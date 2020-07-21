@@ -1,0 +1,481 @@
+@extends('layouts.master')
+
+@section('main')
+<section class="slider_section slide_medium shop_banner_slider staggered-animation-wrap">
+	<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active background_bg" data-img-src="assets/img/banner/banner_1.jpg">
+				<div class="banner_slide_content">
+					<div class="container">
+						<!-- STRART CONTAINER -->
+						<div class="row">
+							<div class="col-lg-7 col-9">
+								<div class="banner_content overflow-hidden">
+									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">Get up to 50% off Today Only!</h5>
+									<h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">Woman Fashion</h2>
+									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+								</div>
+							</div>
+						</div>
+					</div><!-- END CONTAINER-->
+				</div>
+			</div>
+			<div class="carousel-item background_bg" data-img-src="assets/img/banner/banner_2.jpg">
+				<div class="banner_slide_content">
+					<div class="container">
+						<!-- STRART CONTAINER -->
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="banner_content overflow-hidden">
+									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">50% off in all products</h5>
+									<h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">Man Fashion</h2>
+									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+								</div>
+							</div>
+						</div>
+					</div><!-- END CONTAINER-->
+				</div>
+			</div>
+			<div class="carousel-item background_bg" data-img-src="assets/img/banner/banner_3.jpg">
+				<div class="banner_slide_content">
+					<div class="container">
+						<!-- STRART CONTAINER -->
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="banner_content overflow-hidden">
+									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">Taking your Viewing Experience to Next Level</h5>
+									<h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">Summer Sale</h2>
+									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+								</div>
+							</div>
+						</div>
+					</div><!-- END CONTAINER-->
+				</div>
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			<i class="far fa-chevron-left"></i>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			<i class="far fa-chevron-right"></i>
+		</a>
+	</div>
+</section>
+
+<section class="feature_section py-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="grid_item">
+					<div class="grid_inner_item">
+						<div class="makp_icon">
+							<i class="fal fa-shipping-fast"></i>
+						</div>
+						<div class="makp_content">
+							<h3><a href="serice-details.html">Free Shipping & Return</a></h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="grid_item">
+					<div class="grid_inner_item">
+						<div class="makp_icon">
+							<i class="fal fa-history"></i>
+						</div>
+						<div class="makp_content">
+							<h3><a href="serice-details.html">30 Days Return</a></h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="grid_item">
+					<div class="grid_inner_item">
+						<div class="makp_icon">
+							<i class="fal fa-hand-holding-heart"></i>
+						</div>
+						<div class="makp_content">
+							<h3><a href="serice-details.html">24/7 Strong Support</a></h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="mt-5 clearfix">
+	</div>
+</section>
+
+<section class="trending_item">
+
+</section>
+
+<section class="product_section py-5">
+	<div class="container">
+		<div class="row justify-content-center py-4">
+			<div class="col-lg-8">
+				<div class="section_title text-center">
+					<h2>Our Products</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+				</div>
+			</div>
+		</div>
+		<div class="row pb-4">
+			<div class="col-lg-12">
+				<ul class="product_tab nav pb-5 justify-content-center" id="pills-tab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<a class="nav-link active" id="product-all-tab" data-toggle="pill" href="#product-all" role="tab">All</a>
+					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link" id="product-popular-tab" data-toggle="pill" href="#product-popular" role="tab">Popular</a>
+					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link" id="product-trending-tab" data-toggle="pill" href="#product-trending" role="tab">Trending</a>
+					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link" id="product-bestsell-tab" data-toggle="pill" href="#product-bestsell" role="tab">Best Sell</a>
+					</li>
+				</ul>
+
+				<div class="tab-content" id="pills-tabContent">
+					<div class="tab-pane fade show active" id="product-all" role="tabpanel">
+						<div class="row">
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_1.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_2.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_3.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_4.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_5.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_6.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_7.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">
+								<div class="card">
+									<div class="product_image">
+										<img src="assets/img/product/product_8.jpg" class="card-img-top" alt="">
+
+										<div class="product_item">
+											<div class="d-flex align-items-center justify-content-center">
+												<a class="add-wishlist">
+													<i class="fal fa-heart"></i>
+												</a>
+												<a class="add-cart">
+													<i class="fal fa-shopping-bag"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="product_info card-body text-center">
+										<h5 class="card-title">Baby Girls Dress Designs</h5>
+										<span class="price">
+											<span class="old">$99.99</span>
+											<span class="new">$79.99</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="product-popular" role="tabpanel">
+					</div>
+					<div class="tab-pane fade" id="product-trending" role="tabpanel">
+					</div>
+					<div class="tab-pane fade" id="product-bestsell" role="tabpanel">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="blog_section bg_gray py-5">
+	<div class="container">
+		<div class="row justify-content-center py-4">
+			<div class="col-lg-8">
+				<div class="section_title text-center">
+					<h2>Blog & News</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+				</div>
+			</div>
+		</div>
+		<div class="row pb-4">
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
+					<div class="grid_inner_item">
+						<div class="blog_img">
+							<a href="#">
+								<img src="assets/img/blog/blog_1.jpg" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="blog_info">
+							<p>January 19, 2020 by Admin</p>
+							<h3>
+								<a href="#">Lorem ipsum dolor amet, consectr adipiscing elit.</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
+					<div class="grid_inner_item">
+						<div class="blog_img">
+							<a href="#">
+								<img src="assets/img/blog/blog_2.jpg" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="blog_info">
+							<p>January 19, 2020 by Admin</p>
+							<h3>
+								<a href="#">Lorem ipsum dolor amet, consectr adipiscing elit.</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
+					<div class="grid_inner_item">
+						<div class="blog_img">
+							<a href="#">
+								<img src="assets/img/blog/blog_3.jpg" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="blog_info">
+							<p>January 19, 2020 by Admin</p>
+							<h3>
+								<a href="#">Lorem ipsum dolor amet, consectr adipiscing elit.</a>
+							</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="testimonial_section">
+
+</section>
+
+<section class="banner_section bg_light_blue py-5 pb-0">
+	<div class="container">
+		<div class="row align-items-center flex-row-reverse">
+			<div class="col-md-6 offset-md-1">
+				<div class="medium_divider d-none d-md-block clearfix"></div>
+				<div class="trand_banner_text text-center text-md-left">
+					<div class="heading_s1 mb-3">
+						<span class="sub_heading">New season trends!</span>
+						<h2>Best Summer Collection</h2>
+					</div>
+					<h5 class="mb-4">Sale Get up to 50% Off</h5>
+					<a href="shop-left-sidebar.html" class="btn btn-fill-out rounded-0">Shop Now</a>
+				</div>
+				<div class="medium_divider clearfix"></div>
+			</div>
+			<div class="col-md-5">
+				<div class="text-center">
+					<img src="assets/img/banner/banner.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="sponssor_logo py-5">
+	<div class="container">
+		<div class="row">
+			<div class="slick_sponssor col-12">
+				<div class="item">
+					<img src="assets/img/sponssor/sponssor_1.png" alt="" />
+				</div>
+				<div class="item">
+					<img src="assets/img/sponssor/sponssor_2.png" alt="" />
+				</div>
+				<div class="item">
+					<img src="assets/img/sponssor/sponssor_3.png" alt="" />
+				</div>
+				<div class="item">
+					<img src="assets/img/sponssor/sponssor_4.png" alt="" />
+				</div>
+				<div class="item">
+					<img src="assets/img/sponssor/sponssor_5.png" alt="" />
+				</div>
+				<div class="item">
+					<img src="assets/img/sponssor/sponssor_6.png" alt="" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+@stop
