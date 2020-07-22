@@ -16,9 +16,11 @@ class RoleController extends Controller
             ->addColumn('action', function ($role) {
                 $action = '<form class="delete-form" action="' . route('admin.role.destroy', $role->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
                 
-                $action .= '<a href="' . route('admin.role.edit', $role->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-                if($role->name !=  'super-admin')
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                if($role->name !=  'super-admin'){
+                    $action .= '<a href="' . route('admin.role.edit', $role->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                } 
+                else $action .= '<span>Không có hành động nào</span>';
 
                 $action .= '</form>';
 
