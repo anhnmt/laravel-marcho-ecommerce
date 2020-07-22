@@ -14,6 +14,11 @@ class Blog extends Model
         'user_id', 'name', 'slug', 'image', 'description', 'body', 'status',
     ];
 
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
     public function sluggable()
     {
         return [
@@ -31,5 +36,10 @@ class Blog extends Model
     public function comments()
     {
         return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
+    }
+
+    public static function latest($take = 3)
+    {
+        return Blog::orderBy('id', 'desc')->take($take)->get();
     }
 }

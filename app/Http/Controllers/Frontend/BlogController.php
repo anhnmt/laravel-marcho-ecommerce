@@ -16,9 +16,9 @@ class BlogController extends Controller
     public function index()
     {
         
-        $blogs = Blog::paginate(10);
+        $blogs = Blog::paginate(8);
 
-        $latest_blog = Blog::orderBy('id', 'desc')->take(3)->get();
+        $latest_blog = Blog::latest();
 
         // dd($latest_blog);
 
@@ -37,6 +37,8 @@ class BlogController extends Controller
         
         $blog = Blog::findBySlug($blog->slug);
 
-        return view('frontend.blog_detail', compact('blog'));
+        $latest_blog = Blog::latest();
+
+        return view('frontend.blog_detail', compact('blog', 'latest_blog'));
     }
 }

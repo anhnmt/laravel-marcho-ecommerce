@@ -75,16 +75,9 @@
 											<div class="row">
 												@foreach($permissions as $permission)
 												<div class="col-lg-3 mb-4">
-													<!-- <div class="custom-switch custom-switch-label-onoff custom-switch-xs text-left">
-														<div for="" class="parent-vertical-center" permission="{{$permission->name}}">
-															<input class="custom-switch-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}">
-															<label class="custom-switch-btn" for="{{$permission->id}}"></label>
-															<span class="vertical-center">{{$permission->name}}</span>
-														</div>
-													</div> -->
 													<div for="" class="parent-vertical-center" permission="{{$permission->name}}">
 														<div class="custom-control custom-switch">
-															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}">
+															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}" {{ $permission->name == 'admin.dashboard' ? 'checked disabled' : '' }}>
 															<label class="custom-control-label" for="{{$permission->id}}">{{$permission->name}}</label>
 														</div>
 													</div>

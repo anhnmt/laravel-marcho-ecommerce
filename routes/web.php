@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
 // use Auth;
@@ -15,25 +16,18 @@ use UniSharp\LaravelFilemanager\Lfm;
 |
 */
 
-
-Route::view('/', 'frontend.home')->name('home');
-
-
 Route::view('contact', 'frontend.contact')->name('contact');
 Route::view('product', 'frontend.product')->name('product');
-
-// Route::get('/blog', function () {
-//     return view('frontend.blog');
-// })->name('blog');
 
 // ROUTE FRONTEND
 Route::group([
     'namespace' => 'Frontend',
-    'name' => 'blog',
 ], function () {
+    // Home
+    Route::get('/', 'HomeController@index')->name('home');
+    // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
-    // Route::resource('blog', 'BlogController');
 });
 
 // ROUTE ADMIN
@@ -47,6 +41,10 @@ Route::group([
     // Dashboard
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+    //Profile
+    Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::put('profile/{profile}', 'ProfileController@update')->name('profile.update');
+
     // Category
     Route::get('category/list', 'CategoryController@list')->name('category.list');
     Route::resource('category', 'CategoryController', ['except' => ['show']]);
@@ -55,9 +53,9 @@ Route::group([
     Route::get('attribute/list', 'AttributeController@list')->name('attribute.list');
     Route::resource('attribute', 'AttributeController', ['except' => ['show']]);
 
-    // Attribute Options
-    Route::get('attribute-value/list', 'AttributeValueController@list')->name('attribute-value.list');
-    Route::resource('attribute-value', 'AttributeValueController', ['except' => ['show']]);
+    // Attribute Values
+    Route::get('attribute/{attribute}/value/list', 'AttributeValueController@list')->name('attribute.value.list');
+    Route::resource('attribute.value', 'AttributeValueController', ['except' => ['show', 'create', 'edit', 'update']]);
 
     // Product
     Route::get('product/list', 'ProductController@list')->name('product.list');
@@ -74,11 +72,11 @@ Route::group([
     // Role
     Route::get('role/list', 'RoleController@list')->name('role.list');
     Route::get('role/permissionList', 'RoleController@permissionList')->name('role.permissionList');
-    Route::resource('role', 'RoleController');
+    Route::resource('role', 'RoleController', ['except' => ['show']]);
 
     // Permission
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
-    Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store' ,'edit', 'update']]);
+    Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
 });
 
 // FILE MANAGER

@@ -19,7 +19,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				<form id="create-form" action="{{ route('admin.blog.store') }}" method="POST">
+				<form id="create-form" action="{{ route('admin.attribute.store') }}" method="POST">
 					@csrf
 
 					<div class="row">
@@ -42,27 +42,10 @@
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror
 									</div>
-									<div class="form-group">
-										<label for="description">Mô tả</label>
-										<textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="3" placeholder="Nhập mô tả"></textarea>
-
-										@error('description')
-										<span class="invalid-feedback" role="alert">{{ $message }}</span>
-										@enderror
-									</div>
-
-									<div class="form-group">
-										<label for="body">Nội dung</label>
-										<textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="30" placeholder="Nhập nội dung"></textarea>
-
-										@error('body')
-										<span class="invalid-feedback" role="alert">{{ $message }}</span>
-										@enderror
-									</div>
 								</div>
 							</div>
 						</div>
-
+						
 						<div class="col-lg-4">
 							<div class="card">
 								<div class="card-header">
@@ -70,51 +53,14 @@
 								</div>
 
 								<div class="card-body">
-									<button type="submit" class="btn btn-success">
-										<i class="fal fa-check-circle"></i> Lưu
-									</button>
-									<a href="{{ route('admin.blog.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
-									</a>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<h5>Trạng thái</h5>
-								</div>
-
-								<div class="card-body">
-									<select class="form-control @error('status') is-invalid @enderror" name="status" id="status">
-										<option value="1" selected>Kích hoạt</option>
-										<option value="0">Bản nháp</option>
-									</select>
-
-									@error('status')
-									<span class="invalid-feedback" role="alert">{{ $message }}</span>
-									@enderror
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<h5>Hình ảnh</h5>
-								</div>
-
-								<div class="card-body">
-									<div class="input-group">
-										<span class="input-group-btn">
-											<a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary text-white">
-												<i class="fa fa-picture-o"></i> Choose
-											</a>
-										</span>
-										<input class="form-control @error('image') is-invalid @enderror" type="text" name="image" id="image">
-
-										@error('image')
-										<span class="invalid-feedback" role="alert">{{ $message }}</span>
-										@enderror
+									<div class="btn-group">
+										<button type="submit" class="btn btn-success">
+											<i class="fal fa-check-circle"></i> Lưu
+										</button>
+										<a href="{{ route('admin.blog.index') }}" class="btn btn-danger">
+											<i class="fal fa-save"></i> Huỷ
+										</a>
 									</div>
-									<div id="holder" style="margin-top:15px;max-height:100px;"></div>
 								</div>
 							</div>
 						</div>
@@ -127,64 +73,30 @@
 @stop
 
 @section('style')
-<!-- summernote -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 @stop
 
 @section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<!-- SweetAlert2 -->
 <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-<!-- Summernote -->
-<script src="{{ asset('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
+@if(session('success'))
 <script>
 	$(function() {
-		// Define function to open filemanager window
-		var lfm = function(options, cb) {
-			PopupCenter('/admin/filemanager?type=blog', "FileManager", 900, 600);
-			window.SetUrl = cb;
-		};
-
-		// Define LFM summernote button
-		var LFMButton = function(context) {
-			var ui = $.summernote.ui;
-			var button = ui.button({
-				contents: '<i class="note-icon-picture"></i> ',
-				tooltip: 'Insert image with filemanager',
-				click: function() {
-
-					lfm({
-						type: 'image',
-						prefix: '/admin/filemanager'
-					}, function(lfmItems, path) {
-						lfmItems.forEach(function(lfmItem) {
-							context.invoke('insertImage', lfmItem.url);
-						});
-					});
-
-				}
-			});
-			return button.render();
-		};
-
-		// Summernote
-		$('#body').summernote({
-			height: 300, //set editable area's height
-			toolbar: [
-				['style', ['style']],
-				['font', ['bold', 'underline', 'clear']],
-				['fontname', ['fontname']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['table', ['table']],
-				['insert', ['link', 'lfm']],
-				['view', ['fullscreen', 'codeview', 'help']],
-			],
-			buttons: {
-				lfm: LFMButton
-			}
+		Swal.fire({
+			toast: true,
+			position: "top-end",
+			showConfirmButton: false,
+			timer: 3000,
+			icon: "success",
+			title: "{{ session('success') }}",
 		});
-
-		$('#lfm').filemanager('blog');
 	});
 </script>
-@stop
+@endif
