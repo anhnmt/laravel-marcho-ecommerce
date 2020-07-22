@@ -41,6 +41,10 @@ Route::group([
     // Dashboard
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+    //Profile
+    Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::put('profile/{profile}', 'ProfileController@update')->name('profile.update');
+
     // Category
     Route::get('category/list', 'CategoryController@list')->name('category.list');
     Route::resource('category', 'CategoryController', ['except' => ['show']]);

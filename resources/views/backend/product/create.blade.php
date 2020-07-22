@@ -289,7 +289,7 @@
 		};
 
 		// Summernote
-		$('#content').summernote({
+		$('#body').summernote({
 			height: 300, //set editable area's height
 			toolbar: [
 				['style', ['style']],

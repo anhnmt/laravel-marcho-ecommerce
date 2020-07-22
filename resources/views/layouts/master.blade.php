@@ -66,7 +66,9 @@
                             @can('admin.dashboard')
                             <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
                             @endcan
+                            @cannot('admin.dashboard')
                             <a class="dropdown-item" href="#">Trang cá nhân</a>
+                            @endcannot
                             <div class="dropdown-divider"></div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
                                 @csrf
