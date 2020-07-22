@@ -369,57 +369,27 @@
 			</div>
 		</div>
 		<div class="row pb-4">
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
-					<div class="grid_inner_item">
-						<div class="blog_img">
-							<a href="#">
-								<img src="assets/img/blog/blog_1.jpg" class="img-fluid" alt="">
-							</a>
-						</div>
-						<div class="blog_info">
-							<p>January 19, 2020 by Admin</p>
-							<h3>
-								<a href="#">Lorem ipsum dolor amet, consectr adipiscing elit.</a>
-							</h3>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
-					<div class="grid_inner_item">
-						<div class="blog_img">
-							<a href="#">
-								<img src="assets/img/blog/blog_2.jpg" class="img-fluid" alt="">
-							</a>
-						</div>
-						<div class="blog_info">
-							<p>January 19, 2020 by Admin</p>
-							<h3>
-								<a href="#">Lorem ipsum dolor amet, consectr adipiscing elit.</a>
-							</h3>
+			@if($latest_blog ?? '')
+				@foreach ($latest_blog as $blog)
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
+						<div class="grid_inner_item">
+							<div class="blog_img">
+								<a href="{{ route('blog.show', $blog->slug) }}">
+									<img src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="">
+								</a>
+							</div>
+							<div class="blog_info">
+								<p>January 19, 2020 by Admin</p>
+								<h3>
+									<a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
+								</h3>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
-					<div class="grid_inner_item">
-						<div class="blog_img">
-							<a href="#">
-								<img src="assets/img/blog/blog_3.jpg" class="img-fluid" alt="">
-							</a>
-						</div>
-						<div class="blog_info">
-							<p>January 19, 2020 by Admin</p>
-							<h3>
-								<a href="#">Lorem ipsum dolor amet, consectr adipiscing elit.</a>
-							</h3>
-						</div>
-					</div>
-				</div>
-			</div>
+				@endforeach
+			@endif
 		</div>
 	</div>
 </section>

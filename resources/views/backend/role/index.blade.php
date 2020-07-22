@@ -26,6 +26,7 @@
 						</h3>
 					</div>
 					@endcan
+					
 					<div class="card-body">
 						<div class="table-responsive">
 							<table id="datatables" class="table table-bordered table-hover">

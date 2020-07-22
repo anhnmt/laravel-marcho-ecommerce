@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use BinaryCats\Sku\HasSku;
 
 class Product extends Model
 {
-    use Sluggable;
+    use Sluggable, HasSku;
 
     protected $fillable = [
         'category_id', 'name', 'slug', 'image', 'body', 'description', 'status',
@@ -19,7 +20,7 @@ class Product extends Model
      *
      * @return void
      */
-    public function categories()
+    public function category()
     {
         return $this->hasOne(Category::class, 'category_id', 'id');
     }

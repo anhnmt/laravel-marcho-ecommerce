@@ -10,7 +10,7 @@ class AttributeValue extends Model
     use Sluggable;
 
     protected $fillable = [
-        'value', 'code',
+        'attribute_id', 'value', 'code',
     ];
 
     public function sluggable()
@@ -20,5 +20,10 @@ class AttributeValue extends Model
                 'source' => 'value'
             ]
         ];
+    }
+
+    public function attribute()
+    {
+        return $this->hasOne('App\Models\Attribute');
     }
 }

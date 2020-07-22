@@ -1,8 +1,7 @@
 <?php
 
+use App\Models\AttributeValue;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class AttributeValueSeeder extends Seeder
 {
@@ -95,26 +94,18 @@ class AttributeValueSeeder extends Seeder
         ];
 
         foreach ($size_values as $value) {
-            DB::table('attribute_values')->insert([
-                [
-                    'attribute_id' => 1,
-                    'value' => $value['value'],
-                    'code' => $value['code'],
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ],
+            AttributeValue::create([
+                'attribute_id' => 1,
+                'value' => $value['value'],
+                'code' => $value['code'],
             ]);
         }
 
         foreach ($color_values as $value) {
-            DB::table('attribute_values')->insert([
-                [
-                    'attribute_id' => 2,
-                    'value' => $value['value'],
-                    'code' => $value['code'],
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ],
+            AttributeValue::create([
+                'attribute_id' => 2,
+                'value' => $value['value'],
+                'code' => $value['code'],
             ]);
         }
     }

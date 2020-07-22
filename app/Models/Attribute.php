@@ -21,4 +21,9 @@ class Attribute extends Model
             ]
         ];
     }
+
+    public function attribute_values()
+    {
+        return $this->hasMany('App\Models\AttributeValue');
+    }
 }

@@ -29,12 +29,12 @@ class ProductController extends Controller
                 return $product->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
             })
             ->addColumn('action', function ($product) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
                 
                 $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-                $action .= '</form>';
+                $action .= '</div></form>';
 
                 return $action;
             })
