@@ -14,6 +14,11 @@ class Blog extends Model
         'user_id', 'name', 'slug', 'image', 'description', 'body', 'status',
     ];
 
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
     public function sluggable()
     {
         return [

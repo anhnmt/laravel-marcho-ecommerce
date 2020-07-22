@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use BinaryCats\Sku\HasSku;
+use BinaryCats\Sku\Concerns\SkuOptions;
 
 class Product extends Model
 {
@@ -26,15 +27,10 @@ class Product extends Model
     }
 
     /**
-     * Define relationship with the Category
+     * Return the sluggable configuration array for this model.
      *
-     * @return void
+     * @return array
      */
-    public function skus()
-    {
-        return $this->hasOne(Sku::class, 'id', 'product_id');
-    }
-
     public function sluggable()
     {
         return [
@@ -42,5 +38,17 @@ class Product extends Model
                 'source' => 'name'
             ]
         ];
+    }
+    
+
+    /**
+     * Get the options for generating the Sku.
+     *
+     * @return BinaryCats\Sku\Concerns\SkuOptions;
+     */
+    public function skuOptions() : SkuOptions
+    {
+        return SkuOptions::make()
+            ->from(['slug']);
     }
 }

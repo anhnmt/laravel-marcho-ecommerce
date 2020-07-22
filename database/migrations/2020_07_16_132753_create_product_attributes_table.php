@@ -15,8 +15,12 @@ class CreateProductAttributesTable extends Migration
     {
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
+            $table->increments('id');
             $table->foreignId('product_id');
-            $table->foreignId('atrribute_set');
+            $table->integer('quantity');
+            $table->decimal('price')->nullable()->default(0);
+            $table->decimal('sale_price')->nullable()->default(0);
+            $table->boolean('default')->default(0);
             $table->timestamps();
             // Foreign key
             $table->foreign('product_id')->references('id')->on('products');

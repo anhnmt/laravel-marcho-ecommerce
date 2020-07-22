@@ -78,16 +78,15 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:products,name',
             'slug' => 'nullable|unique:products,slug',
-            'sku' => 'required|unique:products,sku',
+            'sku' => 'nullable|unique:products,sku',
             'image' => 'nullable',
             'description' => 'nullable',
-            'content' => 'nullable',
+            'body' => 'nullable',
             'price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
             'status' => 'boolean',
         ], [
             'name.required' => 'Vui lòng nhập tên sản phẩm',
-            'sku.required' => 'Vui lòng nhập SKU',
             'name.unique' => 'Tên sản phẩm đã tồn tại',
             'slug.unique' => 'Slug đã tồn tại',
             'sku.unique' => 'SKU đã tồn tại',
@@ -135,6 +134,7 @@ class ProductController extends Controller
             'slug' => 'nullable|string',
             'image' => 'nullable',
             'description' => 'nullable',
+            'body' => 'nullable',
             'status' => 'boolean',
         ], [
             'name.required' => 'Vui lòng nhập tên danh mục',

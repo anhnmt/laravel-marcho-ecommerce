@@ -13,6 +13,11 @@ class Category extends Model
         'name', 'slug', 'image', 'description', 'status',
     ];
 
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
     public function sluggable()
     {
         return [
