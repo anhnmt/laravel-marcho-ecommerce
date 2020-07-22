@@ -19,13 +19,11 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
-					@can('admin.product.create')
 					<div class="card-header">
 						<h3 class="card-title">
 							<a href="{{ route('admin.product.create') }}" class="btn btn-primary">Thêm sản phẩm</a>
 						</h3>
 					</div>
-					@endcan
 					<div class="card-body">
 						<div class="table-responsive">
 							<table id="datatables" class="table table-bordered table-hover">
