@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Auth;
-use App\User;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use Helper;
+use Auth;
 
 class UserController extends Controller
 {
     public function list()
     {
-        $users = User::all();
-
+        $users = User::select(['id', 'name', 'email']);
         return datatables($users)
         ->addColumn('action', function ($user) {
             $action = '<form class="delete-form" action="' . route('admin.user.destroy', $user->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
@@ -26,7 +25,7 @@ class UserController extends Controller
             if(Auth::user()->name != $user->name)
             $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-            $action .= '</=form>';
+            $action .= '</form>';
 
             return $action;
         })
@@ -69,6 +68,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $roles = $request->roles;
+        dd($roles);
         $user->syncRoles($roles);
         return redirect()->route('admin.user.index');
     }

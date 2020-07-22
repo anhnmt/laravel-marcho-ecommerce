@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\User;
 use Auth;
-use App\Models\Role;
-use App\Models\Permission;
 
 class CheckPermission
 {
@@ -18,24 +17,24 @@ class CheckPermission
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
-        $permission = $user->getAllPermissions();
-
+        
+        $permission = Auth::user()->getAllPermissions();
+        
         // dd($permission);
 
-        if ($user->hasAnyRole(Role::all()) || $user->hasAnyDirectPermission(Permission::all())) {
+        if(!empty($permission) || Auth::user()->hasRole('super-admin')){
             $permissions = [];
             $current_route = $request->route()->getName();
 
-            foreach ($permission as $value) array_push($permissions, $value->name);
+            foreach($permission as $value) array_push($permissions, $value->name);
 
-            if (!in_array('admin.dashboard', $permissions)) array_push($permissions, 'admin.dashboard');
+            if(!in_array('admin.dashboard', $permissions) ) array_push($permissions, 'admin.dashboard');
 
-            if ($user->hasRole('super-admin') || in_array($current_route, $permissions)) {
+            if(Auth::user()->hasRole('super-admin') || in_array($current_route, $permissions)){
                 return $next($request);
             }
         }
-
-        return abort(403);
+        
+        abort(403);
     }
 }
