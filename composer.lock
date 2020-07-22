@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e53981a193d5a3053ca3971b9cf6036c",
+    "content-hash": "64a6293d851bcd09e089e908c9d81661",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -57,6 +57,66 @@
                 "stack"
             ],
             "time": "2019-12-24T22:41:47+00:00"
+        },
+        {
+            "name": "binary-cats/laravel-sku",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/binary-cats/laravel-sku.git",
+                "reference": "ef76b5a4fb7c19e0e2b5e2de2df5eb0c05ae4d37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/binary-cats/laravel-sku/zipball/ef76b5a4fb7c19e0e2b5e2de2df5eb0c05ae4d37",
+                "reference": "ef76b5a4fb7c19e0e2b5e2de2df5eb0c05ae4d37",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.6|^6.0|^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.6|^4.0|^5.0",
+                "phpunit/phpunit": "^7.0|^8.2|^9.0"
+            },
+            "suggest": {
+                "binary-cats/laravel-mailgun-webhooks": "Handle Mailgun webhooks in your Laravel application"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BinaryCats\\Sku\\SkuServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BinaryCats\\Sku\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cyrill Kalita",
+                    "email": "cyrill.kalita@gmail.com",
+                    "homepage": "https://github.com/binary-cats",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate SKUs for Eloquent models",
+            "homepage": "https://github.com/binary-cats/laravel-sku",
+            "keywords": [
+                "binary-cats",
+                "eloquent",
+                "laravel",
+                "sku"
+            ],
+            "time": "2020-03-05T07:24:31+00:00"
         },
         {
             "name": "brick/math",
@@ -3753,6 +3813,20 @@
                 "portable",
                 "shim"
             ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-12T16:47:27+00:00"
         },
         {
@@ -4953,6 +5027,12 @@
                 "facade",
                 "flare",
                 "reporting"
+            ],
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/spatie",
+                    "type": "patreon"
+                }
             ],
             "time": "2020-03-02T15:52:04+00:00"
         },

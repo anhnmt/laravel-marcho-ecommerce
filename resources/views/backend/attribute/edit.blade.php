@@ -8,7 +8,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
 					<li class="breadcrumb-item"><a href="{{ route('admin.attribute.index') }}">Thuộc tính</a></li>
-					<li class="breadcrumb-item active">Thêm thuộc tính</li>
+					<li class="breadcrumb-item active">Sửa thuộc tính</li>
 				</ol>
 			</div>
 		</div>
@@ -19,8 +19,9 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				<form id="create-form" action="{{ route('admin.attribute.store') }}" method="POST">
+				<form id="create-form" action="{{ route('admin.attribute.update', $attribute->id) }}" method="POST">
 					@csrf
+					@method('PUT')
 
 					<div class="row">
 						<div class="col-lg-8">
@@ -28,7 +29,7 @@
 								<div class="card-body">
 									<div class="form-group">
 										<label class="required" for="name">Tên</label>
-										<input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nhập tên">
+										<input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nhập tên" value="{{ $attribute->name }}">
 
 										@error('name')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -36,7 +37,7 @@
 									</div>
 									<div class="form-group">
 										<label for="slug">Đường dẫn (Để trống sẽ tự động tạo)</label>
-										<input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="Nhập dường dẫn">
+										<input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="Nhập dường dẫn" value="{{ $attribute->slug }}">
 
 										@error('slug')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>

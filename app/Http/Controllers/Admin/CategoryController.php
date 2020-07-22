@@ -26,12 +26,12 @@ class CategoryController extends Controller
                 return $category->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
             })
             ->addColumn('action', function ($category) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.category.destroy', $category->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.category.destroy', $category->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
                 
                 $action .= '<a href="' . route('admin.category.edit', $category->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-                $action .= '</form>';
+                $action .= '</div></form>';
 
                 return $action;
             })

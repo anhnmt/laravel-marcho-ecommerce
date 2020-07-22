@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('sku')->unique();
             $table->string('image')->nullable();
             // $table->decimal('price', 15, 2);
             // $table->decimal('sale_price', 15, 2)->nullable();

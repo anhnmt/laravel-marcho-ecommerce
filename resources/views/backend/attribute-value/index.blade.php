@@ -20,9 +20,10 @@
 			<div class="col-lg-4">
 				<div class="card">
 					@if($attribute_value ?? '')
-					<form id="create-form" action="{{ route('admin.attribute-value.update', $attribute_value->id) }}" method="POST">
+					<form id="create-form" action="{{ route('admin.attribute.value.update', [ $attribute, $attribute_value ]) }}" method="POST">
 						@csrf
 						@method('PUT')
+
 						<div class="card-body">
 							<div class="form-group">
 								<label class="required" for="value">Giá trị</label>
@@ -45,13 +46,13 @@
 							<button type="submit" class="btn btn-primary">
 								Lưu lại
 							</button>
-							<a href="{{ route('admin.attribute-value.index') }}" class="btn">
+							<a href="{{ route('admin.attribute.index') }}" class="btn">
 								Huỷ
 							</a>
 						</div>
 					</form>
 					@else
-					<form id="create-form" action="{{ route('admin.attribute-value.store') }}" method="POST">
+					<form id="create-form" action="{{ route('admin.attribute.value.store', $attribute->id) }}" method="POST">
 						@csrf
 						<div class="card-body">
 							<div class="form-group">
@@ -75,7 +76,7 @@
 							<button type="submit" class="btn btn-primary">
 								Lưu lại
 							</button>
-							<a href="{{ route('admin.attribute-value.index') }}" class="btn">
+							<a href="{{ route('admin.attribute.index') }}" class="btn">
 								Huỷ
 							</a>
 						</div>
@@ -150,13 +151,11 @@
 			"paging": true,
 			"ordering": true,
 			"autoWidth": true,
-			"responsive": true,
 			"serverSide": true,
-			"ajax": "{{ route('admin.attribute-value.list') }}",
+			"ajax": "{{ route('admin.attribute.value.list', $attribute->id) }}",
 			"columns": [{
 					data: 'id',
 					className: 'align-middle text-center',
-					width: '10%',
 				},
 				{
 					data: 'value',
@@ -168,7 +167,7 @@
 				},
 				{
 					data: 'action',
-					className: 'align-middle text-center d-flex justify-content-center',
+					className: 'align-middle text-center',
 					orderable: false,
 					searchable: false,
 				},
