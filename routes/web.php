@@ -91,5 +91,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'],], function (
 });
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

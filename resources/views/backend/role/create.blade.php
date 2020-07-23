@@ -100,9 +100,10 @@
 
 @section('style')
 <style>
-	label:not(.form-check-label):not(.custom-file-label) {
+	label:not(.form-check-label):not(.custom-file-label):not(.required) {
 		font-weight: normal;
 	}
+	
 </style>
 @endsection
 
@@ -118,16 +119,28 @@
 			$("#myDIV .parent-vertical-center").filter(function() {
 				if ($(this).attr('permission').toLowerCase().indexOf(value) > -1) {
 					$(this).parents('.col-lg-3').show(50);
-					$(this).find('input').prop("disabled", false);
+					$(this).find('input').not('#1').prop("disabled", false);
 				} else {
 					$(this).parents('.col-lg-3').hide(50);
 					$(this).find('input').prop("disabled", true);
 				}
 			});
+			checkAllInput();
 		});
 
+		function checkAllInput() {
+			if($('input[name="permissions[]"]:checked').length == $('input[name="permissions[]"]').length){
+				$('#check-all').prop('checked', true);
+			}else{
+				$('#check-all').prop('checked', false);
+			};
+		}
+		checkAllInput();
+		$('input[name="permissions[]"]').on('change', function() {
+			checkAllInput();	
+		});
 		$("#check-all").click(function() {
-			$('input:checkbox').not(this).prop('checked', this.checked);
+			$('input[name="permissions[]"]').not(':disabled').prop('checked', this.checked);
 		});
 	});
 </script>
