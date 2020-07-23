@@ -14,7 +14,7 @@
 
                 <p class="text-muted text-center">{{auth()->user()->email}}</p>
                 <p class="text-muted text-center">
-                    @foreach($roles->roles as $role)
+                    @foreach($roles->getRoles as $role)
                     {{$role->name}}
                     @endforeach
                 </p>
