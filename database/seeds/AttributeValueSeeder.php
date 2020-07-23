@@ -94,7 +94,7 @@ class AttributeValueSeeder extends Seeder
         ];
 
         foreach ($size_values as $value) {
-            AttributeValue::create([
+            AttributeValue::updateOrCreate([
                 'attribute_id' => 1,
                 'value' => $value['value'],
                 'code' => $value['code'],
@@ -102,7 +102,7 @@ class AttributeValueSeeder extends Seeder
         }
 
         foreach ($color_values as $value) {
-            AttributeValue::create([
+            AttributeValue::updateOrCreate([
                 'attribute_id' => 2,
                 'value' => $value['value'],
                 'code' => $value['code'],

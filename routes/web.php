@@ -41,6 +41,10 @@ Route::group([
     // Dashboard
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+    //Profile
+    Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::put('profile/{profile}', 'ProfileController@update')->name('profile.update');
+
     // Category
     Route::get('category/list', 'CategoryController@list')->name('category.list');
     Route::resource('category', 'CategoryController', ['except' => ['show']]);
@@ -56,6 +60,10 @@ Route::group([
     // Product
     Route::get('product/list', 'ProductController@list')->name('product.list');
     Route::resource('product', 'ProductController', ['except' => ['show']]);
+
+    // Product Attributes
+    Route::get('product/{product}/attribute/list', 'ProductAttributeController@list')->name('product.list');
+    Route::resource('product.attribute', 'ProductAttributeController', ['except' => ['show']]);
 
     // Blog
     Route::get('blog/list', 'BlogController@list')->name('blog.list');

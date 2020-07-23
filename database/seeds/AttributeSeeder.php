@@ -12,16 +12,14 @@ class AttributeSeeder extends Seeder
      */
     public function run()
     {
-        Attribute::create([
+        Attribute::updateOrCreate([
             'name' => 'Size',
             'slug' => 'size',
-            'type' => 'select',
         ]);
 
-        Attribute::create([
+        Attribute::updateOrCreate([
             'name' => 'Color',
             'slug' => 'color',
-            'type' => 'select',
         ]);
     }
 }

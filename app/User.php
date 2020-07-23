@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Blog');
     }
+
+    public function getRoles()
+    {
+        return $this->belongsToMany('App\Models\Role', 'model_has_roles', 'model_id', 'role_id');
+    }
 }

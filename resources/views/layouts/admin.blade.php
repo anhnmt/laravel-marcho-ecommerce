@@ -46,7 +46,7 @@
                         <span class="hidden-xs text-capitalize">{{ auth()->user()->name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
+                        <a href="{{route('admin.profile')}}" class="dropdown-item">
                             <i class="fal fa-id-card"></i> Trang cá nhân
                         </a>
                         <div class="dropdown-divider"></div>

@@ -13,15 +13,16 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
+        // dd(Permission::all());
+        Role::updateOrCreate([
             'name' => 'super-admin',
         ]);
 
-        Role::create([
+        Role::updateOrCreate([
             'name' => 'admin',
         ])->givePermissionTo(Permission::all());
 
-        Role::create([
+        Role::updateOrCreate([
             'name' => 'editor',
         ])->givePermissionTo([
             'admin.dashboard',
@@ -34,7 +35,7 @@ class RoleSeeder extends Seeder
             'admin.blog.destroy',
         ]);
 
-        Role::create([
+        Role::updateOrCreate([
             'name' => 'test',
         ])->givePermissionTo([
             'admin.dashboard',
