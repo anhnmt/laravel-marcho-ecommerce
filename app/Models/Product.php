@@ -52,9 +52,9 @@ class Product extends Model
     }
 
     /**
-     * Define relationship with the Category
+     * Return the sluggable configuration array for this model.
      *
-     * @return void
+     * @return array
      */
     public function category()
     {
@@ -67,5 +67,17 @@ class Product extends Model
     public function attributes()
     {
         return $this->hasMany(ProductAttribute::class);
+    }
+    
+
+    /**
+     * Get the options for generating the Sku.
+     *
+     * @return BinaryCats\Sku\Concerns\SkuOptions;
+     */
+    public function skuOptions() : SkuOptions
+    {
+        return SkuOptions::make()
+            ->from(['slug']);
     }
 }
