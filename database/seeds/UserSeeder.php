@@ -12,31 +12,31 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        User::updateOrCreate([
             'name' => 'Demo Super Admin',
             'email' => 'sa@gmail.com',
             'password' => bcrypt('123456'),
         ])->assignRole('super-admin');
 
-        User::create([
+        User::updateOrCreate([
             'name' => 'Demo Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456'),
         ])->assignRole('admin');
 
-        User::create([
+        User::updateOrCreate([
             'name' => 'Demo Editor',
             'email' => 'editor@gmail.com',
             'password' => bcrypt('123456'),
         ])->assignRole('editor');
 
-        User::create([
+        User::updateOrCreate([
             'name' => 'Demo Test',
             'email' => 'test@gmail.com',
             'password' => bcrypt('123456'),
         ])->assignRole('test');
 
-        User::create([
+        User::updateOrCreate([
             'name' => 'Demo User',
             'email' => 'user@gmail.com',
             'password' => bcrypt('123456'),

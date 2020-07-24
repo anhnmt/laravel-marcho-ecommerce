@@ -23,7 +23,7 @@ class ProductController extends Controller
         return datatables($categories)
             ->addColumn('image', function ($product) {
                 $product->image = $product->image ? $product->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . $product->image . '"/>';
+                return '<img height="70px" width="70px" src="' . asset($product->image) . '"/>';
             })
             ->addColumn('status', function ($product) {
                 return $product->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
@@ -31,6 +31,7 @@ class ProductController extends Controller
             ->addColumn('action', function ($product) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
                 
+                $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
                 $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
@@ -82,6 +83,7 @@ class ProductController extends Controller
             'image' => 'nullable',
             'description' => 'nullable',
             'body' => 'nullable',
+            'quantity' => 'required|integer',
             'price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
             'status' => 'boolean',
@@ -90,6 +92,8 @@ class ProductController extends Controller
             'name.unique' => 'Tên sản phẩm đã tồn tại',
             'slug.unique' => 'Slug đã tồn tại',
             'sku.unique' => 'SKU đã tồn tại',
+            'quantity.required' => 'Vui lòng nhập số lượng',
+            'quantity.integer' => 'Số lượng phải là số nguyên',
             'price.required' => 'Vui lòng nhập giá sản phẩm',
             'price.numeric' => 'Giá tiền phải là kiểu số',
             'sale_price.numeric' => 'Giá khuyến mãi phải là kiểu số',
@@ -114,7 +118,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all(); 
-        $product->image = $product->image ? $product->image : 'assets/img/placeholder.png';
+        $product->image = asset($product->image ? $product->image : 'assets/img/placeholder.png');
 
         return view('backend.product.edit', compact('product', 'categories'));
     }
@@ -132,13 +136,17 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'slug' => 'nullable|string',
+            'sku' => 'nullable|string',
             'image' => 'nullable',
             'description' => 'nullable',
             'body' => 'nullable',
+            'quantity' => 'required|integer',
             'status' => 'boolean',
         ], [
             'name.required' => 'Vui lòng nhập tên danh mục',
             'status.boolean' => 'Trạng thái phải là true hoặc false',
+            'quantity.required' => 'Vui lòng nhập số lượng',
+            'quantity.integer' => 'Số lượng phải là số nguyên',
         ]);
 
         if ($validator->fails()) {
