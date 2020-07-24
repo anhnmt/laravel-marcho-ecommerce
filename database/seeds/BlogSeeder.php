@@ -13,7 +13,7 @@ class BlogSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i <= 16; $i++) {
-            Blog::create([
+            Blog::updateOrCreate([
                 'user_id' => 1,
                 'name' => 'Lorem ipsum dolor amet, consectr adipiscing elit ' . $i,
                 'image' => '/uploads/blogs/thumbs/' . $i . '.jpg',

@@ -27,8 +27,11 @@ class Attribute extends Model
         ];
     }
 
-    public function attribute_values()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function values()
     {
-        return $this->hasMany('App\Models\AttributeValue');
+        return $this->hasMany(AttributeValue::class);
     }
 }

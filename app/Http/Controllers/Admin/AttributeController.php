@@ -22,7 +22,7 @@ class AttributeController extends Controller
             ->addColumn('action', function ($attribute) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.attribute.destroy', $attribute->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
                 
-                $action .= '<a href="' . route('admin.attribute.value.index', $attribute->id) . '" class="btn btn-sm btn-success">Tùy chọn</a>';
+                $action .= '<a href="' . route('admin.attribute.value.index', $attribute->id) . '" class="btn btn-sm btn-success">Giá trị</a>';
                 $action .= '<a href="' . route('admin.attribute.edit', $attribute->id) . '" class="btn btn-sm btn-warning">Sửa</a>';
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 

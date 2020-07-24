@@ -34,7 +34,7 @@ class PermissionSeeder extends Seeder
                 && strpos($route_name, 'unisharp') === false
                 && in_array($route_name, $permission) === false
             ) {
-                Permission::create([
+                Permission::updateOrCreate([
                     'name' => $route_name,
                     'guard_name' => 'web'
                 ]);

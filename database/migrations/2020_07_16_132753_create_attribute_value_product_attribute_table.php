@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductAttributeValueTable extends Migration
+class CreateAttributeValueProductAttributeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProductAttributeValueTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_attribute_value', function (Blueprint $table) {
+        Schema::create('attribute_value_product_attribute', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribute_value_id');
             $table->foreignId('product_attribute_id');

@@ -17,8 +17,8 @@ class CreateProductAttributesTable extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->integer('quantity');
-            $table->decimal('price')->nullable()->default(0);
-            $table->decimal('sale_price')->nullable()->default(0);
+            $table->decimal('price')->nullable();
+            $table->decimal('sale_price')->nullable();
             $table->boolean('default')->default(0);
             $table->timestamps();
             // Foreign key
