@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\AttributeValueProductAttribute;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\ProductAttribute\CreateProductAttributeRequest;
 
 class ProductAttributeController extends Controller
 {
@@ -19,13 +21,22 @@ class ProductAttributeController extends Controller
     {
         $this->product = $product;
 
-        $product_attributes = $product->product_attributes->all('id', 'value', 'code');
-        
-        dd($product_attributes);
+        $product_attributes = ProductAttribute::where('product_id', $product->id);;
 
-        return datatables($attribute_values)
-            ->addColumn('action', function ($attribute_value) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.attribute.value.destroy', [$this->attribute->id, $attribute_value->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+        return datatables($product_attributes)
+            ->addColumn('attributeValue', function ($product_attribute) {
+                $action = '<ul class="list-unstyled">';
+
+                foreach ($product_attribute->attributesValues as $item) {
+                    $action .= '<li>' . $item->attribute->name . ': ' . $item->value . '</li>';
+                }
+
+                $action .= '</ul>';
+
+                return $action;
+            })
+            ->addColumn('action', function ($product_attribute) {
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.attribute.destroy', [$this->product->id, $product_attribute->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
@@ -33,7 +44,7 @@ class ProductAttributeController extends Controller
 
                 return $action;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['attributeValue', 'action'])
             ->toJson();
     }
 
@@ -44,18 +55,9 @@ class ProductAttributeController extends Controller
      */
     public function index(Product $product)
     {
-        dd($product);
-        return view('backend.product-attribute.index', compact('product'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        // dd($product);
+        $attributes = Attribute::all();
+        return view('backend.product-attribute.index', compact('product', 'attributes'));
     }
 
     /**
@@ -64,20 +66,27 @@ class ProductAttributeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductAttributeRequest $request, Product $product)
     {
-        //
-    }
+        $request['product_id'] = $product->id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ProductAttribute  $productAttribute
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProductAttribute $productAttribute)
-    {
-        //
+        $product_attribute = ProductAttribute::create($request->only(
+            'product_id',
+            'quantity',
+            'price',
+            'sale_price',
+            'default',
+        ));
+
+        // dd($request->attributeValue);
+        foreach ($request->attributeValue as $attribute_value_id) {
+            AttributeValueProductAttribute::create([
+                'attribute_value_id' => $attribute_value_id,
+                'product_attribute_id' => $product_attribute->id,
+            ]);
+        }
+
+        return redirect()->route('admin.product.attribute.index', $product->id)->withSuccess('Thêm thuộc tính sản phẩm thành công');
     }
 
     /**
@@ -86,8 +95,21 @@ class ProductAttributeController extends Controller
      * @param  \App\Models\ProductAttribute  $productAttribute
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductAttribute $productAttribute)
+    public function destroy(Product $product, $productAttribute)
     {
-        //
+        // dd([$attribute, $attribute_value]);
+        $productAttribute = ProductAttribute::findOrFail($productAttribute);
+        // dd($productAttribute->id);
+        
+        $attributeValueProductAttribute = AttributeValueProductAttribute::findOrFail($productAttribute->id)->all();
+        // dd($attributeValueProductAttribute);
+
+        foreach ($attributeValueProductAttribute as $attrValueProductAttr) {
+            $attrValueProductAttr->delete();
+        }
+
+        $productAttribute->delete();
+
+        return redirect()->route('admin.product.attribute.index', $product->id)->withSuccess('Xoá thuộc tính sản phẩm thành công');
     }
 }

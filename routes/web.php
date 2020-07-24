@@ -62,7 +62,7 @@ Route::group([
     Route::resource('product', 'ProductController', ['except' => ['show']]);
 
     // Product Attributes
-    Route::get('product/{product}/attribute/list', 'ProductAttributeController@list')->name('product.list');
+    Route::get('product/{product}/attribute/list', 'ProductAttributeController@list')->name('product.attribute.list');
     Route::resource('product.attribute', 'ProductAttributeController', ['except' => ['show']]);
 
     // Blog

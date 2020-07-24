@@ -60,4 +60,12 @@ class Product extends Model
     {
         return $this->hasOne(Category::class, 'category_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
+    }
 }
