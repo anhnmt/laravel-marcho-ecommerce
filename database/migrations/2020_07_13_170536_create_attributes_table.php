@@ -17,7 +17,6 @@ class CreateAttributesTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->string('type');
             $table->timestamps();
         });
     }

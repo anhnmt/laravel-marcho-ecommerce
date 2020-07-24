@@ -12,42 +12,42 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
+        Category::updateOrCreate([
             'name' => 'Nam',
             'image' => '/uploads/categories/thumbs/5f12293a9dd36.jpg',
             'description' => 'Đồ cho nam',
             'status' => 1,
         ]);
 
-        Category::create([
+        Category::updateOrCreate([
             'name' => 'Nữ',
             'image' => '/uploads/categories/thumbs/5f12293a9dd36.jpg',
             'description' => 'Đồ cho nữ',
             'status' => 1,
         ]);
 
-        Category::create([
+        Category::updateOrCreate([
             'name' => 'Giảm giá',
             'image' => '/uploads/categories/thumbs/5f12293a9dd36.jpg',
             'description' => 'Giảm giá',
             'status' => 1,
         ]);
 
-        Category::create([
+        Category::updateOrCreate([
             'name' => 'Thời trang',
             'image' => '/uploads/categories/thumbs/5f12293a9dd36.jpg',
             'description' => 'Thời trang',
             'status' => 1,
         ]);
 
-        Category::create([
+        Category::updateOrCreate([
             'name' => 'Hot',
             'image' => '/uploads/categories/thumbs/5f12293a9dd36.jpg',
             'description' => 'Sản phẩm Hot',
             'status' => 1,
         ]);
 
-        Category::create([
+        Category::updateOrCreate([
             'name' => 'Phụ kiện',
             'image' => '/uploads/categories/thumbs/5f12293a9dd36.jpg',
             'description' => 'Phụ kiện',

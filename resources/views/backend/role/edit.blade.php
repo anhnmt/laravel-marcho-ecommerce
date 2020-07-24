@@ -77,7 +77,7 @@
 												<div class="col-lg-3 mb-4">
 													<div for="" class="parent-vertical-center" permission="{{$permission->name}}">
 														<div class="custom-control custom-switch">
-															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}" @foreach($permissionsAssigned as $per) {{ $per === $permission->name ? 'checked' : '' }} @endforeach {{ $permission->name == 'admin.dashboard' ? 'disabled' : '' }}>
+															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}" @foreach($permissionsAssigned as $per) {{ $per === $permission->name ? 'checked' : '' }} @endforeach {{ $permission->name == 'admin.dashboard' ? 'checked disabled' : '' }}>
 															<label class="custom-control-label" for="{{$permission->id}}">{{$permission->name}}</label>
 														</div>
 													</div>
@@ -99,7 +99,7 @@
 
 @section('style')
 <style>
-	label:not(.form-check-label):not(.custom-file-label) {
+	label:not(.form-check-label):not(.custom-file-label):not(.required) {
 		font-weight: normal;
 	}
 </style>
@@ -116,21 +116,29 @@
 			var value = $(this).val().toLowerCase();
 			$("#myDIV .parent-vertical-center").filter(function() {
 				if ($(this).attr('permission').toLowerCase().indexOf(value) > -1) {
-					$(this).parents('.col-md-4').show(50);
-					$(this).find('input').prop("disabled", false);
+					$(this).parents('.col-lg-3').show(50);
+					$(this).find('input').not('#1').prop("disabled", false);
 				} else {
-					$(this).parents('.col-md-4').hide(50);
+					$(this).parents('.col-lg-3').hide(50);
 					$(this).find('input').prop("disabled", true);
 				}
 			});
+			checkAllInput();
 		});
 
-		if($('input:checkbox').not("#check-all").prop('checked', true)){
-			$('#check-all').prop('checked', true);
+		function checkAllInput() {
+			if($('input[name="permissions[]"]:checked').length == $('input[name="permissions[]"]').length){
+				$('#check-all').prop('checked', true);
+			}else{
+				$('#check-all').prop('checked', false);
+			};
 		}
-
+		checkAllInput();
+		$('input[name="permissions[]"]').on('change', function() {
+			checkAllInput();	
+		});
 		$("#check-all").click(function() {
-			$('input:checkbox').not(this).prop('checked', this.checked);
+			$('input[name="permissions[]"]').not(':disabled').prop('checked', this.checked);
 		});
 	});
 </script>

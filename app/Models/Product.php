@@ -13,18 +13,18 @@ class Product extends Model
     use Sluggable, HasSku;
 
     protected $fillable = [
-        'category_id', 'name', 'slug', 'image', 'body', 'description', 'status',
+        'category_id',
+        'name',
+        'slug',
+        'sku',
+        'image',
+        'description',
+        'body',
+        'quantity',
+        'price',
+        'sale_price',
+        'status',
     ];
-
-    /**
-     * Define relationship with the Category
-     *
-     * @return void
-     */
-    public function category()
-    {
-        return $this->hasOne(Category::class, 'category_id', 'id');
-    }
 
     /**
      * Return the sluggable configuration array for this model.
@@ -39,16 +39,33 @@ class Product extends Model
             ]
         ];
     }
-    
 
     /**
      * Get the options for generating the Sku.
      *
      * @return BinaryCats\Sku\Concerns\SkuOptions;
      */
-    public function skuOptions() : SkuOptions
+    public function skuOptions(): SkuOptions
     {
         return SkuOptions::make()
             ->from(['slug']);
+    }
+
+    /**
+     * Define relationship with the Category
+     *
+     * @return void
+     */
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'category_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
     }
 }

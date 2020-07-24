@@ -39,6 +39,35 @@ function PopupCenter(url, title, w, h) {
     return newWindow;
 }
 
+// Define function to open filemanager window
+var lfm = function (options, cb) {
+    PopupCenter("/admin/filemanager?type=product", "FileManager", 900, 600);
+    window.SetUrl = cb;
+};
+
+// Define LFM summernote button
+var LFMButton = function (context) {
+    var ui = $.summernote.ui;
+    var button = ui.button({
+        contents: '<i class="note-icon-picture"></i> ',
+        tooltip: "Insert image with filemanager",
+        click: function () {
+            lfm(
+                {
+                    type: "image",
+                    prefix: "/admin/filemanager",
+                },
+                function (lfmItems, path) {
+                    lfmItems.forEach(function (lfmItem) {
+                        context.invoke("insertImage", lfmItem.url);
+                    });
+                }
+            );
+        },
+    });
+    return button.render();
+};
+
 (function ($) {
     $.fn.filemanager = function (type, options) {
         type = type || "other";
@@ -50,7 +79,12 @@ function PopupCenter(url, title, w, h) {
                     : "/admin/filemanager";
             var target_input = $("#" + $(this).data("input"));
             var target_preview = $("#" + $(this).data("preview"));
-            PopupCenter(route_prefix + "?type=" + type, "FileManager", 900, 600);
+            PopupCenter(
+                route_prefix + "?type=" + type,
+                "FileManager",
+                900,
+                600
+            );
             window.SetUrl = function (items) {
                 var file_path = items
                     .map(function (item) {

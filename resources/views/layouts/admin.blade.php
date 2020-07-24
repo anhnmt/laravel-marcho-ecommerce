@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/ionicons/css/ionicons.min.css') }}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="{{ asset('assets/css/SourceSansPro.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    @yield('style')
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="{{ asset('assets/css/SourceSansPro.css') }}" rel="stylesheet"> <!-- Custom CSS -->
-    @yield('style')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -46,7 +47,7 @@
                         <span class="hidden-xs text-capitalize">{{ auth()->user()->name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
+                        <a href="{{route('admin.profile')}}" class="dropdown-item">
                             <i class="fal fa-id-card"></i> Trang cá nhân
                         </a>
                         <div class="dropdown-divider"></div>
