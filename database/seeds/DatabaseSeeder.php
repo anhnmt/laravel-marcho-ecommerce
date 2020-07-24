@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AttributeSeeder::class);
         $this->call(AttributeValueSeeder::class);
         $this->call(BlogSeeder::class);
+        $this->call(SliderSeeder::class);
     }
 }

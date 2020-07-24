@@ -183,6 +183,16 @@
                         @endcanany
 
                         <li class="nav-header">EXAMPLES</li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.slider.index') }}" class="nav-link {{ (request()->routeIs('admin.slider.*')) ? 'active' : '' }}">
+                                <i class="nav-icon fal fa-book-alt"></i>
+                                <p>
+                                    Slider
+                                </p>
+                            </a>
+                        </li>
+
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
