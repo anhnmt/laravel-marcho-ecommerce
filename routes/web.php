@@ -17,7 +17,6 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
-Route::view('product', 'frontend.product')->name('product');
 
 // ROUTE FRONTEND
 Route::group([
@@ -28,6 +27,8 @@ Route::group([
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
+    //Product
+    Route::get('product', 'ProductController@index')->name('product.index');
 });
 
 // ROUTE ADMIN
