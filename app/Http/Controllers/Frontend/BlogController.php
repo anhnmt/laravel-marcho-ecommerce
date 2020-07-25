@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,11 @@ class BlogController extends Controller
 
         $latest_blog = Blog::latest();
 
+        $categories = Category::all();
+
         // dd($latest_blog);
 
-        return view('frontend.blog', compact('blogs', 'latest_blog'));
+        return view('frontend.blog', compact('blogs', 'latest_blog', 'categories'));
     }
 
     /**
@@ -39,6 +42,8 @@ class BlogController extends Controller
 
         $latest_blog = Blog::latest();
 
-        return view('frontend.blog_detail', compact('blog', 'latest_blog'));
+        $categories = Category::all();
+
+        return view('frontend.blog_detail', compact('blog', 'latest_blog', 'categories'));
     }
 }

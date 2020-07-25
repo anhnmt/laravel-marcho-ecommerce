@@ -75,8 +75,8 @@
 		$('#datatables').DataTable({
 			"paging": true,
 			"ordering": true,
-			"autoWidth": true,
-			// "responsive": true,
+			"autoWidth": false,
+			"responsive": true,
 			"serverSide": true,
 			"ajax": "{{ route('admin.blog.list') }}",
 			"columns": [{

@@ -47,45 +47,17 @@
         </div>
     </div>
     <div class="widget_box search_widget mb-55">
-        <h4 class="mb-4 head_sidebar">CATEGORY</h4>
+        <h4 class="mb-4 head_sidebar">DANH MỤC</h4>
         <div class="product_category">
             <ul class="list-group">
+                @foreach ($categories as $category)
                 <li class="list-group-item mt-2">
                     <div class="row">
-                        <span class="col-md-6">Woman</span>
+                        <span class="col-md-6">{{ $category->name }}</span>
                         <span class="text-md-right col-md-6">48</span>
                     </div>
                 </li>
-                <li class="list-group-item mt-2">
-                    <div class="row">
-                        <span class="col-md-6">Man</span>
-                        <span class="text-md-right col-md-6">69</span>
-                    </div>
-                </li>
-                <li class="list-group-item mt-2 active">
-                    <div class="row">
-                        <span class="col-md-6">Sale Products</span>
-                        <span class="text-md-right col-md-6">92</span>
-                    </div>
-                </li>
-                <li class="list-group-item mt-2">
-                    <div class="row">
-                        <span class="col-md-6">Fashion</span>
-                        <span class="text-md-right col-md-6">121</span>
-                    </div>
-                </li>
-                <li class="list-group-item mt-2">
-                    <div class="row">
-                        <span class="col-md-6">Hot Dresses</span>
-                        <span class="text-md-right col-md-6">52</span>
-                    </div>
-                </li>
-                <li class="list-group-item mt-2">
-                    <div class="row">
-                        <span class="col-md-6">Accessories</span>
-                        <span class="text-md-right col-md-6">83</span>
-                    </div>
-                </li>
+                @endforeach
             </ul>
         </div>
     </div>

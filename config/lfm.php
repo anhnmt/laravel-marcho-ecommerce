@@ -100,6 +100,19 @@ return [
             ],
         ],
 
+        'slider' => [
+            'folder_name' => 'sliders',
+            'startup_view' => 'list', // grid || list
+            'max_size' => 30000, // size in KB
+            'valid_mime' => [
+                'image/jpeg',
+                'image/pjpeg',
+                'image/png',
+                'image/gif',
+                'image/svg+xml',
+            ],
+        ],
+
         'file' => [
             'folder_name' => 'files',
             'startup_view' => 'list', // grid || list
