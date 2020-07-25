@@ -82,6 +82,11 @@ Route::group([
     // Permission
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
     Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
+
+    // Slider
+    Route::get('slider/list', 'SliderController@list')->name('slider.list');
+    Route::resource('slider', 'SliderController', ['except' => ['show']]);
+
 });
 
 // FILE MANAGER
