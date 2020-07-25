@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\AttributeValueProductAttribute;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductAttribute\CreateProductAttributeRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProductAttributeController extends Controller
 {
@@ -68,23 +68,37 @@ class ProductAttributeController extends Controller
      */
     public function store(CreateProductAttributeRequest $request, Product $product)
     {
-        $request['product_id'] = $product->id;
+        DB::beginTransaction();
+        
+        try {
+            $request['product_id'] = $product->id;
 
-        $product_attribute = ProductAttribute::create($request->only(
-            'product_id',
-            'quantity',
-            'price',
-            'sale_price',
-            'default',
-        ));
-
-        // dd($request->attributeValue);
-        foreach ($request->attributeValue as $attribute_value_id) {
-            AttributeValueProductAttribute::create([
-                'attribute_value_id' => $attribute_value_id,
-                'product_attribute_id' => $product_attribute->id,
-            ]);
+            $product_attribute = ProductAttribute::create($request->only(
+                'product_id',
+                'quantity',
+                'price',
+                'sale_price',
+                'default',
+            ));
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('error', 'Thêm thuộc tính sản phẩm không thành công!');
         }
+        
+        try {
+            // dd($request->attributeValue);
+            foreach ($request->attributeValue as $attribute_value_id) {
+                AttributeValueProductAttribute::create([
+                    'attribute_value_id' => $attribute_value_id,
+                    'product_attribute_id' => $product_attribute->id,
+                ]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('error', 'Thêm thuộc tính sản phẩm không thành công!');
+        }
+
+        DB::commit();
 
         return redirect()->route('admin.product.attribute.index', $product->id)->withSuccess('Thêm thuộc tính sản phẩm thành công');
     }
@@ -97,18 +111,31 @@ class ProductAttributeController extends Controller
      */
     public function destroy(Product $product, $productAttribute)
     {
-        // dd([$attribute, $attribute_value]);
-        $productAttribute = ProductAttribute::findOrFail($productAttribute);
-        // dd($productAttribute->id);
-        
-        $attributeValueProductAttribute = AttributeValueProductAttribute::findOrFail($productAttribute->id)->all();
-        // dd($attributeValueProductAttribute);
+        DB::beginTransaction();
 
-        foreach ($attributeValueProductAttribute as $attrValueProductAttr) {
-            $attrValueProductAttr->delete();
+        // Tìm và xóa trong ProductAttribute
+        try {
+            $productAttribute = ProductAttribute::findOrFail($productAttribute);
+    
+            $productAttribute->delete();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('error', 'Xóa tính sản phẩm không thành công!');
         }
 
-        $productAttribute->delete();
+        // Tìm và xóa trong AttributeValueProductAttribute
+        try {
+            $attributeValueProductAttribute = AttributeValueProductAttribute::findOrFail($productAttribute->id)->all();
+    
+            foreach ($attributeValueProductAttribute as $attrValueProductAttr) {
+                $attrValueProductAttr->delete();
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('error', 'Xóa thuộc tính sản phẩm không thành công!');
+        }
+
+        DB::commit();
 
         return redirect()->route('admin.product.attribute.index', $product->id)->withSuccess('Xoá thuộc tính sản phẩm thành công');
     }

@@ -72,99 +72,59 @@
 <script>
 	$.fn.dataTable.ext.errMode = 'throw';
 
-	var app = new Vue({
-		el: "#app",
-		data() {
-			return {
-				errors: {},
-			};
-		},
-		methods: {
-			delete(id) {
-				var self = this;
+	$(function() {
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
 
-				Swal.fire({
-					title: 'Xác nhận xoá?',
-					text: "Bạn sẽ không thể khôi phục dữ liệu!",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Đồng ý!',
-					cancelButtonText: 'Huỷ!',
-				}).then((result) => {
-					if (result.value) {
-						$.ajax({
-							url: "{{ route('admin.permission.index') }}/" + id,
-							type: "POST",
-							dataType: "json",
-							data: {
-								_method: "DELETE"
-							},
-							success: function(data) {
-								console.log(data);
+		$('#datatables').DataTable({
+			"paging": true,
+			"ordering": true,
+			"autoWidth": false,
+			"responsive": true,
+			"serverSide": true,
+			"ajax": "{{ route('admin.permission.list') }}",
+			"columns": [{
+					data: 'id',
+					className: 'align-middle text-center',
+					width: '5%',
+				},
+				{
+					data: 'name',
+					className: 'align-middle',
+				},
+				{
+					data: 'guard_name',
+					className: 'align-middle text-center',
+					width: '40%',
+				},
+				{
+					data: 'action',
+					className: 'align-middle text-center d-flex justify-content-center',
+					orderable: false,
+					searchable: false
+				},
+			]
+		}).on('submit', '.delete-form', function(event) {
+			event.preventDefault();
 
-								Swal.fire(
-									'Xoá thành công!',
-									'Bạn đã xoá thành công.',
-									'success'
-								)
-							},
-							error: function(data) {
-								console.log(data);
-							},
-						}).always(function(data) {
-							$('#datatables').DataTable().draw(false);
-						});
-					}
-				})
-			},
-		},
-		created() {
-			var self = this;
-
-			$(function() {
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
-
-				$('#datatables').DataTable({
-					"paging": true,
-					"ordering": true,
-					"autoWidth": true,
-					"responsive": true,
-					"serverSide": true,
-					"ajax": "{{ route('admin.permission.list') }}",
-					"columns": [{
-							data: 'id',
-							className: 'align-middle text-center',
-							width: '5%',
-						},
-						{
-							data: 'name',
-							className: 'align-middle',
-						},
-						{
-							data: 'guard_name',
-							className: 'align-middle text-center',
-							width: '40%',
-						},
-						{
-							data: 'action',
-							className: 'align-middle text-center d-flex justify-content-center',
-							orderable: false,
-							searchable: false
-						},
-					]
-				}).on('click', 'button[data-delete]', function(e) {
-					var id = $(this).data('delete');
-					// console.log(id);
-					self.delete(id);
-				});
-			})
-		}
+			Swal.fire({
+				title: 'Xác nhận xoá?',
+				text: "Bạn sẽ không thể khôi phục dữ liệu!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Đồng ý!',
+				cancelButtonText: 'Huỷ!',
+			}).then((result) => {
+				if (result.value) {
+					event.currentTarget.submit();
+				}
+			});
+		});
 	});
 </script>
 @stop

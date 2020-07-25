@@ -89,7 +89,7 @@
 		$('#datatables').DataTable({
 			"paging": true,
 			"ordering": true,
-			"autoWidth": true,
+			"autoWidth": false,
 			"responsive": true,
 			"serverSide": true,
 			"ajax": "{{ route('admin.attribute.list') }}",

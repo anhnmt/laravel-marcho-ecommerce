@@ -91,18 +91,6 @@ class SliderController extends Controller
         return redirect()->route('admin.slider.index')->withSuccess('Thêm slider thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Slider $slider)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Slider  $slider
@@ -110,7 +98,9 @@ class SliderController extends Controller
      */
     public function edit(Slider $slider)
     {
-        //
+        $slider->image = $slider->image ? $slider->image : 'assets/img/placeholder.png';
+
+        return view('backend.slider.edit', compact('slider'));
     }
 
     /**
@@ -122,7 +112,25 @@ class SliderController extends Controller
      */
     public function update(Request $request, Slider $slider)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'link' => 'nullable',
+            'image' => 'required',
+            'body' => 'nullable',
+            'status' => 'boolean',
+        ], [
+            'name.required' => 'Vui lòng nhập tên danh mục',
+            'image.required' => 'Vui lòng thêm ảnh',
+            'status.boolean' => 'Trạng thái phải là true hoặc false',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
+
+        $slider->update($request->all());
+
+        return redirect()->route('admin.slider.index')->withSuccess('Cập nhật slider thành công');
     }
 
     /**
@@ -133,6 +141,8 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
-        //
+        $slider->delete();
+
+        return redirect()->route('admin.slider.index')->withSuccess('Xoá slider thành công');
     }
 }
