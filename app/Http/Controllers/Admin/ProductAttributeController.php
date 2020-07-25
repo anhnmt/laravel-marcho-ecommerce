@@ -8,7 +8,6 @@ use App\Models\ProductAttribute;
 use App\Models\AttributeValueProductAttribute;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\ProductAttribute\CreateProductAttributeRequest;
 
 class ProductAttributeController extends Controller
 {
