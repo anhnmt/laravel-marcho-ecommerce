@@ -41,11 +41,13 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.user.edit')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.user.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									@endcan
+									<a href="{{ route('admin.user.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
@@ -57,45 +59,42 @@
 								<label for="name">Chọn nhóm quyền</label>
 								<div class="row">
 									<div class="col-12">
-											<div class="card-header d-flex p-0">
-												<ul class="nav nav-pills p-2">
-													<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Nhóm quyền</a></li>
-													<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Quyền</a></li>
-												</ul>
-											</div><!-- /.card-header -->
-											<div class="card-body">
-												<div class="tab-content">
-													<div class="tab-pane active" id="tab_1">
+										<div class="card-header d-flex p-0">
+											<ul class="nav nav-pills p-2">
+												<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Nhóm quyền</a></li>
+												<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Quyền</a></li>
+											</ul>
+										</div><!-- /.card-header -->
+										<div class="card-body">
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab_1">
+													<div class="row">
+														<input id="myInput" class="form-control col-lg-4 my-sm-2 my-0" placeholder="Search..">
+													</div>
+													<div class="role-list mt-4" id="myDIV">
 														<div class="row">
-															<input id="myInput" class="form-control col-lg-4 my-sm-2 my-0" placeholder="Search..">
-														</div>
-														<div class="role-list mt-4" id="myDIV">
-															<div class="row">
-																@foreach($roles as $role)
-																<div class="col-lg-3 mb-4">
-																	<div for="" class="parent-vertical-center" role="{{$role->name}}">
-																		<div class="custom-control custom-switch">
-																			<input class="custom-control-input" id="{{$role->id}}" type="checkbox" name="roles[]" value="{{$role->name}}" 
-																			@foreach($rolesAssigned as $value)
-																			{{$role->name == $value ? 'checked' : ''}}
-																			@endforeach>
-																			<label class="custom-control-label" for="{{$role->id}}">{{$role->name}}</label>
-																		</div>
+															@foreach($roles as $role)
+															<div class="col-lg-3 mb-4">
+																<div for="" class="parent-vertical-center" role="{{$role->name}}">
+																	<div class="custom-control custom-switch">
+																		<input class="custom-control-input" id="{{$role->id}}" type="checkbox" name="roles[]" value="{{$role->name}}" @foreach($rolesAssigned as $value) {{$role->name == $value ? 'checked' : ''}} @endforeach>
+																		<label class="custom-control-label" for="{{$role->id}}">{{$role->name}}</label>
 																	</div>
 																</div>
-																@endforeach
 															</div>
+															@endforeach
 														</div>
 													</div>
-													<!-- /.tab-pane -->
-													<div class="tab-pane" id="tab_2">
-														None
-													</div>
-													<!-- /.tab-pane -->
 												</div>
-												<!-- /.tab-content -->
-											</div><!-- /.card-body -->
-										</div>
+												<!-- /.tab-pane -->
+												<div class="tab-pane" id="tab_2">
+													None
+												</div>
+												<!-- /.tab-pane -->
+											</div>
+											<!-- /.tab-content -->
+										</div><!-- /.card-body -->
+									</div>
 									<!-- /.col -->
 								</div>
 							</div>

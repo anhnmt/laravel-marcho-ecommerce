@@ -48,12 +48,7 @@
                             </span>
                             <span><i class="fal fa-user"></i><a href="#">{{ $blog->user->name }}</a></span>
 
-                            <span>
-                                <i class="fal fa-comment-alt-dots"></i>
-                                <a href="#comment_section">
-                                    {{ $comments->count() }} Bình Luận
-                                </a>
-                            </span>
+                            <span><i class="fal fa-comment-alt-dots"></i><a href="#">05 Comments</a></span>
                         </div>
 
                         <h5 class="mb-3">{{ $blog->name }}</h5>
@@ -95,41 +90,85 @@
                         </div>
                     </div>
 
-                    @if ($comments->count() > 0)
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="comment_box mb-50">
                                 <div class="quantity_comment my-4">
-                                    <h3>{{ $comments->count() }} Bình Luận</h3>
+                                    <h3> COMMENTS</h3>
                                 </div>
-
                                 <ul class="list_none comment_list">
-                                    @foreach ($comments as $comment)
                                     <li class="comment_info">
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex">
                                             <div class="comment_user">
-                                                <img src="{{ asset('assets/img/user1-128x128.jpg') }}" alt="user2" class="rounded-circle">
+                                                <img src="{{asset('assets/img/user1-128x128.jpg')}}" alt="user2" class="rounded-circle">
                                             </div>
                                             <div class="comment_content">
                                                 <div class="d-flex">
                                                     <div class="meta_data">
-                                                        <h6><a href="#">{{ $comment->user->name }}</a></h6>
-                                                        <div class="comment-time">{{ $comment->created_at->ago() }}</div>
+                                                        <h6><a href="#">Alden Smith</a></h6>
+                                                        <div class="comment-time">MARCH 5, 2018, 6:05 PM</div>
                                                     </div>
                                                     <div class="ml-auto">
                                                         <a href="#" class="comment-reply"><i class="fas fa-reply-all"></i>Reply</a>
                                                     </div>
                                                 </div>
-                                                <p>{{ $comment->body }}</p>
+                                                <p>We denounce with righteous indignation and dislike men who are so
+                                                    beguiled and demoralized by the charms of pleasure of the moment, so
+                                                    blinded by desire that the cannot foresee the pain and trouble that.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <ul class="children">
+                                            <li class="comment_info">
+                                                <div class="d-flex">
+                                                    <div class="comment_user">
+                                                        <img src="{{asset('assets/img/user3-128x128.jpg')}}" alt="user3" class="rounded-circle">
+                                                    </div>
+                                                    <div class="comment_content">
+                                                        <div class="d-flex align-items-md-center">
+                                                            <div class="meta_data">
+                                                                <h6><a href="#/">Daisy Lana</a></h6>
+                                                                <div class="comment-time">april 8, 2018, 5:15 PM</div>
+                                                            </div>
+                                                            <div class="ml-auto">
+                                                                <a href="#" class="comment-reply"><i class="fas fa-reply-all"></i>Reply</a>
+                                                            </div>
+                                                        </div>
+                                                        <p>We denounce with righteous indignation and dislike men who
+                                                            are so beguiled and demoralized by the charms of pleasure of
+                                                            the moment, so blinded by desire that the cannot foresee the
+                                                            pain and trouble that.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="comment_info">
+                                        <div class="d-flex">
+                                            <div class="comment_user">
+                                                <img src="{{asset('assets/img/user4-128x128.jpg')}}" alt="user4" class="rounded-circle">
+                                            </div>
+                                            <div class="comment_content">
+                                                <div class="d-flex">
+                                                    <div class="meta_data">
+                                                        <h6><a href="#">John Becker</a></h6>
+                                                        <div class="comment-time">april 15, 2018, 10:30 PM</div>
+                                                    </div>
+                                                    <div class="ml-auto">
+                                                        <a href="#/" class="comment-reply"><i class="fas fa-reply-all"></i>Reply</a>
+                                                    </div>
+                                                </div>
+                                                <p>We denounce with righteous indignation and dislike men who are so
+                                                    beguiled and demoralized by the charms of pleasure of the moment, so
+                                                    blinded by desire that the cannot foresee the pain and trouble that.
+                                                </p>
                                             </div>
                                         </div>
                                     </li>
-                                    @endforeach
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    @endif
 
                     <div class="row" id="comment_section">
                         <div class="col-lg-12">
@@ -142,10 +181,10 @@
 
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            @if($user ?? '')
+                                            @if(auth()->check())
                                             <div class="form-group form_group">
-                                                <img src="{{asset($user->avatar)}}" width="40px" alt="user4" class="rounded-circle">
-                                                <span>{{ $user->name }}</span>
+                                                <img src="{{asset('assets/img/user4-128x128.jpg')}}" width="40px" alt="user4" class="rounded-circle">
+                                                <span>{{ auth()->user()->name }}</span>
                                             </div>
                                             @else
                                             <div class="form-group form_group">

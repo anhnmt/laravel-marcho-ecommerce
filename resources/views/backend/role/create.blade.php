@@ -46,11 +46,13 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.role.store')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.role.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									@endcan
+									<a href="{{ route('admin.role.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>

@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class AttributeValue extends Model
 {
     use Sluggable;
+    use Cachable;
 
     protected $fillable = [
         'attribute_id', 'value', 'code',

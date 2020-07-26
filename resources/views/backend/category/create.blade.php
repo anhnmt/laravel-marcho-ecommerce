@@ -61,15 +61,17 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.category.store')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.category.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									@endcan
+									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
-							
+
 							<div class="card">
 								<div class="card-header">
 									<h5>Trạng thái</h5>
@@ -96,16 +98,19 @@
 									<div class="input-group">
 										<span class="input-group-btn">
 											<a id="lfm" data-input="image" data-preview="holder" data-type="category" class="btn btn-primary text-white">
-												<i class="fa fa-picture-o"></i> Choose
+												<i class="fal fa-camera"></i> Chọn ảnh
 											</a>
+											<button type="button" id="remove_img" class="btn btn-danger text-white">
+												<i class="fal fa-trash-alt"></i> Xoá
+											</button>
 										</span>
-										<input class="form-control @error('image') is-invalid @enderror" type="text" name="image" id="image">
-
+										<input class="form-control @error('image') is-invalid @enderror" type="hidden" name="image" id="image" value="{{ old('image') }}">
+		
 										@error('image')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror
 									</div>
-									<div id="holder" style="margin-top:15px;max-height:100px;"></div>
+									<div id="holder" style="margin-top:15px"></div>
 								</div>
 							</div>
 						</div>

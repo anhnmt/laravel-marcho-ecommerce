@@ -46,11 +46,13 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.role.update')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.role.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									@endcan
+									<a href="{{ route('admin.role.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
@@ -127,15 +129,15 @@
 		});
 
 		function checkAllInput() {
-			if($('input[name="permissions[]"]:checked').length == $('input[name="permissions[]"]').length){
+			if ($('input[name="permissions[]"]:checked').length == $('input[name="permissions[]"]').length) {
 				$('#check-all').prop('checked', true);
-			}else{
+			} else {
 				$('#check-all').prop('checked', false);
 			};
 		}
 		checkAllInput();
 		$('input[name="permissions[]"]').on('change', function() {
-			checkAllInput();	
+			checkAllInput();
 		});
 		$("#check-all").click(function() {
 			$('input[name="permissions[]"]').not(':disabled').prop('checked', this.checked);

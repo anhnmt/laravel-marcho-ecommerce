@@ -62,11 +62,13 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.category.update')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.category.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									@endcan
+									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
@@ -110,8 +112,8 @@
 										@enderror
 									</div>
 
-									<div id="holder" style="margin-top:15px;max-height:100px;">
-										<img src="{{ $category->image }}" style="height: 100px;">
+									<div id="holder" style="margin-top:15px">
+										<img src="{{ $category->image }}">
 									</div>
 								</div>
 							</div>

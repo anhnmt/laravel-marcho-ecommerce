@@ -4,11 +4,14 @@ namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class Comment extends Model
 {
+    use Cachable;
+
     protected $fillable = [
-        'parent_id', 'user_id', 'post_id', 'body',
+        'parent_id', 'user_id', 'blog_id', 'body',
     ];
 
     /**

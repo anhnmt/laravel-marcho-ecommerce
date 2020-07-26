@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $categories = Category::all();
-        return view('frontend.product', compact('categories'));
+        $products = Product::paginate(10);
+
+        return view('frontend.product', compact('products', 'categories'));
     }
 }

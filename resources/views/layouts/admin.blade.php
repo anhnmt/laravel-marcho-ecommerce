@@ -43,7 +43,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
+                        <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
                         <span class="hidden-xs text-capitalize">{{ auth()->user()->name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -131,16 +131,40 @@
                         </li>
                         @endcanany
 
-                        @can('admin.blog.index')
-                        <li class="nav-item">
-                            <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs('admin.blog.*')) ? 'active' : '' }}">
+                        @canany(['admin.blog.index','admin.comment.index'])
+                        <li class="nav-item has-treeview {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'active' : '' }}">
                                 <i class="nav-icon fal fa-book-alt"></i>
                                 <p>
                                     Bài viết
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                @can('admin.blog.index')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs('admin.blog.*')) ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Danh sách bài viết
+                                        </p>
+                                    </a>
+                                </li>
+                                @endcan
+
+                                @can('admin.comment.index')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.comment.index') }}" class="nav-link {{ (request()->routeIs('admin.comment.*')) ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Danh sách bình luận
+                                        </p>
+                                    </a>
+                                </li>
+                                @endcan
+                            </ul>
                         </li>
-                        @endcan
+                        @endcanany
 
                         @canany(['admin.user.index','admin.role.index','admin.permission.index'])
                         <li class="nav-item has-treeview {{ (request()->routeIs(['admin.user*', 'admin.role*','admin.permission*'])) ? 'menu-open' : '' }}">
@@ -183,7 +207,7 @@
                         @endcanany
 
                         <li class="nav-header">CÀI ĐẶT</li>
-
+                        @can('admin.slider.index')
                         <li class="nav-item">
                             <a href="{{ route('admin.slider.index') }}" class="nav-link {{ (request()->routeIs('admin.slider.*')) ? 'active' : '' }}">
                                 <i class="nav-icon fal fa-book-alt"></i>
@@ -192,6 +216,7 @@
                                 </p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

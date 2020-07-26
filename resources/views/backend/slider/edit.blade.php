@@ -62,10 +62,12 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.slider.store')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+									@endcan
+									<a href="{{ route('admin.slider.index') }}" class="btn btn-default">
 										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
@@ -96,14 +98,14 @@
 								<div class="card-body">
 									<div class="input-group">
 										<span class="input-group-btn">
-											<a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary text-white">
+											<a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary text-white" data-type="slider">
 												<i class="fal fa-camera"></i> Chọn ảnh
 											</a>
 											<button type="button" id="remove_img" class="btn btn-danger text-white">
 												<i class="fal fa-trash-alt"></i> Xoá
 											</button>
 										</span>
-										
+                    
 										<input class="form-control @error('image') is-invalid @enderror" type="hidden" name="image" id="image" value="{{ $slider->image }}">
 
 										@error('image')
@@ -111,8 +113,8 @@
 										@enderror
 									</div>
 
-									<div id="holder" style="margin-top:15px;max-height:100px;">
-										<img src="{{ asset($slider->image) }}" style="height: 100px;">
+									<div id="holder" style="margin-top:15px">
+										<img src="{{ asset($slider->image) }}">
 									</div>
 								</div>
 							</div>

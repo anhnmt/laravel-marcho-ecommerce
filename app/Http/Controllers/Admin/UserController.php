@@ -4,34 +4,37 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\User;
+use App\Models\Role;
+use App\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 
 class UserController extends Controller
 {
     public function list()
     {
-        $users = User::all();
+        $users = User::select('id', 'name', 'email')->orderBy('id', 'desc');
 
         return datatables($users)
         ->addColumn('action', function ($user) {
             $action = '<form class="delete-form" action="' . route('admin.user.destroy', $user->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
             
+            if(Auth::user()->can('admin.user.edit'))
             $action .= '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-            if(Auth::user()->name != $user->name)
+            if(Auth::user()->name != $user->name || Auth::user()->can('admin.user.destroy'))
             $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
+            if((auth()->user()->can('admin.user.edit') && auth()->user()->can('admin.user.destroy')) == false) 
+                $action .= "<span>Không có hành động nào</span>";
             $action .= '</=form>';
 
-            return $action;
-        })
-        ->rawColumns(['image', 'status', 'action'])
-        ->toJson();
+                $action .= '</=form>';
+
+                return $action;
+            })
+            ->rawColumns(['image', 'status', 'action'])
+            ->toJson();
     }
     /**
      * Display a listing of the resource.
@@ -56,7 +59,7 @@ class UserController extends Controller
         $permissionsAssigned = $user->getPermissionNames();
         $rolesAssigned = $user->getRoleNames();
 
-        return view('backend.user.edit', compact('permissions','roles' , 'user', 'permissionsAssigned', 'rolesAssigned'));
+        return view('backend.user.edit', compact('permissions', 'roles', 'user', 'permissionsAssigned', 'rolesAssigned'));
     }
 
     /**
@@ -70,6 +73,7 @@ class UserController extends Controller
     {
         $roles = $request->roles;
         $user->syncRoles($roles);
+
         return redirect()->route('admin.user.index');
     }
 
@@ -85,6 +89,4 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index')->withSuccess('Xoá danh mục thành công');
     }
-
-    
 }
