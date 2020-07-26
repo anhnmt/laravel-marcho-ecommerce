@@ -28,8 +28,13 @@ class SliderController extends Controller
             ->addColumn('action', function ($slider) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.slider.destroy', $slider->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
                 
+                if(auth()->user()->can('admin.slider.edit'))
                 $action .= '<a href="' . route('admin.slider.edit', $slider->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                if(auth()->user()->can('admin.slider.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+
+                if(!auth()->user()->hasRole(['admin.slider.edit', 'admin.slider.destroy'])) 
+                $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</div></form>';
 

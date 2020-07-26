@@ -61,9 +61,11 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.category.store')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
+									@endcan
 									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
 										<i class="fal fa-save"></i> Quay lại
 									</a>
@@ -96,11 +98,14 @@
 									<div class="input-group">
 										<span class="input-group-btn">
 											<a id="lfm" data-input="image" data-preview="holder" data-type="category" class="btn btn-primary text-white">
-												<i class="fa fa-picture-o"></i> Choose
+												<i class="fal fa-camera"></i> Chọn ảnh
 											</a>
+											<button type="button" id="remove_img" class="btn btn-danger text-white">
+												<i class="fal fa-trash-alt"></i> Xoá
+											</button>
 										</span>
-										<input class="form-control @error('image') is-invalid @enderror" type="text" name="image" id="image">
-
+										<input class="form-control @error('image') is-invalid @enderror" type="hidden" name="image" id="image" value="{{ old('image') }}">
+		
 										@error('image')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror

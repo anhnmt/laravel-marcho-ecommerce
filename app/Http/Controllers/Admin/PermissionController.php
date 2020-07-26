@@ -12,7 +12,11 @@ class PermissionController extends Controller
         $permissions = Permission::select(['id', 'name', 'guard_name']);
         return datatables($permissions)
             ->addColumn('action', function ($permission) {
+                if(auth()->user()->can('admin.permission.destroy'))
                 return '<button data-delete="' . $permission->id . '" class="btn btn-sm btn-danger"><i class="far fa-trash"></i></button>';
+                else{
+                return '<span>Không có hành động nào</span>';
+                }
             })
             ->rawColumns(['action'])
             ->toJson();

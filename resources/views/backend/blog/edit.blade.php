@@ -71,10 +71,12 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.blog.update')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+									@endcan
+									<a href="{{ route('admin.blog.index') }}" class="btn btn-default">
 										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
@@ -105,7 +107,7 @@
 								<div class="card-body">
 									<div class="input-group">
 										<span class="input-group-btn">
-											<a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary text-white">
+											<a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary text-white" data-type="blog">
 												<i class="fal fa-camera"></i> Chọn ảnh
 											</a>
 											<button type="button" id="remove_img" class="btn btn-danger text-white">

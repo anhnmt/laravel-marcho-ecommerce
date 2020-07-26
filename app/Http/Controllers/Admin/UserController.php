@@ -20,10 +20,13 @@ class UserController extends Controller
         ->addColumn('action', function ($user) {
             $action = '<form class="delete-form" action="' . route('admin.user.destroy', $user->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
             
+            if(Auth::user()->can('admin.user.edit'))
             $action .= '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-            if(Auth::user()->name != $user->name)
+            if(Auth::user()->name != $user->name || Auth::user()->can('admin.user.destroy'))
             $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
+            if(!auth()->user()->hasRole(['admin.user.edit', 'admin.user.destroy'])) 
+                $action .= "<span>Không có hành động nào</span>";
             $action .= '</=form>';
 
             return $action;

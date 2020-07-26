@@ -17,6 +17,7 @@ class BlogController extends Controller
     public function list()
     {
         $blogs = Blog::select(['id', 'name', 'slug', 'image', 'status']);
+
         return datatables($blogs)
             ->addColumn('image', function ($blog) {
                 $thumb_url = $blog->image ? $blog->image : 'assets/img/placeholder.png';
@@ -28,10 +29,15 @@ class BlogController extends Controller
             ->addColumn('action', function ($blog) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.blog.destroy', $blog->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
+                if(auth()->user()->can('admin.blog.edit'))
                 $action .= '<a href="' . route('admin.blog.edit', $blog->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
 
+                if(auth()->user()->can('admin.blog.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
-
+                
+                if(!auth()->user()->hasRole(['admin.blog.edit', 'admin.blog.destroy'])) 
+                $action .= "<span>Không có hành động nào</span>"; 
+                
                 $action .= '</div></form>';
 
                 return $action;
