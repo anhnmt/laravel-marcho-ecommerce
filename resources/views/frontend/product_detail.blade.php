@@ -96,7 +96,8 @@
                     </div>
                     <div class="product_review mt-4">
                         <p class="title">Đánh giá</p>
-                        <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aperiam rem cum nulla quam
+                        <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aperiam rem cum
+                            nulla quam
                             nostrum ipsam dolorum voluptatum veniam saepe quasi laborum, iusto veritatis suscipit
                             necessitatibus inventore delectus iure exercitationem.</p>
                     </div>
@@ -228,17 +229,20 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Tên bạn..." name="name" required="">
+                                    <input type="text" class="form_control" placeholder="Tên bạn..." name="name"
+                                        required="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form_group">
-                                    <input type="email" class="form_control" placeholder="Địa chỉ E-mail..." name="email" required="">
+                                    <input type="email" class="form_control" placeholder="Địa chỉ E-mail..."
+                                        name="email" required="">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form_group">
-                                    <textarea class="form_control" placeholder="Đánh giá của bạn..." name="message"></textarea>
+                                    <textarea class="form_control" placeholder="Đánh giá của bạn..."
+                                        name="message"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12">

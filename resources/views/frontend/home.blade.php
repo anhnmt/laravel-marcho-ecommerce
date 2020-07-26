@@ -115,8 +115,15 @@
 								</div>
 							</div>
 							<div class="product_info card-body text-center">
-								<h5 class="card-title">{{ $product->name }}</h5>
-								<span class="price">
+								<div class="star_rating d-inline-block">
+									<i class="fas fa-star checked"></i>
+									<i class="fas fa-star checked"></i>
+									<i class="fas fa-star checked"></i>
+									<i class="fas fa-star checked"></i>
+									<i class="fas fa-star"></i>
+								</div>
+								<h5 class="card-title mt-2">{{ $product->name }}</h5>
+								<span class="price mt-2">
 									@if($product->sale_price)
 									<span class="new">{{ $product->sale_price }}đ</span>
 									<span class="old">{{ $product->price }}đ</span>

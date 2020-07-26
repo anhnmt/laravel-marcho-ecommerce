@@ -20,6 +20,7 @@ class ProductAttributeController extends Controller
      */
     public function list(Product $product)
     {
+
         $this->product = $product;
 
         $product_attributes = ProductAttribute::where('product_id', $product->id)->orderBy('id', 'desc');
@@ -39,8 +40,11 @@ class ProductAttributeController extends Controller
             ->addColumn('action', function ($product_attribute) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.attribute.destroy', [$this->product->id, $product_attribute->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
+                if(auth()->user()->can('admin.product.attribute.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
-
+                else
+                $action .= "<span>Không có hành động nào</span>";
+                
                 $action .= '</div></form>';
 
                 return $action;
@@ -113,15 +117,13 @@ class ProductAttributeController extends Controller
     public function destroy(Product $product, $productAttribute)
     {
         DB::beginTransaction();
-
         // Tìm và xóa trong ProductAttribute
         try {
             $productAttribute = ProductAttribute::findOrFail($productAttribute);
-    
             $productAttribute->delete();
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->with('error', 'Xóa tính sản phẩm không thành công!');
+            return back()->with('error', 'Xóa thuộc tính sản phẩm không thành công!');
         }
 
         // Tìm và xóa trong AttributeValueProductAttribute

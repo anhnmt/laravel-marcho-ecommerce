@@ -18,12 +18,18 @@ class RoleController extends Controller
         return datatables($roles)
             ->addColumn('action', function ($role) {
                 $action = '<form class="delete-form" action="' . route('admin.role.destroy', $role->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
-
-                if ($role->name !=  'super-admin') {
+                
+                if($role->name !=  'super-admin'){
+                    if(auth()->user()->can('admin.role.edit'))
                     $action .= '<a href="' . route('admin.role.edit', $role->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                    if(auth()->user()->can('admin.role.destroy'))
                     $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
-                } else $action .= '<span>Không có hành động nào</span>';
-
+                } 
+                else $action .= '<span>Không có hành động nào</span>';
+                
+                if((auth()->user()->can('admin.role.edit') && auth()->user()->can('admin.role.destroy')) == false) 
+                $action .= "<span>Không có hành động nào</span>";
+              
                 $action .= '</form>';
 
                 return $action;

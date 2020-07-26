@@ -100,6 +100,10 @@ Route::group([
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
     Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
 
+    // Comment
+    Route::get('comment/list', 'CommentController@list')->name('comment.list');
+    Route::resource('comment', 'CommentController', ['only' => ['index', 'destroy']]);
+
     // Slider
     Route::get('slider/list', 'SliderController@list')->name('slider.list');
     Route::resource('slider', 'SliderController', ['except' => ['show']]);

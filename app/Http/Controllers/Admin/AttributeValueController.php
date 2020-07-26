@@ -24,10 +24,11 @@ class AttributeValueController extends Controller
 
         return datatables($attribute_values)
             ->addColumn('action', function ($attribute_value) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.attribute.value.destroy', [$attribute_value->attribute_id, $attribute_value->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.attribute.value.destroy', [$this->attribute->id, $attribute_value->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+                if(auth()->user()->can('admin.attribute.value.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
-
+                else
+                $action .= '<span>Không có hành động nào</span>' ;
                 $action .= '</div></form>';
 
                 return $action;
