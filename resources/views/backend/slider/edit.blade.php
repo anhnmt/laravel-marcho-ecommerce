@@ -103,7 +103,7 @@
 												<i class="fal fa-trash-alt"></i> Xoá
 											</button>
 										</span>
-										
+                    
 										<input class="form-control @error('image') is-invalid @enderror" type="hidden" name="image" id="image" value="{{ $slider->image }}">
 
 										@error('image')

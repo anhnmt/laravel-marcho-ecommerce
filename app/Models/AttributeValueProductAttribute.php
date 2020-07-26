@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class AttributeValueProductAttribute extends Model
 {
+    use Cachable;
+
     /**
      * The table associated with the model.
      *

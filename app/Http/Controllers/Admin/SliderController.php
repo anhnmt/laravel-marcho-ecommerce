@@ -91,6 +91,7 @@ class SliderController extends Controller
         return redirect()->route('admin.slider.index')->withSuccess('Thêm slider thành công');
     }
 
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Slider  $slider

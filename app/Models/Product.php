@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use BinaryCats\Sku\HasSku;
 use BinaryCats\Sku\Concerns\SkuOptions;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class Product extends Model
 {
-    use Sluggable, HasSku;
+    use Sluggable;
+    use HasSku;
+    use Cachable;
 
     protected $fillable = [
         'category_id',

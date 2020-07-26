@@ -32,7 +32,16 @@ Route::group([
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
     //Product
     Route::get('product', 'ProductController@index')->name('product.index');
+    Route::view('product_detail', 'frontend.product_detail')->name('product.show');
+    // Frontend Auth
+    Route::group([
+        'middleware' => ['auth'],
+    ], function () {
+        // Comment
+        Route::resource('blog.comment', 'CommentController');
+    });
 });
+
 
 // ROUTE ADMIN
 Route::group([
@@ -89,7 +98,6 @@ Route::group([
     // Slider
     Route::get('slider/list', 'SliderController@list')->name('slider.list');
     Route::resource('slider', 'SliderController', ['except' => ['show']]);
-
 });
 
 // FILE MANAGER

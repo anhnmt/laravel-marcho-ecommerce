@@ -1440,7 +1440,7 @@ header .navbar-collapse {
     font-family: "Roboto";
     color: rgb(41, 40, 45);
     line-height: 1.2;
-    font-weight: 400;
+    font-weight: 500;
 }
 .product_section .product_image:hover .product_item {
     opacity: 1;
@@ -1505,7 +1505,7 @@ header .navbar-collapse {
     color: rgb(204, 204, 206);
     text-decoration: line-through;
 }
-.product_section .product_info .price span.new {
+.product_section .product_info .price span.old {
     margin-left: 10px;
 }
 
@@ -2346,6 +2346,7 @@ header .navbar-collapse {
 }
 .blog_details_section .comment_box .comment_content {
     padding-left: 20px;
+    width: 100%;
 }
 .blog_details_section .comment_box .comment_content .meta_data h6 {
     font-size: 16px;
@@ -2353,7 +2354,7 @@ header .navbar-collapse {
     font-family: 'Roboto';
 }
 .blog_details_section .comment_box .comment-time {
-    font-size: 14px;
+    font-size: 12px;
     line-height: normal;
     margin-bottom: 8px;
     text-transform: uppercase;
@@ -2407,7 +2408,7 @@ header .navbar-collapse {
     height: 55px;
     padding: 18px 20px;
     background: #f6f6f6;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     color: #878b97;
 }
 .blog_details_section .blog_wrapper_content input,
@@ -2535,14 +2536,6 @@ img {
     display: inherit;
     border: none;
     outline: none;
-}
-.btn {
-    border-width: 1px;
-    cursor: pointer;
-    line-height: normal;
-    padding: 12px 35px;
-    text-transform: capitalize;
-    transition: all 0.3s ease-in-out;
 }
 .btn-line-fill {
     transition: all 0.8s ease 0s;

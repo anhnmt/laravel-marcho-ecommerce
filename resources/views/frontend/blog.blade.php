@@ -50,7 +50,7 @@
                                     <div class="blog_info">
                                         <p>
                                             <i class="fad fa-calendar-alt"></i>
-                                            {{ $blog->created_at->diffForHumans() }}
+                                            {{ $blog->created_at->format('d-m-Y') }}
                                         </p>
                                         <h3>
                                             <a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>

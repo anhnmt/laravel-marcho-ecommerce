@@ -74,8 +74,8 @@
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.blog.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
