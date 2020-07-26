@@ -17,6 +17,9 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
+Route::view('product_detail', 'frontend.product_detail')->name('product_detail');
+Route::view('cart', 'frontend.cart')->name('cart');
+Route::view('checkout', 'frontend.cart')->name('checkout');
 
 // ROUTE FRONTEND
 Route::group([

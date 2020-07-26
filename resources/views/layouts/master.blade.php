@@ -95,7 +95,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link icon_cart" href="#">
+                        <a class="nav-link icon_cart" href="{{ route('cart') }}">
                             <i class="fal fa-shopping-cart"></i>
                             <span class="cart_count">0</span>
                         </a>
