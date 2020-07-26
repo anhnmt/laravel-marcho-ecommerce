@@ -129,6 +129,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="product_action mt-4">
+                        <div class="quantity">
+                            <input type="button" value="-" class="minus">
+                            <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                            <input type="button" value="+" class="plus">
+                        </div>
+                        <button class="btn filter_btn">Add to cart</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,23 +253,263 @@
                 <h1>Sản phẩm liên quan</h1>
             </div>
             <div class="products mt-5">
-                <div class="mx-3">
-                    <img src="{{asset('assets/img/product/product_3.jpg')}}" alt="">
+                <div class="product_section col-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="product_image col-md-4 col-sm-12 col-12">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
+                                    class="card-img card-img-list" alt="">
+
+                                <div class="product_item">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="add-wishlist">
+                                            <i class="fal fa-heart"></i>
+                                        </a>
+                                        <a class="add-cart">
+                                            <i class="fal fa-shopping-bag"></i>
+                                        </a>
+                                        <a class="product-search">
+                                            <i class="fal fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
+                                <h4 class="card-title"><a href="">Baby Girls Dress Designs</a></h4>
+                                <span class="price mr-5">
+                                    <span class="new">$79.99</span>
+                                    <span class="old">$99.99</span>
+                                </span>
+                                <div class="star_rating d-inline-block">
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="product_description">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Eveniet at ullam earum velit</p>
+                                </div>
+                                <button class="btn filter_btn">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mx-3">
-                    <img src="{{asset('assets/img/product/product_1.jpg')}}" alt="">
+                <div class="product_section col-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="product_image col-md-4 col-sm-12 col-12">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
+                                    class="card-img card-img-list" alt="">
+
+                                <div class="product_item">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="add-wishlist">
+                                            <i class="fal fa-heart"></i>
+                                        </a>
+                                        <a class="add-cart">
+                                            <i class="fal fa-shopping-bag"></i>
+                                        </a>
+                                        <a class="product-search">
+                                            <i class="fal fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
+                                <h4 class="card-title"><a href="">Baby Girls Dress Designs</a></h4>
+                                <span class="price mr-5">
+                                    <span class="new">$79.99</span>
+                                    <span class="old">$99.99</span>
+                                </span>
+                                <div class="star_rating d-inline-block">
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="product_description">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Eveniet at ullam earum velit</p>
+                                </div>
+                                <button class="btn filter_btn">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mx-3">
-                    <img src="{{asset('assets/img/product/product_2.jpg')}}" alt="">
+                <div class="product_section col-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="product_image col-md-4 col-sm-12 col-12">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
+                                    class="card-img card-img-list" alt="">
+
+                                <div class="product_item">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="add-wishlist">
+                                            <i class="fal fa-heart"></i>
+                                        </a>
+                                        <a class="add-cart">
+                                            <i class="fal fa-shopping-bag"></i>
+                                        </a>
+                                        <a class="product-search">
+                                            <i class="fal fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
+                                <h4 class="card-title"><a href="">Baby Girls Dress Designs</a></h4>
+                                <span class="price mr-5">
+                                    <span class="new">$79.99</span>
+                                    <span class="old">$99.99</span>
+                                </span>
+                                <div class="star_rating d-inline-block">
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="product_description">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Eveniet at ullam earum velit</p>
+                                </div>
+                                <button class="btn filter_btn">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mx-3">
-                    <img src="{{asset('assets/img/product/product_4.jpg')}}" alt="">
+                <div class="product_section col-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="product_image col-md-4 col-sm-12 col-12">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
+                                    class="card-img card-img-list" alt="">
+
+                                <div class="product_item">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="add-wishlist">
+                                            <i class="fal fa-heart"></i>
+                                        </a>
+                                        <a class="add-cart">
+                                            <i class="fal fa-shopping-bag"></i>
+                                        </a>
+                                        <a class="product-search">
+                                            <i class="fal fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
+                                <h4 class="card-title"><a href="">Baby Girls Dress Designs</a></h4>
+                                <span class="price mr-5">
+                                    <span class="new">$79.99</span>
+                                    <span class="old">$99.99</span>
+                                </span>
+                                <div class="star_rating d-inline-block">
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="product_description">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Eveniet at ullam earum velit</p>
+                                </div>
+                                <button class="btn filter_btn">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mx-3"> 
-                    <img src="{{asset('assets/img/product/product_3.jpg')}}" alt="">
+                <div class="product_section col-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="product_image col-md-4 col-sm-12 col-12">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
+                                    class="card-img card-img-list" alt="">
+
+                                <div class="product_item">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="add-wishlist">
+                                            <i class="fal fa-heart"></i>
+                                        </a>
+                                        <a class="add-cart">
+                                            <i class="fal fa-shopping-bag"></i>
+                                        </a>
+                                        <a class="product-search">
+                                            <i class="fal fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
+                                <h4 class="card-title"><a href="">Baby Girls Dress Designs</a></h4>
+                                <span class="price mr-5">
+                                    <span class="new">$79.99</span>
+                                    <span class="old">$99.99</span>
+                                </span>
+                                <div class="star_rating d-inline-block">
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="product_description">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Eveniet at ullam earum velit</p>
+                                </div>
+                                <button class="btn filter_btn">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mx-3">
-                    <img src="{{asset('assets/img/product/product_4.jpg')}}" alt="">
+                <div class="product_section col-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="product_image col-md-4 col-sm-12 col-12">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
+                                    class="card-img card-img-list" alt="">
+
+                                <div class="product_item">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="add-wishlist">
+                                            <i class="fal fa-heart"></i>
+                                        </a>
+                                        <a class="add-cart">
+                                            <i class="fal fa-shopping-bag"></i>
+                                        </a>
+                                        <a class="product-search">
+                                            <i class="fal fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
+                                <h4 class="card-title"><a href="">Baby Girls Dress Designs</a></h4>
+                                <span class="price mr-5">
+                                    <span class="new">$79.99</span>
+                                    <span class="old">$99.99</span>
+                                </span>
+                                <div class="star_rating d-inline-block">
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star checked"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="product_description">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Eveniet at ullam earum velit</p>
+                                </div>
+                                <button class="btn filter_btn">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

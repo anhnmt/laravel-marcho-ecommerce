@@ -17,6 +17,9 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
+Route::view('product_detail', 'frontend.product_detail')->name('product_detail');
+Route::view('cart', 'frontend.cart')->name('cart');
+Route::view('checkout', 'frontend.cart')->name('checkout');
 
 // ROUTE FRONTEND
 Route::group([
@@ -82,10 +85,11 @@ Route::group([
     // Permission
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
     Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
-    
+
     // Slider
     Route::get('slider/list', 'SliderController@list')->name('slider.list');
     Route::resource('slider', 'SliderController', ['except' => ['show']]);
+
 });
 
 // FILE MANAGER
