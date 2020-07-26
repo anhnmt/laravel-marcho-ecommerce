@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\User;
+use App\Models\Role;
+use App\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 
 class UserController extends Controller

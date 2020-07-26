@@ -182,6 +182,21 @@
 </script>
 @endif
 
+@if(session('error'))
+<script>
+	$(function() {
+		Swal.fire({
+			toast: true,
+			position: "top-end",
+			showConfirmButton: false,
+			timer: 3000,
+			icon: "error",
+			title: "{{ session('error') }}",
+		});
+	});
+</script>
+@endif
+
 <script>
 	$.fn.dataTable.ext.errMode = 'throw';
 
@@ -224,7 +239,8 @@
 		$('#datatables').DataTable({
 			"paging": true,
 			"ordering": true,
-			"autoWidth": true,
+			"autoWidth": false,
+			"responsive": true,
 			"serverSide": true,
 			"ajax": "{{ route('admin.product.attribute.list', $product->id) }}",
 			"columns": [{

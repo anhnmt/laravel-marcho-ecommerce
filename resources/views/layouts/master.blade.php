@@ -44,8 +44,8 @@
                         <li class="nav-item {{ (request()->routeIs('home')) ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home') }}">Trang chủ</a>
                         </li>
-                        <li class="nav-item {{ (request()->routeIs('product')) ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('product') }}">Sản phẩm</a>
+                        <li class="nav-item {{ (request()->routeIs('product*')) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('product.index') }}">Sản phẩm</a>
                         </li>
                         <li class="nav-item {{ (request()->routeIs('blog.*')) ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('blog.index') }}">Tin tức</a>
@@ -97,7 +97,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link icon_cart" href="#">
+                        <a class="nav-link icon_cart" href="{{ route('cart') }}">
                             <i class="fal fa-shopping-cart"></i>
                             <span class="cart_count">0</span>
                         </a>
@@ -219,8 +219,12 @@
     <script src="{{ asset('assets/plugins/owlcarousel/js/owl.carousel.min.js') }}"></script>
     <!-- Slick js -->
     <script src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
-    <!-- Ưaypoints  -->
+    <!-- Waypoints  -->
     <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+    <!-- Jquery-UI  -->
+    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+    <!-- Nice select  -->
+    <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
     @yield('script')
     <!-- Custom script -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>

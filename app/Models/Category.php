@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class Category extends Model
 {
     use Sluggable;
+    use Cachable;
 
     protected $fillable = [
         'name', 'slug', 'image', 'description', 'status',

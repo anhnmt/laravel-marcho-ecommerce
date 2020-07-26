@@ -1,48 +1,73 @@
 @extends('layouts.admin')
 
 @section('main')
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Trang cá nhân</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="content">
     <div class="container-fluid">
         <div class="card">
             <div class="card-body box-profile">
-                <div class="text-center">
-                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('assets/img/user2-160x160.jpg') }}" alt="User profile picture">
-                </div>
-
-                <h3 class="profile-username text-center">{{auth()->user()->name}}</h3>
-
-                <p class="text-muted text-center">{{auth()->user()->email}}</p>
-                <p class="text-muted text-center">
-                    @foreach($roles->getRoles as $role)
-                    {{$role->name}}
-                    @endforeach
-                </p>
-
-                <form class="form-horizontal" action="{{ route('admin.profile.update', auth()->user()->id) }}" method="POST">
+                <form class="form-horizontal" action="{{ route('admin.profile.update', $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="text-center">
+                                <div id="holder" style="margin-top:15px;max-height:100px;">
+                                    <img class="profile-user-img img-fluid img-circle" src="{{ asset($user->avatar) }}" alt="User profile picture">
+                                </div>
+                            </div>
 
-                    <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" id="inputName" placeholder="Name..." value="{{auth()->user()->name}}">
+                            <h3 class="profile-username text-center">{{ $user->name }}</h3>
+
+                            <p class="text-muted text-center">{{ $user->email }}</p>
+                            <p class="text-muted text-center">
+                                @foreach($roles as $role)
+                                {{$role->name}}
+                                @endforeach
+                            </p>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email..." value="{{auth()->user()->email}}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" name="password" id="inputEmail" placeholder="xxxxxxxx">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Đồng ý</button>
+
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label for="inputName" class="col-form-label">Họ và tên</label>
+                                <input type="text" class="form-control" name="name" id="inputName" placeholder="Nhập tên người dùng..." value="{{ $user->name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-form-label">Địa chỉ email</label>
+                                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email..." value="{{ $user->email }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" name="password" id="inputEmail" placeholder="Để trống nếu không thay đổi mật khẩu">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-success">Cập nhật</button>
+
+                                        <a id="lfm" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid img-circle" class="btn btn-primary text-white">
+                                            <i class="fal fa-camera"></i> Đổi avatar
+                                        </a>
+                                    </span>
+                                    <input class="form-control @error('avatar') is-invalid @enderror" type="hidden" name="avatar" id="avatar" value="{{ $user->avatar }}">
+
+                                    @error('avatar')
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -51,4 +76,31 @@
         </div>
     </div>
 </section>
+@stop
+
+@section('script')
+<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
+<!-- SweetAlert2 -->
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+@if(session('success'))
+<script>
+    $(function() {
+        Swal.fire({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            icon: "success",
+            title: "{{ session('success') }}",
+        });
+    });
+</script>
+@endif
+
+<script>
+    $(function() {
+        $('#lfm').filemanager('avatar');
+    });
+</script>
 @stop

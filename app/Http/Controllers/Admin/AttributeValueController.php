@@ -20,7 +20,7 @@ class AttributeValueController extends Controller
     {
         $this->attribute = $attribute;
 
-        $attribute_values = $attribute->attribute_values->all('id', 'value', 'code');
+        $attribute_values = $attribute->values->all();
 
         return datatables($attribute_values)
             ->addColumn('action', function ($attribute_value) {

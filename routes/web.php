@@ -17,7 +17,9 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
-Route::view('product', 'frontend.product')->name('product');
+Route::view('product_detail', 'frontend.product_detail')->name('product_detail');
+Route::view('cart', 'frontend.cart')->name('cart');
+Route::view('checkout', 'frontend.cart')->name('checkout');
 
 // ROUTE FRONTEND
 Route::group([
@@ -28,7 +30,18 @@ Route::group([
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
+    //Product
+    Route::get('product', 'ProductController@index')->name('product.index');
+    Route::view('product_detail', 'frontend.product_detail')->name('product.show');
+    // Frontend Auth
+    Route::group([
+        'middleware' => ['auth'],
+    ], function () {
+        // Comment
+        Route::resource('blog.comment', 'CommentController');
+    });
 });
+
 
 // ROUTE ADMIN
 Route::group([
@@ -81,7 +94,7 @@ Route::group([
     // Permission
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
     Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
-    
+
     // Slider
     Route::get('slider/list', 'SliderController@list')->name('slider.list');
     Route::resource('slider', 'SliderController', ['except' => ['show']]);

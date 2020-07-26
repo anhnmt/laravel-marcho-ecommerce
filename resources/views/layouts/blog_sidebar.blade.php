@@ -8,19 +8,7 @@
             </div>
         </form>
     </div>
-    <div class="widget_box search_widget mb-55 text-center">
-        <div class="admin_box">
-            <img src="{{asset('assets/img/admin_1.jpg')}}" class="img-fluid" alt="">
-            <p>Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed
-                fringilla mauris sit</p>
-            <ul>
-                <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
-            </ul>
-        </div>
-    </div>
+    
     <div class="widget_box search_widget mb-55">
         <h4 class="head_sidebar">MỚI ĐĂNG</h4>
         <div class="post_wrapper">

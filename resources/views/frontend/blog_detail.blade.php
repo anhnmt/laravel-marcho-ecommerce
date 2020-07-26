@@ -17,7 +17,7 @@
                             <h1 class="font-weight-normal">Tin tức</h1>
                             <ul>
                                 <li class="mx-1">
-                                    <a href="{{ route('home') }}"><i class="fal fa-home-alt mr-1"></i>Home</a>
+                                    <a href="{{ route('home') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a>
                                 </li>
                                 <li class="mx-1">
                                     <i class="fal fa-angle-right"></i>
@@ -40,10 +40,20 @@
                     <div class="blog_content mb-50">
 
                         <div class="blog_meta">
-                            <span><i class="fad fa-calendar-alt"></i><a href="#">24 Feb, 2020</a></span>
+                            <span>
+                                <i class="fad fa-calendar-alt"></i>
+                                <a href="#">
+                                    {{ $blog->created_at->format('d-m-Y') }}
+                                </a>
+                            </span>
                             <span><i class="fal fa-user"></i><a href="#">{{ $blog->user->name }}</a></span>
 
-                            <span><i class="fal fa-comment-alt-dots"></i><a href="#">05 Comments</a></span>
+                            <span>
+                                <i class="fal fa-comment-alt-dots"></i>
+                                <a href="#comment_section">
+                                    {{ $comments->count() }} Bình Luận
+                                </a>
+                            </span>
                         </div>
 
                         <h5 class="mb-3">{{ $blog->name }}</h5>
@@ -85,115 +95,78 @@
                         </div>
                     </div>
 
+                    @if ($comments->count() > 0)
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="comment_box mb-50">
                                 <div class="quantity_comment my-4">
-                                    <h3>02 COMMENTS</h3>
+                                    <h3>{{ $comments->count() }} Bình Luận</h3>
                                 </div>
+
                                 <ul class="list_none comment_list">
+                                    @foreach ($comments as $comment)
                                     <li class="comment_info">
-                                        <div class="d-flex">
+                                        <div class="d-flex justify-content-between">
                                             <div class="comment_user">
-                                                <img src="{{asset('assets/img/user1-128x128.jpg')}}" alt="user2" class="rounded-circle">
+                                                <img src="{{ asset('assets/img/user1-128x128.jpg') }}" alt="user2" class="rounded-circle">
                                             </div>
                                             <div class="comment_content">
                                                 <div class="d-flex">
                                                     <div class="meta_data">
-                                                        <h6><a href="#">Alden Smith</a></h6>
-                                                        <div class="comment-time">MARCH 5, 2018, 6:05 PM</div>
+                                                        <h6><a href="#">{{ $comment->user->name }}</a></h6>
+                                                        <div class="comment-time">{{ $comment->created_at->ago() }}</div>
                                                     </div>
                                                     <div class="ml-auto">
                                                         <a href="#" class="comment-reply"><i class="fas fa-reply-all"></i>Reply</a>
                                                     </div>
                                                 </div>
-                                                <p>We denounce with righteous indignation and dislike men who are so
-                                                    beguiled and demoralized by the charms of pleasure of the moment, so
-                                                    blinded by desire that the cannot foresee the pain and trouble that.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <ul class="children">
-                                            <li class="comment_info">
-                                                <div class="d-flex">
-                                                    <div class="comment_user">
-                                                        <img src="{{asset('assets/img/user3-128x128.jpg')}}" alt="user3" class="rounded-circle">
-                                                    </div>
-                                                    <div class="comment_content">
-                                                        <div class="d-flex align-items-md-center">
-                                                            <div class="meta_data">
-                                                                <h6><a href="#/">Daisy Lana</a></h6>
-                                                                <div class="comment-time">april 8, 2018, 5:15 PM</div>
-                                                            </div>
-                                                            <div class="ml-auto">
-                                                                <a href="#" class="comment-reply"><i class="fas fa-reply-all"></i>Reply</a>
-                                                            </div>
-                                                        </div>
-                                                        <p>We denounce with righteous indignation and dislike men who
-                                                            are so beguiled and demoralized by the charms of pleasure of
-                                                            the moment, so blinded by desire that the cannot foresee the
-                                                            pain and trouble that.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="comment_info">
-                                        <div class="d-flex">
-                                            <div class="comment_user">
-                                                <img src="{{asset('assets/img/user4-128x128.jpg')}}" alt="user4" class="rounded-circle">
-                                            </div>
-                                            <div class="comment_content">
-                                                <div class="d-flex">
-                                                    <div class="meta_data">
-                                                        <h6><a href="#">John Becker</a></h6>
-                                                        <div class="comment-time">april 15, 2018, 10:30 PM</div>
-                                                    </div>
-                                                    <div class="ml-auto">
-                                                        <a href="#/" class="comment-reply"><i class="fas fa-reply-all"></i>Reply</a>
-                                                    </div>
-                                                </div>
-                                                <p>We denounce with righteous indignation and dislike men who are so
-                                                    beguiled and demoralized by the charms of pleasure of the moment, so
-                                                    blinded by desire that the cannot foresee the pain and trouble that.
-                                                </p>
+                                                <p>{{ $comment->body }}</p>
                                             </div>
                                         </div>
                                     </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    @endif
 
-                    <div class="row">
+                    <div class="row" id="comment_section">
                         <div class="col-lg-12">
                             <div class="post_comment_form mt-20">
                                 <div class="title">
-                                    <h4>Leave Your Comment</h4>
+                                    <h4>Để lại bình luận của bạn</h4>
                                 </div>
-                                <form>
+                                <form action="{{ route('blog.comment.store', $blog->id) }}" method="POST">
+                                    @csrf
+
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form_group">
-                                                <input type="text" class="form_control" placeholder="Name" name="name"
-                                                    required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form_group">
-                                                <input type="email" class="form_control" placeholder="E-mail"
-                                                    name="email" required="">
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12">
-                                            <div class="form_group">
-                                                <textarea class="form_control" placeholder="Your comment here"
-                                                    name="message"></textarea>
+                                            @if($user)
+                                            <div class="form-group form_group">
+                                                <img src="{{asset($user->avatar)}}" width="40px" alt="user4" class="rounded-circle">
+                                                <span>{{ $user->name }}</span>
+                                            </div>
+                                            @else
+                                            <div class="form-group form_group">
+                                                <span class="text-danger">Vui lòng đăng nhập để bình luận</span>
+                                            </div>
+                                            @endif
+                                            <div class="form-group form_group">
+                                                <textarea class="form-control form_control @error('body') is-invalid @enderror" placeholder="Viết bình luận của bạn ở đây" name="body"></textarea>
+
+                                                @error('body')
+                                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="button_box">
-                                                <button class="makp_btn">Post Comment</button>
+                                                @if(auth()->check())
+                                                <button class="makp_btn">Đăng bình luận</button>
+                                                @else
+                                                <a href="{{ route('login') }}" class="makp_btn">Đăng nhập ngay</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Product;
 use App\Models\Blog;
 use App\Models\Slider;
 use App\Http\Controllers\Controller;
@@ -16,9 +17,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slider = Slider::all();
-        $latest_blog = Blog::latest();
+        $sliders = Slider::all();
+        $latest_blog = Blog::latest(3);
+        $products = Product::orderBy('id', 'desc')->paginate(6);
 
-        return view('frontend.home', compact('slider', 'latest_blog'));
+        return view('frontend.home', compact('sliders', 'latest_blog', 'products'));
     }
 }
