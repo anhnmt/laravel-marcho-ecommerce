@@ -66,11 +66,9 @@
                             @can('admin.dashboard')
                             <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
                             @endcan
-
                             @cannot('admin.dashboard')
                             <a class="dropdown-item" href="#">Trang cá nhân</a>
                             @endcannot
-
                             <div class="dropdown-divider"></div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
                                 @csrf
@@ -97,7 +95,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link icon_cart" href="#">
+                        <a class="nav-link icon_cart" href="{{ route('cart') }}">
                             <i class="fal fa-shopping-cart"></i>
                             <span class="cart_count">0</span>
                         </a>
