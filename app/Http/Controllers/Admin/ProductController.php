@@ -19,7 +19,8 @@ class ProductController extends Controller
      */
     public function list()
     {
-        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status']);
+        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status'])->orderBy('id', 'desc');
+
         return datatables($categories)
             ->addColumn('image', function ($product) {
                 $product->image = $product->image ? $product->image : 'assets/img/placeholder.png';
@@ -122,7 +123,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::all(); 
+        $categories = Category::all();
         $product->image = asset($product->image ? $product->image : 'assets/img/placeholder.png');
 
         return view('backend.product.edit', compact('product', 'categories'));

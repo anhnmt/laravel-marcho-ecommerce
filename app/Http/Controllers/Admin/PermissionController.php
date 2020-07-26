@@ -9,7 +9,8 @@ class PermissionController extends Controller
 {
     public function list()
     {
-        $permissions = Permission::select(['id', 'name', 'guard_name']);
+        $permissions = Permission::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+
         return datatables($permissions)
             ->addColumn('action', function ($permission) {
                 if(auth()->user()->can('admin.permission.destroy'))

@@ -113,8 +113,8 @@
 										@enderror
 									</div>
 
-									<div id="holder" style="margin-top:15px;max-height:100px;">
-										<img src="{{ asset($slider->image) }}" style="height: 100px;">
+									<div id="holder" style="margin-top:15px">
+										<img src="{{ asset($slider->image) }}">
 									</div>
 								</div>
 							</div>

@@ -75,8 +75,8 @@
 								<span class="invalid-feedback" role="alert">{{ $message }}</span>
 								@enderror
 							</div>
-							<div id="holder" style="margin-top:15px;max-height:100px;">
-								<img src="{{ $product->image }}" style="height: 100px;">
+							<div id="holder" style="margin-top:15px">
+								<img src="{{ $product->image }}">
 							</div>
 						</div>
 					</div>

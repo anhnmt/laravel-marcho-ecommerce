@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function list()
     {
-        $categories = Category::select(['id', 'name', 'slug', 'image', 'status']);
+        $categories = Category::select(['id', 'name', 'slug', 'image', 'status'])->orderBy('id', 'desc');
+
         return datatables($categories)
             ->addColumn('image', function ($category) {
                 $thumb_url = $category->image ? $category->image : 'assets/img/placeholder.png';

@@ -142,7 +142,7 @@
 
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            @if($user)
+                                            @if($user ?? '')
                                             <div class="form-group form_group">
                                                 <img src="{{asset($user->avatar)}}" width="40px" alt="user4" class="rounded-circle">
                                                 <span>{{ $user->name }}</span>
