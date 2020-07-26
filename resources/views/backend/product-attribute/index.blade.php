@@ -43,11 +43,13 @@
 								@enderror
 							</div>
 
-							<button type="submit" class="btn btn-primary">
-								Lưu lại
+							@can('admin.product.attribute.update')
+							<button type="submit" class="btn btn-success">
+								<i class="fal fa-check-circle"></i> Lưu
 							</button>
-							<a href="{{ route('admin.product.index') }}" class="btn">
-								Huỷ
+							@endcan
+							<a href="{{ route('admin.product.index') }}" class="btn btn-default">
+								<i class="fal fa-save"></i> Quay lại
 							</a>
 						</div>
 					</form>
@@ -110,11 +112,13 @@
 								</select>
 							</div>
 
-							<button id="btnCreate" type="submit" class="btn btn-primary" disabled>
-								Lưu lại
+							@can('admin.product.attribute.store')
+							<button type="submit" class="btn btn-success">
+								<i class="fal fa-check-circle"></i> Lưu
 							</button>
-							<a href="{{ route('admin.product.index') }}" class="btn">
-								Huỷ
+							@endcan
+							<a href="{{ route('admin.product.index') }}" class="btn btn-default">
+								<i class="fal fa-save"></i> Quay lại
 							</a>
 						</div>
 					</form>

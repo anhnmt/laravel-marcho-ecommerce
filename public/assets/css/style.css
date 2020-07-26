@@ -1508,6 +1508,16 @@ header .navbar-collapse {
 .product_section .product_info .price span.old {
     margin-left: 10px;
 }
+.product_section .product_info .card-title{
+    font-size: 16px;
+}
+.product_section .product_info .star_rating .checked {
+    color: #fec35b;
+}
+
+.product_section .product_info .star_rating i {
+    color: #ccccce;
+}
 
 /*===================================*
     BLOG SECTION

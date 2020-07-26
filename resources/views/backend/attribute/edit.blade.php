@@ -54,10 +54,12 @@
 								</div>
 
 								<div class="card-body">
+									@can('admin.attribute.update')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+									@endcan
+									<a href="{{ route('admin.attribute.index') }}" class="btn btn-default">
 										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>

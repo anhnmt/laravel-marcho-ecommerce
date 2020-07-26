@@ -28,9 +28,15 @@ class CategoryController extends Controller
             })
             ->addColumn('action', function ($category) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.category.destroy', $category->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-
+                
+                if(auth()->user()->can('admin.category.edit'))
                 $action .= '<a href="' . route('admin.category.edit', $category->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+
+                if(auth()->user()->can('admin.category.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+
+                if(!auth()->user()->hasRole(['admin.category.edit', 'admin.category.destroy'])) 
+                $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</div></form>';
 
