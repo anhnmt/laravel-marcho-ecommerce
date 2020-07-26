@@ -18,9 +18,9 @@ class AttributeValueController extends Controller
      */
     public function list(Attribute $attribute)
     {
-        $this->attribute = $attribute;
+        // $this->attribute = $attribute;
 
-        $attribute_values = $attribute->values->all();
+        $attribute_values = AttributeValue::where('attribute_id', $attribute->id)->orderBy('id', 'desc')->select('id', 'attribute_id','value', 'code');
 
         return datatables($attribute_values)
             ->addColumn('action', function ($attribute_value) {
@@ -89,7 +89,7 @@ class AttributeValueController extends Controller
     public function destroy(Attribute $attribute, $attribute_value)
     {
         // dd([$attribute, $attribute_value]);
-        $attribute_value = AttributeValue::find($attribute_value);
+        $attribute_value = AttributeValue::findOrFail($attribute_value);
 
         $attribute_value->delete();
 

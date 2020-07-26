@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function list()
     {
-        $users = User::all();
+        $users = User::select('id', 'name', 'email')->orderBy('id', 'desc');
 
         return datatables($users)
         ->addColumn('action', function ($user) {
@@ -29,10 +29,12 @@ class UserController extends Controller
                 $action .= "<span>Không có hành động nào</span>";
             $action .= '</=form>';
 
-            return $action;
-        })
-        ->rawColumns(['image', 'status', 'action'])
-        ->toJson();
+                $action .= '</=form>';
+
+                return $action;
+            })
+            ->rawColumns(['image', 'status', 'action'])
+            ->toJson();
     }
     /**
      * Display a listing of the resource.
@@ -57,7 +59,7 @@ class UserController extends Controller
         $permissionsAssigned = $user->getPermissionNames();
         $rolesAssigned = $user->getRoleNames();
 
-        return view('backend.user.edit', compact('permissions','roles' , 'user', 'permissionsAssigned', 'rolesAssigned'));
+        return view('backend.user.edit', compact('permissions', 'roles', 'user', 'permissionsAssigned', 'rolesAssigned'));
     }
 
     /**
@@ -71,6 +73,7 @@ class UserController extends Controller
     {
         $roles = $request->roles;
         $user->syncRoles($roles);
+
         return redirect()->route('admin.user.index');
     }
 
@@ -86,6 +89,4 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index')->withSuccess('Xoá danh mục thành công');
     }
-
-    
 }
