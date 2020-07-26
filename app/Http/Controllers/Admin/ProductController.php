@@ -37,7 +37,7 @@ class ProductController extends Controller
                 if(auth()->user()->can('admin.product.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-                if(!auth()->user()->hasRole(['admin.product.attribute.index','admin.product.edit', 'admin.product.destroy'])) 
+                if((auth()->user()->can('admin.product.edit') && auth()->user()->can('admin.product.destroy') && auth()->user()->can('admin.admin.product.attribute.index')) == false)  
                 $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</div></form>';

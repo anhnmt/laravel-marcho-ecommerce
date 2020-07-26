@@ -34,7 +34,7 @@ class CategoryController extends Controller
                 if(auth()->user()->can('admin.category.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-                if(!auth()->user()->hasRole(['admin.category.edit', 'admin.category.destroy'])) 
+                if((auth()->user()->can('admin.category.edit') && auth()->user()->can('admin.category.destroy')) == false) 
                 $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</div></form>';

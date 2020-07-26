@@ -35,7 +35,7 @@ class BlogController extends Controller
                 if(auth()->user()->can('admin.blog.destroy'))
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
                 
-                if(!auth()->user()->hasRole(['admin.blog.edit', 'admin.blog.destroy'])) 
+                if((auth()->user()->can('admin.blog.edit') && auth()->user()->can('admin.blog.destroy')) == false) 
                 $action .= "<span>Không có hành động nào</span>"; 
                 
                 $action .= '</div></form>';

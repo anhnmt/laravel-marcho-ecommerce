@@ -26,7 +26,7 @@ class RoleController extends Controller
                 } 
                 else $action .= '<span>Không có hành động nào</span>';
                 
-                if(!auth()->user()->hasRole(['admin.role.edit', 'admin.role.destroy'])) 
+                if((auth()->user()->can('admin.role.edit') && auth()->user()->can('admin.role.destroy')) == false) 
                 $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</form>';
