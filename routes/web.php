@@ -82,10 +82,6 @@ Route::group([
     Route::get('blog/list', 'BlogController@list')->name('blog.list');
     Route::resource('blog', 'BlogController', ['except' => ['show']]);
 
-    // Comment
-    Route::get('comment/list', 'CommentController@list')->name('comment.list');
-    Route::resource('comment', 'CommentController', ['except' => ['show']]);
-
     // User
     Route::get('user/list', 'UserController@list')->name('user.list');
     Route::resource('user', 'UserController', ['except' => ['show', 'create', 'store']]);

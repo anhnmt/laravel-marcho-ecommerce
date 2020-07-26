@@ -46,7 +46,7 @@ class BlogController extends Controller
         $latest_blog = Blog::latest();
 
         $categories = Category::all();
-
+      
         $user = auth()->user();
 
         return view('frontend.blog_detail', compact('user', 'blog', 'latest_blog', 'categories', 'comments'));
