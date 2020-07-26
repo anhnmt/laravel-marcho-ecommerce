@@ -64,12 +64,12 @@
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.category.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
-							
+
 							<div class="card">
 								<div class="card-header">
 									<h5>Trạng thái</h5>
@@ -105,7 +105,7 @@
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror
 									</div>
-									<div id="holder" style="margin-top:15px;max-height:100px;"></div>
+									<div id="holder" style="margin-top:15px"></div>
 								</div>
 							</div>
 						</div>

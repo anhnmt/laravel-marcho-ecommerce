@@ -1,12 +1,9 @@
 <?php
 
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Route;
 use Spatie\Permission\PermissionRegistrar;
-use App\User;
 
 class PermissionSeeder extends Seeder
 {
@@ -20,37 +17,28 @@ class PermissionSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $routes = [];
-        $route = \Route::getRoutes();
+        $routes = Route::getRoutes();
+        $permissions = Permission::all();
+        $permission = [];
+        // dd($permissions);
 
-        foreach ($route as $value) {
-            $name = $value->getName();
-            if (strpos($name, 'admin') !== false && strpos($name, 'unisharp') === false && !in_array($name, $routes)) {
-                array_push($routes, $name);
+        foreach ($permissions as $value) {
+            array_push($permission, $value->name);
+        }
+
+        foreach ($routes as $route) {
+            $route_name = $route->getName();
+
+            if (
+                strpos($route_name, 'admin') !== false
+                && strpos($route_name, 'unisharp') === false
+                && in_array($route_name, $permission) === false
+            ) {
+                Permission::updateOrCreate([
+                    'name' => $route_name,
+                    'guard_name' => 'web'
+                ]);
             }
         }
-
-        unset($routes[0]);
-
-        for ($i = 1; $i < count($routes); $i++) {
-            DB::table('permissions')->insert([
-                [
-                    'name' => $routes[$i],
-                    'guard_name' => 'web'
-                ],
-            ]);
-        }
-
-        $role3 = Role::create(['name' => 'super-admin']);
-        // gets all permissions via Gate::before rule; see AuthServiceProvider
-
-        // create demo users
-        $user = User::create([
-            'name' => 'Nguyễn Tuấn Minh',
-            'email' => 'minh@gmail.com',
-            'password' => bcrypt('123456'),
-        ]);
-
-        $user->assignRole($role3);
     }
 }

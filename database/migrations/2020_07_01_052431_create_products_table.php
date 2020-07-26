@@ -18,12 +18,18 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('sku')->unique();
             $table->string('image')->nullable();
-            // $table->decimal('price', 15, 2);
-            // $table->decimal('sale_price', 15, 2)->nullable();
             $table->text('description')->nullable();
             $table->text('body')->nullable();
+            $table->integer('quantity');
+            $table->decimal('price');
+            $table->decimal('sale_price')->nullable();
             $table->boolean('status')->default(0);
+            // $table->decimal('length')->nullable();
+            // $table->decimal('width')->nullable();
+            // $table->decimal('height')->nullable();
+            // $table->decimal('weight')->default(0);
             $table->timestamps();
             // Foreign Key
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

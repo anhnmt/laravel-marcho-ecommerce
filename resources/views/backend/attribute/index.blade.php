@@ -19,11 +19,13 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
+					@can('admin.attribute.create')
 					<div class="card-header">
 						<h3 class="card-title">
 							<a href="{{ route('admin.attribute.create') }}" class="btn btn-primary">Thêm thuộc tính</a>
 						</h3>
 					</div>
+					@endcan
 					<div class="card-body">
 						<div class="table-responsive">
 							<table id="datatables" class="table table-bordered table-hover">
@@ -87,7 +89,7 @@
 		$('#datatables').DataTable({
 			"paging": true,
 			"ordering": true,
-			"autoWidth": true,
+			"autoWidth": false,
 			"responsive": true,
 			"serverSide": true,
 			"ajax": "{{ route('admin.attribute.list') }}",

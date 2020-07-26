@@ -50,7 +50,7 @@ return [
     'folder_categories' => [
         'product' => [
             'folder_name' => 'products',
-            'startup_view' => 'list',
+            'startup_view' => 'grid', // grid || list
             'max_size' => 30000, // size in KB
             'valid_mime' => [
                 'image/jpeg',
@@ -63,7 +63,7 @@ return [
 
         'category' => [
             'folder_name' => 'categories',
-            'startup_view' => 'list',
+            'startup_view' => 'grid', // grid || list
             'max_size' => 30000, // size in KB
             'valid_mime' => [
                 'image/jpeg',
@@ -76,7 +76,7 @@ return [
 
         'avatar' => [
             'folder_name' => 'avatars',
-            'startup_view' => 'list',
+            'startup_view' => 'list', // grid || list
             'max_size' => 30000, // size in KB
             'valid_mime' => [
                 'image/jpeg',
@@ -89,7 +89,7 @@ return [
 
         'blog' => [
             'folder_name' => 'blogs',
-            'startup_view' => 'list',
+            'startup_view' => 'grid', // grid || list
             'max_size' => 30000, // size in KB
             'valid_mime' => [
                 'image/jpeg',
@@ -100,9 +100,9 @@ return [
             ],
         ],
 
-        'other' => [
-            'folder_name' => 'others',
-            'startup_view' => 'list',
+        'slider' => [
+            'folder_name' => 'sliders',
+            'startup_view' => 'list', // grid || list
             'max_size' => 30000, // size in KB
             'valid_mime' => [
                 'image/jpeg',
@@ -115,7 +115,7 @@ return [
 
         'file' => [
             'folder_name' => 'files',
-            'startup_view' => 'list',
+            'startup_view' => 'list', // grid || list
             'max_size' => 30000, // size in KB
             'valid_mime' => [
                 'image/jpeg',

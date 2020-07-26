@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/ionicons/css/ionicons.min.css') }}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="{{ asset('assets/css/SourceSansPro.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    @yield('style')
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="{{ asset('assets/css/SourceSansPro.css') }}" rel="stylesheet"> <!-- Custom CSS -->
-    @yield('style')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -42,11 +43,11 @@
             <ul class="navbar-nav ml-auto">
                 <li class="dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
+                        <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
                         <span class="hidden-xs text-capitalize">{{ auth()->user()->name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
+                        <a href="{{route('admin.profile')}}" class="dropdown-item">
                             <i class="fal fa-id-card"></i> Trang cá nhân
                         </a>
                         <div class="dropdown-divider"></div>
@@ -131,13 +132,37 @@
                         @endcanany
 
                         @can('admin.blog.index')
-                        <li class="nav-item">
-                            <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs('admin.blog.*')) ? 'active' : '' }}">
+                        <li class="nav-item has-treeview {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'active' : '' }}">
                                 <i class="nav-icon fal fa-book-alt"></i>
                                 <p>
                                     Bài viết
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                @can('admin.blog.index')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs('admin.blog.*')) ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Danh sách bài viết
+                                        </p>
+                                    </a>
+                                </li>
+                                @endcan
+
+                                @can('admin.blog.index')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.comment.index') }}" class="nav-link {{ (request()->routeIs('admin.comment.*')) ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Danh sách bình luận
+                                        </p>
+                                    </a>
+                                </li>
+                                @endcan
+                            </ul>
                         </li>
                         @endcan
 
@@ -181,30 +206,15 @@
                         </li>
                         @endcanany
 
-                        <li class="nav-header">EXAMPLES</li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                        <li class="nav-header">CÀI ĐẶT</li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.slider.index') }}" class="nav-link {{ (request()->routeIs('admin.slider.*')) ? 'active' : '' }}">
+                                <i class="nav-icon fal fa-book-alt"></i>
                                 <p>
-                                    Layout Options
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">6</span>
+                                    Slider
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation + Sidebar</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </nav>

@@ -16,14 +16,14 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('parent_id')->nullable();
+            $table->foreignId('blog_id');
             $table->foreignId('user_id');
-            $table->foreignId('post_id');
             $table->text('body');
             $table->timestamps();
             // Foreign key
             $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('post_id')->references('id')->on('blogs')->onDelete('cascade');
         });
     }
 

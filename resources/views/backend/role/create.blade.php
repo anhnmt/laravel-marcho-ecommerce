@@ -49,8 +49,8 @@
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.role.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
@@ -75,16 +75,9 @@
 											<div class="row">
 												@foreach($permissions as $permission)
 												<div class="col-lg-3 mb-4">
-													<!-- <div class="custom-switch custom-switch-label-onoff custom-switch-xs text-left">
-														<div for="" class="parent-vertical-center" permission="{{$permission->name}}">
-															<input class="custom-switch-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}">
-															<label class="custom-switch-btn" for="{{$permission->id}}"></label>
-															<span class="vertical-center">{{$permission->name}}</span>
-														</div>
-													</div> -->
 													<div for="" class="parent-vertical-center" permission="{{$permission->name}}">
 														<div class="custom-control custom-switch">
-															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}">
+															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}" {{ $permission->name == 'admin.dashboard' ? 'checked disabled' : '' }}>
 															<label class="custom-control-label" for="{{$permission->id}}">{{$permission->name}}</label>
 														</div>
 													</div>
@@ -107,9 +100,10 @@
 
 @section('style')
 <style>
-	label:not(.form-check-label):not(.custom-file-label) {
+	label:not(.form-check-label):not(.custom-file-label):not(.required) {
 		font-weight: normal;
 	}
+	
 </style>
 @endsection
 
@@ -125,16 +119,28 @@
 			$("#myDIV .parent-vertical-center").filter(function() {
 				if ($(this).attr('permission').toLowerCase().indexOf(value) > -1) {
 					$(this).parents('.col-lg-3').show(50);
-					$(this).find('input').prop("disabled", false);
+					$(this).find('input').not('#1').prop("disabled", false);
 				} else {
 					$(this).parents('.col-lg-3').hide(50);
 					$(this).find('input').prop("disabled", true);
 				}
 			});
+			checkAllInput();
 		});
 
+		function checkAllInput() {
+			if($('input[name="permissions[]"]:checked').length == $('input[name="permissions[]"]').length){
+				$('#check-all').prop('checked', true);
+			}else{
+				$('#check-all').prop('checked', false);
+			};
+		}
+		checkAllInput();
+		$('input[name="permissions[]"]').on('change', function() {
+			checkAllInput();	
+		});
 		$("#check-all").click(function() {
-			$('input:checkbox').not(this).prop('checked', this.checked);
+			$('input[name="permissions[]"]').not(':disabled').prop('checked', this.checked);
 		});
 	});
 </script>

@@ -39,9 +39,45 @@ function PopupCenter(url, title, w, h) {
     return newWindow;
 }
 
+// Define function to open filemanager window
+var lfm = function (options, cb) {
+    PopupCenter("/admin/filemanager?type=product", "FileManager", 900, 600);
+    window.SetUrl = cb;
+};
+
+// Define LFM summernote button
+var LFMButton = function (context) {
+    var ui = $.summernote.ui;
+    var button = ui.button({
+        contents: '<i class="note-icon-picture"></i> ',
+        tooltip: "Insert image with filemanager",
+        click: function () {
+            lfm(
+                {
+                    type: "image",
+                    prefix: "/admin/filemanager",
+                },
+                function (lfmItems, path) {
+                    lfmItems.forEach(function (lfmItem) {
+                        context.invoke("insertImage", lfmItem.url);
+                    });
+                }
+            );
+        },
+    });
+    return button.render();
+};
+
 (function ($) {
+    $("#remove_img").click(function (e) {
+        if ($("#image").val()) {
+            $("#image").val("");
+            $("#holder").html("");
+        }
+    });
+
     $.fn.filemanager = function (type, options) {
-        type = type || "other";
+        type = type || "file";
 
         this.on("click", function (e) {
             var route_prefix =
@@ -50,7 +86,15 @@ function PopupCenter(url, title, w, h) {
                     : "/admin/filemanager";
             var target_input = $("#" + $(this).data("input"));
             var target_preview = $("#" + $(this).data("preview"));
-            PopupCenter(route_prefix + "?type=" + type, "FileManager", 900, 600);
+            var target_class = $(this).data("class");
+
+            PopupCenter(
+                route_prefix + "?type=" + type,
+                "FileManager",
+                900,
+                600
+            );
+
             window.SetUrl = function (items) {
                 var file_path = items
                     .map(function (item) {
@@ -66,11 +110,13 @@ function PopupCenter(url, title, w, h) {
 
                 // set or change the preview image src
                 items.forEach(function (item) {
-                    console.log(item);
+                    // console.log(item);
+
+                    // console.log(target_class);
 
                     target_preview.append(
                         $("<img>")
-                            .css("height", "5rem")
+                            .addClass(target_class)
                             .attr("src", item.thumb_url)
                     );
                 });

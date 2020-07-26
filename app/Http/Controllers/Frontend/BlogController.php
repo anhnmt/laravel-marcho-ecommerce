@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
+use App\Models\Comment;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,14 +17,16 @@ class BlogController extends Controller
      */
     public function index()
     {
-        
-        $blogs = Blog::paginate(10);
 
-        $latest_blog = Blog::orderBy('id', 'desc')->take(3)->get();
+        $blogs = Blog::orderBy('id', 'desc')->paginate(8);
+
+        $latest_blog = Blog::latest();
+
+        $categories = Category::all();
 
         // dd($latest_blog);
 
-        return view('frontend.blog', compact('blogs', 'latest_blog'));
+        return view('frontend.blog', compact('blogs', 'latest_blog', 'categories'));
     }
 
     /**
@@ -34,9 +38,21 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         // dd($blog->user->getShortName());
-        
+
         $blog = Blog::findBySlug($blog->slug);
 
-        return view('frontend.blog_detail', compact('blog'));
+        $comments = $blog->comments()->all();
+
+        $latest_blog = Blog::latest();
+
+        $categories = Category::all();
+
+        $user = auth()->user();
+
+        if (auth()->check()) {
+            $user->avatar = $user->avatar ? $user->avatar : 'assets/img/user2-160x160.jpg';
+        }
+
+        return view('frontend.blog_detail', compact('user', 'blog', 'latest_blog', 'categories', 'comments'));
     }
 }

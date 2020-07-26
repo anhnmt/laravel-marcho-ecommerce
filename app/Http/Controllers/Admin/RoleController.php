@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Role;
+use App\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Http\Requests\Role\RoleCreateRequest;
+use App\Http\Requests\Role\RoleUpdateRequest;
 
 class RoleController extends Controller
 {
     public function list()
     {
-        $roles = Role::select(['id', 'name', 'guard_name']);
+        $roles = Role::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+
         return datatables($roles)
             ->addColumn('action', function ($role) {
                 $action = '<form class="delete-form" action="' . route('admin.role.destroy', $role->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
-                
-                $action .= '<a href="' . route('admin.role.edit', $role->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-                if($role->name !=  'super-admin')
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+
+                if ($role->name !=  'super-admin') {
+                    $action .= '<a href="' . route('admin.role.edit', $role->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                } else $action .= '<span>Không có hành động nào</span>';
 
                 $action .= '</form>';
 
@@ -54,15 +58,15 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleCreateRequest $request)
     {
         $permissions = $request->permissions;
         $role = Role::create($request->only('name'));
-        if($role){
+        if ($role) {
             $role->syncPermissions($permissions);
             return redirect()->route('admin.role.index')->withSuccess('Thêm nhóm quyền thành công!');
         };
-        
+
         return redirect()->back()->with('Thêm nhóm quyền thất bại');
     }
 
@@ -97,14 +101,14 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleUpdateRequest $request, Role $role)
     {
         $permissions = $request->permissions;
-        if($role->update($request->only('name'))){
+        if ($role->update($request->only('name'))) {
             $role->syncPermissions($permissions);
             return redirect()->route('admin.role.index')->withSuccess('Sửa nhóm quyền thành công!');
         };
-        
+
         return redirect()->back()->with('Sửa nhóm quyền thất bại');
     }
 
@@ -116,9 +120,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        if($role->delete()) return redirect()->route('admin.role.index')->with('Xóa nhóm quyền thành công');
+        if ($role->delete()) return redirect()->route('admin.role.index')->with('Xóa nhóm quyền thành công');
 
         return redirect()->back()->with('Xóa nhóm quyền thất bại');
-
     }
 }

@@ -30,43 +30,6 @@
 										<label class="required" for="name">Tên người dùng</label>
 										<input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nhập tên" value="{{$user->name}}" disabled>
 									</div>
-									<div class="form-group clearfix">
-										<label for="name">Chọn nhóm quyền</label>
-										<div class="row">
-											<div class="col-12">
-												<!-- Custom Tabs -->
-												<div class="card">
-													<div class="card-header d-flex p-0">
-														<ul class="nav nav-pills p-2">
-															<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Nhóm quyền</a></li>
-															<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Quyền</a></li>
-														</ul>
-													</div><!-- /.card-header -->
-													<div class="card-body">
-														<div class="tab-content">
-															<div class="tab-pane active" id="tab_1">
-																
-															</div>
-															<!-- /.tab-pane -->
-															<div class="tab-pane" id="tab_2">
-																The European languages are members of the same family. Their separate existence is a myth.
-																For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-																in their grammar, their pronunciation and their most common words. Everyone realizes why a
-																new common language would be desirable: one could refuse to pay expensive translators. To
-																achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-																words. If several languages coalesce, the grammar of the resulting language is more simple
-																and regular than that of the individual languages.
-															</div>
-															<!-- /.tab-pane -->
-														</div>
-														<!-- /.tab-content -->
-													</div><!-- /.card-body -->
-												</div>
-												<!-- ./card -->
-											</div>
-											<!-- /.col -->
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -81,9 +44,56 @@
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.user.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<div class="form-group clearfix">
+								<label for="name">Chọn nhóm quyền</label>
+								<div class="row">
+									<div class="col-12">
+										<div class="card-header d-flex p-0">
+											<ul class="nav nav-pills p-2">
+												<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Nhóm quyền</a></li>
+												<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Quyền</a></li>
+											</ul>
+										</div><!-- /.card-header -->
+										<div class="card-body">
+											<div class="tab-content">
+												<div class="tab-pane active" id="tab_1">
+													<div class="row">
+														<input id="myInput" class="form-control col-lg-4 my-sm-2 my-0" placeholder="Search..">
+													</div>
+													<div class="role-list mt-4" id="myDIV">
+														<div class="row">
+															@foreach($roles as $role)
+															<div class="col-lg-3 mb-4">
+																<div for="" class="parent-vertical-center" role="{{$role->name}}">
+																	<div class="custom-control custom-switch">
+																		<input class="custom-control-input" id="{{$role->id}}" type="checkbox" name="roles[]" value="{{$role->name}}" @foreach($rolesAssigned as $value) {{$role->name == $value ? 'checked' : ''}} @endforeach>
+																		<label class="custom-control-label" for="{{$role->id}}">{{$role->name}}</label>
+																	</div>
+																</div>
+															</div>
+															@endforeach
+														</div>
+													</div>
+												</div>
+												<!-- /.tab-pane -->
+												<div class="tab-pane" id="tab_2">
+													None
+												</div>
+												<!-- /.tab-pane -->
+											</div>
+											<!-- /.tab-content -->
+										</div><!-- /.card-body -->
+									</div>
+									<!-- /.col -->
 								</div>
 							</div>
 						</div>
@@ -97,22 +107,10 @@
 
 @section('style')
 <style>
-	#th_firstchild {
-		vertical-align: middle;
-		position: relative;
-	}
-
-	#th_firstchild .form-check-input {
-		top: 50%;
-		transform: translateY(-50%);
-	}
-
-	#th_firstchild {
-		border-bottom: 1px solid #dee2e6;
-		padding-bottom: 11px;
+	label:not(.form-check-label):not(.custom-file-label) {
+		font-weight: normal;
 	}
 </style>
-
 @endsection
 
 @section('script')

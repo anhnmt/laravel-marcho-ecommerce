@@ -3,13 +3,16 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class User extends Authenticatable
 {
-    use HasRoles, Notifiable;
+    use HasRoles;
+    use Notifiable;
+    use Cachable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'avatar',
     ];
 
     /**
@@ -49,5 +52,10 @@ class User extends Authenticatable
     public function blogs()
     {
         return $this->hasMany('App\Models\Blog');
+    }
+
+    public function getRoles()
+    {
+        return $this->belongsToMany('App\Models\Role', 'model_has_roles', 'role_id', 'model_id');
     }
 }

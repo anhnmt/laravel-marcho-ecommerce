@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Permission;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use Route;
 
 class PermissionController extends Controller
-{   
+{
     public function list()
     {
-        $permissions = Permission::select(['id', 'name', 'guard_name']);
+        $permissions = Permission::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+
         return datatables($permissions)
             ->addColumn('action', function ($permission) {
                 return '<button data-delete="' . $permission->id . '" class="btn btn-sm btn-danger"><i class="far fa-trash"></i></button>';
@@ -26,7 +24,7 @@ class PermissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         return view('backend.permission.index');
     }
 
@@ -41,6 +39,5 @@ class PermissionController extends Controller
         $permission->delete();
 
         return redirect()->route('admin.permission.index')->withSuccess('Xoá quyền thành công');
-
     }
 }
