@@ -17,7 +17,6 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
-Route::view('product_detail', 'frontend.product_detail')->name('product_detail');
 Route::view('cart', 'frontend.cart')->name('cart');
 Route::view('checkout', 'frontend.cart')->name('checkout');
 
@@ -81,6 +80,12 @@ Route::group([
     // Blog
     Route::get('blog/list', 'BlogController@list')->name('blog.list');
     Route::resource('blog', 'BlogController', ['except' => ['show']]);
+
+    // Comment
+    Route::get('comment/list', 'CommentController@list')->name('comment.list');
+    Route::resource('comment', 'CommentController')->only([
+        'index', 'destroy'
+    ]);
 
     // User
     Route::get('user/list', 'UserController@list')->name('user.list');

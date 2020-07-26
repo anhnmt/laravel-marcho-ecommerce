@@ -22,7 +22,7 @@ class ProductAttributeController extends Controller
     {
         $this->product = $product;
 
-        $product_attributes = ProductAttribute::where('product_id', $product->id);;
+        $product_attributes = ProductAttribute::where('product_id', $product->id)->orderBy('id', 'desc');
 
         return datatables($product_attributes)
             ->addColumn('attributeValue', function ($product_attribute) {

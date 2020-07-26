@@ -19,7 +19,8 @@ class ProductController extends Controller
      */
     public function list()
     {
-        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status']);
+        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status'])->orderBy('id', 'desc');
+
         return datatables($categories)
             ->addColumn('image', function ($product) {
                 $product->image = $product->image ? $product->image : 'assets/img/placeholder.png';
@@ -30,7 +31,7 @@ class ProductController extends Controller
             })
             ->addColumn('action', function ($product) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-                
+
                 $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
                 $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
@@ -117,7 +118,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::all(); 
+        $categories = Category::all();
         $product->image = asset($product->image ? $product->image : 'assets/img/placeholder.png');
 
         return view('backend.product.edit', compact('product', 'categories'));

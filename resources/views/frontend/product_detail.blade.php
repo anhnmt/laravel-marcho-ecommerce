@@ -92,7 +92,7 @@
                                 </div>
                                 <span class="product_quantity_review">(22)</span>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="product_review mt-4">
                         <p class="title">Đánh giá</p>
@@ -141,37 +141,40 @@
             </div>
         </div>
         <div class="body_product_detail mb-70">
-            <div class="container mt-3">
-                <br>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#home">Mô tả</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Thông tin liên quan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu2">Nhận xét</a>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col-12">
 
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div id="home" class="container tab-pane active"><br>
-                        <h3>HOME</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
-                    </div>
-                    <div id="menu1" class="container tab-pane fade"><br>
-                        <h3>Menu 1</h3>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</p>
-                    </div>
-                    <div id="menu2" class="container tab-pane fade"><br>
-                        <h3>Menu 2</h3>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam.</p>
+                    <br>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#home">Mô tả</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#menu1">Thông tin liên quan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#menu2">Nhận xét</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="home" class="container tab-pane active"><br>
+                            <h3>HOME</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                labore et dolore magna aliqua.</p>
+                        </div>
+                        <div id="menu1" class="container tab-pane fade"><br>
+                            <h3>Menu 1</h3>
+                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat.</p>
+                        </div>
+                        <div id="menu2" class="container tab-pane fade"><br>
+                            <h3>Menu 2</h3>
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                laudantium, totam rem aperiam.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -189,7 +192,7 @@
                             <a href="#/">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                            </a>                            
+                            </a>
                         </div>
                         <div class="star d-inline mr-4">
                             <a href="#/">
@@ -218,7 +221,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-review mt-4">
                 <div class="contact_form">
                     <form>
@@ -257,8 +260,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="product_image col-md-4 col-sm-12 col-12">
-                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
-                                    class="card-img card-img-list" alt="">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}" class="card-img card-img-list" alt="">
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">
@@ -300,8 +302,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="product_image col-md-4 col-sm-12 col-12">
-                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
-                                    class="card-img card-img-list" alt="">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}" class="card-img card-img-list" alt="">
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">
@@ -343,8 +344,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="product_image col-md-4 col-sm-12 col-12">
-                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
-                                    class="card-img card-img-list" alt="">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}" class="card-img card-img-list" alt="">
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">
@@ -386,8 +386,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="product_image col-md-4 col-sm-12 col-12">
-                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
-                                    class="card-img card-img-list" alt="">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}" class="card-img card-img-list" alt="">
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">
@@ -429,8 +428,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="product_image col-md-4 col-sm-12 col-12">
-                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
-                                    class="card-img card-img-list" alt="">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}" class="card-img card-img-list" alt="">
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">
@@ -472,8 +470,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="product_image col-md-4 col-sm-12 col-12">
-                                <img src="{{ asset('assets/img/product/product_1.jpg') }}"
-                                    class="card-img card-img-list" alt="">
+                                <img src="{{ asset('assets/img/product/product_1.jpg') }}" class="card-img card-img-list" alt="">
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">

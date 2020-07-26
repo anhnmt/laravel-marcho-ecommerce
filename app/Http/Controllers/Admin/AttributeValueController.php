@@ -18,13 +18,13 @@ class AttributeValueController extends Controller
      */
     public function list(Attribute $attribute)
     {
-        $this->attribute = $attribute;
+        // $this->attribute = $attribute;
 
-        $attribute_values = $attribute->values->all();
+        $attribute_values = AttributeValue::where('attribute_id', $attribute->id)->orderBy('id', 'desc')->select('id', 'attribute_id','value', 'code');
 
         return datatables($attribute_values)
             ->addColumn('action', function ($attribute_value) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.attribute.value.destroy', [$this->attribute->id, $attribute_value->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.attribute.value.destroy', [$attribute_value->attribute_id, $attribute_value->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
@@ -88,7 +88,7 @@ class AttributeValueController extends Controller
     public function destroy(Attribute $attribute, $attribute_value)
     {
         // dd([$attribute, $attribute_value]);
-        $attribute_value = AttributeValue::find($attribute_value);
+        $attribute_value = AttributeValue::findOrFail($attribute_value);
 
         $attribute_value->delete();
 

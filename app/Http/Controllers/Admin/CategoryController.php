@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function list()
     {
-        $categories = Category::select(['id', 'name', 'slug', 'image', 'status']);
+        $categories = Category::select(['id', 'name', 'slug', 'image', 'status'])->orderBy('id', 'desc');
+
         return datatables($categories)
             ->addColumn('image', function ($category) {
                 $thumb_url = $category->image ? $category->image : 'assets/img/placeholder.png';
@@ -27,7 +28,7 @@ class CategoryController extends Controller
             })
             ->addColumn('action', function ($category) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.category.destroy', $category->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-                
+
                 $action .= '<a href="' . route('admin.category.edit', $category->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 

@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function list()
     {
-        $comments = Comment::select(['id', 'parent_id', 'post_id', 'user_id', 'body']);
+        $comments = Comment::select('id', 'parent_id', 'blog_id', 'user_id', 'body')->orderBy('id', 'desc');
 
         return datatables($comments)
             ->addColumn('action', function ($comment) {

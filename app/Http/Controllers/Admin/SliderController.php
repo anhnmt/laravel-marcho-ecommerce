@@ -16,7 +16,8 @@ class SliderController extends Controller
      */
     public function list()
     {
-        $sliders = Slider::select(['id', 'name', 'body', 'link', 'image', 'status']);
+        $sliders = Slider::select(['id', 'name', 'body', 'link', 'image', 'status'])->orderBy('id', 'desc');
+
         return datatables($sliders)
             ->addColumn('image', function ($slider) {
                 $thumb_url = $slider->image ? $slider->image : 'assets/img/placeholder.png';
@@ -27,7 +28,7 @@ class SliderController extends Controller
             })
             ->addColumn('action', function ($slider) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.slider.destroy', $slider->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-                
+
                 $action .= '<a href="' . route('admin.slider.edit', $slider->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
                 $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 

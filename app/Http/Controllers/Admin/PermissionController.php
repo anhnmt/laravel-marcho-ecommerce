@@ -9,7 +9,8 @@ class PermissionController extends Controller
 {
     public function list()
     {
-        $permissions = Permission::select(['id', 'name', 'guard_name']);
+        $permissions = Permission::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+
         return datatables($permissions)
             ->addColumn('action', function ($permission) {
                 return '<button data-delete="' . $permission->id . '" class="btn btn-sm btn-danger"><i class="far fa-trash"></i></button>';

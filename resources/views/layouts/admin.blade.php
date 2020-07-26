@@ -43,7 +43,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset(auth()->user()->avatar) }}" class="img-circle elevation-1 user-image" alt="User Image">
+                        <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
                         <span class="hidden-xs text-capitalize">{{ auth()->user()->name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
