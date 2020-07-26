@@ -69,8 +69,15 @@ var LFMButton = function (context) {
 };
 
 (function ($) {
+    $("#remove_img").click(function (e) {
+        if ($("#image").val()) {
+            $("#image").val("");
+            $("#holder").html("");
+        }
+    });
+
     $.fn.filemanager = function (type, options) {
-        type = type || "other";
+        type = type || "file";
 
         this.on("click", function (e) {
             var route_prefix =
@@ -79,12 +86,15 @@ var LFMButton = function (context) {
                     : "/admin/filemanager";
             var target_input = $("#" + $(this).data("input"));
             var target_preview = $("#" + $(this).data("preview"));
+            var target_class = $(this).data("class");
+
             PopupCenter(
                 route_prefix + "?type=" + type,
                 "FileManager",
                 900,
                 600
             );
+
             window.SetUrl = function (items) {
                 var file_path = items
                     .map(function (item) {
@@ -100,11 +110,13 @@ var LFMButton = function (context) {
 
                 // set or change the preview image src
                 items.forEach(function (item) {
-                    console.log(item);
+                    // console.log(item);
+
+                    // console.log(target_class);
 
                     target_preview.append(
                         $("<img>")
-                            .css("height", "5rem")
+                            .addClass(target_class)
                             .attr("src", item.thumb_url)
                     );
                 });

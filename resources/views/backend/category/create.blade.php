@@ -64,12 +64,12 @@
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
-									<a href="{{ route('admin.category.index') }}" class="btn btn-danger">
-										<i class="fal fa-save"></i> Huỷ
+									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+										<i class="fal fa-save"></i> Quay lại
 									</a>
 								</div>
 							</div>
-							
+
 							<div class="card">
 								<div class="card-header">
 									<h5>Trạng thái</h5>

@@ -4,17 +4,17 @@
 <section class="slider_section slide_medium shop_banner_slider staggered-animation-wrap">
 	<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
 		<div class="carousel-inner">
-			@foreach($slider as $slide)
-			<div class="carousel-item {{ $loop->first ? 'active' : '' }} background_bg" data-img-src="{{ asset(str_replace('thumbs/', '', $slide->image)) }}">
+			@foreach($sliders as $slider)
+			<div class="carousel-item {{ $loop->first ? 'active' : '' }} background_bg" data-img-src="{{ asset(str_replace('thumbs/', '', $slider->image)) }}">
 				<div class="banner_slide_content">
 					<div class="container">
 						<!-- STRART CONTAINER -->
 						<div class="row">
 							<div class="col-lg-7 col-9">
 								<div class="banner_content overflow-hidden">
-									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">{{ $slide->body }}</h5>
-									<h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">{{ $slide->name }}</h2>
-									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ $slide->link }}" data-animation="slideInLeft" data-animation-delay="1.5s">Xem Ngay</a>
+									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">{{ $slider->body }}</h5>
+									<h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">{{ $slider->name }}</h2>
+									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ $slider->link }}" data-animation="slideInLeft" data-animation-delay="1.5s">Xem Ngay</a>
 								</div>
 							</div>
 						</div>
@@ -89,239 +89,45 @@
 		<div class="row justify-content-center py-4">
 			<div class="col-lg-8">
 				<div class="section_title text-center">
-					<h2>Our Products</h2>
+					<h2>Sản Phẩm Nổi Bật</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
 				</div>
 			</div>
 		</div>
 		<div class="row pb-4">
 			<div class="col-lg-12">
-				<ul class="product_tab nav pb-5 justify-content-center" id="pills-tab" role="tablist">
-					<li class="nav-item" role="presentation">
-						<a class="nav-link active" id="product-all-tab" data-toggle="pill" href="#product-all" role="tab">All</a>
-					</li>
-					<li class="nav-item" role="presentation">
-						<a class="nav-link" id="product-popular-tab" data-toggle="pill" href="#product-popular" role="tab">Popular</a>
-					</li>
-					<li class="nav-item" role="presentation">
-						<a class="nav-link" id="product-trending-tab" data-toggle="pill" href="#product-trending" role="tab">Trending</a>
-					</li>
-					<li class="nav-item" role="presentation">
-						<a class="nav-link" id="product-bestsell-tab" data-toggle="pill" href="#product-bestsell" role="tab">Best Sell</a>
-					</li>
-				</ul>
+				<div class="row">
+					@foreach($products as $product)
+					<div class="col-lg-4 col-md-6 col-sm-12">
+						<div class="card">
+							<div class="product_image">
+								<img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
 
-				<div class="tab-content" id="pills-tabContent">
-					<div class="tab-pane fade show active" id="product-all" role="tabpanel">
-						<div class="row">
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_1.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
+								<div class="product_item">
+									<div class="d-flex align-items-center justify-content-center">
+										<a class="add-wishlist">
+											<i class="fal fa-heart"></i>
+										</a>
+										<a class="add-cart">
+											<i class="fal fa-shopping-bag"></i>
+										</a>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_2.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_3.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_4.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_5.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_6.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_7.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<div class="card">
-									<div class="product_image">
-										<img src="assets/img/product/product_8.jpg" class="card-img-top" alt="">
-
-										<div class="product_item">
-											<div class="d-flex align-items-center justify-content-center">
-												<a class="add-wishlist">
-													<i class="fal fa-heart"></i>
-												</a>
-												<a class="add-cart">
-													<i class="fal fa-shopping-bag"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="product_info card-body text-center">
-										<h5 class="card-title">Baby Girls Dress Designs</h5>
-										<span class="price">
-											<span class="old">$99.99</span>
-											<span class="new">$79.99</span>
-										</span>
-									</div>
-								</div>
+							<div class="product_info card-body text-center">
+								<h5 class="card-title">{{ $product->name }}</h5>
+								<span class="price">
+									@if($product->sale_price)
+									<span class="new">{{ $product->sale_price }}đ</span>
+									<span class="old">{{ $product->price }}đ</span>
+									@else
+									<span class="new">{{ $product->price }}đ</span>
+									@endif
+								</span>
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="product-popular" role="tabpanel">
-					</div>
-					<div class="tab-pane fade" id="product-trending" role="tabpanel">
-					</div>
-					<div class="tab-pane fade" id="product-bestsell" role="tabpanel">
-					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
@@ -333,32 +139,32 @@
 		<div class="row justify-content-center py-4">
 			<div class="col-lg-8">
 				<div class="section_title text-center">
-					<h2>Blog & News</h2>
+					<h2>Tin tức</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
 				</div>
 			</div>
 		</div>
 		<div class="row pb-4">
 			@if($latest_blog ?? '')
-				@foreach ($latest_blog as $blog)
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
-						<div class="grid_inner_item">
-							<div class="blog_img">
-								<a href="{{ route('blog.show', $blog->slug) }}">
-									<img src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="blog_info">
-								<p>January 19, 2020 by Admin</p>
-								<h3>
-									<a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
-								</h3>
-							</div>
+			@foreach ($latest_blog as $blog)
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
+					<div class="grid_inner_item">
+						<div class="blog_img">
+							<a href="{{ route('blog.show', $blog->slug) }}">
+								<img src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="blog_info">
+							<p>January 19, 2020 by Admin</p>
+							<h3>
+								<a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
+							</h3>
 						</div>
 					</div>
 				</div>
-				@endforeach
+			</div>
+			@endforeach
 			@endif
 		</div>
 	</div>
