@@ -106,7 +106,7 @@
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror
 									</div>
-									<div id="holder" style="margin-top:15px;max-height:100px;"></div>
+									<div id="holder" style="margin-top:15px"></div>
 								</div>
 							</div>
 						</div>

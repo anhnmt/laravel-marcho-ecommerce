@@ -110,8 +110,8 @@
 										@enderror
 									</div>
 
-									<div id="holder" style="margin-top:15px;max-height:100px;">
-										<img src="{{ $category->image }}" style="height: 100px;">
+									<div id="holder" style="margin-top:15px">
+										<img src="{{ $category->image }}">
 									</div>
 								</div>
 							</div>
