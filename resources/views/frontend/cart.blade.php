@@ -2,29 +2,29 @@
 
 @section('main')
 <div class="custom-container">
-    <section class="makp_breadcrumb bg_image">
-        <div class="banner">
-            <div class="bg_overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="breadcrumb_content text-center">
-                            <h1 class="font-weight-normal">Giỏ Hàng</h1>
-                            <ul>
-                                <li class="mx-1">
-                                    <a href="{{ route('home') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a>
-                                </li>
-                                <li class="mx-1">
-                                    <i class="fal fa-angle-right"></i>
-                                </li>
-                                <li class=" mx-1 active">Giỏ hàng</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+	<section class="makp_breadcrumb bg_image">
+		<div class="banner">
+			<div class="bg_overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumb_content text-center">
+							<h1 class="font-weight-normal">Giỏ Hàng</h1>
+							<ul>
+								<li class="mx-1">
+									<a href="{{ route('home') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a>
+								</li>
+								<li class="mx-1">
+									<i class="fal fa-angle-right"></i>
+								</li>
+								<li class=" mx-1 active">Giỏ hàng</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
 
 <section class="cart_section my-5 py-5">
@@ -45,16 +45,14 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td class="product-thumbnail"><a href="#"><img
-											src="{{ asset('uploads/products/product2.jpg') }}" alt="product1"></a></td>
+								<td class="product-thumbnail"><a href="#"><img src="{{ asset('uploads/products/product2.jpg') }}" alt="product1"></a></td>
 								<td class="product-name" data-title="Product"><a href="#">Blue Dress For
 										Woman</a></td>
 								<td class="product-price" data-title="Price">$45.00</td>
 								<td class="product-quantity" data-title="Quantity">
 									<div class="quantity">
 										<input type="button" value="-" class="minus">
-										<input type="text" name="quantity" value="2" title="Qty" class="qty"
-											size="4">
+										<input type="text" name="quantity" value="2" title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
 									</div>
 								</td>
@@ -62,16 +60,14 @@
 								<td class="product-remove" data-title="Remove"><a href="#"><i class="fal fa-times"></i></a></td>
 							</tr>
 							<tr>
-								<td class="product-thumbnail"><a href="#"><img
-											src="{{ asset('uploads/products/product1.jpg') }}" alt="product2"></a></td>
+								<td class="product-thumbnail"><a href="#"><img src="{{ asset('uploads/products/product1.jpg') }}" alt="product2"></a></td>
 								<td class="product-name" data-title="Product"><a href="#">Lether Gray Tuxedo</a>
 								</td>
 								<td class="product-price" data-title="Price">$55.00</td>
 								<td class="product-quantity" data-title="Quantity">
 									<div class="quantity">
 										<input type="button" value="-" class="minus">
-										<input type="text" name="quantity" value="1" title="Qty" class="qty"
-											size="4">
+										<input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
 									</div>
 								</td>
@@ -79,16 +75,14 @@
 								<td class="product-remove" data-title="Remove"><a href="#"><i class="fal fa-times"></i></a></td>
 							</tr>
 							<tr>
-								<td class="product-thumbnail"><a href="#"><img
-											src="{{ asset('uploads/products/product3.jpg') }}" alt="product3"></a></td>
+								<td class="product-thumbnail"><a href="#"><img src="{{ asset('uploads/products/product3.jpg') }}" alt="product3"></a></td>
 								<td class="product-name" data-title="Product"><a href="#">woman full sliv
 										dress</a></td>
 								<td class="product-price" data-title="Price">$68.00</td>
 								<td class="product-quantity" data-title="Quantity">
 									<div class="quantity">
 										<input type="button" value="-" class="minus">
-										<input type="text" name="quantity" value="3" title="Qty" class="qty"
-											size="4">
+										<input type="text" name="quantity" value="3" title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
 									</div>
 								</td>
@@ -103,7 +97,7 @@
 
 										<div class="col-lg-4 col-md-6 mb-3 mb-md-0 text-md-left">
 											<div class="fix_btn_line_fill d-inline-block">
-												<button class="btn btn-line-fill btn-sm" type="submit">Xóa giỏ hàng</button>
+												<button class="btn btn-fill-line" type="submit">Xóa giỏ hàng</button>
 											</div>
 										</div>
 										<div class="col-lg-8 col-md-6 text-left text-md-right">
@@ -156,7 +150,7 @@
 							</tbody>
 						</table>
 					</div>
-					<a href="#" class="btn btn-fill-out">Proceed To CheckOut</a>
+					<a href="#" class="btn btn-fill-out">Thanh toán ngay</a>
 				</div>
 			</div>
 		</div>

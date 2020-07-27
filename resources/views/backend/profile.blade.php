@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="text-center">
-                                <div id="holder" style="margin-top:15px;max-height:100px;">
+                                <div id="holder" style="margin-top:15px">
                                     <img class="profile-user-img img-fluid img-circle" src="{{ asset($user->avatar) }}" alt="User profile picture">
                                 </div>
                             </div>

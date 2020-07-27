@@ -121,65 +121,80 @@
         $(this).parents(".view_icon").find(".active").removeClass("active");
         $(this).addClass("active");
         if ($(this).hasClass("product_grid")) {
-            $(".product_section").find(".product_list").removeClass('product_list').addClass('product_grid');
+            $(".product_section")
+                .find(".product_list")
+                .removeClass("product_list")
+                .addClass("product_grid");
         } else {
-            $(".product_section").find(".product_grid").removeClass('product_grid').addClass('product_list');
+            $(".product_section")
+                .find(".product_grid")
+                .removeClass("product_grid")
+                .addClass("product_list");
         }
     });
 
     /*-------------------------------
 	Slick Slider for Product Image
     ------------------------------ */
-    $('.slider-for').slick({
+    $(".slider-for").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
         fade: true,
-        asNavFor: '.slider-nav'
-    });
-    $('.slider-nav').slick({
+        asNavFor: ".slider-nav",
         infinite: true,
+        speed: 300,
+    });
+
+    $(".slider-nav").slick({
+        speed: 300,
         slidesToShow: 4,
         slidesToScroll: 1,
-        asNavFor: '.slider-for',
+        asNavFor: ".slider-for",
         dots: false,
         focusOnSelect: true,
         vertical: true,
         arrows: true,
-        prevArrow: '<span class="prev"><i class="fa fa-angle-up" aria-hidden="true"></i></span>',
-        nextArrow: '<span class="next"><i class="fa fa-angle-down" aria-hidden="true"></i></span>'
+        prevArrow:
+            '<span class="prev"><i class="fa fa-angle-up" aria-hidden="true"></i></span>',
+        nextArrow:
+            '<span class="next"><i class="fa fa-angle-down" aria-hidden="true"></i></span>',
     });
     /*-------------------------------
                 Choose Star
     ------------------------------ */
-    $('.star').click(function(){
-        $(this).parents('.star_rating').find('.checked').removeClass('checked');
-        $(this).addClass('checked');
-    })
+    $(".star").click(function () {
+        $(this).parents(".star_rating").find(".checked").removeClass("checked");
+        $(this).addClass("checked");
+    });
 
     $(".related_products .products").slick({
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 4,
-        arrows: true
-    })
+        arrows: true,
+    });
     /*-------------------------------
         Plus and minus quantity
     ------------------------------ */
     $(".plus").on("click", function () {
         if ($(this).prev().val()) {
-            $(this).prev().val(+$(this).prev().val() + 1);
+            $(this)
+                .prev()
+                .val(+$(this).prev().val() + 1);
         }
     });
     $(".minus").on("click", function () {
         if ($(this).next().val() > 1) {
             if ($(this).next().val() > 1)
-                $(this).next().val(+$(this).next().val() - 1);
+                $(this)
+                    .next()
+                    .val(+$(this).next().val() - 1);
         }
     });
-    $(".qty").on("change", function(){
-        if($(this).val() <= 0){
+    $(".qty").on("change", function () {
+        if ($(this).val() <= 0) {
             $(this).val(1);
         }
-    })
+    });
 })(window.jQuery);
