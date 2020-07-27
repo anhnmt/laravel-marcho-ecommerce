@@ -32,47 +32,25 @@
     <div class="container">
         <div class="head_product_detail">
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-md-8">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="slider slider-nav">
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                    </div>
+                        <div class="col-md-4">
+                            <div class="slider slider-nav">
+                                <div>
+                                    <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                 </div>
-                                <div class="col-lg-8 text-center">
-                                    <div class="slider slider-for">
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 text-center">
+                            <div class="slider slider-for">
+                                <div>
+                                    <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-md-4">
                     <h5 class="product_name">Áo vest nam công sở</h5>
                     <div class="product_info">
                         <div class="row">

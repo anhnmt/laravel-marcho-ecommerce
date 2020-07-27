@@ -14,6 +14,8 @@ class User extends Authenticatable
     use Notifiable;
     use Cachable;
 
+    protected $with = ['roles', 'permissions'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,7 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getShortName() {
+    public function getShortName()
+    {
         $name = auth()->user()->name;
 
         $arr_name = explode(' ', $name);

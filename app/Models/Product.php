@@ -4,16 +4,20 @@ namespace App\Models;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 use BinaryCats\Sku\HasSku;
 use BinaryCats\Sku\Concerns\SkuOptions;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class Product extends Model
 {
     use Sluggable;
+    use SluggableScopeHelpers;
     use HasSku;
     use Cachable;
+
+    // protected $with = ['roles.permissions', 'permissions'];
 
     protected $fillable = [
         'category_id',
@@ -61,7 +65,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->hasOne(Category::class, 'category_id', 'id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 
     /**
