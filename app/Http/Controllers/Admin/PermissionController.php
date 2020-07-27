@@ -9,7 +9,7 @@ class PermissionController extends Controller
 {
     public function list()
     {
-        $permissions = Permission::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+        $permissions = Permission::orderBy('id', 'desc')->select('id', 'name', 'guard_name');
 
         return datatables($permissions)
             ->addColumn('action', function ($permission) {

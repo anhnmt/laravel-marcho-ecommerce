@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Auth;
 use App\User;
 use App\Models\Role;
 use App\Models\Permission;
@@ -20,9 +19,9 @@ class UserController extends Controller
         ->addColumn('action', function ($user) {
             $action = '<form class="delete-form" action="' . route('admin.user.destroy', $user->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
             
-            if(Auth::user()->can('admin.user.edit'))
+            if(auth()->user()->can('admin.user.edit'))
             $action .= '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-            if(Auth::user()->name != $user->name || Auth::user()->can('admin.user.destroy'))
+            if(auth()->user()->name != $user->name || auth()->user()->can('admin.user.destroy'))
             $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
             if((auth()->user()->can('admin.user.edit') && auth()->user()->can('admin.user.destroy')) == false) 

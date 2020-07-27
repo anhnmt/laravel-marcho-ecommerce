@@ -26,12 +26,15 @@ Route::group([
 ], function () {
     // Home
     Route::get('/', 'HomeController@index')->name('home');
+
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
-    //Product
+
+    // Product
     Route::get('product', 'ProductController@index')->name('product.index');
-    Route::view('product_detail', 'frontend.product_detail')->name('product.show');
+    Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+
     // Frontend Auth
     Route::group([
         'middleware' => ['auth'],
@@ -40,7 +43,6 @@ Route::group([
         Route::resource('blog.comment', 'CommentController');
     });
 });
-
 
 // ROUTE ADMIN
 Route::group([
@@ -99,10 +101,6 @@ Route::group([
     // Permission
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
     Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
-
-    // Comment
-    Route::get('comment/list', 'CommentController@list')->name('comment.list');
-    Route::resource('comment', 'CommentController', ['only' => ['index', 'destroy']]);
 
     // Slider
     Route::get('slider/list', 'SliderController@list')->name('slider.list');
