@@ -2084,12 +2084,7 @@ header .navbar-collapse {
     line-height: 10px;
     padding: 15px 30px 15px;
     font-size: 14px;
-    color: #fff;
-    border: none;
-    background: #fe3e57;
-    -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     border-radius: 0;
-    text-transform: unset;
     margin-left: 30px;
 }
 .product_detai_section .foot_product_detail .title .underline{
@@ -2141,12 +2136,11 @@ header .navbar-collapse {
     left: 50%;
     transform: translate(-50%, -50%);
     margin-bottom: 0!important;
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
-    
 }
 .login-wrapper.product_detai_section {
-    margin: 150px 0 80px 0;
+    margin: 100px 0 80px 0;
 }
 .product_detai_section .products .product_info .price{
     position: absolute;
@@ -2349,7 +2343,7 @@ header .navbar-collapse {
 }
 .blog_details_section .comment_box .comment_user img {
     height: auto;
-    max-width: 80px;
+    max-width: 50px;
 }
 .blog_details_section .comment_box .comment_content {
     padding-left: 20px;
@@ -2794,11 +2788,11 @@ select.not_chosen, select.first_null option:first-child, select.not_chosen:focus
 /*===================================*
     CONTACT SECTION
 *===================================*/
-.pb-140 {
-    padding-bottom: 140px;
+.pb-100 {
+    padding-bottom: 100px;
 }
-.pt-140 {
-    padding-top: 140px;
+.pt-100 {
+    padding-top: 100px;
 }
 .makp_map .map_box iframe {
     width: 100%;
@@ -2808,7 +2802,7 @@ select.not_chosen, select.first_null option:first-child, select.not_chosen:focus
 }
 
 .contact_v1 {
-    padding-bottom: 140px;
+    padding-bottom: 100px;
 }
 
 .contact_v1 .makp_conent_box .section_title {

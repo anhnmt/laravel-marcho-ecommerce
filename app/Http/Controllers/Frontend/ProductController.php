@@ -31,7 +31,10 @@ class ProductController extends Controller
         $product = Product::findBySlug($product->slug);
         // dd($product->name);
 
-        $relatedProducts = Product::select('name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
+        $relatedProducts = Product::where([
+            ['category_id', $product->category_id],
+            ['id', '!=', $product->id],
+        ])->orderBy('name', 'desc')->select('name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
 
         // dd($relatedProducts);
         // $comments = $product->comments()->all();

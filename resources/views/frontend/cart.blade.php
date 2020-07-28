@@ -35,12 +35,12 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th class="product-thumbnail">&nbsp;</th>
-								<th class="product-name">Product</th>
-								<th class="product-price">Price</th>
-								<th class="product-quantity">Quantity</th>
-								<th class="product-subtotal">Total</th>
-								<th class="product-remove">Remove</th>
+								<th class="product-thumbnail">Ảnh</th>
+								<th class="product-name">Sản phẩm</th>
+								<th class="product-price">Đơn giá</th>
+								<th class="product-quantity">Số lượng</th>
+								<th class="product-subtotal">Tổng</th>
+								<th class="product-remove">Xóa</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -115,9 +115,9 @@
 			<div class="col-md-6">
 				<div class="border p-3 p-md-4">
 					<div class="heading_s1 mb-3">
-						<h6>Coupon code</h6>
+						<h6>Mã giảm giá</h6>
 					</div>
-					<div class="col-lg-12 mt-3">
+					<div class="mt-3">
 						<div class="form_group">
 							<input type="text" class="form_control coupon_code_input" placeholder="Nhập mã giảm giá..." name="subject">
 						</div>
