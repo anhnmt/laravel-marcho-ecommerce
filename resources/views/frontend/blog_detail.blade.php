@@ -108,7 +108,7 @@
                                     <li class="comment_info">
                                         <div class="d-flex justify-content-between">
                                             <div class="comment_user">
-                                                <img src="{{ asset('assets/img/user1-128x128.jpg') }}" alt="user2" class="rounded-circle">
+                                                <img src="{{ asset($comment->user->avatar ? $comment->user->avatar : 'assets/img/user2-160x160.jpg') }}" alt="user2" class="rounded-circle">
                                             </div>
                                             <div class="comment_content">
                                                 <div class="d-flex">
