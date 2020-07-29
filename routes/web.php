@@ -46,15 +46,17 @@ Route::group([
             'prefix' => 'cart',
         ], function () {
             // List Cart
-            Route::view('/', 'frontend.cart')->name('cart.index');
+            Route::get('/', 'CartController@index')->name('cart.index');
+            // Count Cart
+            Route::get('count', 'CartController@count')->name('cart.count');
             // Add Cart
-            Route::view('add/{id}', 'frontend.cart')->name('cart.add');
+            Route::post('store', 'CartController@store')->name('cart.store');
             // Update Cart
-            Route::view('update/{rowId}', 'frontend.cart')->name('cart.add');
+            Route::get('update/{rowId}', 'CartController@update')->name('cart.update');
             // Remove Cart
-            Route::view('remove/{rowId}', 'frontend.cart')->name('cart.add');
+            Route::get('destroy/{rowId}', 'CartController@destroy')->name('cart.destroy');
             // Clear All Cart
-            Route::view('clear', 'frontend.cart')->name('cart.add');
+            Route::get('clear', 'CartController@clear')->name('cart.clear');
         });
     });
 });

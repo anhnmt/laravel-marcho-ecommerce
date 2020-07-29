@@ -109,10 +109,16 @@
     $(".input_size").click(function () {
         $(this).parents("label").toggleClass("_highlight");
     });
+
     /*-----------------------
 		Nice Select
     ------------------------ */
-    $("select").niceSelect();
+    // $("select").niceSelect();
+
+    /*-----------------------
+		Select2
+    ------------------------ */
+    $(".select2").select2();
 
     /*-----------------------
         Product List Style

@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/animate.css/animate.min.css') }}">
     <!-- Google Font: Roboto, Quicksand -->
     <link rel="stylesheet" href="{{ asset('assets/css/Roboto_Quicksand.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Custom Style -->
     @yield('style')
     <!-- Custom Style -->
@@ -231,7 +234,7 @@
     </footer>
 
     <!-- Vuejs -->
-    <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script> -->
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/jquery/jquery-migrate.min.js') }}"></script>
@@ -247,6 +250,8 @@
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
     <!-- Nice select  -->
     <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- Custom script -->
     @yield('script')
     <!-- Custom script -->
