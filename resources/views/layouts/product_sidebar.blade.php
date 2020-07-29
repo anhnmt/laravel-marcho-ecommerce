@@ -2,8 +2,8 @@
     <div class="widget_box search_widget mb-55">
         <h4 class="mb-4 head_sidebar">SEARCH</h4>
         <form>
-            <div class="form_group">
-                <input type="text" class="form_control" placeholder="Enter your keyword...">
+            <div class="form-group form_group">
+                <input type="text" class="form-control form_control" placeholder="Enter your keyword...">
                 <button class="search_btn"><i class="fal fa-search"></i></button>
             </div>
         </form>
