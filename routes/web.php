@@ -17,8 +17,7 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
-Route::view('cart', 'frontend.cart')->name('cart');
-Route::view('checkout', 'frontend.cart')->name('checkout');
+Route::view('cart', 'frontend.cart')->name('cart');Route::view('checkout', 'frontend.checkout')->name('checkout');
 
 // ROUTE FRONTEND
 Route::group([
@@ -34,6 +33,11 @@ Route::group([
     // Product
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+
+    // Checkout
+    Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
+    Route::get('checkout/districts', 'CheckoutController@districts')->name('checkout.districts');
+    Route::get('checkout/wards', 'CheckoutController@wards')->name('checkout.wards');
 
     // Frontend Auth
     Route::group([

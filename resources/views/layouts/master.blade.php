@@ -21,10 +21,11 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/animate.css/animate.min.css') }}">
     <!-- Google Font: Roboto, Quicksand -->
     <link rel="stylesheet" href="{{ asset('assets/css/Roboto_Quicksand.css') }}">
+    @yield('style')
     <!-- Custom Style -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-    @yield('style')
+    
 </head>
 
 <body>
