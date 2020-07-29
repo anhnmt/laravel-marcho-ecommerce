@@ -48,7 +48,6 @@ class BlogController extends Controller
         $categories = Category::all();
 
         $user = auth()->user();
-        $user['avatar'] = $user->avatar ? $user->avatar : 'assets/img/user2-160x160.jpg';
 
         if (auth()->check()) {
             $user->avatar = $user->avatar ? $user->avatar : 'assets/img/user2-160x160.jpg';

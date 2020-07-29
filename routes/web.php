@@ -17,8 +17,7 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
-Route::view('cart', 'frontend.cart')->name('cart');
-Route::view('checkout', 'frontend.cart')->name('checkout');
+
 
 // ROUTE FRONTEND
 Route::group([
@@ -26,21 +25,46 @@ Route::group([
 ], function () {
     // Home
     Route::get('/', 'HomeController@index')->name('home');
+
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
-    //Product
+
+    // Product
     Route::get('product', 'ProductController@index')->name('product.index');
-    Route::view('product_detail', 'frontend.product_detail')->name('product.show');
+    Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+
+    // Checkout
+    Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
+    Route::get('checkout/districts', 'CheckoutController@districts')->name('checkout.districts');
+    Route::get('checkout/wards', 'CheckoutController@wards')->name('checkout.wards');
+
     // Frontend Auth
     Route::group([
         'middleware' => ['auth'],
     ], function () {
         // Comment
         Route::resource('blog.comment', 'CommentController');
+
+        // Cart
+        Route::group([
+            'prefix' => 'cart',
+        ], function () {
+            // List Cart
+            Route::get('/', 'CartController@index')->name('cart.index');
+            // Count Cart
+            Route::get('count', 'CartController@count')->name('cart.count');
+            // Add Cart
+            Route::post('store', 'CartController@store')->name('cart.store');
+            // Update Cart
+            Route::get('update/{rowId}', 'CartController@update')->name('cart.update');
+            // Remove Cart
+            Route::get('destroy/{rowId}', 'CartController@destroy')->name('cart.destroy');
+            // Clear All Cart
+            Route::get('clear', 'CartController@clear')->name('cart.clear');
+        });
     });
 });
-
 
 // ROUTE ADMIN
 Route::group([
@@ -99,10 +123,6 @@ Route::group([
     // Permission
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
     Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
-
-    // Comment
-    Route::get('comment/list', 'CommentController@list')->name('comment.list');
-    Route::resource('comment', 'CommentController', ['only' => ['index', 'destroy']]);
 
     // Slider
     Route::get('slider/list', 'SliderController@list')->name('slider.list');

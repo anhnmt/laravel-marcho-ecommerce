@@ -51,12 +51,12 @@
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <span>Sort By </span>
-                            <select>
+                            <select class="nice_select" >
                                 <option value="1">Default</option>
                                 <option value="2">Newest</option>
                             </select>
                             <span>Show </span>
-                            <select>
+                            <select class="nice_select">
                                 <option>9</option>
                                 <option value="1">12</option>
                                 <option value="2">24</option>
@@ -88,7 +88,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
-                                                    <a href="{{ url($product->slug) }}">
+                                                    <a href="{{ route('product.show', $product->slug) }}">
                                                         <h4 class="card-title">
                                                             {{ $product->name }}
                                                         </h4>
@@ -123,18 +123,11 @@
                     </div>
 
                 </div>
-                <div class="_pagination">
-                    <ul class="pagination d-flex justify-content-lg-center pt-4">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+                <div class="_pagination d-flex justify-content-center ">
+                    {{$products->links()}}
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 @endsection

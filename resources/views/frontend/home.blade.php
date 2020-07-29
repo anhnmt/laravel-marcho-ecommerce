@@ -122,7 +122,9 @@
 									<i class="fas fa-star checked"></i>
 									<i class="fas fa-star"></i>
 								</div>
-								<h5 class="card-title mt-2">{{ $product->name }}</h5>
+								<a href="{{ route('product.show', $product->slug) }}">
+									<h5 class="card-title mt-2">{{ $product->name }}</h5>
+								</a>
 								<span class="price mt-2">
 									@if($product->sale_price)
 									<span class="new">{{ $product->sale_price }}đ</span>
@@ -181,7 +183,7 @@
 
 </section>
 
-<section class="banner_section bg_light_blue py-5 pb-0">
+<section class="banner_section bg_light_blue p-0">
 	<div class="container">
 		<div class="row align-items-center flex-row-reverse">
 			<div class="col-md-6 offset-md-1">
