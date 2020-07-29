@@ -141,7 +141,7 @@
 							</tbody>
 						</table>
 					</div>
-					<a href="#" class="btn btn-fill-out @if ($items->count() <= 0) disabled @endif">Thanh toán ngay</a>
+					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if ($items->count() <= 0) disabled @endif">Thanh toán ngay</a>
 				</div>
 			</div>
 		</div>

@@ -51,12 +51,12 @@
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <span>Sort By </span>
-                            <select>
+                            <select class="nice_select" >
                                 <option value="1">Default</option>
                                 <option value="2">Newest</option>
                             </select>
                             <span>Show </span>
-                            <select>
+                            <select class="nice_select">
                                 <option>9</option>
                                 <option value="1">12</option>
                                 <option value="2">24</option>
@@ -123,10 +123,8 @@
                     </div>
 
                 </div>
-                <div class="_pagination">
-                    <div class="d-flex justify-content-center pt-4">
-                        {{ $products->links() }}
-                    </div>
+                <div class="_pagination d-flex justify-content-center ">
+                    {{$products->links()}}
                 </div>
             </div>
         </div>
