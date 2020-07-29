@@ -109,10 +109,16 @@
     $(".input_size").click(function () {
         $(this).parents(".list-group-item").find("label").toggleClass("_highlight");
     });
+
     /*-----------------------
 		Nice Select
     ------------------------ */
     $(".nice_select").niceSelect();
+    /*-----------------------
+		Select2
+    ------------------------ */
+    $(".select2").select2();
+    
 
     /*-----------------------
         Product List Style
@@ -147,6 +153,7 @@
     });
 
     $(".slider-nav").slick({
+        infinite: true,
         speed: 300,
         slidesToShow: 4,
         slidesToScroll: 1,

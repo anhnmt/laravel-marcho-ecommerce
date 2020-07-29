@@ -183,7 +183,7 @@
 
 </section>
 
-<section class="banner_section bg_light_blue py-5 pb-0">
+<section class="banner_section bg_light_blue p-0">
 	<div class="container">
 		<div class="row align-items-center flex-row-reverse">
 			<div class="col-md-6 offset-md-1">

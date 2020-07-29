@@ -17,7 +17,7 @@ use UniSharp\LaravelFilemanager\Lfm;
 */
 
 Route::view('contact', 'frontend.contact')->name('contact');
-Route::view('cart', 'frontend.cart')->name('cart');Route::view('checkout', 'frontend.checkout')->name('checkout');
+
 
 // ROUTE FRONTEND
 Route::group([
@@ -45,6 +45,24 @@ Route::group([
     ], function () {
         // Comment
         Route::resource('blog.comment', 'CommentController');
+
+        // Cart
+        Route::group([
+            'prefix' => 'cart',
+        ], function () {
+            // List Cart
+            Route::get('/', 'CartController@index')->name('cart.index');
+            // Count Cart
+            Route::get('count', 'CartController@count')->name('cart.count');
+            // Add Cart
+            Route::post('store', 'CartController@store')->name('cart.store');
+            // Update Cart
+            Route::get('update/{rowId}', 'CartController@update')->name('cart.update');
+            // Remove Cart
+            Route::get('destroy/{rowId}', 'CartController@destroy')->name('cart.destroy');
+            // Clear All Cart
+            Route::get('clear', 'CartController@clear')->name('cart.clear');
+        });
     });
 });
 

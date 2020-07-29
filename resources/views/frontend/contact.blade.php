@@ -27,7 +27,7 @@
     </section>
 </div>
 
-<section class="makp_map pt-140 pb-140">
+<section class="makp_map pt-100 pb-100">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

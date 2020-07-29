@@ -21,11 +21,14 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/animate.css/animate.min.css') }}">
     <!-- Google Font: Roboto, Quicksand -->
     <link rel="stylesheet" href="{{ asset('assets/css/Roboto_Quicksand.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <!-- Custom Style -->
     @yield('style')
     <!-- Custom Style -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-    
 </head>
 
 <body>
@@ -73,7 +76,8 @@
                             @endcannot
 
                             <div class="dropdown-divider"></div>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item">
                                     <i class="fal fa-sign-out"></i> Đăng xuất
@@ -98,7 +102,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link icon_cart" href="{{ route('cart') }}">
+                        <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
                             <i class="fal fa-shopping-cart"></i>
                             <span class="cart_count">0</span>
                         </a>
@@ -197,11 +201,31 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="footer_payment text-center text-md-right">
-                            <li><a href="#"><img src="assets/img/payment/visa.png" alt="visa"></a></li>
-                            <li><a href="#"><img src="assets/img/payment/discover.png" alt="discover"></a></li>
-                            <li><a href="#"><img src="assets/img/payment/master_card.png" alt="master_card"></a></li>
-                            <li><a href="#"><img src="assets/img/payment/paypal.png" alt="paypal"></a></li>
-                            <li><a href="#"><img src="assets/img/payment/amarican_express.png" alt="amarican_express"></a></li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/payment/visa.png') }}" alt="visa">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/payment/discover.png') }}" alt="discover">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/payment/master_card.png') }}" alt="master_card">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/payment/paypal.png') }}" alt="paypal">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/payment/amarican_express.png') }}" alt="amarican_express">
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -210,7 +234,7 @@
     </footer>
 
     <!-- Vuejs -->
-    <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script> -->
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/jquery/jquery-migrate.min.js') }}"></script>
@@ -226,6 +250,9 @@
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
     <!-- Nice select  -->
     <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Custom script -->
     @yield('script')
     <!-- Custom script -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>

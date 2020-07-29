@@ -31,9 +31,14 @@ class ProductController extends Controller
         $product = Product::findBySlug($product->slug);
         // dd($product->name);
 
-        $relatedProducts = Product::select('name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
+        $relatedProducts = Product::where([
+            ['category_id', $product->category_id],
+            ['id', '!=', $product->id],
+        ])->orderBy('name', 'desc')->select('name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
 
-        // dd($relatedProducts);
+        $productAttributes = $product->attributes;
+
+        // dd($productAttributes);
         // $comments = $product->comments()->all();
 
         $latest_blog = Blog::latest();
@@ -46,6 +51,13 @@ class ProductController extends Controller
             $user->avatar = $user->avatar ? $user->avatar : 'assets/img/user2-160x160.jpg';
         }
 
-        return view('frontend.product_detail', compact('user', 'product', 'relatedProducts', 'latest_blog', 'categories'));
+        return view('frontend.product_detail', compact(
+            'user',
+            'product',
+            'productAttributes',
+            'relatedProducts',
+            'latest_blog',
+            'categories',
+        ));
     }
 }
