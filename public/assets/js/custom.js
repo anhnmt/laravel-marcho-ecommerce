@@ -1,5 +1,12 @@
 (function ($) {
     "use strict";
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
     $(".carouselExampleControls").owlCarousel({
         margin: 10,
         loop: true,
@@ -107,7 +114,10 @@
 		Size Filter
     ------------------------ */
     $(".input_size").click(function () {
-        $(this).parents(".list-group-item").find("label").toggleClass("_highlight");
+        $(this)
+            .parents(".list-group-item")
+            .find("label")
+            .toggleClass("_highlight");
     });
 
     /*-----------------------
@@ -118,7 +128,6 @@
 		Select2
     ------------------------ */
     $(".select2").select2();
-    
 
     /*-----------------------
         Product List Style
@@ -180,28 +189,5 @@
         slidesToShow: 4,
         slidesToScroll: 4,
         arrows: true,
-    });
-    /*-------------------------------
-        Plus and minus quantity
-    ------------------------------ */
-    $(".plus").on("click", function () {
-        if ($(this).prev().val()) {
-            $(this)
-                .prev()
-                .val(+$(this).prev().val() + 1);
-        }
-    });
-    $(".minus").on("click", function () {
-        if ($(this).next().val() > 1) {
-            if ($(this).next().val() > 1)
-                $(this)
-                    .next()
-                    .val(+$(this).next().val() - 1);
-        }
-    });
-    $(".qty").on("change", function () {
-        if ($(this).val() <= 0) {
-            $(this).val(1);
-        }
     });
 })(window.jQuery);

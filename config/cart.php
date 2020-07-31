@@ -4,76 +4,85 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Gross price as base price
+    | Default cart name
     |--------------------------------------------------------------------------
     |
-    | This default value is used to select the method to calculate prices and taxes
-    | If true the item price is managed as a gross price, so taxes will be calculated by separation/exclusion
+    | This setting allows you to set the default name of the cart in case you
+    | do not specify a specific name.
     |
     */
+    'default_cart_name' => 'default',
 
-    'gross_price' => false,
+    /*
+    |--------------------------------------------------------------------------
+    | None commercial carts
+    |--------------------------------------------------------------------------
+    |
+    | This setting allows you to specify which carts (by the name) are not for
+    | commercial use but used for other purposes such as storing recent viewed
+    | items, compared items... They are have no information regarding money.
+    |
+    */
+    'none_commercial_carts' => [
+        // 'example_cart_name'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Use built-in tax system
+    |--------------------------------------------------------------------------
+    |
+    | This setting allows you to set the default state of using the built-in
+    | taxing system or not every time you initialize the cart.
+    |
+    */
+    'use_builtin_tax' => true,
 
     /*
     |--------------------------------------------------------------------------
     | Default tax rate
     |--------------------------------------------------------------------------
     |
-    | This default tax rate will be used when you make a class implement the
-    | Taxable interface and use the HasTax trait.
+    | This is the default tax rate value used for each tax of the cart if you do
+    | not set the rate attribute every time apply a tax into cart.
     |
     */
-
-    'tax' => 0,
+    'default_tax_rate' => 10,
 
     /*
     |--------------------------------------------------------------------------
-    | Shoppingcart database settings
+    | Default rules of actions
     |--------------------------------------------------------------------------
     |
-    | Here you can set the connection that the shoppingcart should use when
-    | storing and restoring a cart.
+    | This is the default rules attribute of action when you apply an action
+    | into cart or item. The value of this setting shows how to calculate the
+    | amount for the action. For details about the available keys and values ​​of
+    | this setting, please see https://github.com/JackieDo/Laravel-Cart
     |
     */
-
-    'database' => [
-
-        'connection' => null,
-
-        'table' => 'shoppingcart',
-
+    'default_action_rules' => [
+        'enable'               => true,
+        'taxable'              => true,
+        'allow_others_disable' => true,
+        'disable_others'       => null,
+        'include_calculations' => 'same_group_previous_actions',
+        'max_amount'           => null,
+        'min_amount'           => null
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Destroy the cart on user logout
+    | Action groups order
     |--------------------------------------------------------------------------
     |
-    | When this option is set to 'true' the cart will automatically
-    | destroy all cart instances when the user logs out.
+    | This setting allows to prioritize groups of actions in descending order.
+    | If not set, actions will be sorted according to the time of applied. In
+    | contrast, the actions will be sorted by groups order first, then sorted
+    | by the time of applied.
     |
     */
-
-    'destroy_on_logout' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default number format
-    |--------------------------------------------------------------------------
-    |
-    | This defaults will be used for the formatted numbers if you don't
-    | set them in the method call.
-    |
-    */
-
-    'format' => [
-
-        'decimals' => 0,
-
-        'decimal_point' => '',
-
-        'thousand_separator' => '',
-
-    ],
+    'action_groups_order' => [
+        // 'example_action_group_name'
+    ]
 
 ];
