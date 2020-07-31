@@ -69,9 +69,6 @@ iframe {
 video {
     width: 100%;
 }
-.header_icon .user-img{
-    border-color: rgba(0, 0, 0, 0.1);
-}
 .header_icon .dropdown-menu{
     left: unset;
     right: 0;
