@@ -43,25 +43,29 @@
 								<th class="product-remove">Xóa</th>
 							</tr>
 						</thead>
-						@if ($items->count() > 0)
+						@if (count($items) > 0)
 						<tbody>
 							@foreach($items as $item)
-							<tr>
-								<td class="product-thumbnail"><a href="#"><img src="{{ asset($item->model->image) }}" alt="product1"></a></td>
+							@php
+							//dd($item->getDetails())
+							$itemDetail = $item->getDetails();
+							@endphp
+							<tr id="{{ $item->getHash() }}">
+								<td class="product-thumbnail"><a href="#"><img src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}" alt="product1"></a></td>
 								<td class="product-name" data-title="Product">
-									<a href="{{ route('product.show', $item->model->slug) }}">{{ $item->name }}</a>
+									<a href="{{ route('product.show', $itemDetail->model->slug) }}">{{ $itemDetail->title }}</a>
 								</td>
-								<td class="product-price" data-title="Price">{{ number_format($item->price, 0) }}đ</td>
+								<td class="product-price" data-title="Price">{{ number_format($itemDetail->price, 0) }}đ</td>
 								<td class="product-quantity" data-title="Quantity">
 									<div class="quantity">
 										<input type="button" value="-" class="minus">
-										<input type="text" name="quantity" value="{{ $item->qty }}" title="Qty" class="qty" size="4">
+										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}" title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
 									</div>
 								</td>
-								<td class="product-subtotal" data-title="Total">{{ number_format($item->total, 0) }}đ</td>
+								<td class="product-subtotal" data-title="Total">{{ number_format($itemDetail->total_price, 0) }}đ</td>
 								<td class="product-remove" data-title="Remove">
-									<a href="{{ route('cart.destroy', $item->rowId) }}"><i class="fal fa-times"></i></a>
+									<a href="{{ route('cart.destroy', $item->getHash()) }}"><i class="fal fa-times"></i></a>
 								</td>
 							</tr>
 							@endforeach
@@ -105,17 +109,21 @@
 		<div class="row mt-5 pt-5">
 			<div class="col-md-6">
 				<div class="border p-3 p-md-4">
-					<div class="heading_s1 mb-3">
-						<h6>Mã giảm giá</h6>
-					</div>
-					<div class="mt-3">
-						<div class="form_group">
-							<input type="text" class="form_control coupon_code_input" placeholder="Nhập mã giảm giá..." name="subject">
+					<form action="{{ route('cart.discount') }}" method="POST">
+						@csrf
+
+						<div class="heading_s1 mb-3">
+							<h6>Mã giảm giá</h6>
 						</div>
-					</div>
-					<div class="text-right">
-						<a href="#" class="btn btn-fill-out @if ($items->count() <= 0) disabled @endif">Áp dụng</a>
-					</div>
+						<div class="mt-3">
+							<div class="form_group">
+								<input type="text" class="form_control coupon_code_input" placeholder="Nhập mã giảm giá..." name="coupon">
+							</div>
+						</div>
+						<div class="text-right">
+							<button type="submit" class="btn btn-fill-out @if (count($items) <= 0) disabled @endif">Áp dụng</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -128,23 +136,134 @@
 							<tbody>
 								<tr>
 									<td class="cart_total_label">Tổng tiền sản phẩm</td>
-									<td class="cart_total_amount">{{ number_format($subtotal, 0) }}đ</td>
+									<td id="cart_subtotal" class="cart_total_amount">{{ number_format($total, 0) }}đ</td>
 								</tr>
 								<tr>
-									<td class="cart_total_label">Phí ship</td>
-									<td class="cart_total_amount">Miễn phí ship</td>
+									<td class="cart_total_label">Mã giảm giá</td>
+									<td class="cart_total_amount">{{ number_format($action, 0) }}đ</td>
 								</tr>
 								<tr>
 									<td class="cart_total_label">Tất cả</td>
-									<td class="cart_total_amount"><strong>{{ number_format($total, 0) }}đ</strong></td>
+									<td id="cart_total" class="cart_total_amount"><strong>{{ number_format($subtotal, 0) }}đ</strong></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if ($items->count() <= 0) disabled @endif">Thanh toán ngay</a>
+					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if (count($items) <= 0) disabled @endif">Thanh toán ngay</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+@endsection
+
+@section('script')
+<!-- SweetAlert2 -->
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+@if(session('success'))
+<script>
+	$(function() {
+		Swal.fire({
+			toast: true,
+			position: "top-end",
+			showConfirmButton: false,
+			timer: 3000,
+			icon: "success",
+			title: "{{ session('success') }}",
+		});
+	});
+</script>
+@endif
+
+@if(session('error'))
+<script>
+	$(function() {
+		Swal.fire({
+			toast: true,
+			position: "top-end",
+			showConfirmButton: false,
+			timer: 3000,
+			icon: "error",
+			title: "{{ session('error') }}",
+		});
+	});
+</script>
+@endif
+
+<script>
+	/*-------------------------------
+        Plus and minus quantity
+	------------------------------ */
+	$(function() {
+		$(".plus").on("click", function() {
+			var qty = $(this).closest("tr").find(".qty");
+			if (qty.val()) {
+				qty.val(+qty.val() + 1);
+				$(this).closest("tr").find(".minus").attr("disabled", false);
+				//Trigger change event
+				qty.trigger("change");
+			}
+		});
+
+		$(".minus").on("click", function() {
+			var qty = $(this).closest("tr").find(".qty");
+			if (qty.val() <= 1) {
+				$(this).attr("disabled", true);
+			} else {
+				qty.val(+qty.val() - 1);
+				//Trigger change event
+				qty.trigger("change");
+			}
+		});
+
+		$(".qty").on("change", function() {
+			if ($(this).val() <= 0) {
+				$(this).val(1);
+			}
+
+			var id = $(this).closest("tr").attr('id');
+			var qty = $(this).val();
+			var total = $(this).closest("tr").find(".product-subtotal");
+
+			// console.log(id);
+			// console.log(qty);
+
+			$.ajax({
+				"url": "cart/update/" + id,
+				"method": "POST",
+				"data": {
+					// "_token": "{{ csrf_token() }}",
+					"quantity": qty,
+				}
+			}).done(function(json) {
+				// console.log(json);
+
+				if (json.success === true) {
+					total.html(json.item_total);
+					$('#cart_subtotal').html(json.cart_subtotal);
+					$('#cart_total > strong').html(json.cart_total);
+
+					Swal.fire({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						icon: "success",
+						title: json.msg,
+					});
+				} else {
+					Swal.fire({
+						toast: true,
+						position: "top-end",
+						showConfirmButton: false,
+						timer: 3000,
+						icon: "error",
+						title: json.msg,
+					});
+				}
+			});
+		});
+	});
+</script>
 @endsection

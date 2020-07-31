@@ -6380,8 +6380,8 @@ select.form-control-sm
 /*===================================*
     Pagination
 *===================================*/
-.pagination .page-item span,
-.pagination .page-item a {
+.pagination li span,
+.pagination li a {
     color: #0e93d8;
     height: 40px;
     width: 40px;
@@ -6396,26 +6396,26 @@ select.form-control-sm
 .pagination li {
     margin-right: 5px;
 }
-.pagination .page-item span,
-.pagination .page-item a {
+.pagination li span,
+.pagination li a {
     border: 2px solid #dee2e6;
     border-radius: 0 !important;
     color: #687188;
     margin-left: 0px;
     line-height: 36px;
 }
-.pagination .page-item span i,
-.pagination .page-item a i {
+.pagination li span i,
+.pagination li a i {
     line-height: 36px;
 }
-.pagination .page-item.disabled .page-link {
+.pagination li.disabled .page-link {
     color: #c6c6c6;
     pointer-events: none;
     background-color: #fff;
     border-color: #f4f4f4;
 }
-.pagination .page-item.active .page-link,
-.pagination .page-item .page-link:hover {
+.pagination li.active .page-link,
+.pagination li .page-link:hover {
     background-color: #ff324d;
     border-color: #ff324d;
     color: #fff;
@@ -6487,40 +6487,4 @@ footer .subscribe .btn {
 .footer_payment li {
     display: inline-block;
     list-style: none;
-}
-/*===================================*
-    PAGINATION SECTION
-*===================================*/
-.pagination .page-item .page-link{
-    border: none;
-}
-.pagination .disabled{
-    color: #ccc;
-}
-.page-item.active .page-link {
-    color: #fe3e57;
-    background-color: transparent;
-    border-color: transparent;
-    
-}
-.page-link:focus {
-    box-shadow: unset;
-}
-.page-link {
-    color: #a7a4a4ea;
-    background-color: transparent;
-    font-size: 14px;
-    border: none;
-}
-.page-link:hover {
-    color: #fe3e57;
-    background-color: transparent;
-}
-.previous-page{
-    margin-right: 25px;
-    letter-spacing: 2px;
-}
-.next-page{
-    margin-left: 25px;
-    letter-spacing: 2px;
 }

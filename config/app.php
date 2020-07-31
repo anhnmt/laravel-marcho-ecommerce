@@ -180,7 +180,7 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+        Jackiedo\Cart\CartServiceProvider::class,
 
     ],
 
@@ -237,7 +237,7 @@ return [
         // Custom
         'Date' => Jenssegers\Date\Date::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Cart' => Jackiedo\Cart\Facades\Cart::class,
     ],
 
 ];

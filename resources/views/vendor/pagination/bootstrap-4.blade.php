@@ -5,11 +5,11 @@
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled previous-page" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                    <span class="page-link" aria-hidden="true"><i class="fal fa-angle-left"></i> TRƯỚC</span>
+                    <span class="page-link" aria-hidden="true"><i class="fal fa-angle-left"></i></span>
                 </li>
             @else
                 <li class="page-item previous-page">
-                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')"><i class="fal fa-angle-left"></i> TRƯỚC</a>
+                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')"><i class="fal fa-angle-left"></i></a>
                 </li>
             @endif
             {{-- @foreach ($elements as $element)
@@ -50,11 +50,11 @@
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
                 <li class="page-item next-page">
-                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">SAU <i class="fal fa-angle-right"></i></a>
+                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')"><i class="fal fa-angle-right"></i></a>
                 </li>
             @else
                 <li class="page-item disabled next-page" aria-disabled="true" aria-label="@lang('pagination.next')">
-                    <span class="page-link" aria-hidden="true">SAU <i class="fal fa-angle-right"></i></span>
+                    <span class="page-link" aria-hidden="true"><i class="fal fa-angle-right"></i></span>
                 </li>
             @endif
         </ul>

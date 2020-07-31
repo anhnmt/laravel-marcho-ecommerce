@@ -253,9 +253,9 @@
     <!-- Select2 -->
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- Custom script -->
-    @yield('script')
-    <!-- Custom script -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- Custom script -->
+    @yield('script')
 
 </body>
 
