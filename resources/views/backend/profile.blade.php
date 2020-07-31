@@ -24,9 +24,14 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="text-center">
-                                <div id="holder" style="margin-top:15px">
-                                    <img class="profile-user-img img-fluid img-circle" src="{{ asset($user->avatar) }}" alt="User profile picture">
-                                </div>
+                                <p>
+                                    <div id="holder" class="lfm profile-user-img" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid img-circle" style="margin-top:15px">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{ asset($user->avatar) }}" alt="User profile picture">
+                                    </div>
+                                </p>
+                                <p>
+                                    <button type="submit" class="lfm btn btn-sm btn-default" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid img-circle">Chọn ảnh</button>
+                                </p>
                             </div>
 
                             <h3 class="profile-username text-center">{{ $user->name }}</h3>
@@ -56,11 +61,8 @@
                                 <div class="input-group">
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-success">Cập nhật</button>
-
-                                        <a id="lfm" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid img-circle" class="btn btn-primary text-white">
-                                            <i class="fal fa-camera"></i> Đổi avatar
-                                        </a>
                                     </span>
+
                                     <input class="form-control @error('avatar') is-invalid @enderror" type="hidden" name="avatar" id="avatar" value="{{ $user->avatar }}">
 
                                     @error('avatar')
@@ -100,7 +102,7 @@
 
 <script>
     $(function() {
-        $('#lfm').filemanager('avatar');
+        $('.lfm').filemanager('avatar');
     });
 </script>
 @stop

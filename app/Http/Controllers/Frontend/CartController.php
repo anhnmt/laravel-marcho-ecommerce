@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Auth;
 use Cart;
 use App\Models\Product;
 use App\Models\ProductAttribute;
@@ -18,36 +17,27 @@ class CartController extends Controller
      */
     public function index()
     {
-        $userId = auth()->user()->id;
-        $cart = Cart::restore($userId);
-
-        // dd($cart->content());
-
-        $items = Cart::content();
-        $total = Cart::total();
-        $subtotal = Cart::subtotal();
+        $cart = Cart::name('shopping');
+        $items = $cart->getItems();
+        $total = $cart->getItemsSubtotal();
+        $subtotal = $cart->getSubtotal();
+        $action = $cart->sumActionsAmount();
+        $quantity = $cart->sumItemsQuantity();
 
         // dd([
         //     $items,
         //     $total,
         //     $subtotal,
+        //     $action,
         // ]);
 
         return view('frontend.cart', compact(
             'items',
             'total',
             'subtotal',
+            'action',
+            'quantity',
         ));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -85,41 +75,18 @@ class CartController extends Controller
 
         // dd($product->image);
 
-        $userId = auth()->user()->id;
-        $cart = Cart::store($userId);
+        $cart = Cart::name('shopping');
 
-        Cart::add([
+        $cart->addItem([
+            'model' => $product,
             'id' => $product->id,
-            'name' => $product->name,
-            'qty' => $request->quantity,
+            'title' => $product->name,
+            'quantity' => $request->quantity,
             'price' => $product->price,
-            'weight' => 0,
             'options' => $options,
-        ])->associate('App\Models\Product');
+        ]);
 
         return redirect()->route('cart.index')->withSuccess('Thêm vào giỏ thành công');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -131,7 +98,64 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+
+        try {
+            $cart = Cart::name('shopping');
+
+            $item = $cart
+                ->updateItem($id, [
+                    'quantity' => $request->get('quantity'),
+                ])
+                ->getDetails();
+
+            $total = $cart->getTotal();
+            $subtotal = $cart->getSubtotal();
+            $count = $cart->sumItemsQuantity();
+
+            // dd($item);
+
+            return response()->json([
+                'success' => true,
+                'msg' => 'Cập nhật giỏ hàng thành công!',
+                'item_total' => number_format($item->total_price, 0) . 'đ',
+                'cart_total' => number_format($total, 0) . 'đ',
+                'cart_subtotal' => number_format($subtotal, 0) . 'đ',
+                'cart_count' => number_format($count, 0),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Không thể cập nhật giỏ hàng, hãy thử lại!',
+            ]);
+        }
+    }
+
+    /**
+     * Discount the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function discount(Request $request)
+    {
+        // dd($request->all());
+
+        try {
+            $cart = Cart::name('shopping');
+
+            $cart->applyAction([
+                'group'      => 'Discount',
+                'id'         => 1,
+                'title'      => 'Sale 10%',
+                'value'      => '-10%',
+            ]);
+
+            return redirect()->route('cart.index')->withSuccess('Thêm vào giỏ thành công');
+        } catch (\Exception $e) {
+            return redirect()->route('cart.index')->withError('Thêm vào giỏ thành công');
+        }
     }
 
     /**
@@ -140,11 +164,10 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($rowId)
+    public function destroy($id)
     {
-        $userId = auth()->user()->id;
-        $cart = Cart::instance($userId);
-        $cart->remove($rowId);
+        $cart = Cart::name('shopping');
+        $cart->removeItem($id);
 
         return redirect()->route('cart.index')->withSuccess('Xóa sản phẩm trong giỏ hàng thành công');
     }
@@ -156,9 +179,8 @@ class CartController extends Controller
      */
     public function clear()
     {
-        $userId = auth()->user()->id;
-        $cart = Cart::instance($userId);
-        $cart->destroy();
+        $cart = Cart::name('shopping');
+        $cart->clearItems();
 
         return redirect()->route('cart.index')->withSuccess('Xóa giỏ hàng thành công');
     }
