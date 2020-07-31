@@ -69,6 +69,13 @@ iframe {
 video {
     width: 100%;
 }
+.header_icon .user-img{
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.header_icon .dropdown-menu{
+    left: unset;
+    right: 0;
+}
 .section {
     padding: 100px 0;
     position: relative;
@@ -2688,28 +2695,15 @@ select.not_chosen.form-control:focus {
 .checkout_section .btn-fill-out {
     width: 100%;
 }
-.select2-container .select2-selection--single {
-    height: auto;
-    position: relative;
+.checkout_section .checkout_section .form-check {
+    padding: 0;
+}
+.checkout_section .select2-container--default .select2-selection--single {
+    background: #f6f6f6;
     border: none;
 }
-.select2-container .select2-selection--single .select2-selection__rendered {
-    padding: 8px 15px;
+.checkout_section .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #878b97;
-    background: #f6f6f6;
-}
-.select2-container--default
-    .select2-selection--single
-    .select2-selection__arrow {
-    height: 26px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 1px;
-    width: 20px;
-}
-.checkout_section .form-check {
-    padding: 0;
 }
 .checkout_section .form-check label {
     position: relative;
