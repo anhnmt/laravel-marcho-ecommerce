@@ -9,9 +9,12 @@ use BinaryCats\Sku\Concerns\SkuOptions;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
+use Jackiedo\Cart\Contracts\UseCartable; // Interface
+use Jackiedo\Cart\Traits\CanUseCart;     // Trait
 
-class Product extends Model
+class Product extends Model implements UseCartable
 {
+    use CanUseCart;
     use Sluggable;
     use SluggableScopeHelpers;
     use HasSku;

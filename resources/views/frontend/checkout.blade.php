@@ -38,22 +38,19 @@
 					<div class="col-lg-12 mt-3">
 						<div class="form-group">
 							<label for="" class="required">Họ và tên <span class="text-danger">*</span></label>
-							<input type="text" class="form-control coupon_code_input"
-								placeholder="Nhập họ tên đầy đủ..." name="name">
+							<input type="text" class="form-control coupon_code_input" placeholder="Nhập họ tên đầy đủ..." name="name" value="{{ auth()->user()->name }}">
 						</div>
 					</div>
 					<div class="col-lg-12 mt-3">
 						<div class="form-group">
-							<label for="" class="required">Email </label>
-							<input type="email" class="form-control coupon_code_input" placeholder="Nhập email..."
-								name="email">
+							<label for="" class="required">Email <span class="text-danger">*</span></label>
+							<input type="email" class="form-control coupon_code_input" placeholder="Nhập email..." name="email" value="{{ auth()->user()->email }}">
 						</div>
 					</div>
 					<div class="col-lg-12 mt-3">
 						<div class="form-group">
 							<label for="" class="required">Số điện thoại <span class="text-danger">*</span></label>
-							<input type="text" class="form-control coupon_code_input" placeholder="Nhập SĐT..."
-								name="phone">
+							<input type="text" class="form-control coupon_code_input" placeholder="Nhập SĐT..." name="phone">
 						</div>
 					</div>
 					<div class="col-lg-12 mt-3">
@@ -61,7 +58,8 @@
 							<div class="col-lg-4 mt-2">
 								<div class="form-group">
 									<label for="">Tỉnh/Thành phố <span class="text-danger">*</span></label>
-									<select class="form-control select2" name="cities" id="cities">
+
+									<select class="form-control select2 checkout_select2" name="cities" id="cities">
 										<option value="0">--Tỉnh/Thành phố--</option>
 										@foreach ($cities as $city)
 										<option value="{{$city->id}}">{{$city->name}}</option>
@@ -88,8 +86,7 @@
 							<div class="col-lg-12 mt-2">
 								<div class="form-group">
 									<label for="" class="required">Địa chỉ cụ thể</label>
-									<input type="text" class="form-control coupon_code_input"
-										placeholder="Số nhà, tòa nhà ..." name="name">
+									<input type="text" class="form-control coupon_code_input" placeholder="Số nhà, tòa nhà ..." name="name">
 								</div>
 							</div>
 						</div>
@@ -97,8 +94,7 @@
 					<div class="col-lg-12 mt-3">
 						<div class="form-group">
 							<label for="" class="required">Lời nhắn</label>
-							<textarea class="form-control coupon_code_input" name="" id="" rows="5"
-								placeholder="Ghi chú của bạn..."></textarea>
+							<textarea class="form-control coupon_code_input" name="" id="" rows="5" placeholder="Ghi chú của bạn..."></textarea>
 						</div>
 					</div>
 				</div>
@@ -196,54 +192,45 @@
 <!-- Select2 -->
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
-	//Initialize Select2 Elements
-	$('.select2').select2();
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-		}
-	});
-	$("#cities").on('change', function(e){ 
+	$("#cities").on('change', function(e) {
 		e.preventDefault();
 		var id = $(this).val();
-		var url = '{{url('checkout/districts')}}';
 		$.ajax({
-            url: url,
-            method: 'get',
-            data: {
-                id: id,
-            },
-            success: function(data) {
-                $('#districts').find('option:not(:first)').remove();
-                $('#wards').find('option:not(:first)').remove();
-                $.each(data, function(key, value){
-                    $("select[name='districts']").append(
-                        "<option value=" + value.id + ">" + value.name + "</option>"
-                    );
-                });
-            }
-        });
+			url: "{{ route('checkout.districts') }}",
+			method: 'POST',
+			data: {
+				id: id,
+			},
+			success: function(data) {
+				$('#districts').find('option:not(:first)').remove();
+				$('#wards').find('option:not(:first)').remove();
+				$.each(data, function(key, value) {
+					$("select[name='districts']").append(
+						"<option value=" + value.id + ">" + value.name + "</option>"
+					);
+				});
+			}
+		});
 	});
-	$("#districts").on('change', function(e){ 
+
+	$("#districts").on('change', function(e) {
 		e.preventDefault();
 		var id = $(this).val();
-		var url = '{{url('checkout/wards')}}';
 		$.ajax({
-            url: url,
-            method: 'get',
-            data: {
-                id: id,
-            },
-            success: function(data) {
-                $('#wards').find('option:not(:first)').remove();
-                $.each(data, function(key, value){
-                    $("select[name='wards']").append(
-                        "<option value=" + value.id + ">" + value.name + "</option>"
-                    );
-                });
-            }
-        });
+			url: "{{ route('checkout.wards') }}",
+			method: 'POST',
+			data: {
+				id: id,
+			},
+			success: function(data) {
+				$('#wards').find('option:not(:first)').remove();
+				$.each(data, function(key, value) {
+					$("select[name='wards']").append(
+						"<option value=" + value.id + ">" + value.name + "</option>"
+					);
+				});
+			}
+		});
 	});
-	
 </script>
 @endsection

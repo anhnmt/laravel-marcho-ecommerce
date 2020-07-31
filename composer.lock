@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4370bb983fef1aa7b29daa3dc5608236",
+    "content-hash": "994ff68c70176377dc195b8205997f04",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -163,73 +163,6 @@
                 "math"
             ],
             "time": "2020-04-15T15:59:35+00:00"
-        },
-        {
-            "name": "bumbummen99/shoppingcart",
-            "version": "2.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bumbummen99/LaravelShoppingcart.git",
-                "reference": "08618b40f5003d3ed792cd746c8cc5bf1dec8f99"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bumbummen99/LaravelShoppingcart/zipball/08618b40f5003d3ed792cd746c8cc5bf1dec8f99",
-                "reference": "08618b40f5003d3ed792cd746c8cc5bf1dec8f99",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/events": "5.4.*||5.5.*||5.6.*||5.7.*||5.8.*||^6.0||^7.0",
-                "illuminate/session": "5.4.*||5.5.*||5.6.*||5.7.*||5.8.*||^6.0||^7.0",
-                "illuminate/support": "5.4.*||5.5.*||5.6.*||5.7.*||5.8.*||^6.0||^7.0",
-                "nesbot/carbon": "~1.20||^1.26.3||^2.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^3.4",
-                "phpunit/phpunit": "~5.0||~6.0||~7.0||~8.0"
-            },
-            "suggest": {
-                "gloudemans/notify": "Simple flash notifications for Laravel"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider"
-                    ],
-                    "aliases": {
-                        "Cart": "Gloudemans\\Shoppingcart\\Facades\\Cart"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Gloudemans\\Shoppingcart\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Gloudemans",
-                    "email": "info@robgloudemans.nl",
-                    "homepage": "http://robgloudemans.nl/"
-                },
-                {
-                    "name": "Patrick Henninger",
-                    "email": "privat@skyraptor.eu",
-                    "homepage": "https://skyraptor.eu/"
-                }
-            ],
-            "description": "Laravel Shoppingcart",
-            "keywords": [
-                "laravel",
-                "shoppingcart"
-            ],
-            "time": "2020-05-08T19:20:56+00:00"
         },
         {
             "name": "cocur/slugify",
@@ -1182,6 +1115,67 @@
                 "watermark"
             ],
             "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
+            "name": "jackiedo/cart",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JackieDo/Laravel-Cart.git",
+                "reference": "ea08295194a259c78de51f80aca01ec6be1caca0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JackieDo/Laravel-Cart/zipball/ea08295194a259c78de51f80aca01ec6be1caca0",
+                "reference": "ea08295194a259c78de51f80aca01ec6be1caca0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.0|^6.0|^5.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0|^0.9",
+                "orchestra/testbench": "^5.0|^4.0|^3.0",
+                "phpunit/phpunit": "^9.0|^8.0|^7.0|^6.0|^5.0|^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jackiedo\\Cart\\CartServiceProvider"
+                    ],
+                    "aliases": {
+                        "Cart": "Jackiedo\\Cart\\Facades\\Cart"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "Jackiedo\\Cart\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jackie Do",
+                    "email": "anhvudo@gmail.com"
+                }
+            ],
+            "description": "A package used to create and manage carts (such as shopping, recently viewed, compared items...) in Laravel application.",
+            "keywords": [
+                "cart",
+                "laravel",
+                "shopping",
+                "shoppingcart"
+            ],
+            "time": "2020-06-04T23:56:35+00:00"
         },
         {
             "name": "jenssegers/date",
@@ -5835,66 +5829,6 @@
                 "test"
             ],
             "time": "2020-07-09T08:09:16+00:00"
-        },
-        {
-            "name": "hardevine/shoppingcart",
-            "version": "2.8.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hardevine/LaravelShoppingcart.git",
-                "reference": "00e180b6cb968d6453426fdc7bd6475fcea2335c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hardevine/LaravelShoppingcart/zipball/00e180b6cb968d6453426fdc7bd6475fcea2335c",
-                "reference": "00e180b6cb968d6453426fdc7bd6475fcea2335c",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/events": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6|^7",
-                "illuminate/session": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6|^7",
-                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6|^7"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9.0",
-                "orchestra/testbench": "~3.1",
-                "phpunit/phpunit": "~5.0 || ~6.0 || ~7.0"
-            },
-            "suggest": {
-                "gloudemans/notify": "Simple flash notifications for Laravel"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider"
-                    ],
-                    "aliases": {
-                        "Cart": "Gloudemans\\Shoppingcart\\Facades\\Cart"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Gloudemans\\Shoppingcart\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Gloudemans",
-                    "email": "info@robgloudemans.nl"
-                }
-            ],
-            "description": "Laravel Shoppingcart",
-            "keywords": [
-                "laravel",
-                "shoppingcart"
-            ],
-            "time": "2020-04-15T07:11:21+00:00"
         },
         {
             "name": "maximebf/debugbar",

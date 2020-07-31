@@ -60,11 +60,32 @@
                     </ul>
                 </div>
 
-                <ul class="header_icon navbar-nav flex-row">
+                <ul class="header_icon navbar-nav flex-row align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fal fa-search"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link icon_love" href="#">
+                            <i class="fal fa-heart"></i>
+                            <span class="wishlist_count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
+                            <i class="fal fa-shopping-cart"></i>
+                            @php
+                                $cart = Cart::name('shopping');
+                                $items = $cart->sumItemsQuantity();
+                            @endphp
+                            <span id="cart_count" class="cart_count">{{ $items }}</span>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         @if(auth()->check())
-                        <a class="nav-link dropdown-toggle user_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fal fa-user-circle"></i><span>{{ auth()->user()->getShortName() }}</span>
+                        <a class="nav-link user_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @can('admin.dashboard')
@@ -89,23 +110,6 @@
                             <i class="fal fa-user"></i>
                         </a>
                         @endif
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fal fa-search"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link icon_love" href="#">
-                            <i class="fal fa-heart"></i>
-                            <span class="wishlist_count">0</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
-                            <i class="fal fa-shopping-cart"></i>
-                            <span class="cart_count">0</span>
-                        </a>
                     </li>
                 </ul>
             </nav>
@@ -253,9 +257,9 @@
     <!-- Select2 -->
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- Custom script -->
-    @yield('script')
-    <!-- Custom script -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- Custom script -->
+    @yield('script')
 
 </body>
 
