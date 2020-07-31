@@ -61,7 +61,7 @@
 							<div class="col-lg-4 mt-2">
 								<div class="form-group">
 									<label for="">Tỉnh/Thành phố <span class="text-danger">*</span></label>
-									<select class="form-control select2" name="cities" id="cities">
+									<select class="form-control select2 checkout_select2" name="cities" id="cities">
 										<option value="0">--Tỉnh/Thành phố--</option>
 										@foreach ($cities as $city)
 										<option value="{{$city->id}}">{{$city->name}}</option>
