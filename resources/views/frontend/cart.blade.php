@@ -102,7 +102,7 @@
 											Giỏ hàng của bạn còn trống.
 										</p>
 
-										<a href="{{ route('home') }}" class="btn btn-fill-out px-3 py-2">Mua ngay</a>
+										<a href="{{ route('product.index') }}" class="btn btn-fill-out px-3 py-2">Mua ngay</a>
 									</div>
 								</td>
 							</tr>

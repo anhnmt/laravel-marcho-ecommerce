@@ -92,9 +92,13 @@
                             <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
                             @endcan
 
+                            @can('admin.dashboard')
+                            <a class="dropdown-item" href="{{ route('admin.profile') }}">Trang cá nhân</a>
+                            @endcan
+
                             @cannot('admin.dashboard')
-                            <a class="dropdown-item" href="#">Trang cá nhân</a>
-                            @endcannot
+                            <a class="dropdown-item" href="{{ route('profile.index') }}">Trang cá nhân</a>
+                            @endcan
 
                             <div class="dropdown-divider"></div>
 

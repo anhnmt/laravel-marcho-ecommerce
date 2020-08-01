@@ -68,6 +68,17 @@ Route::group([
             Route::post('districts', 'CheckoutController@districts')->name('checkout.districts');
             Route::post('wards', 'CheckoutController@wards')->name('checkout.wards');
         });
+
+        // Profile
+        Route::group([
+            'prefix' => 'profile',
+        ], function () {
+            Route::get('/', 'ProfileController@index')->name('profile.index');
+            Route::get('/password', 'ProfileController@password')->name('profile.password');
+            Route::put('/{profile}', 'ProfileController@update')->name('profile.update');
+            // Route::post('districts', 'ProfileControllwe@districts')->name('profile.districts');
+            // Route::post('wards', 'ProfileControllwe@wards')->name('profile.wards');
+        });
     });
 });
 
