@@ -69,9 +69,6 @@ iframe {
 video {
     width: 100%;
 }
-.header_icon .user-img{
-    border-color: rgba(0, 0, 0, 0.1);
-}
 .header_icon .dropdown-menu{
     left: unset;
     right: 0;
@@ -2860,11 +2857,7 @@ select.not_chosen.form-control:focus {
     color: #fe3e57;
     font-size: 23px;
 }
-.panel-login .form-group span {
-    font-weight: 450;
-    color: #8f8d8d;
-    font-size: 14px;
-}
+
 
 .panel-login .form-group p {
     font-weight: 450;
@@ -2875,14 +2868,16 @@ select.not_chosen.form-control:focus {
 .panel-login input[type="text"],
 .panel-login input[type="email"],
 .panel-login input[type="password"] {
-    height: 45px;
     font-size: 16px;
     -webkit-transition: all 0.1s linear;
     -moz-transition: all 0.1s linear;
     transition: all 0.1s linear;
     background-color: #f6f6f6;
     border-radius: 0 !important;
-    border: none;
+    border: 1px solid transparent;
+}
+.panel-login .form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #dc3545;
 }
 
 .panel-login input:hover,
@@ -2935,6 +2930,36 @@ select.not_chosen.form-control:focus {
     background-color: #1ca347;
 }
 
+/*===================================*
+    PROFILE SECTION
+*===================================*/
+.profile_section .list-group {
+    box-shadow: 0 0px 4px 0 #e9e9e9;
+}
+.profile_section .list-group .list-group-item{
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #efefef;
+    padding: 20px 20px;
+    font-size: 18px;
+}
+.profile_section .list-group .active{
+    background: #fe3e57;
+    color: #ffffff;
+    border: none;
+    border-radius: 0;
+    font-size: 20px;
+}
+.profile_section .card{
+    box-shadow: 0 0px 4px 0 #e9e9e9;
+    border: none;
+    border-radius: 0;
+}
+.profile_section .card .card-header {
+    background-color: #ffffff;
+    border: none;
+    border-bottom: 1px solid #efefef;
+}
 /*===================================*
     CONTACT SECTION
 *===================================*/

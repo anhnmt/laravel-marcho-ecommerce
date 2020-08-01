@@ -48,23 +48,29 @@
 									
 									<div class="form-group">
 										<label for="email">Địa chỉ email*</label>
-										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror mt-2" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror mt-2" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-										@error('email')
+										{{-- @error('email')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
 										</span>
-										@enderror
+										@enderror --}}
+										@error('email')
+                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                        @enderror
 									</div>
 									<div class="form-group">
 										<label for="password">Mật khẩu*</label>
 										<input id="password" type="password" class="form-control @error('password') is-invalid @enderror mt-2" name="password" required autocomplete="current-password">
 
-										@error('password')
+										{{-- @error('password')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
 										</span>
-										@enderror
+										@enderror --}}
+										@error('password')
+                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                        @enderror
 									</div>
 
 									<div class="form-group">

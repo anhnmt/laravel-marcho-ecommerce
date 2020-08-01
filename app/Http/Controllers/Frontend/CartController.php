@@ -22,6 +22,7 @@ class CartController extends Controller
         $total = $cart->getItemsSubtotal();
         $subtotal = $cart->getSubtotal();
         $action = $cart->sumActionsAmount();
+        $quantity = $cart->sumItemsQuantity();
 
         // dd([
         //     $items,
@@ -35,6 +36,7 @@ class CartController extends Controller
             'total',
             'subtotal',
             'action',
+            'quantity',
         ));
     }
 
@@ -109,6 +111,7 @@ class CartController extends Controller
 
             $total = $cart->getTotal();
             $subtotal = $cart->getSubtotal();
+            $count = $cart->sumItemsQuantity();
 
             // dd($item);
 
@@ -118,6 +121,7 @@ class CartController extends Controller
                 'item_total' => number_format($item->total_price, 0) . 'đ',
                 'cart_total' => number_format($total, 0) . 'đ',
                 'cart_subtotal' => number_format($subtotal, 0) . 'đ',
+                'cart_count' => number_format($count, 0),
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -147,9 +151,6 @@ class CartController extends Controller
                 'title'      => 'Sale 10%',
                 'value'      => '-10%',
             ]);
-
-            $total = $cart->getTotal();
-            $subtotal = $cart->getSubtotal();
 
             return redirect()->route('cart.index')->withSuccess('Thêm vào giỏ thành công');
         } catch (\Exception $e) {

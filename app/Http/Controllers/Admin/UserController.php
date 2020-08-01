@@ -21,7 +21,7 @@ class UserController extends Controller
             
             if(auth()->user()->can('admin.user.edit'))
             $action .= '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-            if(auth()->user()->name != $user->name || auth()->user()->can('admin.user.destroy'))
+            if(auth()->user()->name != $user->name && auth()->user()->can('admin.user.destroy'))
             $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
             if((auth()->user()->can('admin.user.edit') && auth()->user()->can('admin.user.destroy')) == false) 

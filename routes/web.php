@@ -34,11 +34,6 @@ Route::group([
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
 
-    // Checkout
-    Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
-    Route::get('checkout/districts', 'CheckoutController@districts')->name('checkout.districts');
-    Route::get('checkout/wards', 'CheckoutController@wards')->name('checkout.wards');
-
     // Frontend Auth
     Route::group([
         'middleware' => ['auth'],
@@ -52,8 +47,6 @@ Route::group([
         ], function () {
             // Show Cart
             Route::get('/', 'CartController@index')->name('cart.index');
-            // Count Cart
-            Route::get('count', 'CartController@count')->name('cart.count');
             // Add Cart
             Route::post('store', 'CartController@store')->name('cart.store');
             // Discount Cart
@@ -61,9 +54,30 @@ Route::group([
             // Update Cart
             Route::post('update/{id}', 'CartController@update')->name('cart.update');
             // Remove Cart
-            Route::get('destroy/{id}', 'CartController@destroy')->name('cart.destroy');
+            Route::post('destroy/{id}', 'CartController@destroy')->name('cart.destroy');
             // Clear All Cart
-            Route::get('clear', 'CartController@clear')->name('cart.clear');
+            Route::post('clear', 'CartController@clear')->name('cart.clear');
+        });
+
+        // Checkout
+        Route::group([
+            'prefix' => 'checkout',
+        ], function () {
+            // Checkout
+            Route::get('/', 'CheckoutController@index')->name('checkout.index');
+            Route::post('districts', 'CheckoutController@districts')->name('checkout.districts');
+            Route::post('wards', 'CheckoutController@wards')->name('checkout.wards');
+        });
+
+        // Profile
+        Route::group([
+            'prefix' => 'profile',
+        ], function () {
+            Route::get('/', 'ProfileController@index')->name('profile.index');
+            Route::get('/password', 'ProfileController@password')->name('profile.password');
+            Route::put('/{profile}', 'ProfileController@update')->name('profile.update');
+            // Route::post('districts', 'ProfileControllwe@districts')->name('profile.districts');
+            // Route::post('wards', 'ProfileControllwe@wards')->name('profile.wards');
         });
     });
 });

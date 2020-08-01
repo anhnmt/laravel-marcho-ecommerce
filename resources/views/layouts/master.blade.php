@@ -75,22 +75,30 @@
                     <li class="nav-item">
                         <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
                             <i class="fal fa-shopping-cart"></i>
-                            <span class="cart_count">0</span>
+                            @php
+                                $cart = Cart::name('shopping');
+                                $items = $cart->sumItemsQuantity();
+                            @endphp
+                            <span id="cart_count" class="cart_count">{{ $items }}</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         @if(auth()->check())
                         <a class="nav-link user_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-thumbnail user-img" width="45px" height="45px">
+                            <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @can('admin.dashboard')
                             <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
                             @endcan
 
+                            @can('admin.dashboard')
+                            <a class="dropdown-item" href="{{ route('admin.profile') }}">Trang cá nhân</a>
+                            @endcan
+
                             @cannot('admin.dashboard')
-                            <a class="dropdown-item" href="#">Trang cá nhân</a>
-                            @endcannot
+                            <a class="dropdown-item" href="{{ route('profile.index') }}">Trang cá nhân</a>
+                            @endcan
 
                             <div class="dropdown-divider"></div>
 

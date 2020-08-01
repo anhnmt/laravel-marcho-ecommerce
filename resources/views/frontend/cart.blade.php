@@ -65,7 +65,10 @@
 								</td>
 								<td class="product-subtotal" data-title="Total">{{ number_format($itemDetail->total_price, 0) }}đ</td>
 								<td class="product-remove" data-title="Remove">
-									<a href="{{ route('cart.destroy', $item->getHash()) }}"><i class="fal fa-times"></i></a>
+									<form action="{{ route('cart.destroy', $item->getHash()) }}" method="POST">
+										@csrf
+										<button class="btn" type="submit"><i class="fal fa-times"></i></button>
+									</form>
 								</td>
 							</tr>
 							@endforeach
@@ -76,7 +79,10 @@
 									<div class="row no-gutters">
 										<div class="col-lg-4 col-md-6 mb-3 mb-md-0 text-md-left">
 											<div class="fix_btn_line_fill d-inline-block">
-												<a class="btn btn-fill-line" href="{{ route('cart.clear') }}">Xóa giỏ hàng</a>
+												<form action="{{ route('cart.clear') }}" method="POST">
+													@csrf
+													<button type="submit" class="btn btn-fill-line">Xóa giỏ hàng</button>
+												</form>
 											</div>
 										</div>
 
@@ -96,7 +102,7 @@
 											Giỏ hàng của bạn còn trống.
 										</p>
 
-										<a href="{{ route('home') }}" class="btn btn-fill-out px-3 py-2">Mua ngay</a>
+										<a href="{{ route('product.index') }}" class="btn btn-fill-out px-3 py-2">Mua ngay</a>
 									</div>
 								</td>
 							</tr>
@@ -121,7 +127,7 @@
 							</div>
 						</div>
 						<div class="text-right">
-							<button type="submit" class="btn btn-fill-out @if (count($items) <= 0) disabled @endif">Áp dụng</button>
+							<button type="submit" class="btn btn-fill-out" @if ($quantity <= 0) disabled @endif>Áp dụng</button>
 						</div>
 					</form>
 				</div>
@@ -149,7 +155,7 @@
 							</tbody>
 						</table>
 					</div>
-					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if (count($items) <= 0) disabled @endif">Thanh toán ngay</a>
+					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if ($quantity <= 0) disabled @endif">Thanh toán ngay</a>
 				</div>
 			</div>
 		</div>
@@ -218,16 +224,19 @@
 		});
 
 		$(".qty").on("change", function() {
-			if ($(this).val() <= 0) {
-				$(this).val(1);
+			var self = this;
+
+			if ($(self).val() <= 0) {
+				$(self).val(1);
 			}
 
-			var id = $(this).closest("tr").attr('id');
-			var qty = $(this).val();
-			var total = $(this).closest("tr").find(".product-subtotal");
+			var id = $(self).closest("tr").attr('id');
+			var qty = $(self).val();
+			var total = $(self).closest("tr").find(".product-subtotal");
 
-			// console.log(id);
-			// console.log(qty);
+			$(self).attr("disabled", true);
+			$(self).closest("tr").find(".plus").attr("disabled", true);
+			$(self).closest("tr").find(".minus").attr("disabled", true);
 
 			$.ajax({
 				"url": "cart/update/" + id,
@@ -238,20 +247,15 @@
 				}
 			}).done(function(json) {
 				// console.log(json);
+				$(self).attr("disabled", false);
+				$(self).closest("tr").find(".plus").attr("disabled", false);
+				$(self).closest("tr").find(".minus").attr("disabled", false);
 
 				if (json.success === true) {
 					total.html(json.item_total);
 					$('#cart_subtotal').html(json.cart_subtotal);
 					$('#cart_total > strong').html(json.cart_total);
-
-					Swal.fire({
-						toast: true,
-						position: "top-end",
-						showConfirmButton: false,
-						timer: 3000,
-						icon: "success",
-						title: json.msg,
-					});
+					$('#cart_count').html(json.cart_count);
 				} else {
 					Swal.fire({
 						toast: true,

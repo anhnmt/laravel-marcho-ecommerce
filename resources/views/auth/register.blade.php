@@ -47,8 +47,8 @@
 									@csrf
 
 									<div class="form-group">
-										<span>Họ và tên*</span>
-										<input id="name" type="text" class="form-control @error('name') is-invalid @enderror mt-2" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+										<label for="">Họ và tên*</label>
+										<input id="name" type="text" class="form-control @error('name') is-invalid @enderror mt-2" name="name" value="{{ old('name') }}" required autocomplete="name">
 
 										@error('name')
 										<span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
 									</div>
 
 									<div class="form-group">
-										<span>Địa chỉ email*</span>
+										<label>Địa chỉ email*</label>
 										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror mt-2" name="email" value="{{ old('email') }}" required autocomplete="email">
 
 										@error('email')
@@ -69,7 +69,7 @@
 									</div>
 
 									<div class="form-group">
-										<span>Mật khẩu*</span>
+										<label>Mật khẩu*</label>
 										<input id="password" type="password" class="form-control @error('password') is-invalid @enderror mt-2" name="password" required autocomplete="new-password">
 
 										@error('password')
@@ -80,7 +80,7 @@
 									</div>
 
 									<div class="form-group">
-										<span>Xác nhận mật khẩu*</span>
+										<label>Xác nhận mật khẩu*</label>
 										<input id="confirm" type="password" class="form-control mt-2" name="password_confirmation" required autocomplete="new-password">
 									</div>
 
