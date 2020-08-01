@@ -12,9 +12,9 @@
 						<div class="row">
 							<div class="col-lg-7 col-9">
 								<div class="banner_content overflow-hidden">
-									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">{{ $slider->body }}</h5>
-									<h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">{{ $slider->name }}</h2>
-									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ $slider->link }}" data-animation="slideInLeft" data-animation-delay="1.5s">Xem Ngay</a>
+									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="animate__slideInLeft" data-animation-delay="0.5s">{{ $slider->body }}</h5>
+									<h2 class="staggered-animation" data-animation="animate__slideInLeft" data-animation-delay="1s">{{ $slider->name }}</h2>
+									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ $slider->link }}" data-animation="animate__slideInLeft" data-animation-delay="1.5s">Xem Ngay</a>
 								</div>
 							</div>
 						</div>
@@ -42,8 +42,8 @@
 							<i class="fal fa-shipping-fast"></i>
 						</div>
 						<div class="makp_content">
-							<h3><a href="serice-details.html">Free Shipping & Return</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+							<h3><a href="serice-details.html">Miễn Phí Vận chuyển</a></h3>
+							<p>Chúng tôi miễn mọi chi phí vận chuyển trên toàn quốc</p>
 						</div>
 					</div>
 				</div>
@@ -55,8 +55,8 @@
 							<i class="fal fa-history"></i>
 						</div>
 						<div class="makp_content">
-							<h3><a href="serice-details.html">30 Days Return</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+							<h3><a href="serice-details.html">30 Ngày Đổi Trả</a></h3>
+							<p>Miễn phí đổi trả trong vòng 30 ngày kể từ khi nhận được sản phẩm</p>
 						</div>
 					</div>
 				</div>
@@ -68,8 +68,8 @@
 							<i class="fal fa-hand-holding-heart"></i>
 						</div>
 						<div class="makp_content">
-							<h3><a href="serice-details.html">24/7 Strong Support</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+							<h3><a href="serice-details.html">Hỗ Trợ 24/7</a></h3>
+							<p>Chúng tôi luôn lắng nghe và giải đáp mọi thắc mắc của khách hàng</p>
 						</div>
 					</div>
 				</div>

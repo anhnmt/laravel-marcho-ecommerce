@@ -43,17 +43,29 @@
 								<th class="product-remove">Xóa</th>
 							</tr>
 						</thead>
-						@if (count($items) > 0)
+						@if ($quantity > 0)
 						<tbody>
 							@foreach($items as $item)
 							@php
-							//dd($item->getDetails())
 							$itemDetail = $item->getDetails();
+							$itemOption = $item->getOptions();
 							@endphp
 							<tr id="{{ $item->getHash() }}">
 								<td class="product-thumbnail"><a href="#"><img src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}" alt="product1"></a></td>
 								<td class="product-name" data-title="Product">
-									<a href="{{ route('product.show', $itemDetail->model->slug) }}">{{ $itemDetail->title }}</a>
+									<a href="{{ route('product.show', $itemDetail->model->slug) }}">
+										{{ $itemDetail->title }}
+
+										@if ($itemOption)
+										<p>
+											@foreach($itemOption as $option)
+											<span class="badge badge-danger">
+												{{ $option['code'] }}
+											</span>
+											@endforeach
+										</p>
+										@endif
+									</a>
 								</td>
 								<td class="product-price" data-title="Price">{{ number_format($itemDetail->price, 0) }}đ</td>
 								<td class="product-quantity" data-title="Quantity">
@@ -77,7 +89,7 @@
 							<tr>
 								<td colspan="6" class="px-0 mt-5 pt-5">
 									<div class="row no-gutters">
-										<div class="col-lg-4 col-md-6 mb-3 mb-md-0 text-md-left">
+										<div class="col-md-6 mb-3 mb-md-0 text-md-left">
 											<div class="fix_btn_line_fill d-inline-block">
 												<form action="{{ route('cart.clear') }}" method="POST">
 													@csrf
@@ -86,7 +98,7 @@
 											</div>
 										</div>
 
-										<div class="col-lg-8 col-md-6 text-left text-md-right">
+										<div class="col-md-6 text-left text-md-right">
 											<a href="{{ route('home') }}" class="btn btn-fill-out">Tiếp tục mua sắm</a>
 										</div>
 									</div>
@@ -127,7 +139,7 @@
 							</div>
 						</div>
 						<div class="text-right">
-							<button type="submit" class="btn btn-fill-out" @if ($quantity <= 0) disabled @endif>Áp dụng</button>
+							<button type="submit" class="btn btn-fill-out" @if ($quantity <=0) disabled @endif>Áp dụng</button>
 						</div>
 					</form>
 				</div>
@@ -242,7 +254,6 @@
 				"url": "cart/update/" + id,
 				"method": "POST",
 				"data": {
-					// "_token": "{{ csrf_token() }}",
 					"quantity": qty,
 				}
 			}).done(function(json) {

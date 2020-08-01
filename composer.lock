@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "994ff68c70176377dc195b8205997f04",
+    "content-hash": "4ac1fc45c6cf14efb2db4b1278474786",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5074,61 +5074,6 @@
                 "upload"
             ],
             "time": "2020-05-10T10:10:07+00:00"
-        },
-        {
-            "name": "vanthao03596/laravel-hanhchinhvn",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vanthao03596/laravel-hanhchinhvn.git",
-                "reference": "f55d22220c31153a35d0565d5af938b3bb5ab1b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vanthao03596/laravel-hanhchinhvn/zipball/f55d22220c31153a35d0565d5af938b3bb5ab1b7",
-                "reference": "f55d22220c31153a35d0565d5af938b3bb5ab1b7",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "orchestra/testbench": "^5.0",
-                "phpunit/phpunit": "^9.0",
-                "symfony/var-dumper": "^4.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Vanthao03596\\HCVN\\HCVNServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Vanthao03596\\HCVN\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PhamThao",
-                    "email": "phamthao03596@gmail.com"
-                }
-            ],
-            "description": "hành chính việt nam laravel",
-            "homepage": "https://github.com/vanthao03596/laravel-hanhchinhvn",
-            "keywords": [
-                "hanhchinhvn",
-                "laravel",
-                "vanthao03596"
-            ],
-            "time": "2020-05-20T11:51:07+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

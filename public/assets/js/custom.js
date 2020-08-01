@@ -14,7 +14,6 @@
     /*===================================*
         BACKGROUND IMAGE JS
 	*===================================*/
-    /*data image src*/
     $(".background_bg").each(function () {
         var attr = $(this).attr("data-img-src");
         if (typeof attr !== typeof undefined && attr !== false) {
@@ -43,8 +42,12 @@
 
                 ckTrigger.waypoint(
                     function () {
-                        ckElement.addClass("animated").css("opacity", "1");
-                        ckElement.addClass("animated").addClass(AnimationClass);
+                        ckElement
+                            .addClass("animate__animated")
+                            .css("opacity", "1");
+                        ckElement
+                            .addClass("animate__animated")
+                            .addClass(AnimationClass);
                     },
                     {
                         triggerOnce: true,
@@ -56,6 +59,24 @@
 
         ckScrollInit($(".animation"));
         ckScrollInit($(".staggered-animation"), $(".staggered-animation-wrap"));
+    });
+
+    /*===================================*
+        MENU JS
+	*===================================*/
+    //Main navigation scroll spy for shadow
+    $(window).on("scroll", function () {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 150) {
+            $("header").addClass(
+                "fixed-top animate__animated animate__backInDown"
+            );
+        } else {
+            $("header").removeClass(
+                "fixed-top animate__animated animate__backInDown"
+            );
+        }
     });
 
     /*===================================*
@@ -149,7 +170,7 @@
     });
 
     /*-------------------------------
-	Slick Slider for Product Image
+        Slick Slider for Product Image
     ------------------------------ */
     $(".slider-for").slick({
         slidesToShow: 1,
@@ -177,7 +198,7 @@
             '<span class="next"><i class="fa fa-angle-down" aria-hidden="true"></i></span>',
     });
     /*-------------------------------
-                Choose Star
+        Choose Star
     ------------------------------ */
     $(".star").click(function () {
         $(this).parents(".star_rating").find(".checked").removeClass("checked");
@@ -189,5 +210,12 @@
         slidesToShow: 4,
         slidesToScroll: 4,
         arrows: true,
+    });
+
+    $.scrollUp({
+        easingType: "linear",
+        scrollSpeed: 900,
+        animation: "fade",
+        scrollText: '<i class="fas fa-arrow-up"></i>',
     });
 })(window.jQuery);

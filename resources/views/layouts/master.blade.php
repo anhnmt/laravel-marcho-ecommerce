@@ -62,7 +62,7 @@
 
                 <ul class="header_icon navbar-nav flex-row align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#" data-toggle="tooltip" title="Tìm kiếm">
                             <i class="fal fa-search"></i>
                         </a>
                     </li>
@@ -76,8 +76,8 @@
                         <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
                             <i class="fal fa-shopping-cart"></i>
                             @php
-                                $cart = Cart::name('shopping');
-                                $items = $cart->sumItemsQuantity();
+                            $cart = Cart::name('shopping');
+                            $items = $cart->sumItemsQuantity();
                             @endphp
                             <span id="cart_count" class="cart_count">{{ $items }}</span>
                         </a>
@@ -110,8 +110,8 @@
                             </form>
                         </div>
                         @else
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <i class="fal fa-user"></i>
+                        <a class="nav-link" href="{{ route('login') }}" data-toggle="tooltip" title="Đăng nhập">
+                            <i class="fal fa-user-circle"></i>
                         </a>
                         @endif
                     </li>
@@ -245,6 +245,7 @@
     <!-- <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script> -->
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- jQuery migrate -->
     <script src="{{ asset('assets/plugins/jquery/jquery-migrate.min.js') }}"></script>
     <!-- Bootstrap -->
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -260,6 +261,8 @@
     <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- scrollUp -->
+    <script src="{{ asset('assets/plugins/scrollup/jquery.scrollUp.min.js') }}"></script>
     <!-- Custom script -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- Custom script -->
