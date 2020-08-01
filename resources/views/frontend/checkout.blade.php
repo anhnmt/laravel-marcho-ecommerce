@@ -29,7 +29,7 @@
 
 <section class="checkout_section my-5 py-5">
 	<div class="container">
-		<div class="row mt-5">
+		<div class="row">
 			<div class="col-lg-8">
 				<div class="border p-3 p-lg-4">
 					<div class="mb-1">
@@ -106,29 +106,18 @@
 					</div>
 					<div class="table-responsive">
 						<table class="table oder_table">
-							<thead>
-								<tr>
-									<td class="cart_total_label">Sản phẩm</td>
-								</tr>
-							</thead>
 							<tbody>
 								<tr>
-									<td class="cart_total_label">Đồng hồ nam</td>
-									<td class="cart_total_amount text-right">$349.00</td>
+									<td class="cart_total_label">Số sản phẩm</td>
+									<td class="cart_total_amount text-right"><span class="badge badge-danger">{{ $quantity }}</span></td>
 								</tr>
-								<tr>
-									<td class="cart_total_label">Váy nữ</td>
-									<td class="cart_total_amount text-right">$349.00</td>
-								</tr>
-								<tr>
-									<td class="cart_total_label">Giày trẻ em</td>
-									<td class="cart_total_amount text-right">$349.00</td>
-								</tr>
-							</tbody>
-							<tfoot>
 								<tr>
 									<td class="cart_total_label">Tổng tiền sản phẩm</td>
-									<td class="cart_total_amount text-right">$349.00</td>
+									<td class="cart_total_amount text-right">{{ number_format($total, 0) }}đ</td>
+								</tr>
+								<tr>
+									<td class="cart_total_label">Mã giảm giá</td>
+									<td class="cart_total_amount text-right">{{ number_format($action, 0) }}đ</td>
 								</tr>
 								<tr>
 									<td class="cart_total_label">Phí ship</td>
@@ -136,9 +125,9 @@
 								</tr>
 								<tr>
 									<td class="cart_total_label">Tất cả</td>
-									<td class="cart_total_amount text-right"><strong>$349.00</strong></td>
+									<td class="cart_total_amount text-right"><strong>{{ number_format($subtotal, 0) }}đ</strong></td>
 								</tr>
-							</tfoot>
+							</tbody>
 						</table>
 					</div>
 				</div>
@@ -154,9 +143,9 @@
 										<label class="form-check-label">
 											<input type="radio" class="form-check-input input_size" name="payment" id="" value="checkedValue" checked>
 											<span class="checkmark"></span>
-											Thanh toán khi nhận
+											Thanh toán trực tiếp
 										</label>
-										<p>Lorem ipsum dolor sit amet consectetur adipisicing elit !?</p>
+										<p>Thanh toán đơn hàng sau khi nhận được sản phẩm</p>
 									</div>
 								</td>
 							</tr>
@@ -166,9 +155,9 @@
 										<label class="form-check-label">
 											<input type="radio" class="form-check-input input_size" name="payment" id="" value="checkedValue">
 											<span class="checkmark"></span>
-											Paypal
+											Thanh toán qua Paypal
 										</label>
-										<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quia doloremque dolores quibusdam laboriosam ullam officiis</p>
+										<p>Thanh toán đơn hàng trước rồi sau đó mới nhận sản phẩm</p>
 									</div>
 								</td>
 							</tr>

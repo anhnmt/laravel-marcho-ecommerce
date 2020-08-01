@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use Cart;
+use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Http\Controllers\Controller;
@@ -23,13 +24,6 @@ class CartController extends Controller
         $subtotal = $cart->getSubtotal();
         $action = $cart->sumActionsAmount();
         $quantity = $cart->sumItemsQuantity();
-
-        // dd([
-        //     $items,
-        //     $total,
-        //     $subtotal,
-        //     $action,
-        // ]);
 
         return view('frontend.cart', compact(
             'items',
@@ -65,15 +59,23 @@ class CartController extends Controller
         }
 
         $options = [];
+
         if ($request->has('productAttribute')) {
-            $attr = ProductAttribute::find($request->productAttribute);
-            $product->price = $attr->price;
+            $productAttribute = ProductAttribute::find($request->productAttribute);
+            $product->price = $productAttribute->price;
+            $attrValues = $productAttribute->attributesValues;
 
-            $options['product_attribute_id'] = $request->productAttribute;
-            $options['attribute_value'] = $attr->attributesValues->toArray();
+            foreach ($attrValues as $value) {
+                $attr = Attribute::find($value->attribute_id);
+                // array_push($options, $value->value);
+                $options[$attr->slug] = [
+                    'value' => $value->value,
+                    'code' => $value->code
+                ];
+            }
+
+            // dd($options);
         }
-
-        // dd($product->image);
 
         $cart = Cart::name('shopping');
 
