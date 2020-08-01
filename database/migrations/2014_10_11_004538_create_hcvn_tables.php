@@ -20,7 +20,7 @@ class CreateHcvnTables extends Migration
         }
 
         Schema::create($tableNames['cities'], function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->string('slug')->index();
             $table->string('type');
@@ -29,7 +29,7 @@ class CreateHcvnTables extends Migration
         });
 
         Schema::create($tableNames['districts'], function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->string('type');
             $table->string('slug')->index();
@@ -41,7 +41,7 @@ class CreateHcvnTables extends Migration
         });
 
         Schema::create($tableNames['wards'], function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->string('type');
             $table->string('slug')->index();
@@ -51,8 +51,6 @@ class CreateHcvnTables extends Migration
             $table->string('code')->index();
             $table->string('parent_code')->index();
         });
-
-
     }
 
     /**

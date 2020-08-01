@@ -28,6 +28,12 @@ class ProductAttributeController extends Controller
         // dd($productAttributes->product->id);
 
         return datatables($productAttributes)
+            ->addColumn('price', function ($productAttribute) {
+                return number_format($productAttribute->price, 0) . 'đ';
+            })
+            ->addColumn('sale_price', function ($productAttribute) {
+                return number_format($productAttribute->sale_price, 0) . 'đ';
+            })
             ->addColumn('attributeValue', function ($productAttribute) {
                 $action = '<ul class="list-unstyled">';
 
