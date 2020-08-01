@@ -11,11 +11,11 @@
 						<div class="breadcrumb_content text-center">
 							<h1 class="font-weight-normal">Đăng ký</h1>
 							<ul>
-								<li class="mx-1"><a href="{{ route('register') }}"><i class="fal fa-home-alt mr-1"></i>Home</a></li>
+								<li class="mx-1"><a href="{{ route('register') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a></li>
 								<li class="mx-1">
-									<i class="fal fa-chevron-double-right"></i>
-								</li>
-								<li class=" mx-1 active">Register</li>
+                                    <i class="fal fa-angle-right"></i>
+                                </li>
+								<li class=" mx-1 active">Đăng ký</li>
 							</ul>
 						</div>
 					</div>
