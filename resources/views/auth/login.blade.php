@@ -11,11 +11,11 @@
 						<div class="breadcrumb_content text-center">
 							<h1 class="font-weight-normal">Đăng nhập</h1>
 							<ul>
-								<li class="mx-1"><a href="{{ route('login') }}"><i class="fal fa-home-alt mr-1"></i>Home</a></li>
+								<li class="mx-1"><a href="{{ route('login') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a></li>
 								<li class="mx-1">
-									<i class="fal fa-chevron-double-right"></i>
-								</li>
-								<li class=" mx-1 active">Login</li>
+                                    <i class="fal fa-angle-right"></i>
+                                </li>
+								<li class=" mx-1 active">Đăng nhập</li>
 							</ul>
 						</div>
 					</div>
@@ -48,23 +48,29 @@
 									
 									<div class="form-group">
 										<label for="email">Địa chỉ email*</label>
-										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror mt-2" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror mt-2" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-										@error('email')
+										{{-- @error('email')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
 										</span>
-										@enderror
+										@enderror --}}
+										@error('email')
+                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                        @enderror
 									</div>
 									<div class="form-group">
 										<label for="password">Mật khẩu*</label>
 										<input id="password" type="password" class="form-control @error('password') is-invalid @enderror mt-2" name="password" required autocomplete="current-password">
 
-										@error('password')
+										{{-- @error('password')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
 										</span>
-										@enderror
+										@enderror --}}
+										@error('password')
+                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                        @enderror
 									</div>
 
 									<div class="form-group">
