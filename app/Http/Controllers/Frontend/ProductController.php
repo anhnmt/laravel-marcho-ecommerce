@@ -34,7 +34,7 @@ class ProductController extends Controller
         $relatedProducts = Product::where([
             ['category_id', $product->category_id],
             ['id', '!=', $product->id],
-        ])->orderBy('name', 'desc')->select('name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
+        ])->orderBy('name', 'desc')->select('id', 'name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
 
         $productAttributes = $product->attributes;
 

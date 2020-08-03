@@ -93,7 +93,7 @@ function debounce(func, wait) {
         // console.log(id);
 
         $.ajax({
-            url: "favorite/" + id,
+            url: "/favorite/" + id,
             method: "POST",
         }).done(function (json) {
             if (json.success === true) {
