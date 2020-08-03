@@ -20,7 +20,7 @@ class AttributeValueController extends Controller
     {
         // $this->attribute = $attribute;
 
-        $attribute_values = AttributeValue::where('attribute_id', $attribute->id)->orderBy('id', 'desc')->select('id', 'attribute_id','value', 'code');
+        $attribute_values = AttributeValue::where('attribute_id', $attribute->id)->select('id', 'attribute_id','value', 'code');
 
         return datatables($attribute_values)
             ->addColumn('action', function ($attribute_value) {

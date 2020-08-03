@@ -16,7 +16,7 @@ class SliderController extends Controller
      */
     public function list()
     {
-        $sliders = Slider::select(['id', 'name', 'body', 'link', 'image', 'status'])->orderBy('id', 'desc');
+        $sliders = Slider::select(['id', 'name', 'body', 'link', 'image', 'status']);
 
         return datatables($sliders)
             ->addColumn('image', function ($slider) {

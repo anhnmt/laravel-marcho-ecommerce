@@ -25,6 +25,8 @@ class CartController extends Controller
         $action = $cart->sumActionsAmount();
         $quantity = $cart->sumItemsQuantity();
 
+        // dd($items);
+
         return view('frontend.cart', compact(
             'items',
             'total',
@@ -178,7 +180,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return \Illuminate\Http\Response
+    * @return \Illuminate\Http\Response
      */
     public function clear()
     {

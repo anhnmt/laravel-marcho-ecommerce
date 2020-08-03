@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function list()
     {
-        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status'])->orderBy('id', 'desc');
+        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status']);
 
         return datatables($categories)
             ->addColumn('image', function ($product) {

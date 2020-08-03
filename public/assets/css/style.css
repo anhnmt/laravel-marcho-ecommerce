@@ -1479,6 +1479,7 @@ header .navbar-collapse {
     -o-transition: all 0.5s ease 0s;
     transition: all 0.5s ease 0s;
 }
+.product_section .product_item a.active,
 .product_section .product_item a:hover {
     background-color: #fe3e57 !important;
     color: #fff;
@@ -6544,14 +6545,13 @@ footer .subscribe .btn {
 #scrollUp {
     width: 30px;
     height: 30px;
-    background-color: #fff;
+    background-color: #fe3e57;
     border: 1px solid #fe3e57;
-    color: #fe3e57;
-    right: 20px;
-    bottom: 20px;
+    color: #fff;
+    right: 15px;
+    bottom: 15px;
     text-align: center;
     overflow: hidden;
-    border-radius: 50%;
     left: auto;
 }
 #scrollUp:hover i {

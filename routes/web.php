@@ -16,7 +16,6 @@ use UniSharp\LaravelFilemanager\Lfm;
 |
 */
 
-Route::view('contact', 'frontend.contact')->name('contact');
 
 
 // ROUTE FRONTEND
@@ -34,12 +33,19 @@ Route::group([
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
 
+    // Contact
+    Route::view('contact', 'frontend.contact')->name('contact');
+
     // Frontend Auth
     Route::group([
         'middleware' => ['auth'],
     ], function () {
-        // Comment
+        // Blog Comment
         Route::resource('blog.comment', 'CommentController');
+
+        // Product Favorite
+        Route::post('product/{product}/favorite', 'ProductController@favorite')->name('product.favorite');
+        Route::post('product/{product}/unfavorite', 'ProductController@unFavorite')->name('product.unfavorite');
 
         // Cart
         Route::group([
@@ -56,7 +62,7 @@ Route::group([
             // Remove Cart
             Route::post('destroy/{id}', 'CartController@destroy')->name('cart.destroy');
             // Clear All Cart
-            Route::post('clear', 'CartController@clear')->name('cart.clear');
+            Route::get('clear', 'CartController@clear')->name('cart.clear');
         });
 
         // Checkout
@@ -79,8 +85,6 @@ Route::group([
             Route::get('/', 'ProfileController@index')->name('profile.index');
             Route::get('/password', 'ProfileController@password')->name('profile.password');
             Route::put('/{profile}', 'ProfileController@update')->name('profile.update');
-            // Route::post('districts', 'ProfileControllwe@districts')->name('profile.districts');
-            // Route::post('wards', 'ProfileControllwe@wards')->name('profile.wards');
         });
     });
 });

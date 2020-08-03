@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function list()
     {
-        $users = User::select('id', 'name', 'email')->orderBy('id', 'desc');
+        $users = User::select('id', 'name', 'email');
 
         return datatables($users)
         ->addColumn('action', function ($user) {
