@@ -15,15 +15,15 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('total');
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
+            $table->foreignId('user_id');
             $table->foreignId('city_id')->nullable();
             $table->foreignId('district_id')->nullable();
             $table->foreignId('ward_id')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->float('total', 10); // Total price
             $table->text('note')->nullable();
             $table->tinyInteger('status')->default(0);
-            $table->foreignId('user_id');
             $table->timestamps();
 
             //Foreign key
