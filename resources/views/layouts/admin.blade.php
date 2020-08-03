@@ -9,16 +9,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/ionicons/css/ionicons.min.css') }}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="{{ asset('assets/css/SourceSansPro.css') }}" rel="stylesheet">
-    <!-- Custom CSS -->
+    <!-- Custom Style -->
+    {!! \Assets::renderHeader() !!}
+
     @yield('style')
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -244,24 +238,44 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- Vuejs -->
-    <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script>
-    <!-- jQuery -->
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <!-- Custom Script -->
+    {!! \Assets::renderFooter() !!}
+
+    @yield('script')
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button);
     </script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('assets/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('assets/js/demo.js') }}"></script>
-    <!-- Custom JS -->
-    @yield('script')
+
+    @if(session('success'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "success",
+                title: "{{ session('success') }}",
+            });
+        });
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "error",
+                title: "{{ session('error') }}",
+            });
+        });
+    </script>
+    @endif
 </body>
 
 </html>

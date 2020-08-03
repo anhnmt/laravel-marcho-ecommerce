@@ -21,11 +21,13 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantity');
             $table->float('price', 10);
             $table->timestamps();
-
             //Foreign key
-            $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('product_attribute_id')->references('id')->on('product_attributes');
+            $table->foreign('order_id')->references('id')->on('orders')
+            ->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')
+            ->onDelete('cascade');
+            $table->foreign('product_attribute_id')->references('id')->on('product_attributes')
+            ->onDelete('cascade');
         });
     }
 

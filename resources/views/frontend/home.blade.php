@@ -1,3 +1,30 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'slick',
+'slick-theme',
+'owlcarousel',
+'owlcarousel-theme',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'wowjs',
+'jquery-scrollup',
+'custom',
+'custom-owlcarousel',
+'custom-slick',
+'custom-wow',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -12,9 +39,9 @@
 						<div class="row">
 							<div class="col-lg-7 col-9">
 								<div class="banner_content overflow-hidden">
-									<h5 class="mb-3 staggered-animation font-weight-light" data-animation="animate__slideInLeft" data-animation-delay="0.5s">{{ $slider->body }}</h5>
-									<h2 class="staggered-animation" data-animation="animate__slideInLeft" data-animation-delay="1s">{{ $slider->name }}</h2>
-									<a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ $slider->link }}" data-animation="animate__slideInLeft" data-animation-delay="1.5s">Xem Ngay</a>
+									<h5 class="mb-3 font-weight-light wow animate__slideInLeft" data-wow-delay="0.5s">{{ $slider->body }}</h5>
+									<h2 class="wow animate__slideInLeft" data-wow-delay="1s">{{ $slider->name }}</h2>
+									<a class="btn btn-fill-out rounded-0 text-uppercase wow animate__slideInLeft" href="{{ $slider->link }}" data-wow-delay="1.5s">Xem Ngay</a>
 								</div>
 							</div>
 						</div>
@@ -105,7 +132,7 @@
 
 								<div class="product_item">
 									<div class="d-flex align-items-center justify-content-center">
-										<a class="add-wishlist">
+										<a class="add-wishlist" data-product="{{ $product->id }}">
 											<i class="fal fa-heart"></i>
 										</a>
 										<a class="add-cart">
@@ -157,7 +184,7 @@
 			@if($latest_blog ?? '')
 			@foreach ($latest_blog as $blog)
 			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__slideInUp" data-wow-delay=".1s">
+				<div class="grid_item wow animate__zoomIn">
 					<div class="grid_inner_item">
 						<div class="blog_img">
 							<a href="{{ route('blog.show', $blog->slug) }}">

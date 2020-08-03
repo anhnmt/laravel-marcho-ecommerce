@@ -1,3 +1,13 @@
+@php
+\Assets::addStyles([
+'adminlte'
+]);
+
+\Assets::addScripts([
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -113,12 +123,8 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <script>
 	$(function() {
-		$('#lfm').filemanager('role');
-
 		$("#myInput").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
 			$("#myDIV .parent-vertical-center").filter(function() {

@@ -1,3 +1,20 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -13,8 +30,8 @@
 							<ul>
 								<li class="mx-1"><a href="{{ route('login') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a></li>
 								<li class="mx-1">
-                                    <i class="fal fa-angle-right"></i>
-                                </li>
+									<i class="fal fa-angle-right"></i>
+								</li>
 								<li class=" mx-1 active">Đăng nhập</li>
 							</ul>
 						</div>
@@ -45,7 +62,7 @@
 							<div class="col-lg-12">
 								<form id="login-form" action="{{ route('login') }}" method="post" role="form">
 									@csrf
-									
+
 									<div class="form-group">
 										<label for="email">Địa chỉ email*</label>
 										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror mt-2" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -56,8 +73,8 @@
 										</span>
 										@enderror --}}
 										@error('email')
-                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                        @enderror
+										<span class="invalid-feedback" role="alert">{{ $message }}</span>
+										@enderror
 									</div>
 									<div class="form-group">
 										<label for="password">Mật khẩu*</label>
@@ -69,8 +86,8 @@
 										</span>
 										@enderror --}}
 										@error('password')
-                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                        @enderror
+										<span class="invalid-feedback" role="alert">{{ $message }}</span>
+										@enderror
 									</div>
 
 									<div class="form-group">

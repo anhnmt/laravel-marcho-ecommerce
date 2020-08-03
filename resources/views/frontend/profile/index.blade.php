@@ -1,3 +1,20 @@
+@php
+\Assets::addStyles([
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'nice-select',
+'select2',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -57,30 +74,22 @@
                                 <div class="col-lg-3">
                                     <div class="text-center">
                                         <p>
-                                            <div id="holder" class="lfm profile-user-img" data-input="avatar"
-                                                data-preview="holder"
-                                                data-class="profile-user-img img-fluid rounded-circle"
-                                                style="margin-top:15px">
-                                                <img class="profile-user-img img-fluid rounded-circle"
-                                                    src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}"
-                                                    alt="User profile picture">
+                                            <div id="holder" class="lfm profile-user-img" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid rounded-circle" style="margin-top:15px">
+                                                <img class="profile-user-img img-fluid rounded-circle" src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="User profile picture">
                                             </div>
+
+                                            <input class="form-control @error('avatar') is-invalid @enderror" type="hidden" name="avatar" id="avatar" value="{{ auth()->user()->avatar }}">
                                         </p>
 
                                         <p>
-                                            <button type="submit" class="lfm btn btn-sm border-dark" data-input="avatar"
-                                                data-preview="holder"
-                                                data-class="profile-user-img img-fluid rounded-circle">Chọn ảnh</button>
+                                            <button type="submit" class="lfm btn btn-sm border-dark" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid rounded-circle">Chọn ảnh</button>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="form-group">
                                         <label for="">Tên</label>
-                                        <input type="text" id=""
-                                            class="form-control @error('name') is-invalid @enderror"
-                                            placeholder="Nhập tên của bạn ..." aria-describedby="helpId"
-                                            value="{{auth()->user()->name}}" name="name">
+                                        <input type="text" id="" class="form-control @error('name') is-invalid @enderror" placeholder="Nhập tên của bạn ..." aria-describedby="helpId" value="{{auth()->user()->name}}" name="name">
 
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -89,10 +98,7 @@
 
                                     <div class="form-group">
                                         <label for="">Email</label>
-                                        <input type="email" id=""
-                                            class="form-control @error('email') is-invalid @enderror"
-                                            placeholder="Nhập email của bạn ..." aria-describedby="helpId"
-                                            value="{{auth()->user()->email}}" name="email">
+                                        <input type="email" id="" class="form-control @error('email') is-invalid @enderror" placeholder="Nhập email của bạn ..." aria-describedby="helpId" value="{{auth()->user()->email}}" name="email">
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -101,9 +107,7 @@
 
                                     <div class="form-group">
                                         <label for="">Số điện thoại</label>
-                                        <input type="text" id="" class="form-control"
-                                            placeholder="Nhập số điện thoại của bạn ..." aria-describedby="helpId"
-                                            name="phone" value="{{auth()->user()->phone}}">
+                                        <input type="text" id="" class="form-control" placeholder="Nhập số điện thoại của bạn ..." aria-describedby="helpId" name="phone" value="{{auth()->user()->phone}}">
                                     </div>
 
 
@@ -121,29 +125,9 @@
         </div>
     </div>
 </section>
-
 @endsection
 
 @section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<!-- SweetAlert2 -->
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-@if(session('success'))
-<script>
-    $(function() {
-        Swal.fire({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            icon: "success",
-            title: "{{ session('success') }}",
-        });
-    });
-</script>
-@endif
-
 <script>
     $(function() {
         $('.lfm').filemanager('avatar');

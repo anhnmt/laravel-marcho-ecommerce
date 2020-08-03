@@ -1,3 +1,16 @@
+@php
+\Assets::addStyles([
+'summernote',
+'adminlte'
+]);
+
+\Assets::addScripts([
+'summernote',
+'stand-alone-button',
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')

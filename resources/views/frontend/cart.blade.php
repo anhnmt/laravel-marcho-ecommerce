@@ -1,3 +1,22 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -229,6 +248,7 @@
         Plus and minus quantity
 	------------------------------ */
 	$(function() {
+
 		$(".plus").on("click", function() {
 			var qty = $(this).closest("tr").find(".qty");
 			if (qty.val()) {
@@ -250,7 +270,7 @@
 			}
 		});
 
-		$(".qty").on("change", function() {
+		$(".qty").on("change", debounce(function(e) {
 			var self = this;
 
 			if ($(self).val() <= 0) {
@@ -261,10 +281,6 @@
 			var qty = $(self).val();
 			var total = $(self).closest("tr").find(".product-subtotal");
 
-			$(self).attr("disabled", true);
-			$(self).closest("tr").find(".plus").attr("disabled", true);
-			$(self).closest("tr").find(".minus").attr("disabled", true);
-
 			$.ajax({
 				"url": "cart/update/" + id,
 				"method": "POST",
@@ -273,9 +289,6 @@
 				}
 			}).done(function(json) {
 				// console.log(json);
-				$(self).attr("disabled", false);
-				$(self).closest("tr").find(".plus").attr("disabled", false);
-				$(self).closest("tr").find(".minus").attr("disabled", false);
 
 				if (json.success === true) {
 					total.html(json.item_total);
@@ -293,7 +306,7 @@
 					});
 				}
 			});
-		});
+		}, 300));
 	});
 </script>
 @endsection

@@ -28,9 +28,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             // Foreign key
-            $table->foreign('city_id')->references('id')->on('cities');
-            $table->foreign('district_id')->references('id')->on('districts');
-            $table->foreign('ward_id')->references('id')->on('wards');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
         });
     }
 

@@ -1,3 +1,18 @@
+@php
+\Assets::addStyles([
+'datatables-bs4',
+'adminlte'
+]);
+
+\Assets::addScripts([
+'datatables',
+'datatables-bs4',
+'datatables-responsive',
+'datatables-responsive-bs4',
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -40,131 +55,64 @@
 </section>
 @stop
 
-@section('style')
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-@stop
-
 @section('script')
-<!-- DataTables -->
-<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<!-- SweetAlert2 -->
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-@if(session('success'))
-<script>
-	$(function() {
-		Swal.fire({
-			toast: true,
-			position: "top-end",
-			showConfirmButton: false,
-			timer: 3000,
-			icon: "success",
-			title: "{{ session('success') }}",
-		});
-	});
-</script>
-@endif
-
 <script>
 	$.fn.dataTable.ext.errMode = 'throw';
 
-	var app = new Vue({
-		el: "#app",
-		data() {
-			return {
-				errors: {},
-			};
-		},
-		methods: {
-			delete(id) {
-				var self = this;
+	$(function() {
+		$('#datatables').DataTable({
+			"paging": true,
+			"ordering": true,
+			"autoWidth": false,
+			"responsive": true,
+			"serverSide": true,
+			"ajax": "{{ route('admin.user.list') }}",
+			"order": [
+				[0, 'desc']
+			],
+			"columns": [{
+					data: 'id',
+					className: 'align-middle text-center',
+					width: '5%',
+				},
+				{
+					data: 'name',
+					className: 'align-middle',
+				},
+				{
+					data: 'email',
+					className: 'align-middle text-center',
+					width: '10%',
+				},
+				{
+					data: 'action',
+					className: 'align-middle text-center d-flex justify-content-center',
+					orderable: false,
+					searchable: false
+				},
+			]
+		}).on('click', 'button[data-delete]', function(e) {
+			var id = $(this).data('delete');
+			// console.log(id);
+			self.delete(id);
+		});
+	}).on('submit', '.delete-form', function(event) {
+		event.preventDefault();
 
-				Swal.fire({
-					title: 'Xác nhận xoá?',
-					text: "Bạn sẽ không thể khôi phục dữ liệu!",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Đồng ý!',
-					cancelButtonText: 'Huỷ!',
-				}).then((result) => {
-					if (result.value) {
-						$.ajax({
-							url: "{{ route('admin.user.index') }}/" + id,
-							type: "POST",
-							dataType: "json",
-							data: {
-								_method: "DELETE"
-							},
-							success: function(data) {
-								console.log(data);
-
-								Swal.fire(
-									'Xoá thành công!',
-									'Bạn đã xoá thành công.',
-									'success'
-								)
-							},
-							error: function(data) {
-								console.log(data);
-							},
-						}).always(function(data) {
-							$('#datatables').DataTable().draw(false);
-						});
-					}
-				})
-			},
-		},
-		created() {
-			var self = this;
-
-			$(function() {
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
-
-				$('#datatables').DataTable({
-					"paging": true,
-					"ordering": true,
-					"autoWidth": false,
-					"responsive": true,
-					"serverSide": true,
-					"ajax": "{{ route('admin.user.list') }}",
-					"columns": [{
-							data: 'id',
-							className: 'align-middle text-center',
-							width: '5%',
-						},
-						{
-							data: 'name',
-							className: 'align-middle',
-						},
-						{
-							data: 'email',
-							className: 'align-middle text-center',
-							width: '10%',
-						},
-						{
-							data: 'action',
-							className: 'align-middle text-center d-flex justify-content-center',
-							orderable: false,
-							searchable: false
-						},
-					]
-				}).on('click', 'button[data-delete]', function(e) {
-					var id = $(this).data('delete');
-					// console.log(id);
-					self.delete(id);
-				});
-			})
-		}
+		Swal.fire({
+			title: 'Xác nhận xoá?',
+			text: "Bạn sẽ không thể khôi phục dữ liệu!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Đồng ý!',
+			cancelButtonText: 'Huỷ!',
+		}).then((result) => {
+			if (result.value) {
+				event.currentTarget.submit();
+			}
+		});
 	});
 </script>
 @stop

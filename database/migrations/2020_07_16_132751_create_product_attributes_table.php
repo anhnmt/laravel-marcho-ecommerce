@@ -22,7 +22,7 @@ class CreateProductAttributesTable extends Migration
             $table->boolean('default')->default(0);
             $table->timestamps();
             // Foreign key
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

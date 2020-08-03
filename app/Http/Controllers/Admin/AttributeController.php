@@ -16,7 +16,7 @@ class AttributeController extends Controller
      */
     public function list()
     {
-        $attributes = Attribute::orderBy('id', 'desc')->select(['id', 'name', 'slug']);
+        $attributes = Attribute::select(['id', 'name', 'slug']);
 
         return datatables($attributes)
             ->addColumn('action', function ($attribute) {
