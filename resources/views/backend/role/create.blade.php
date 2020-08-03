@@ -89,8 +89,11 @@
 												<div class="col-lg-3 mb-4">
 													<div for="" class="parent-vertical-center" permission="{{$permission->name}}">
 														<div class="custom-control custom-switch">
-															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}" {{ $permission->name == 'admin.dashboard' || $permission->name == 'admin.profile' ? 'checked disabled' : '' }}>
+															<input class="custom-control-input" id="{{$permission->id}}" type="checkbox" name="permissions[]" value="{{$permission->name}}" {{ $permission->name == 'admin.dashboard' || $permission->name == 'admin.profile' || $permission->name == 'admin.profile.update' ? 'checked disabled' : '' }}>
 															<label class="custom-control-label" for="{{$permission->id}}">{{$permission->name}}</label>
+															@if ($permission->name == 'admin.dashboard' || $permission->name == 'admin.profile' || $permission->name == 'admin.profile.update')
+																<input type="checkbox" name="permissions[]" checked value="{{$permission->name}}" class="d-none">
+															@endif
 														</div>
 													</div>
 												</div>

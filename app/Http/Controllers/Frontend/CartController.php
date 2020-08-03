@@ -159,7 +159,7 @@ class CartController extends Controller
 
             return redirect()->route('cart.index')->withSuccess('Thêm vào giỏ thành công');
         } catch (\Exception $e) {
-            return redirect()->route('cart.index')->withError('Thêm vào giỏ thành công');
+            return redirect()->route('cart.index')->withError('Thêm vào giỏ thất bại');
         }
     }
 
