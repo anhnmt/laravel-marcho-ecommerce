@@ -1,3 +1,16 @@
+@php
+\Assets::addStyles([
+'summernote',
+'adminlte'
+]);
+
+\Assets::addScripts([
+'summernote',
+'stand-alone-button',
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -114,7 +127,7 @@
 											</button>
 										</span>
 										<input class="form-control @error('image') is-invalid @enderror" type="hidden" name="image" id="image" value="{{ old('image') }}">
-		
+
 										@error('image')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror
@@ -131,46 +144,9 @@
 </section>
 @stop
 
-@section('style')
-<!-- summernote -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}">
-@stop
-
 @section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-<!-- Summernote -->
-<script src="{{ asset('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script>
 	$(function() {
-		// Define function to open filemanager window
-		var lfm = function(options, cb) {
-			PopupCenter('/admin/filemanager?type=blog', "FileManager", 900, 600);
-			window.SetUrl = cb;
-		};
-
-		// Define LFM summernote button
-		var LFMButton = function(context) {
-			var ui = $.summernote.ui;
-			var button = ui.button({
-				contents: '<i class="note-icon-picture"></i> ',
-				tooltip: 'Insert image with filemanager',
-				click: function() {
-
-					lfm({
-						type: 'image',
-						prefix: '/admin/filemanager'
-					}, function(lfmItems, path) {
-						lfmItems.forEach(function(lfmItem) {
-							context.invoke('insertImage', lfmItem.url);
-						});
-					});
-
-				}
-			});
-			return button.render();
-		};
-
 		// Summernote
 		$('#body').summernote({
 			height: 300, //set editable area's height

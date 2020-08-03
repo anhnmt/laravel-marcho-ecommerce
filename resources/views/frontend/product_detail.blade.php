@@ -1,4 +1,32 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'jquery-ui',
+'slick',
+'slick-theme',
+'nice-select',
+'select2',
+'select2-bootstrap4',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'slick',
+'owlcarousel',
+'waypoints',
+'nice-select',
+'select2',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
+
 @section('main')
 <div class="custom-container">
     <section class="makp_breadcrumb bg_image">
@@ -280,7 +308,9 @@
                     <div class="card">
                         <div class="row">
                             <div class="product_image col-md-4 col-sm-12 col-12">
-                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                <a href="{{ route('product.show', $product->slug) }}">
+                                    <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                </a>
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">
@@ -322,15 +352,78 @@
 
     </div>
 </section>
-@endsection
-
-@section('style')
-<!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @stop
 
 @section('script')
-<!-- Select2 -->
-<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
-@stop
+<script>
+    /*-------------------------------
+        Plus and minus quantity
+	------------------------------ */
+    $(function() {
+
+        $(".plus").on("click", function() {
+            var self = this;
+            var qty = $(self).closest("div.quantity").find(".qty");
+
+            if (qty.val()) {
+                qty.val(+qty.val() + 1);
+                $(self).closest("div.quantity").find(".minus").attr("disabled", false);
+                //Trigger change event
+                qty.trigger("change");
+            }
+        });
+
+        $(".minus").on("click", function() {
+            var self = this;
+
+            var qty = $(self).closest("div.quantity").find(".qty");
+
+            if (qty.val() <= 1) {
+                $(self).attr("disabled", true);
+            } else {
+                qty.val(+qty.val() - 1);
+                //Trigger change event
+                qty.trigger("change");
+            }
+        });
+
+        $(".qty").on("change", debounce(function(e) {
+            var self = this;
+
+            if ($(self).val() <= 0) {
+                $(self).val(1);
+            }
+
+            // var id = $(self).closest("tr").attr('id');
+            // var qty = $(self).val();
+            // var total = $(self).closest("tr").find(".product-subtotal");
+
+            // $.ajax({
+            //     "url": "cart/update/" + id,
+            //     "method": "POST",
+            //     "data": {
+            //         "quantity": qty,
+            //     }
+            // }).done(function(json) {
+            //     // console.log(json);
+
+            //     if (json.success === true) {
+            //         total.html(json.item_total);
+            //         $('#cart_subtotal').html(json.cart_subtotal);
+            //         $('#cart_total > strong').html(json.cart_total);
+            //         $('#cart_count').html(json.cart_count);
+            //     } else {
+            //         Swal.fire({
+            //             toast: true,
+            //             position: "top-end",
+            //             showConfirmButton: false,
+            //             timer: 3000,
+            //             icon: "error",
+            //             title: json.msg,
+            //         });
+            //     }
+            // });
+        }, 300));
+    });
+</script>
+@endsection

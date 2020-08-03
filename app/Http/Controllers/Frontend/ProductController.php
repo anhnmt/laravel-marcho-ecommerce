@@ -60,4 +60,30 @@ class ProductController extends Controller
             'categories',
         ));
     }
+
+    /**
+     * Favorite a particular post
+     *
+     * @param  Post $post
+     * @return Response
+     */
+    public function favorite(Product $post)
+    {
+        auth()->user()->favorites()->attach($post->id);
+
+        return back();
+    }
+
+    /**
+     * Unfavorite a particular post
+     *
+     * @param  Post $post
+     * @return Response
+     */
+    public function unFavorite(Product $post)
+    {
+        auth()->user()->favorites()->detach($post->id);
+
+        return back();
+    }
 }

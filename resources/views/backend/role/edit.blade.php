@@ -1,3 +1,13 @@
+@php
+\Assets::addStyles([
+'adminlte'
+]);
+
+\Assets::addScripts([
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')

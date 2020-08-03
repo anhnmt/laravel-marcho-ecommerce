@@ -23,7 +23,7 @@ class ProductAttributeController extends Controller
 
         $this->product = $product;
 
-        $productAttributes = ProductAttribute::where('product_id', $product->id)->orderBy('id', 'desc')->select('id', 'quantity', 'price', 'sale_price', 'default');
+        $productAttributes = ProductAttribute::where('product_id', $product->id)->select('id', 'quantity', 'price', 'sale_price', 'default');
 
         // dd($productAttributes->product->id);
 

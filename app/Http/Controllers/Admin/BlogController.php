@@ -16,7 +16,7 @@ class BlogController extends Controller
      */
     public function list()
     {
-        $blogs = Blog::select(['id', 'name', 'slug', 'image', 'status'])->orderBy('id', 'desc');
+        $blogs = Blog::select(['id', 'name', 'slug', 'image', 'status']);
 
         return datatables($blogs)
             ->addColumn('image', function ($blog) {

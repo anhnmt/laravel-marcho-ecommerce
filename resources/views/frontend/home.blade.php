@@ -1,3 +1,27 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'slick',
+'slick-theme',
+'owlcarousel',
+'owlcarousel-theme',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'waypoints',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -105,7 +129,7 @@
 
 								<div class="product_item">
 									<div class="d-flex align-items-center justify-content-center">
-										<a class="add-wishlist">
+										<a class="add-wishlist" data-product="{{ $product->id }}">
 											<i class="fal fa-heart"></i>
 										</a>
 										<a class="add-cart">

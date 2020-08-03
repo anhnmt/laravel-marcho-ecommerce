@@ -92,32 +92,4 @@
         </div>
     </div>
 </section>
-
 @endsection
-
-@section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<!-- SweetAlert2 -->
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-@if(session('success'))
-<script>
-    $(function() {
-        Swal.fire({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            icon: "success",
-            title: "{{ session('success') }}",
-        });
-    });
-</script>
-@endif
-
-<script>
-    $(function() {
-        $('.lfm').filemanager('avatar');
-    });
-</script>
-@stop

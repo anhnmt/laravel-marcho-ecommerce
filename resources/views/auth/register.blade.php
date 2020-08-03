@@ -1,3 +1,23 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'waypoints',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -13,8 +33,8 @@
 							<ul>
 								<li class="mx-1"><a href="{{ route('register') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a></li>
 								<li class="mx-1">
-                                    <i class="fal fa-angle-right"></i>
-                                </li>
+									<i class="fal fa-angle-right"></i>
+								</li>
 								<li class=" mx-1 active">Đăng ký</li>
 							</ul>
 						</div>

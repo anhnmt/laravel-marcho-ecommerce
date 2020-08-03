@@ -1,3 +1,19 @@
+function debounce(func, wait) {
+    var timeout;
+
+    return function () {
+        var context = this,
+            args = arguments;
+
+        var executeFunction = function () {
+            func.apply(context, args);
+        };
+
+        clearTimeout(timeout);
+        timeout = setTimeout(executeFunction, wait);
+    };
+}
+
 (function ($) {
     "use strict";
 
@@ -118,6 +134,7 @@
         maxamount = $("#maxamount"),
         minPrice = rangeSlider.data("min"),
         maxPrice = rangeSlider.data("max");
+
     rangeSlider.slider({
         range: true,
         min: minPrice,
@@ -128,6 +145,7 @@
             maxamount.html("$" + ui.values[1]);
         },
     });
+
     minamount.html("$" + rangeSlider.slider("values", 0));
     maxamount.html("$" + rangeSlider.slider("values", 1));
 
@@ -217,5 +235,14 @@
         scrollSpeed: 900,
         animation: "fade",
         scrollText: '<i class="fas fa-arrow-up"></i>',
+    });
+    /*-------------------------------
+        Add To Favorite
+    ------------------------------ */
+    $(".add-wishlist").on("click", function () {
+        var self = this;
+        var id = $(self).data("product");
+        $(self).toggleClass("active");
+        console.log(id);
     });
 })(window.jQuery);

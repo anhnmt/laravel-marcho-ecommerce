@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Role', 'model_has_roles', 'role_id', 'model_id');
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Models\Favorite', 'favorites', 'user_id', 'post_id')->withTimeStamps();
+    }
 }

@@ -13,7 +13,7 @@ class RoleController extends Controller
 {
     public function list()
     {
-        $roles = Role::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+        $roles = Role::select(['id', 'name', 'guard_name']);
 
         return datatables($roles)
             ->addColumn('action', function ($role) {

@@ -1,9 +1,24 @@
-@extends('layouts.master')
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
 
-@section('style')
-<link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
-@endsection
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'waypoints',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
+@extends('layouts.master')
 
 @section('main')
 <div class="custom-container">
@@ -51,7 +66,7 @@
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <span>Sort By </span>
-                            <select class="nice_select" >
+                            <select class="nice_select">
                                 <option value="1">Default</option>
                                 <option value="2">Newest</option>
                             </select>
@@ -74,7 +89,10 @@
                                         <div class="card">
                                             <div class="row">
                                                 <div class="product_image col-md-4 col-sm-12 col-12">
-                                                    <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+
+                                                    <a href="{{ route('product.show', $product->slug) }}">
+                                                        <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                                    </a>
 
                                                     <div class="product_item">
                                                         <div class="d-flex align-items-center justify-content-center">
