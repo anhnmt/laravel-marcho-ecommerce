@@ -5,6 +5,7 @@
 'fontawesome',
 'jquery-ui',
 'font-roboto-quicksand',
+'nice-select',
 'custom-style',
 'custom-responsive',
 ]);
@@ -12,9 +13,11 @@
 \Assets::addScripts([
 'owlcarousel',
 'slick',
-'waypoints',
+'nice-select',
 'jquery-scrollup',
 'custom',
+'custom-niceselect',
+'custom-jqueryui',
 ]);
 @endphp
 

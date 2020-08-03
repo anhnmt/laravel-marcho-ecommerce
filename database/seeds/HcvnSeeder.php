@@ -27,7 +27,7 @@ class HcvnSeeder extends Seeder
 
     private function getContent($fileName): array
     {
-        return json_decode(file_get_contents(public_path(config('hcvn.data_json') . "/{$fileName}")), true);
+        return json_decode(file_get_contents(config('hcvn.data_json') . "/{$fileName}"), true);
     }
 
     private function insert(string $tableName, $data)

@@ -17,7 +17,6 @@
 \Assets::addScripts([
 'slick',
 'owlcarousel',
-'waypoints',
 'nice-select',
 'select2',
 'jquery-scrollup',
