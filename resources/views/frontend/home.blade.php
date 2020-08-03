@@ -154,10 +154,10 @@
 								</a>
 								<span class="price mt-2">
 									@if($product->sale_price)
-									<span class="new">{{ $product->sale_price }}đ</span>
-									<span class="old">{{ $product->price }}đ</span>
+									<span class="new">{{ number_format($product->sale_price, 0) }}đ</span>
+									<span class="old">{{ number_format($product->price, 0) }}đ</span>
 									@else
-									<span class="new">{{ $product->price }}đ</span>
+									<span class="new">{{ number_format($product->price, 0) }}đ</span>
 									@endif
 								</span>
 							</div>
