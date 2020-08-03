@@ -69,6 +69,9 @@ Route::group([
             Route::post('wards', 'CheckoutController@wards')->name('checkout.wards');
         });
 
+        // Order
+        Route::resource('order', 'OrderController');
+
         // Profile
         Route::group([
             'prefix' => 'profile',
