@@ -1492,10 +1492,9 @@ header .navbar-collapse {
     align-items: center !important;
     -ms-flex-pack: center !important;
     justify-content: center !important;
-    padding: 15px;
+    padding: 10px;
     margin: 0 5px;
     background-color: #fff;
-    border-radius: 50%;
 }
 .product_section .product_info .price {
     font-family: "Quicksand";

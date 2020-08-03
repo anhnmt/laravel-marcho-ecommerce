@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Blog;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -64,26 +64,34 @@ class ProductController extends Controller
     /**
      * Favorite a particular post
      *
-     * @param  Post $post
+     * @param  Product $product
      * @return Response
      */
-    public function favorite(Product $post)
+    public function favorite(Product $product)
     {
-        auth()->user()->favorites()->attach($post->id);
+        try {
+            $user = auth()->user();
 
-        return back();
-    }
+            if ($user->isFavorited($product->id)) {
+                $user->favorites()->detach($product->id);
 
-    /**
-     * Unfavorite a particular post
-     *
-     * @param  Post $post
-     * @return Response
-     */
-    public function unFavorite(Product $post)
-    {
-        auth()->user()->favorites()->detach($post->id);
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Bỏ thích sản phẩm thành công',
+                ]);
+            }
 
-        return back();
+            $user->favorites()->attach($product->id);
+
+            return response()->json([
+                'success' => true,
+                'msg' => 'Thích sản phẩm thành công',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Có lỗi xảy ra, vui lòng thử lại',
+            ]);
+        }
     }
 }

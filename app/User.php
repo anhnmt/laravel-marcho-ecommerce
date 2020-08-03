@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Favorite;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -69,6 +70,17 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->belongsToMany('App\Models\Favorite', 'favorites', 'user_id', 'post_id')->withTimeStamps();
+        return $this->belongsToMany('App\Models\Favorite', 'favorites', 'user_id', 'product_id')->withTimeStamps();
+    }
+
+    public function isFavorited($product_id)
+    {
+        $user = auth()->user();
+        $check = Favorite::where([
+            'user_id' => $user->id,
+            'product_id' => $product_id,
+        ]);
+
+        return $check->exists();
     }
 }
