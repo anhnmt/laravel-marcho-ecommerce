@@ -13,7 +13,7 @@ class RoleController extends Controller
 {
     public function list()
     {
-        $roles = Role::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+        $roles = Role::select(['id', 'name', 'guard_name']);
 
         return datatables($roles)
             ->addColumn('action', function ($role) {
@@ -29,7 +29,6 @@ class RoleController extends Controller
                 
                 if((auth()->user()->can('admin.role.edit') && auth()->user()->can('admin.role.destroy')) == false) 
                 $action .= "<span>Không có hành động nào</span>";
-              
                 $action .= '</form>';
 
                 return $action;

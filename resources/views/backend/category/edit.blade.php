@@ -1,3 +1,14 @@
+@php
+\Assets::addStyles([
+'adminlte'
+]);
+
+\Assets::addScripts([
+'stand-alone-button',
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -127,8 +138,6 @@
 @stop
 
 @section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <script>
 	$(function() {
 		$('#lfm').filemanager('category');

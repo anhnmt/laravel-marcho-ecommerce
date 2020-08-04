@@ -6,5 +6,5 @@ return [
         'districts' => 'districts',
         'wards' => 'wards',
     ],
-    'data_json' => 'vendor/hcvn',
+    'data_json' => public_path('vendor/hcvn'),
 ];

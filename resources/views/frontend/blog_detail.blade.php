@@ -1,9 +1,21 @@
-@extends('layouts.master')
+@php
+\Assets::addStyles([
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
 
-@section('style')
-<link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
-@endsection
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'nice-select',
+'select2',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
+@extends('layouts.master')
 
 @section('main')
 <div class="custom-container">
@@ -183,9 +195,4 @@
         </div>
     </div>
 </section>
-@endsection
-
-@section('script')
-<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
-<script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>
 @endsection

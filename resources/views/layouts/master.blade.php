@@ -7,28 +7,10 @@
     <title>Trang chủ - Marcho Shop</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-    <!-- Slick Slider -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/slick/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/slick/slick-theme.css') }}">
-    <!-- Slick Slider -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/owlcarousel/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/owlcarousel/css/owl.theme.default.min.css') }}">
-    <!-- Font style -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/animate.css/animate.min.css') }}">
-    <!-- Google Font: Roboto, Quicksand -->
-    <link rel="stylesheet" href="{{ asset('assets/css/Roboto_Quicksand.css') }}">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Custom Style -->
+    {!! \Assets::renderHeader() !!}
+
     @yield('style')
-    <!-- Custom Style -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 </head>
 
 <body>
@@ -92,9 +74,13 @@
                             <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
                             @endcan
 
+                            @can('admin.dashboard')
+                            <a class="dropdown-item" href="{{ route('admin.profile') }}">Trang cá nhân</a>
+                            @endcan
+
                             @cannot('admin.dashboard')
-                            <a class="dropdown-item" href="#">Trang cá nhân</a>
-                            @endcannot
+                            <a class="dropdown-item" href="{{ route('profile.index') }}">Trang cá nhân</a>
+                            @endcan
 
                             <div class="dropdown-divider"></div>
 
@@ -237,33 +223,10 @@
         </div>
     </footer>
 
-    <!-- Vuejs -->
-    <!-- <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script> -->
-    <!-- jQuery -->
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery migrate -->
-    <script src="{{ asset('assets/plugins/jquery/jquery-migrate.min.js') }}"></script>
-    <!-- Bootstrap -->
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- OwlCarousel -->
-    <script src="{{ asset('assets/plugins/owlcarousel/js/owl.carousel.min.js') }}"></script>
-    <!-- Slick js -->
-    <script src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
-    <!-- Waypoints  -->
-    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
-    <!-- Jquery-UI  -->
-    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
-    <!-- Nice select  -->
-    <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
-    <!-- Select2 -->
-    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
-    <!-- scrollUp -->
-    <script src="{{ asset('assets/plugins/scrollup/jquery.scrollUp.min.js') }}"></script>
-    <!-- Custom script -->
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <!-- Custom script -->
-    @yield('script')
+    <!-- Custom Script -->
+    {!! \Assets::renderFooter() !!}
 
+    @yield('script')
 </body>
 
 </html>

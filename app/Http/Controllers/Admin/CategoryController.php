@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function list()
     {
-        $categories = Category::select(['id', 'name', 'slug', 'image', 'status'])->orderBy('id', 'desc');
+        $categories = Category::select(['id', 'name', 'slug', 'image', 'status']);
 
         return datatables($categories)
             ->addColumn('image', function ($category) {

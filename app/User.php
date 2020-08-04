@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Favorite;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar',
+        'name', 'email', 'password', 'avatar', 'phone',
     ];
 
     /**
@@ -57,8 +58,29 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Blog');
     }
 
+    public function address()
+    {
+        return $this->hasOne('App\Models\Address');
+    }
+
     public function getRoles()
     {
         return $this->belongsToMany('App\Models\Role', 'model_has_roles', 'role_id', 'model_id');
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Models\Favorite', 'favorites', 'user_id', 'product_id')->withTimeStamps();
+    }
+
+    public function isFavorited($product_id)
+    {
+        $user = auth()->user();
+        $check = Favorite::where([
+            'user_id' => $user->id,
+            'product_id' => $product_id,
+        ]);
+
+        return $check->exists();
     }
 }

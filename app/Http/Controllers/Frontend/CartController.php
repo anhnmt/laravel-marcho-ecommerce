@@ -25,6 +25,8 @@ class CartController extends Controller
         $action = $cart->sumActionsAmount();
         $quantity = $cart->sumItemsQuantity();
 
+        // dd($items);
+
         return view('frontend.cart', compact(
             'items',
             'total',
@@ -65,9 +67,10 @@ class CartController extends Controller
             $product->price = $productAttribute->price;
             $attrValues = $productAttribute->attributesValues;
 
+            $options['product_attribute_id'] = $productAttribute->id;
+
             foreach ($attrValues as $value) {
                 $attr = Attribute::find($value->attribute_id);
-                // array_push($options, $value->value);
                 $options[$attr->slug] = [
                     'value' => $value->value,
                     'code' => $value->code
@@ -156,7 +159,7 @@ class CartController extends Controller
 
             return redirect()->route('cart.index')->withSuccess('Thêm vào giỏ thành công');
         } catch (\Exception $e) {
-            return redirect()->route('cart.index')->withError('Thêm vào giỏ thành công');
+            return redirect()->route('cart.index')->withError('Thêm vào giỏ thất bại');
         }
     }
 
@@ -177,7 +180,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return \Illuminate\Http\Response
+    * @return \Illuminate\Http\Response
      */
     public function clear()
     {

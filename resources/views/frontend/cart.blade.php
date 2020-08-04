@@ -1,3 +1,22 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'owlcarousel',
+'slick',
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -51,7 +70,9 @@
 							$itemOption = $item->getOptions();
 							@endphp
 							<tr id="{{ $item->getHash() }}">
-								<td class="product-thumbnail"><a href="#"><img src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}" alt="product1"></a></td>
+								<td class="product-thumbnail"><a href="#"><img
+											src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}"
+											alt="product1"></a></td>
 								<td class="product-name" data-title="Product">
 									<a href="{{ route('product.show', $itemDetail->model->slug) }}">
 										{{ $itemDetail->title }}
@@ -59,23 +80,28 @@
 										@if ($itemOption)
 										<p>
 											@foreach($itemOption as $option)
+											@if (is_array($option))
 											<span class="badge badge-danger">
 												{{ $option['code'] }}
 											</span>
+											@endif
 											@endforeach
 										</p>
 										@endif
 									</a>
 								</td>
-								<td class="product-price" data-title="Price">{{ number_format($itemDetail->price, 0) }}đ</td>
+								<td class="product-price" data-title="Price">{{ number_format($itemDetail->price, 0) }}đ
+								</td>
 								<td class="product-quantity" data-title="Quantity">
 									<div class="quantity">
 										<input type="button" value="-" class="minus">
-										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}" title="Qty" class="qty" size="4">
+										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}"
+											title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
 									</div>
 								</td>
-								<td class="product-subtotal" data-title="Total">{{ number_format($itemDetail->total_price, 0) }}đ</td>
+								<td class="product-subtotal" data-title="Total">
+									{{ number_format($itemDetail->total_price, 0) }}đ</td>
 								<td class="product-remove" data-title="Remove">
 									<form action="{{ route('cart.destroy', $item->getHash()) }}" method="POST">
 										@csrf
@@ -93,13 +119,15 @@
 											<div class="fix_btn_line_fill d-inline-block">
 												<form action="{{ route('cart.clear') }}" method="POST">
 													@csrf
-													<button type="submit" class="btn btn-fill-line">Xóa giỏ hàng</button>
+													<button type="submit" class="btn btn-fill-line">Xóa giỏ
+														hàng</button>
 												</form>
 											</div>
 										</div>
 
 										<div class="col-md-6 text-left text-md-right">
-											<a href="{{ route('home') }}" class="btn btn-fill-out">Tiếp tục mua sắm</a>
+											<a href="{{ route('product.index') }}" class="btn btn-fill-out">Tiếp tục mua
+												sắm</a>
 										</div>
 									</div>
 								</td>
@@ -114,7 +142,8 @@
 											Giỏ hàng của bạn còn trống.
 										</p>
 
-										<a href="{{ route('home') }}" class="btn btn-fill-out px-3 py-2">Mua ngay</a>
+										<a href="{{ route('product.index') }}" class="btn btn-fill-out px-3 py-2">Mua
+											ngay</a>
 									</div>
 								</td>
 							</tr>
@@ -135,11 +164,13 @@
 						</div>
 						<div class="mt-3">
 							<div class="form_group">
-								<input type="text" class="form_control coupon_code_input" placeholder="Nhập mã giảm giá..." name="coupon">
+								<input type="text" class="form_control coupon_code_input"
+									placeholder="Nhập mã giảm giá..." name="coupon">
 							</div>
 						</div>
 						<div class="text-right">
-							<button type="submit" class="btn btn-fill-out" @if ($quantity <=0) disabled @endif>Áp dụng</button>
+							<button type="submit" class="btn btn-fill-out" @if ($quantity <=0) disabled @endif>Áp
+								dụng</button>
 						</div>
 					</form>
 				</div>
@@ -154,7 +185,8 @@
 							<tbody>
 								<tr>
 									<td class="cart_total_label">Tổng tiền sản phẩm</td>
-									<td id="cart_subtotal" class="cart_total_amount">{{ number_format($total, 0) }}đ</td>
+									<td id="cart_subtotal" class="cart_total_amount">{{ number_format($total, 0) }}đ
+									</td>
 								</tr>
 								<tr>
 									<td class="cart_total_label">Mã giảm giá</td>
@@ -162,12 +194,14 @@
 								</tr>
 								<tr>
 									<td class="cart_total_label">Tất cả</td>
-									<td id="cart_total" class="cart_total_amount"><strong>{{ number_format($subtotal, 0) }}đ</strong></td>
+									<td id="cart_total" class="cart_total_amount">
+										<strong>{{ number_format($subtotal, 0) }}đ</strong></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if ($quantity <= 0) disabled @endif">Thanh toán ngay</a>
+					<a href="{{ route('checkout.index') }}"
+						class="btn btn-fill-out @if ($quantity <= 0) disabled @endif">Thanh toán ngay</a>
 				</div>
 			</div>
 		</div>
@@ -214,6 +248,7 @@
         Plus and minus quantity
 	------------------------------ */
 	$(function() {
+
 		$(".plus").on("click", function() {
 			var qty = $(this).closest("tr").find(".qty");
 			if (qty.val()) {
@@ -235,7 +270,7 @@
 			}
 		});
 
-		$(".qty").on("change", function() {
+		$(".qty").on("change", debounce(function(e) {
 			var self = this;
 
 			if ($(self).val() <= 0) {
@@ -246,10 +281,6 @@
 			var qty = $(self).val();
 			var total = $(self).closest("tr").find(".product-subtotal");
 
-			$(self).attr("disabled", true);
-			$(self).closest("tr").find(".plus").attr("disabled", true);
-			$(self).closest("tr").find(".minus").attr("disabled", true);
-
 			$.ajax({
 				"url": "cart/update/" + id,
 				"method": "POST",
@@ -258,9 +289,6 @@
 				}
 			}).done(function(json) {
 				// console.log(json);
-				$(self).attr("disabled", false);
-				$(self).closest("tr").find(".plus").attr("disabled", false);
-				$(self).closest("tr").find(".minus").attr("disabled", false);
 
 				if (json.success === true) {
 					total.html(json.item_total);
@@ -278,7 +306,7 @@
 					});
 				}
 			});
-		});
+		}, 300));
 	});
 </script>
 @endsection

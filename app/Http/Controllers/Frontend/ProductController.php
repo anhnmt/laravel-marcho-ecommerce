@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Blog;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -34,7 +34,7 @@ class ProductController extends Controller
         $relatedProducts = Product::where([
             ['category_id', $product->category_id],
             ['id', '!=', $product->id],
-        ])->orderBy('name', 'desc')->select('name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
+        ])->orderBy('name', 'desc')->select('id', 'name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
 
         $productAttributes = $product->attributes;
 
@@ -59,5 +59,39 @@ class ProductController extends Controller
             'latest_blog',
             'categories',
         ));
+    }
+
+    /**
+     * Favorite a particular post
+     *
+     * @param  Product $product
+     * @return Response
+     */
+    public function favorite(Product $product)
+    {
+        try {
+            $user = auth()->user();
+
+            if ($user->isFavorited($product->id)) {
+                $user->favorites()->detach($product->id);
+
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Bỏ thích sản phẩm thành công',
+                ]);
+            }
+
+            $user->favorites()->attach($product->id);
+
+            return response()->json([
+                'success' => true,
+                'msg' => 'Thích sản phẩm thành công',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Có lỗi xảy ra, vui lòng thử lại',
+            ]);
+        }
     }
 }

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Không thể tìm thấy tài khoản của bạn.',
+    'failed' => 'Tài khoản hoặc mật khẩu không chính xác.',
     'throttle' => 'Đăng nhập quá nhiều lần. Vui lòng thử lại sau :seconds giây.',
 
 ];

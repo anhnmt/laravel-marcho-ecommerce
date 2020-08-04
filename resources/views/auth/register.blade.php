@@ -1,3 +1,20 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'jquery-ui',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'jquery-scrollup',
+'custom',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
@@ -11,11 +28,11 @@
 						<div class="breadcrumb_content text-center">
 							<h1 class="font-weight-normal">Đăng ký</h1>
 							<ul>
-								<li class="mx-1"><a href="{{ route('register') }}"><i class="fal fa-home-alt mr-1"></i>Home</a></li>
+								<li class="mx-1"><a href="{{ route('register') }}"><i class="fal fa-home-alt mr-1"></i>Trang chủ</a></li>
 								<li class="mx-1">
-									<i class="fal fa-chevron-double-right"></i>
+									<i class="fal fa-angle-right"></i>
 								</li>
-								<li class=" mx-1 active">Register</li>
+								<li class=" mx-1 active">Đăng ký</li>
 							</ul>
 						</div>
 					</div>
@@ -47,8 +64,8 @@
 									@csrf
 
 									<div class="form-group">
-										<span>Họ và tên*</span>
-										<input id="name" type="text" class="form-control @error('name') is-invalid @enderror mt-2" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+										<label for="">Họ và tên*</label>
+										<input id="name" type="text" class="form-control @error('name') is-invalid @enderror mt-2" name="name" value="{{ old('name') }}" required autocomplete="name">
 
 										@error('name')
 										<span class="invalid-feedback" role="alert">
@@ -58,7 +75,7 @@
 									</div>
 
 									<div class="form-group">
-										<span>Địa chỉ email*</span>
+										<label>Địa chỉ email*</label>
 										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror mt-2" name="email" value="{{ old('email') }}" required autocomplete="email">
 
 										@error('email')
@@ -69,7 +86,7 @@
 									</div>
 
 									<div class="form-group">
-										<span>Mật khẩu*</span>
+										<label>Mật khẩu*</label>
 										<input id="password" type="password" class="form-control @error('password') is-invalid @enderror mt-2" name="password" required autocomplete="new-password">
 
 										@error('password')
@@ -80,7 +97,7 @@
 									</div>
 
 									<div class="form-group">
-										<span>Xác nhận mật khẩu*</span>
+										<label>Xác nhận mật khẩu*</label>
 										<input id="confirm" type="password" class="form-control mt-2" name="password_confirmation" required autocomplete="new-password">
 									</div>
 
