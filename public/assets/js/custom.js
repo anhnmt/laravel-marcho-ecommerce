@@ -40,13 +40,9 @@ function debounce(func, wait) {
         var scroll = $(window).scrollTop();
 
         if (scroll >= 150) {
-            $("header").addClass(
-                "fixed-top animated backInDown"
-            );
+            $("header").addClass("fixed-top animated backInDown");
         } else {
-            $("header").removeClass(
-                "fixed-top animated backInDown"
-            );
+            $("header").removeClass("fixed-top animated backInDown");
         }
     });
 
@@ -94,6 +90,31 @@ function debounce(func, wait) {
         var self = this;
         var id = $(self).data("product");
         $(self).toggleClass("active");
-        console.log(id);
+        // console.log(id);
+
+        $.ajax({
+            url: "/favorite/" + id,
+            method: "POST",
+        }).done(function (json) {
+            if (json.success === true) {
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    icon: "success",
+                    title: json.msg,
+                });
+            } else {
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    icon: "error",
+                    title: json.msg,
+                });
+            }
+        });
     });
 })(window.jQuery);

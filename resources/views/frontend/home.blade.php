@@ -132,7 +132,7 @@
 
 								<div class="product_item">
 									<div class="d-flex align-items-center justify-content-center">
-										<a class="add-wishlist" data-product="{{ $product->id }}">
+										<a class="add-wishlist @if(auth()->user()->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
 											<i class="fal fa-heart"></i>
 										</a>
 										<a class="add-cart">
@@ -154,10 +154,10 @@
 								</a>
 								<span class="price mt-2">
 									@if($product->sale_price)
-									<span class="new">{{ $product->sale_price }}đ</span>
-									<span class="old">{{ $product->price }}đ</span>
+									<span class="new">{{ number_format($product->sale_price, 0) }}đ</span>
+									<span class="old">{{ number_format($product->price, 0) }}đ</span>
 									@else
-									<span class="new">{{ $product->price }}đ</span>
+									<span class="new">{{ number_format($product->price, 0) }}đ</span>
 									@endif
 								</span>
 							</div>
@@ -221,13 +221,13 @@
 						<h2>Best Summer Collection</h2>
 					</div>
 					<h5 class="mb-4">Sale Get up to 50% Off</h5>
-					<a href="shop-left-sidebar.html" class="btn btn-fill-out rounded-0">Shop Now</a>
+					<a href="#/" class="btn btn-fill-out rounded-0">Shop Now</a>
 				</div>
 				<div class="medium_divider clearfix"></div>
 			</div>
 			<div class="col-md-5">
 				<div class="text-center">
-					<img src="assets/img/banner/banner.png" alt="">
+					<img src="{{ asset('assets/img/banner/banner.png') }}" alt="">
 				</div>
 			</div>
 		</div>
@@ -239,22 +239,22 @@
 		<div class="row">
 			<div class="slick_sponssor col-12">
 				<div class="item">
-					<img src="assets/img/sponssor/sponssor_1.png" alt="" />
+					<img src="{{ asset('assets/img/sponssor/sponssor_1.png') }}" alt="" />
 				</div>
 				<div class="item">
-					<img src="assets/img/sponssor/sponssor_2.png" alt="" />
+					<img src="{{ asset('assets/img/sponssor/sponssor_2.png') }}" alt="" />
 				</div>
 				<div class="item">
-					<img src="assets/img/sponssor/sponssor_3.png" alt="" />
+					<img src="{{ asset('assets/img/sponssor/sponssor_3.png') }}" alt="" />
 				</div>
 				<div class="item">
-					<img src="assets/img/sponssor/sponssor_4.png" alt="" />
+					<img src="{{ asset('assets/img/sponssor/sponssor_4.png') }}" alt="" />
 				</div>
 				<div class="item">
-					<img src="assets/img/sponssor/sponssor_5.png" alt="" />
+					<img src="{{ asset('assets/img/sponssor/sponssor_5.png') }}" alt="" />
 				</div>
 				<div class="item">
-					<img src="assets/img/sponssor/sponssor_6.png" alt="" />
+					<img src="{{ asset('assets/img/sponssor/sponssor_6.png') }}" alt="" />
 				</div>
 			</div>
 		</div>

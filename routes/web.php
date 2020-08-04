@@ -44,8 +44,7 @@ Route::group([
         Route::resource('blog.comment', 'CommentController');
 
         // Product Favorite
-        Route::post('product/{product}/favorite', 'ProductController@favorite')->name('product.favorite');
-        Route::post('product/{product}/unfavorite', 'ProductController@unFavorite')->name('product.unfavorite');
+        Route::post('favorite/{product}', 'ProductController@favorite')->name('product.favorite');
 
         // Cart
         Route::group([
