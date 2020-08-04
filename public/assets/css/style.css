@@ -2960,33 +2960,75 @@ select.not_chosen.form-control:focus {
 /*===================================*
     PROFILE SECTION
 *===================================*/
-.profile_section .list-group {
+.section {
+    padding: 100px 0;
+    position: relative;
+}
+.dashboard_menu {
     box-shadow: 0 0px 4px 0 #e9e9e9;
 }
-.profile_section .list-group .list-group-item{
+.nav-tabs li.nav-item a {
+    background-color: transparent;
+    border: 0;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 5px 20px;
+}
+ul, li, ol {
+    margin: 0;
+    padding: 0;
+}
+.dashboard_menu .nav-tabs li.nav-item a {
+    text-align: left;
+    padding: 12px 20px;
     border-radius: 0;
-    border: none;
     border-bottom: 1px solid #efefef;
-    padding: 20px 20px;
-    font-size: 18px;
+    color: #2b2f4c;
 }
-.profile_section .list-group .active{
-    background: #fe3e57;
-    color: #ffffff;
-    border: none;
+.dashboard_menu .nav-tabs li.nav-item a.active {
+    background-color: #FF324D;
+    color: #fff;
+}
+.dashboard_menu .nav-tabs li.nav-item a i {
+    margin-right: 10px;
+}
+.dashboard_content .card {
     border-radius: 0;
-    font-size: 20px;
-}
-.profile_section .card{
+    border: 0;
     box-shadow: 0 0px 4px 0 #e9e9e9;
-    border: none;
-    border-radius: 0;
 }
-.profile_section .card .card-header {
-    background-color: #ffffff;
-    border: none;
-    border-bottom: 1px solid #efefef;
+.dashboard_content .card-header {
+    background-color: transparent;
+    border-color: #f0f0f0;
 }
+.dashboard_content .card-header * {
+    margin: 0;
+}
+.card-body p {
+    margin-bottom: 15px;
+}
+.dashboard_content .card-body p:last-child {
+    margin: 0;
+}
+.dashboard_content .table {
+    margin: 0;
+}
+.dashboard_content .table thead th {
+    border: 0;
+    padding-top: 0;
+    font-weight: 600;
+}
+.dashboard_content .table tbody tr td {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.dashboard_content label {
+    color: #333;
+}
+
+
+
 /*===================================*
     CONTACT SECTION
 *===================================*/

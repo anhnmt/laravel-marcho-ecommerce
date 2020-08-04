@@ -18,7 +18,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+        return view('frontend.profile.order', compact('orders'));
     }
 
     /**
@@ -112,7 +113,7 @@ class OrderController extends Controller
             $cart = Cart::name('shopping');
             $cart->clearItems();
             
-            return redirect()->route('home')->withSuccess('Thanh toán thành công');
+            return redirect()->route('order.index')->withSuccess('Thanh toán thành công');
         }
 
         catch(\Exception $e){

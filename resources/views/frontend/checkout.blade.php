@@ -1,3 +1,23 @@
+@php
+\Assets::addStyles([
+'animate',
+'bootstrap',
+'fontawesome',
+'select2',
+'select2-bootstrap4',
+'font-roboto-quicksand',
+'custom-style',
+'custom-responsive',
+]);
+
+\Assets::addScripts([
+'select2',
+'jquery-scrollup',
+'custom',
+'custom-select2',
+]);
+@endphp
+
 @extends('layouts.master')
 
 @section('main')
