@@ -70,9 +70,11 @@
 							$itemOption = $item->getOptions();
 							@endphp
 							<tr id="{{ $item->getHash() }}">
-								<td class="product-thumbnail"><a href="#"><img
-											src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}"
-											alt="product1"></a></td>
+								<td class="product-thumbnail">
+									<a href="{{ route('product.show', $itemDetail->model->slug) }}">
+										<img src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}" alt="product1">
+									</a>
+								</td>
 								<td class="product-name" data-title="Product">
 									<a href="{{ route('product.show', $itemDetail->model->slug) }}">
 										{{ $itemDetail->title }}
@@ -95,8 +97,7 @@
 								<td class="product-quantity" data-title="Quantity">
 									<div class="quantity">
 										<input type="button" value="-" class="minus">
-										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}"
-											title="Qty" class="qty" size="4">
+										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}" title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
 									</div>
 								</td>
@@ -164,8 +165,7 @@
 						</div>
 						<div class="mt-3">
 							<div class="form_group">
-								<input type="text" class="form_control coupon_code_input"
-									placeholder="Nhập mã giảm giá..." name="coupon">
+								<input type="text" class="form_control coupon_code_input" placeholder="Nhập mã giảm giá..." name="coupon">
 							</div>
 						</div>
 						<div class="text-right">
@@ -200,8 +200,7 @@
 							</tbody>
 						</table>
 					</div>
-					<a href="{{ route('checkout.index') }}"
-						class="btn btn-fill-out @if ($quantity <= 0) disabled @endif">Thanh toán ngay</a>
+					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if ($quantity <= 0) disabled @endif">Thanh toán ngay</a>
 				</div>
 			</div>
 		</div>
@@ -210,39 +209,6 @@
 @endsection
 
 @section('script')
-<!-- SweetAlert2 -->
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-@if(session('success'))
-<script>
-	$(function() {
-		Swal.fire({
-			toast: true,
-			position: "top-end",
-			showConfirmButton: false,
-			timer: 3000,
-			icon: "success",
-			title: "{{ session('success') }}",
-		});
-	});
-</script>
-@endif
-
-@if(session('error'))
-<script>
-	$(function() {
-		Swal.fire({
-			toast: true,
-			position: "top-end",
-			showConfirmButton: false,
-			timer: 3000,
-			icon: "error",
-			title: "{{ session('error') }}",
-		});
-	});
-</script>
-@endif
-
 <script>
 	/*-------------------------------
         Plus and minus quantity

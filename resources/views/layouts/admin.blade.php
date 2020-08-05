@@ -252,7 +252,7 @@
         $(function() {
             Swal.fire({
                 toast: true,
-                position: "top-end",
+                position: "bottom-end",
                 showConfirmButton: false,
                 timer: 3000,
                 icon: "success",
@@ -267,7 +267,7 @@
         $(function() {
             Swal.fire({
                 toast: true,
-                position: "top-end",
+                position: "bottom-end",
                 showConfirmButton: false,
                 timer: 3000,
                 icon: "error",

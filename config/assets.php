@@ -232,6 +232,13 @@ return [
                     'local' => 'assets/plugins/slick/slick.min.js',
                 ],
             ],
+            'waypoints' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/plugins/waypoints/jquery.waypoints.min.js',
+                ],
+            ],
             'wowjs' => [
                 'use_cdn'  => false,
                 'location' => 'footer',
@@ -300,6 +307,13 @@ return [
                 'location' => 'footer',
                 'src' => [
                     'local' => 'assets/js/custom-slick.js',
+                ],
+            ],
+            'custom-waypoints' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-waypoints.js',
                 ],
             ],
             'custom-wow' => [

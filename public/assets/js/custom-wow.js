@@ -6,7 +6,7 @@
 	*===================================*/
     var wow = new WOW({
         boxClass: "wow",
-        animateClass: "animate__animated",
+        animateClass: "",
         offset: 0,
         mobile: true,
         live: true,

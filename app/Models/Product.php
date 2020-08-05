@@ -78,4 +78,17 @@ class Product extends Model implements UseCartable
     {
         return $this->hasMany(ProductAttribute::class);
     }
+
+    /**
+     * Determine whether a post has been marked as favorite by a user.
+     *
+     * @return boolean
+     */
+    public function favorited()
+    {
+        $user = auth()->user();
+        return (bool) Favorite::where('user_id', Auth::id())
+            ->where('post_id', $this->id)
+            ->first();
+    }
 }

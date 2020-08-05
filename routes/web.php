@@ -44,7 +44,13 @@ Route::group([
         Route::resource('blog.comment', 'CommentController');
 
         // Product Favorite
-        Route::post('favorite/{product}', 'ProductController@favorite')->name('product.favorite');
+        Route::group([
+            'prefix' => 'favorite',
+        ], function () {
+            Route::get('/', 'FavoriteController@index')->name('favorite.index');
+            Route::get('list', 'FavoriteController@list')->name('favorite.list');
+            Route::get('{product}', 'FavoriteController@favorite')->name('favorite.favorite');
+        });
 
         // Cart
         Route::group([
@@ -52,6 +58,8 @@ Route::group([
         ], function () {
             // Show Cart
             Route::get('/', 'CartController@index')->name('cart.index');
+            // List Cart
+            Route::get('list', 'CartController@list')->name('cart.list');
             // Add Cart
             Route::post('store', 'CartController@store')->name('cart.store');
             // Discount Cart

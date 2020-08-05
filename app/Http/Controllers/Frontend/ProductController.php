@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Blog;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Favorite;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
         $categories = Category::all();
         $products = Product::orderBy('id', 'desc')->paginate(10);
 
-        return view('frontend.product', compact('products', 'categories'));
+        return view('frontend.product', compact('user', 'products', 'categories'));
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductController extends Controller
 
         $user = auth()->user();
 
-        if (auth()->check()) {
+        if ($user) {
             $user->avatar = $user->avatar ? $user->avatar : 'assets/img/user2-160x160.jpg';
         }
 
@@ -59,39 +59,5 @@ class ProductController extends Controller
             'latest_blog',
             'categories',
         ));
-    }
-
-    /**
-     * Favorite a particular post
-     *
-     * @param  Product $product
-     * @return Response
-     */
-    public function favorite(Product $product)
-    {
-        try {
-            $user = auth()->user();
-
-            if ($user->isFavorited($product->id)) {
-                $user->favorites()->detach($product->id);
-
-                return response()->json([
-                    'success' => true,
-                    'msg' => 'Bỏ thích sản phẩm thành công',
-                ]);
-            }
-
-            $user->favorites()->attach($product->id);
-
-            return response()->json([
-                'success' => true,
-                'msg' => 'Thích sản phẩm thành công',
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'msg' => 'Có lỗi xảy ra, vui lòng thử lại',
-            ]);
-        }
     }
 }

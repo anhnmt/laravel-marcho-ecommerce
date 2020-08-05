@@ -48,20 +48,22 @@
                             <i class="fal fa-search"></i>
                         </a>
                     </li>
+                    @php
+                    $user = auth()->user();
+                    $cart = Cart::name('shopping');
+                    $cartCount = $cart->sumItemsQuantity();
+                    $favoriteCount = $user ? $user->favorites()->count() : 0;
+                    @endphp
                     <li class="nav-item">
-                        <a class="nav-link icon_love" href="#">
+                        <a class="nav-link icon_love" href="{{ route('favorite.index') }}">
                             <i class="fal fa-heart"></i>
-                            <span class="wishlist_count">0</span>
+                            <span id="favorite_count" class="wishlist_count">{{ $favoriteCount }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
                             <i class="fal fa-shopping-cart"></i>
-                            @php
-                            $cart = Cart::name('shopping');
-                            $items = $cart->sumItemsQuantity();
-                            @endphp
-                            <span id="cart_count" class="cart_count">{{ $items }}</span>
+                            <span id="cart_count" class="cart_count">{{ $cartCount }}</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -227,6 +229,36 @@
     {!! \Assets::renderFooter() !!}
 
     @yield('script')
+
+    @if(session('success'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "success",
+                title: "{{ session('success') }}",
+            });
+        });
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "error",
+                title: "{{ session('error') }}",
+            });
+        });
+    </script>
+    @endif
 </body>
 
 </html>

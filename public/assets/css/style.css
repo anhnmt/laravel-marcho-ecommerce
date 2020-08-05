@@ -2794,7 +2794,7 @@ select.not_chosen.form-control:focus {
     LOGIN SECTION
 *===================================*/
 .login-wrapper {
-    margin: 150px 0;
+    margin: 100px 0;
 }
 .login-wrapper .label-remember {
     display: block;

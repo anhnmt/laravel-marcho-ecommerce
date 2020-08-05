@@ -16,12 +16,12 @@
 \Assets::addScripts([
 'owlcarousel',
 'slick',
-'wowjs',
+'waypoints',
 'jquery-scrollup',
 'custom',
 'custom-owlcarousel',
 'custom-slick',
-'custom-wow',
+'custom-waypoints',
 ]);
 @endphp
 
@@ -39,9 +39,9 @@
 						<div class="row">
 							<div class="col-lg-7 col-9">
 								<div class="banner_content overflow-hidden">
-									<h5 class="mb-3 font-weight-light wow animate__slideInLeft" data-wow-delay="0.5s">{{ $slider->body }}</h5>
-									<h2 class="wow animate__slideInLeft" data-wow-delay="1s">{{ $slider->name }}</h2>
-									<a class="btn btn-fill-out rounded-0 text-uppercase wow animate__slideInLeft" href="{{ $slider->link }}" data-wow-delay="1.5s">Xem Ngay</a>
+									<h5 class="mb-3 font-weight-light wow animate__animated animate__slideInLeft" data-wow-delay="0.5s">{{ $slider->body }}</h5>
+									<h2 class="wow animate__animated animate__slideInLeft" data-wow-delay="1s">{{ $slider->name }}</h2>
+									<a class="btn btn-fill-out rounded-0 text-uppercase wow animate__animated animate__slideInLeft" href="{{ $slider->link }}" data-wow-delay="1.5s">Xem Ngay</a>
 								</div>
 							</div>
 						</div>
@@ -63,39 +63,39 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item">
+				<div class="grid_item wow animate__fadeIn" data-wow-delay="0.2s">
 					<div class="grid_inner_item">
 						<div class="makp_icon">
 							<i class="fal fa-shipping-fast"></i>
 						</div>
 						<div class="makp_content">
-							<h3><a href="serice-details.html">Miễn Phí Vận chuyển</a></h3>
+							<h3><a href="#/">Miễn Phí Vận chuyển</a></h3>
 							<p>Chúng tôi miễn mọi chi phí vận chuyển trên toàn quốc</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item">
+				<div class="grid_item wow animate__fadeIn" data-wow-delay="0.5s">
 					<div class="grid_inner_item">
 						<div class="makp_icon">
 							<i class="fal fa-history"></i>
 						</div>
 						<div class="makp_content">
-							<h3><a href="serice-details.html">30 Ngày Đổi Trả</a></h3>
+							<h3><a href="#/">30 Ngày Đổi Trả</a></h3>
 							<p>Miễn phí đổi trả trong vòng 30 ngày kể từ khi nhận được sản phẩm</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item">
+				<div class="grid_item wow animate__fadeIn" data-wow-delay="0.8s">
 					<div class="grid_inner_item">
 						<div class="makp_icon">
 							<i class="fal fa-hand-holding-heart"></i>
 						</div>
 						<div class="makp_content">
-							<h3><a href="serice-details.html">Hỗ Trợ 24/7</a></h3>
+							<h3><a href="#/">Hỗ Trợ 24/7</a></h3>
 							<p>Chúng tôi luôn lắng nghe và giải đáp mọi thắc mắc của khách hàng</p>
 						</div>
 					</div>
@@ -126,13 +126,15 @@
 				<div class="row">
 					@foreach($products as $product)
 					<div class="col-lg-4 col-md-6 col-sm-12">
-						<div class="card">
+						<div class="card wow animate__zoomIn">
 							<div class="product_image">
-								<img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
+								<a href="{{ route('product.show', $product->slug) }}">
+									<img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
+								</a>
 
 								<div class="product_item">
 									<div class="d-flex align-items-center justify-content-center">
-										<a class="add-wishlist @if(auth()->user()->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
+										<a class="add-wishlist @if($user && $user->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
 											<i class="fal fa-heart"></i>
 										</a>
 										<a class="add-cart">

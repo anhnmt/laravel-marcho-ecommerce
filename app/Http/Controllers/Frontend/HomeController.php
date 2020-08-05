@@ -17,10 +17,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
         $sliders = Slider::all();
         $latest_blog = Blog::latest(3);
-        $products = Product::orderBy('id', 'desc')->paginate(6);
+        $products = Product::orderBy('updated_at', 'desc')->paginate(6);
 
-        return view('frontend.home', compact('sliders', 'latest_blog', 'products'));
+        return view('frontend.home', compact('user', 'sliders', 'latest_blog', 'products'));
     }
 }

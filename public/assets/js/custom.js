@@ -94,7 +94,7 @@ function debounce(func, wait) {
 
         $.ajax({
             url: "/favorite/" + id,
-            method: "POST",
+            method: "GET",
         }).done(function (json) {
             if (json.success === true) {
                 Swal.fire({
