@@ -66,7 +66,7 @@
 							<tr id="{{ $item->getHash() }}">
 								<td class="product-thumbnail">
 									<a href="{{ route('product.show', $itemDetail->model->slug) }}">
-										<img src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}" alt="product1">
+										<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}" alt="product1">
 									</a>
 								</td>
 								<td class="product-name" data-title="Product">

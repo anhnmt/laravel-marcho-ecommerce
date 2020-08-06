@@ -21,7 +21,7 @@ class CategoryController extends Controller
         return datatables($categories)
             ->addColumn('image', function ($category) {
                 $thumb_url = $category->image ? $category->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . $thumb_url . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . $thumb_url . '"/>';
             })
             ->addColumn('status', function ($category) {
                 return $category->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';

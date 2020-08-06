@@ -124,7 +124,7 @@
 						<div class="card ez-animate" data-animation="animate__fadeIn">
 							<div class="product_image">
 								<a href="{{ route('product.show', $product->slug) }}">
-									<img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
+									<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
 								</a>
 
 								<div class="product_item">
@@ -185,7 +185,7 @@
 					<div class="grid_inner_item">
 						<div class="blog_img">
 							<a href="{{ route('blog.show', $blog->slug) }}">
-								<img src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="">
+								<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="">
 							</a>
 						</div>
 						<div class="blog_info">
@@ -224,7 +224,7 @@
 			</div>
 			<div class="col-md-5">
 				<div class="text-center">
-					<img src="{{ asset('assets/img/banner/banner.png') }}" alt="">
+					<img loading="lazy" src="{{ asset('assets/img/banner/banner.png') }}" alt="">
 				</div>
 			</div>
 		</div>
@@ -235,22 +235,22 @@
 	<div class="swiper_sponssor swiper-container">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
-				<img src="{{ asset('assets/img/sponssor/sponssor_1.png') }}" alt="" />
+				<img loading="lazy" src="{{ asset('assets/img/sponssor/sponssor_1.png') }}" alt="" />
 			</div>
 			<div class="swiper-slide">
-				<img src="{{ asset('assets/img/sponssor/sponssor_2.png') }}" alt="" />
+				<img loading="lazy" src="{{ asset('assets/img/sponssor/sponssor_2.png') }}" alt="" />
 			</div>
 			<div class="swiper-slide">
-				<img src="{{ asset('assets/img/sponssor/sponssor_3.png') }}" alt="" />
+				<img loading="lazy" src="{{ asset('assets/img/sponssor/sponssor_3.png') }}" alt="" />
 			</div>
 			<div class="swiper-slide">
-				<img src="{{ asset('assets/img/sponssor/sponssor_4.png') }}" alt="" />
+				<img loading="lazy" src="{{ asset('assets/img/sponssor/sponssor_4.png') }}" alt="" />
 			</div>
 			<div class="swiper-slide">
-				<img src="{{ asset('assets/img/sponssor/sponssor_5.png') }}" alt="" />
+				<img loading="lazy" src="{{ asset('assets/img/sponssor/sponssor_5.png') }}" alt="" />
 			</div>
 			<div class="swiper-slide">
-				<img src="{{ asset('assets/img/sponssor/sponssor_6.png') }}" alt="" />
+				<img loading="lazy" src="{{ asset('assets/img/sponssor/sponssor_6.png') }}" alt="" />
 			</div>
 		</div>
 	</div>

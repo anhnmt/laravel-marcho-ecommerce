@@ -61,19 +61,19 @@
                                     <div class="swiper-container gallery-thumbs" style="height: 500px;">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <img src="{{ asset($product->image) }}" alt="">
+                                                <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset($product->image) }}" alt="">
+                                                <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset($product->image) }}" alt="">
+                                                <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset($product->image) }}" alt="">
+                                                <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset($product->image) }}" alt="">
+                                                <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -83,19 +83,19 @@
                                     <div class="swiper-container gallery-top" style="height: 500px;">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                         </div>
                                         <!-- Add Arrows -->
@@ -311,7 +311,7 @@
                             <div class="row">
                                 <div class="product_image col-md-4 col-sm-12 col-12">
                                     <a href="{{ route('product.show', $product->slug) }}">
-                                        <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                        <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
                                     </a>
 
                                     <div class="product_item">

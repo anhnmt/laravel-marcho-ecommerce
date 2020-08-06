@@ -21,7 +21,7 @@ class SliderController extends Controller
         return datatables($sliders)
             ->addColumn('image', function ($slider) {
                 $thumb_url = $slider->image ? $slider->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . asset($thumb_url) . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . asset($thumb_url) . '"/>';
             })
             ->addColumn('status', function ($slider) {
                 return $slider->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';

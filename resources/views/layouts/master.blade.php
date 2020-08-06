@@ -18,7 +18,7 @@
         <div class="container">
             <nav class="menu_bar navbar navbar-expand-lg align-items-center justify-content-between">
                 <a class="header_logo navbar-brand" href="{{ route('home') }}">
-                    <img class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
+                    <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
                     <li class="nav-item dropdown">
                         @if(auth()->check())
                         <a class="nav-link user_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset($user->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
+                            <img loading="lazy" src="{{ asset($user->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @can('admin.dashboard')
@@ -113,7 +113,7 @@
             <div class="row">
                 <div class="address col-md-3">
                     <h5 class="my-3">
-                        <img class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
+                        <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
                     </h5>
                     <p>
                         No. 342 - London Oxford Street,<br />
@@ -195,27 +195,27 @@
                         <ul class="footer_payment text-center text-md-right">
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/visa.png') }}" alt="visa">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/visa.png') }}" alt="visa">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/discover.png') }}" alt="discover">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/discover.png') }}" alt="discover">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/master_card.png') }}" alt="master_card">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/master_card.png') }}" alt="master_card">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/paypal.png') }}" alt="paypal">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/paypal.png') }}" alt="paypal">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/amarican_express.png') }}" alt="amarican_express">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/amarican_express.png') }}" alt="amarican_express">
                                 </a>
                             </li>
                         </ul>

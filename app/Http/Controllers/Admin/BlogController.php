@@ -21,7 +21,7 @@ class BlogController extends Controller
         return datatables($blogs)
             ->addColumn('image', function ($blog) {
                 $thumb_url = $blog->image ? $blog->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . $thumb_url . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . $thumb_url . '"/>';
             })
             ->addColumn('status', function ($blog) {
                 return $blog->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';

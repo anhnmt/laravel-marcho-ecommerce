@@ -24,7 +24,7 @@ class ProductController extends Controller
         return datatables($categories)
             ->addColumn('image', function ($product) {
                 $product->image = $product->image ? $product->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . asset($product->image) . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . asset($product->image) . '"/>';
             })
             ->addColumn('status', function ($product) {
                 return $product->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';

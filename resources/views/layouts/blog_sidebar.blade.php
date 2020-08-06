@@ -17,7 +17,7 @@
                 <div class="row no-gutters">
                     <div class="col-4 pr-2 post_img">
                         <a href="{{ route('blog.show', $blog->slug) }}">
-                            <img src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="{{ $blog->name }}">
+                            <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="{{ $blog->name }}">
                         </a>
                     </div>
                     <div class="col-8 post_info">

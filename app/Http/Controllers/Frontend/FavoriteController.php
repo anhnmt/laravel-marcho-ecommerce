@@ -21,7 +21,7 @@ class FavoriteController extends Controller
         return datatables($favorites)
             ->addColumn('image', function ($favorite) {
                 $thumb_url = $favorite->image ? $favorite->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . $thumb_url . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . $thumb_url . '"/>';
             })
             ->addColumn('price', function ($productAttribute) {
                 return number_format($productAttribute->price, 0) . 'đ';
