@@ -40,9 +40,4 @@ class Blog extends Model
     {
         return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
     }
-
-    public static function latest($take = 5)
-    {
-        return Blog::orderBy('id', 'desc')->take($take)->get();
-    }
 }

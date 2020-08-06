@@ -32,6 +32,8 @@ Route::group([
     // Product
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+    // Product Attribute
+    Route::get('product-attribute/{productAttribute}', 'ProductController@quantity')->name('product.quantity');
 
     // Contact
     Route::view('contact', 'frontend.contact')->name('contact');
@@ -43,7 +45,7 @@ Route::group([
         // Blog Comment
         Route::resource('blog.comment', 'CommentController');
 
-        // Product Favorite
+        // Favorite
         Route::group([
             'prefix' => 'favorite',
         ], function () {
@@ -69,7 +71,7 @@ Route::group([
             // Remove Cart
             Route::post('destroy/{id}', 'CartController@destroy')->name('cart.destroy');
             // Clear All Cart
-            Route::get('clear', 'CartController@clear')->name('cart.clear');
+            Route::post('clear', 'CartController@clear')->name('cart.clear');
         });
 
         // Checkout

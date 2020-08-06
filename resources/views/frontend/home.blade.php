@@ -1,13 +1,8 @@
 @php
 \Assets::addStyles([
-'animate',
-'bootstrap',
-'slick',
-'slick-theme',
+'swiper',
 'owlcarousel',
 'owlcarousel-theme',
-'fontawesome',
-'jquery-ui',
 'font-roboto-quicksand',
 'custom-style',
 'custom-responsive',
@@ -15,12 +10,12 @@
 
 \Assets::addScripts([
 'owlcarousel',
-'slick',
+'swiper',
 'waypoints',
 'jquery-scrollup',
 'custom',
 'custom-owlcarousel',
-'custom-slick',
+'custom-swiper',
 'custom-waypoints',
 ]);
 @endphp
@@ -39,9 +34,9 @@
 						<div class="row">
 							<div class="col-lg-7 col-9">
 								<div class="banner_content overflow-hidden">
-									<h5 class="mb-3 font-weight-light wow animate__animated animate__slideInLeft" data-wow-delay="0.5s">{{ $slider->body }}</h5>
-									<h2 class="wow animate__animated animate__slideInLeft" data-wow-delay="1s">{{ $slider->name }}</h2>
-									<a class="btn btn-fill-out rounded-0 text-uppercase wow animate__animated animate__slideInLeft" href="{{ $slider->link }}" data-wow-delay="1.5s">Xem Ngay</a>
+									<h5 class="mb-3 font-weight-light ez-animate" data-animation="animate__slideInLeft" data-animation-delay="0.5s">{{ $slider->body }}</h5>
+									<h2 class=" ez-animate" data-animation="animate__slideInLeft" data-animation-delay="1s">{{ $slider->name }}</h2>
+									<a class="btn btn-fill-out rounded-0 text-uppercase ez-animate" href="{{ $slider->link }}" data-animation="animate__slideInLeft" data-animation-delay="1.5s">Xem Ngay</a>
 								</div>
 							</div>
 						</div>
@@ -63,7 +58,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__fadeIn" data-wow-delay="0.2s">
+				<div class="grid_item ez-animate" data-animation="animate__fadeIn" data-animation-delay="0.2s">
 					<div class="grid_inner_item">
 						<div class="makp_icon">
 							<i class="fal fa-shipping-fast"></i>
@@ -76,7 +71,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__fadeIn" data-wow-delay="0.5s">
+				<div class="grid_item ez-animate" data-animation="animate__fadeIn" data-animation-delay="0.5s">
 					<div class="grid_inner_item">
 						<div class="makp_icon">
 							<i class="fal fa-history"></i>
@@ -89,7 +84,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__fadeIn" data-wow-delay="0.8s">
+				<div class="grid_item ez-animate" data-animation="animate__fadeIn" data-animation-delay="0.8s">
 					<div class="grid_inner_item">
 						<div class="makp_icon">
 							<i class="fal fa-hand-holding-heart"></i>
@@ -125,8 +120,8 @@
 			<div class="col-lg-12">
 				<div class="row">
 					@foreach($products as $product)
-					<div class="col-lg-4 col-md-6 col-sm-12">
-						<div class="card wow animate__zoomIn">
+					<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="card ez-animate" data-animation="animate__fadeIn">
 							<div class="product_image">
 								<a href="{{ route('product.show', $product->slug) }}">
 									<img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
@@ -178,15 +173,15 @@
 			<div class="col-lg-8">
 				<div class="section_title text-center">
 					<h2>Tin tức</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+					<p>Nơi chia sẻ những bí quyết mặc đẹp hữu ích, mẹo làm đẹp, khơi gợi cảm hứng thời trang trong bạn.</p>
 				</div>
 			</div>
 		</div>
 		<div class="row pb-4">
 			@if($latest_blog ?? '')
 			@foreach ($latest_blog as $blog)
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="grid_item wow animate__zoomIn">
+			<div class="col-lg-3 col-md-6 col-sm-12">
+				<div class="grid_item ez-animate" data-animation="animate__fadeIn">
 					<div class="grid_inner_item">
 						<div class="blog_img">
 							<a href="{{ route('blog.show', $blog->slug) }}">
@@ -236,28 +231,26 @@
 	</div>
 </section>
 
-<section class="sponssor_logo py-5">
-	<div class="container">
-		<div class="row">
-			<div class="slick_sponssor col-12">
-				<div class="item">
-					<img src="{{ asset('assets/img/sponssor/sponssor_1.png') }}" alt="" />
-				</div>
-				<div class="item">
-					<img src="{{ asset('assets/img/sponssor/sponssor_2.png') }}" alt="" />
-				</div>
-				<div class="item">
-					<img src="{{ asset('assets/img/sponssor/sponssor_3.png') }}" alt="" />
-				</div>
-				<div class="item">
-					<img src="{{ asset('assets/img/sponssor/sponssor_4.png') }}" alt="" />
-				</div>
-				<div class="item">
-					<img src="{{ asset('assets/img/sponssor/sponssor_5.png') }}" alt="" />
-				</div>
-				<div class="item">
-					<img src="{{ asset('assets/img/sponssor/sponssor_6.png') }}" alt="" />
-				</div>
+<section class="sponssor_logo my-4 py-5">
+	<div class="swiper_sponssor swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<img src="{{ asset('assets/img/sponssor/sponssor_1.png') }}" alt="" />
+			</div>
+			<div class="swiper-slide">
+				<img src="{{ asset('assets/img/sponssor/sponssor_2.png') }}" alt="" />
+			</div>
+			<div class="swiper-slide">
+				<img src="{{ asset('assets/img/sponssor/sponssor_3.png') }}" alt="" />
+			</div>
+			<div class="swiper-slide">
+				<img src="{{ asset('assets/img/sponssor/sponssor_4.png') }}" alt="" />
+			</div>
+			<div class="swiper-slide">
+				<img src="{{ asset('assets/img/sponssor/sponssor_5.png') }}" alt="" />
+			</div>
+			<div class="swiper-slide">
+				<img src="{{ asset('assets/img/sponssor/sponssor_6.png') }}" alt="" />
 			</div>
 		</div>
 	</div>

@@ -1,17 +1,11 @@
 @php
 \Assets::addStyles([
-'animate',
-'bootstrap',
-'fontawesome',
-'jquery-ui',
 'font-roboto-quicksand',
 'custom-style',
 'custom-responsive',
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
 'jquery-scrollup',
 'custom',
 ]);
@@ -92,6 +86,13 @@
 										@endif
 									</a>
 								</td>
+								@php
+								$product_quantity = $itemDetail->model->quantity;
+								if(isset($itemOption['product_attribute_id'])) {
+								$productAttribute = \App\Models\ProductAttribute::find($itemOption['product_attribute_id']);
+								$product_quantity= $productAttribute->quantity;
+								}
+								@endphp
 								<td class="product-price" data-title="Price">{{ number_format($itemDetail->price, 0) }}đ
 								</td>
 								<td class="product-quantity" data-title="Quantity">
@@ -99,6 +100,7 @@
 										<input type="button" value="-" class="minus">
 										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}" title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
+										<input type="hidden" class="product_quantity" value="{{ $product_quantity }}">
 									</div>
 								</td>
 								<td class="product-subtotal" data-title="Total">
@@ -169,8 +171,7 @@
 							</div>
 						</div>
 						<div class="text-right">
-							<button type="submit" class="btn btn-fill-out" @if ($quantity <=0) disabled @endif>Áp
-								dụng</button>
+							<button type="submit" class="btn btn-fill-out" @if ($quantity <=0) disabled @endif>Áp dụng</button>
 						</div>
 					</form>
 				</div>
@@ -214,23 +215,31 @@
         Plus and minus quantity
 	------------------------------ */
 	$(function() {
-
 		$(".plus").on("click", function() {
-			var qty = $(this).closest("tr").find(".qty");
-			if (qty.val()) {
-				qty.val(+qty.val() + 1);
-				$(this).closest("tr").find(".minus").attr("disabled", false);
+			var self = this;
+			var qty = $(self).closest("tr").find(".qty");
+			var maxQty = $(self).closest("tr").find(".product_quantity").val();
+
+			if (parseInt(qty.val()) < parseInt(maxQty)) {
+				qty.val(+parseInt(qty.val()) + 1);
+				$(self).closest("tr").find(".minus").attr("disabled", false);
 				//Trigger change event
 				qty.trigger("change");
+			} else {
+				$(self).attr("disabled", true);
 			}
 		});
 
 		$(".minus").on("click", function() {
-			var qty = $(this).closest("tr").find(".qty");
-			if (qty.val() <= 1) {
-				$(this).attr("disabled", true);
+			var self = this;
+
+			var qty = $(self).closest("tr").find(".qty");
+
+			if (parseInt(qty.val()) < 2) {
+				$(self).attr("disabled", true);
 			} else {
-				qty.val(+qty.val() - 1);
+				qty.val(+parseInt(qty.val()) - 1);
+				$(self).closest("tr").find(".plus").attr("disabled", false);
 				//Trigger change event
 				qty.trigger("change");
 			}
@@ -238,10 +247,18 @@
 
 		$(".qty").on("change", debounce(function(e) {
 			var self = this;
+			var maxQty = $(self).closest("tr").find(".product_quantity").val();
 
-			if ($(self).val() <= 0) {
+			if (parseInt($(self).val()) <= 0 || isNaN($(self).val())) {
 				$(self).val(1);
 			}
+
+			if (parseInt($(self).val()) > maxQty) {
+				$(self).val(maxQty);
+			}
+
+			$(self).closest("tr").find(".plus").attr("disabled", false);
+			$(self).closest("tr").find(".minus").attr("disabled", false);
 
 			var id = $(self).closest("tr").attr('id');
 			var qty = $(self).val();

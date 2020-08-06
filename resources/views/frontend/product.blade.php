@@ -1,9 +1,5 @@
 @php
 \Assets::addStyles([
-'animate',
-'bootstrap',
-'fontawesome',
-'jquery-ui',
 'font-roboto-quicksand',
 'nice-select',
 'custom-style',
@@ -11,8 +7,6 @@
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
 'nice-select',
 'jquery-scrollup',
 'custom',

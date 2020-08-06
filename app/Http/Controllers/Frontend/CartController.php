@@ -64,8 +64,12 @@ class CartController extends Controller
 
         if ($request->has('productAttribute')) {
             $productAttribute = ProductAttribute::find($request->productAttribute);
-            $product->price = $productAttribute->price;
             $attrValues = $productAttribute->attributesValues;
+            $product->price = $productAttribute->price;
+
+            if ($productAttribute->sale_price) {
+                $product->price = $productAttribute->sale_price;
+            }
 
             $options['product_attribute_id'] = $productAttribute->id;
 
@@ -180,7 +184,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-    * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function clear()
     {

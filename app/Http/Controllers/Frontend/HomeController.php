@@ -19,8 +19,8 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         $sliders = Slider::all();
-        $latest_blog = Blog::latest(3);
-        $products = Product::orderBy('updated_at', 'desc')->paginate(6);
+        $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(4);
+        $products = Product::orderBy('updated_at', 'desc')->paginate(8);
 
         return view('frontend.home', compact('user', 'sliders', 'latest_blog', 'products'));
     }

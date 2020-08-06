@@ -1,11 +1,6 @@
 @php
 \Assets::addStyles([
-'animate',
-'bootstrap',
-'fontawesome',
-'jquery-ui',
-'slick',
-'slick-theme',
+'swiper',
 'select2',
 'select2-bootstrap4',
 'font-roboto-quicksand',
@@ -14,11 +9,11 @@
 ]);
 
 \Assets::addScripts([
-'slick',
+'swiper',
 'select2',
 'jquery-scrollup',
 'custom',
-'custom-slick',
+'custom-swiper',
 'custom-select2',
 ]);
 @endphp
@@ -41,9 +36,9 @@
                                         <i class="fal fa-home-alt mr-1"></i>Trang chủ
                                     </a>
                                 </li>
-                                <li class="mx-1">
-                                    <i class="fal fa-chevron-double-right"></i>
-                                </li>
+								<li class="mx-1">
+									<i class="fal fa-angle-right"></i>
+								</li>
                                 <li class=" mx-1 active">Chi tiết sản phẩm</li>
                             </ul>
                         </div>
@@ -63,42 +58,49 @@
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <div class="slider slider-nav">
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset($product->image) }}" alt="">
+                                    <div class="swiper-container gallery-thumbs" style="height: 500px;">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset($product->image) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset($product->image) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset($product->image) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset($product->image) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset($product->image) }}" alt="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-8 text-center">
-                                    <div class="slider slider-for">
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                    <div class="swiper-container gallery-top" style="height: 500px;">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                            </div>
                                         </div>
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
-                                        </div>
+                                        <!-- Add Arrows -->
+                                        <div class="swiper-button-next swiper-button-white"></div>
+                                        <div class="swiper-button-prev swiper-button-white"></div>
                                     </div>
                                 </div>
                             </div>
@@ -116,9 +118,10 @@
                                 <div class="left col-md-6">
                                     @if($product->sale_price)
                                     <p class="product_sale_price d-inline">{{ number_format($product->sale_price, 0) }}đ</p>
-                                    <span class="product_price d-inline">({{ number_format($product->price, 0) }}đ)</span>
+                                    <span class="product_price d-inline">{{ number_format($product->price, 0) }}đ</span>
                                     @else
                                     <p class="product_sale_price d-inline">{{ number_format($product->price, 0) }}đ</p>
+                                    <span class="product_price d-inline"></span>
                                     @endif
                                 </div>
                                 <div class="right d-flex col-md-6 justify-content-end">
@@ -138,7 +141,7 @@
                             <p class="content">{{ $product->description }}</p>
                         </div>
                         <div class="product-attribute">
-                            @if(isset($productAttributes) && !$productAttributes->isEmpty())
+                            @if($productAttributes->isNotEmpty())
                             <div class="attribute mt-3">
                                 <p class="title">Tùy chọn</p>
                                 <div class="form-group">
@@ -148,10 +151,6 @@
                                             @foreach($productAttribute->attributesValues as $value)
                                             {{ $value->attribute->name }} : {{ ucwords($value->value) }}
                                             @endforeach
-
-                                            @if(!is_null($productAttribute->price))
-                                            ( {{ number_format($productAttribute->price, 0) }}đ )
-                                            @endif
                                         </option>
                                         @endforeach
                                     </select>
@@ -187,6 +186,7 @@
                                 <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
                                 <input type="button" value="+" class="plus">
                             </div>
+                            <input type="hidden" id="product_quantity" value="{{ $productAttributes->isNotEmpty() ? $productAttributes->first()->quantity : $product->quantity }}">
                             <input type="hidden" name="product" value="{{ $product->id }}">
                             <button type="submit" class="btn btn-fill-out filter_btn">Thêm vào giỏ</button>
                         </div>
@@ -194,7 +194,8 @@
                 </div>
             </div>
         </div>
-        <div class="body_product_detail mb-70">
+
+        <div class="body_product_detail py-5">
             <div class="row">
                 <div class="col-12">
                     <!-- Nav tabs -->
@@ -223,6 +224,7 @@
                 </div>
             </div>
         </div>
+
         <div class="foot_product_detail">
             <h4 class="title"><span class="underline">Thêm</span> nhận xét của bạn</h4>
             <div class="choose_star">
@@ -295,56 +297,62 @@
                 </div>
             </div>
         </div>
+
         <div class="related_products mt-5 pt-5">
             <div class="text-center">
                 <h1>Sản phẩm liên quan</h1>
             </div>
 
-            <div class="products mt-5">
-                @foreach($relatedProducts as $product)
-                <div class="product_section col-12">
-                    <div class="card">
-                        <div class="row">
-                            <div class="product_image col-md-4 col-sm-12 col-12">
-                                <a href="{{ route('product.show', $product->slug) }}">
-                                    <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
-                                </a>
+            <div class="swiper_related_products swiper-container products mt-5">
+                <div class="swiper-wrapper">
+                    @foreach($relatedProducts as $product)
+                    <div class="swiper-slide product_section">
+                        <div class="card">
+                            <div class="row">
+                                <div class="product_image col-md-4 col-sm-12 col-12">
+                                    <a href="{{ route('product.show', $product->slug) }}">
+                                        <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                    </a>
 
-                                <div class="product_item">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a class="add-wishlist @if($user && $user->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
-                                            <i class="fal fa-heart"></i>
-                                        </a>
-                                        <a class="add-cart">
-                                            <i class="fal fa-shopping-bag"></i>
-                                        </a>
+                                    <div class="product_item">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a class="add-wishlist @if($user && $user->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
+                                                <i class="fal fa-heart"></i>
+                                            </a>
+                                            <a class="add-cart">
+                                                <i class="fal fa-shopping-bag"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
-                                <a href="{{ route('product.show', $product->slug) }}">
-                                    <h4 class="card-title">{{ $product->name }}</h4>
-                                </a>
-                                <span class="price mr-5">
-                                    @if($product->sale_price)
-                                    <span class="new">{{ number_format($product->sale_price, 0) }}đ</span>
-                                    <span class="old">{{ number_format($product->price, 0) }}đ</span>
-                                    @else
-                                    <span class="new">{{ number_format($product->price, 0) }}đ</span>
-                                    @endif
-                                </span>
-                                <div class="star_rating d-inline-block">
-                                    <i class="fas fa-star checked"></i>
-                                    <i class="fas fa-star checked"></i>
-                                    <i class="fas fa-star checked"></i>
-                                    <i class="fas fa-star checked"></i>
-                                    <i class="fas fa-star"></i>
+                                <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
+                                    <a href="{{ route('product.show', $product->slug) }}">
+                                        <h4 class="card-title">{{ $product->name }}</h4>
+                                    </a>
+                                    <span class="price mr-5">
+                                        @if($product->sale_price)
+                                        <span class="new">{{ number_format($product->sale_price, 0) }}đ</span>
+                                        <span class="old">{{ number_format($product->price, 0) }}đ</span>
+                                        @else
+                                        <span class="new">{{ number_format($product->price, 0) }}đ</span>
+                                        @endif
+                                    </span>
+                                    <div class="star_rating d-inline-block">
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star checked"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
 
@@ -362,12 +370,15 @@
         $(".plus").on("click", function() {
             var self = this;
             var qty = $(self).closest("div.quantity").find(".qty");
+            var maxQty = $('#product_quantity').val();
 
-            if (qty.val()) {
-                qty.val(+qty.val() + 1);
+            if (parseInt(qty.val()) < parseInt(maxQty)) {
+                qty.val(+parseInt(qty.val()) + 1);
                 $(self).closest("div.quantity").find(".minus").attr("disabled", false);
                 //Trigger change event
                 qty.trigger("change");
+            } else {
+                $(self).attr("disabled", true);
             }
         });
 
@@ -376,10 +387,11 @@
 
             var qty = $(self).closest("div.quantity").find(".qty");
 
-            if (qty.val() <= 1) {
+            if (parseInt(qty.val()) < 2) {
                 $(self).attr("disabled", true);
             } else {
-                qty.val(+qty.val() - 1);
+                qty.val(+parseInt(qty.val()) - 1);
+                $(self).closest("div.quantity").find(".plus").attr("disabled", false);
                 //Trigger change event
                 qty.trigger("change");
             }
@@ -387,41 +399,58 @@
 
         $(".qty").on("change", debounce(function(e) {
             var self = this;
+            var maxQty = $('#product_quantity').val();
 
-            if ($(self).val() <= 0) {
+            if (parseInt($(self).val()) <= 0 || isNaN($(self).val())) {
                 $(self).val(1);
             }
 
-            // var id = $(self).closest("tr").attr('id');
-            // var qty = $(self).val();
-            // var total = $(self).closest("tr").find(".product-subtotal");
+            if (parseInt($(self).val()) > maxQty) {
+                $(self).val(maxQty);
+            }
 
-            // $.ajax({
-            //     "url": "cart/update/" + id,
-            //     "method": "POST",
-            //     "data": {
-            //         "quantity": qty,
-            //     }
-            // }).done(function(json) {
-            //     // console.log(json);
-
-            //     if (json.success === true) {
-            //         total.html(json.item_total);
-            //         $('#cart_subtotal').html(json.cart_subtotal);
-            //         $('#cart_total > strong').html(json.cart_total);
-            //         $('#cart_count').html(json.cart_count);
-            //     } else {
-            //         Swal.fire({
-            //             toast: true,
-            //             position: "top-end",
-            //             showConfirmButton: false,
-            //             timer: 3000,
-            //             icon: "error",
-            //             title: json.msg,
-            //         });
-            //     }
-            // });
+            $(".plus").attr("disabled", false);
+            $(".minus").attr("disabled", false);
         }, 300));
+
+        $('#productAttribute').on('select2:select', function(e) {
+            var data = e.params.data;
+            var id = data.id;
+            // console.log(id);
+
+            $(".qty").trigger("change");
+            $(".plus").attr("disabled", true);
+            $(".minus").attr("disabled", true);
+
+            $.ajax({
+                "url": "/product-attribute/" + id,
+                "method": "GET",
+            }).done(function(json) {
+                console.log(json);
+                $(".plus").attr("disabled", false);
+                $(".minus").attr("disabled", false);
+
+                if (json.success === true) {
+                    $('#product_quantity').val(json.quantity);
+                    if (json.sale_price) {
+                        $('.product_sale_price').html(parseInt(json.sale_price).formatMoney(0) + 'đ');
+                        $('.product_price').html(parseInt(json.price).formatMoney(0) + 'đ');
+                    } else {
+                        $('.product_sale_price').html(parseInt(json.price).formatMoney(0) + 'đ');
+                        $('.product_price').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        icon: "error",
+                        title: json.msg,
+                    });
+                }
+            });
+        });
     });
 </script>
 @endsection

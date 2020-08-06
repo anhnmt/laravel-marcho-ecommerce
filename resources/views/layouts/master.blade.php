@@ -69,7 +69,7 @@
                     <li class="nav-item dropdown">
                         @if(auth()->check())
                         <a class="nav-link user_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
+                            <img src="{{ asset($user->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @can('admin.dashboard')
@@ -126,23 +126,23 @@
                 <hr class="clearfix w-100 d-md-none">
 
                 <div class="col-md-2">
-                    <h5 class="section_title my-3">Useful Links</h5>
+                    <h5 class="section_title my-3">Liên kết</h5>
 
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!">About Us</a>
+                            <a href="{{ route('home') }}">Trang chủ</a>
                         </li>
                         <li>
-                            <a href="#!">Privacy Policy</a>
+                            <a href="{{ route('product.index') }}">Sản phẩm</a>
                         </li>
                         <li>
-                            <a href="#!">Terms & Conditions</a>
+                            <a href="{{ route('blog.index') }}">Tin tức</a>
                         </li>
                         <li>
-                            <a href="#!">Contact Us</a>
+                            <a href="{{ route('contact') }}">Liên hệ</a>
                         </li>
                         <li>
-                            <a href="#!">Help & Support</a>
+                            <a href="{{ route('home') }}">Tìm kiếm</a>
                         </li>
                     </ul>
                 </div>
@@ -150,22 +150,22 @@
                 <hr class="clearfix w-100 d-md-none">
 
                 <div class="col-md-2">
-                    <h5 class="section_title my-3">My Account</h5>
+                    <h5 class="section_title my-3">Tài khoản</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!">My Account</a>
+                            <a href="{{ route('profile.index') }}">Tài khoản của tôi</a>
                         </li>
                         <li>
-                            <a href="#!">My Cart</a>
+                            <a href="{{ route('cart.index') }}">Giỏ hàng</a>
                         </li>
                         <li>
-                            <a href="#!">My Wishlist</a>
+                            <a href="{{ route('favorite.index') }}">Yêu thích</a>
                         </li>
                         <li>
-                            <a href="#!">Registration</a>
+                            <a href="{{ route('login') }}">Đăng nhập</a>
                         </li>
                         <li>
-                            <a href="#!">Check Out</a>
+                            <a href="{{ route('register') }}">Đăng ký</a>
                         </li>
                     </ul>
                 </div>
@@ -173,7 +173,7 @@
                 <hr class="clearfix w-100 d-md-none">
 
                 <div class="subscribe col-md-5">
-                    <h5 class="section_title my-3">Subscribe Our Newsletter</h5>
+                    <h5 class="section_title my-3">Theo dõi tin tức mới nhất</h5>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
 

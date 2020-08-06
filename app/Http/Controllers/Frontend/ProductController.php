@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
@@ -26,22 +27,27 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        // dd($blog->user->getShortName());
-
         $product = Product::findBySlug($product->slug);
         // dd($product->name);
 
         $relatedProducts = Product::where([
             ['category_id', $product->category_id],
             ['id', '!=', $product->id],
-        ])->orderBy('name', 'desc')->select('id', 'name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
+        ])
+        ->orderBy('name', 'desc')
+        ->select('id', 'name', 'slug', 'price', 'sale_price', 'image')
+        ->take(10)->get();
 
         $productAttributes = $product->attributes;
 
-        // dd($productAttributes);
-        // $comments = $product->comments()->all();
+        if ($productAttributes->isNotEmpty()) {
+            $product->price = $productAttributes->first()->price;
+            $product->sale_price = $productAttributes->first()->sale_price;
+        }
 
-        $latest_blog = Blog::latest();
+        // dd($productAttributes);
+
+        $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
 
         $categories = Category::all();
 
@@ -59,5 +65,24 @@ class ProductController extends Controller
             'latest_blog',
             'categories',
         ));
+    }
+
+    public function quantity(ProductAttribute $productAttribute)
+    {
+        // dd($productAttribute);
+        try {
+            return response()->json([
+                'success' => true,
+                'msg' => 'Lấy thông tin thuộc tính sản phẩm thành công',
+                'quantity' => $productAttribute->quantity,
+                'price' => $productAttribute->price,
+                'sale_price' => $productAttribute->sale_price,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Có lỗi xảy ra, vui lòng thử lại',
+            ]);
+        }
     }
 }

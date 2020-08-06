@@ -6,10 +6,6 @@
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
-'nice-select',
-'select2',
 'jquery-scrollup',
 'custom',
 ]);
