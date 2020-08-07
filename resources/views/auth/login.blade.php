@@ -1,9 +1,5 @@
 @php
 \Assets::addStyles([
-'animate',
-'bootstrap',
-'fontawesome',
-'jquery-ui',
 'font-roboto-quicksand',
 'custom-style',
 'custom-responsive',

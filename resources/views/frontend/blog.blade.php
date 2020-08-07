@@ -6,8 +6,6 @@
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
 'nice-select',
 'select2',
 'jquery-scrollup',
@@ -56,7 +54,7 @@
                                 <div class="grid_inner_item">
                                     <div class="blog_img">
                                         <a href="{{ route('blog.show', $blog->slug) }}">
-                                            <img src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="{{ $blog->name }}">
+                                            <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="{{ $blog->name }}">
                                         </a>
                                     </div>
                                     <div class="blog_info">

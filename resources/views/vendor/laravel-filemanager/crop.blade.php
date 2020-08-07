@@ -1,7 +1,7 @@
 <div class="row no-gutters">
 	<div class="col-xl-8">
 		<div class="crop-container">
-			<img src="{{ $img->url . '?timestamp=' . $img->time }}" class="img img-responsive">
+			<img loading="lazy" src="{{ $img->url . '?timestamp=' . $img->time }}" class="img img-responsive">
 		</div>
 	</div>
 	<div class="col-xl-4">

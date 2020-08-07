@@ -70,17 +70,15 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->belongsToMany('App\Models\Favorite', 'favorites', 'user_id', 'product_id')->withTimeStamps();
+        return $this->belongsToMany('App\Models\Product', 'favorites')->withTimeStamps();
     }
 
     public function isFavorited($product_id)
     {
-        $user = auth()->user();
-        $check = Favorite::where([
-            'user_id' => $user->id,
+        $check = $this->favorites()->where([
             'product_id' => $product_id,
-        ]);
+        ])->exists();
 
-        return $check->exists();
+        return $check;
     }
 }

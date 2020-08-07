@@ -89,7 +89,7 @@
 								@enderror
 							</div>
 							<div id="holder" style="margin-top:15px">
-								<img src="{{ $product->image }}">
+								<img loading="lazy" src="{{ $product->image }}">
 							</div>
 						</div>
 					</div>

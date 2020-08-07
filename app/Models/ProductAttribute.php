@@ -7,7 +7,7 @@ use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class ProductAttribute extends Model
 {
-    use Cachable;
+    // use Cachable;
 
     protected $fillable = [
         'product_id', 'quantity', 'price', 'sale_price', 'default',
