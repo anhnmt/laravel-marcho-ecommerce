@@ -121,7 +121,10 @@ Number.prototype.formatMoney = function (
             url: "/favorite/" + id,
             method: "GET",
         }).done(function (json) {
+            console.log(json);
             if (json.success === true) {
+                $("#favorite_count").html(json.favoriteCount);
+
                 Swal.fire({
                     toast: true,
                     position: "top-end",

@@ -30,19 +30,21 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('home') }}" class="nav-link"><i class="fal fa-undo"></i> Về trang chủ</a>
+                    <a href="{{ route('home') }}" class="nav-link"><i class="fal fa-undo"></i> Trang chủ</a>
                 </li>
+
                 <li class="dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <img loading="lazy" src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
                         <span class="hidden-xs text-capitalize">{{ auth()->user()->name }}</span>
                     </a>
+
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{route('admin.profile')}}" class="dropdown-item">
                             <i class="fal fa-id-card"></i> Trang cá nhân
                         </a>
                         <div class="dropdown-divider"></div>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item">
                                 <i class="fal fa-sign-out"></i> Đăng xuất
@@ -121,7 +123,7 @@
                             </ul>
                         </li>
                         @endcanany
-                        
+
                         @can('admin.order.index')
                         <li class="nav-item">
                             <a href="{{ route('admin.order.index') }}" class="nav-link {{ (request()->routeIs('admin.order.*')) ? 'active' : '' }}">

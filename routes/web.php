@@ -177,4 +177,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'],], function (
     });
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true
+]);

@@ -124,7 +124,7 @@
 						<div class="card ez-animate" data-animation="animate__fadeIn">
 							<div class="product_image">
 								<a href="{{ route('product.show', $product->slug) }}">
-									<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="lazyload card-img-top" alt="">
+									<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
 								</a>
 
 								<div class="product_item">
@@ -185,7 +185,7 @@
 					<div class="grid_inner_item">
 						<div class="blog_img">
 							<a href="{{ route('blog.show', $blog->slug) }}">
-								<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="lazyload img-fluid" alt="">
+								<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="">
 							</a>
 						</div>
 						<div class="blog_info">

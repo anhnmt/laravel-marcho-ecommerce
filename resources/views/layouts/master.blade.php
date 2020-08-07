@@ -153,7 +153,7 @@
                     <h5 class="section_title my-3">Tài khoản</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="{{ route('profile.index') }}">Tài khoản của tôi</a>
+                            <a href="{{ route('user.profile') }}">Tài khoản của tôi</a>
                         </li>
                         <li>
                             <a href="{{ route('cart.index') }}">Giỏ hàng</a>
