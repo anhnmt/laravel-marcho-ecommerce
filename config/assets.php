@@ -12,9 +12,9 @@ return [
     ],
     'scripts' => [
         'jquery',
+        'bootstrap',
         'jquery-migrate',
         'jquery-ui',
-        'bootstrap',
         'sweetalert2',
     ],
     'resources' => [
@@ -33,18 +33,11 @@ return [
                     'local' => 'assets/plugins/bootstrap/css/bootstrap.min.css',
                 ],
             ],
-            'slick' => [
+            'swiper' => [
                 'use_cdn' => false,
                 'location' => 'header',
                 'src' => [
-                    'local' => 'assets/plugins/slick/slick.css',
-                ],
-            ],
-            'slick-theme' => [
-                'use_cdn' => false,
-                'location' => 'header',
-                'src' => [
-                    'local' => 'assets/plugins/slick/slick-theme.css',
+                    'local' => 'assets/plugins/swiper/css/swiper.min.css',
                 ],
             ],
             'owlcarousel' => [
@@ -225,11 +218,18 @@ return [
                     'local' => 'assets/plugins/owlcarousel/js/owl.carousel.min.js',
                 ],
             ],
-            'slick' => [
+            'swiper' => [
                 'use_cdn'  => false,
                 'location' => 'footer',
                 'src' => [
-                    'local' => 'assets/plugins/slick/slick.min.js',
+                    'local' => 'assets/plugins/swiper/js/swiper.min.js',
+                ],
+            ],
+            'waypoints' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/plugins/waypoints/jquery.waypoints.min.js',
                 ],
             ],
             'wowjs' => [
@@ -295,11 +295,18 @@ return [
                     'local' => 'assets/js/custom-select2.js',
                 ],
             ],
-            'custom-slick' => [
+            'custom-swiper' => [
                 'use_cdn'  => false,
                 'location' => 'footer',
                 'src' => [
-                    'local' => 'assets/js/custom-slick.js',
+                    'local' => 'assets/js/custom-swiper.js',
+                ],
+            ],
+            'custom-waypoints' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-waypoints.js',
                 ],
             ],
             'custom-wow' => [

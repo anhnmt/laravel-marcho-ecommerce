@@ -24,22 +24,22 @@ class ProductController extends Controller
         return datatables($categories)
             ->addColumn('image', function ($product) {
                 $product->image = $product->image ? $product->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . asset($product->image) . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . asset($product->image) . '"/>';
             })
             ->addColumn('status', function ($product) {
                 return $product->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
             })
             ->addColumn('action', function ($product) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-                if(auth()->user()->can('admin.product.attribute.index'))
-                $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
-                if(auth()->user()->can('admin.product.edit'))
-                $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-                if(auth()->user()->can('admin.product.destroy'))
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                if (auth()->user()->can('admin.product.attribute.index'))
+                    $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
+                if (auth()->user()->can('admin.product.edit'))
+                    $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                if (auth()->user()->can('admin.product.destroy'))
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-                if((auth()->user()->can('admin.product.edit') && auth()->user()->can('admin.product.destroy') && auth()->user()->can('admin.admin.product.attribute.index')) == false)  
-                $action .= "<span>Không có hành động nào</span>";
+                if ((auth()->user()->can('admin.product.edit') && auth()->user()->can('admin.product.destroy') && auth()->user()->can('admin.admin.product.attribute.index')) == false)
+                    $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</div></form>';
 

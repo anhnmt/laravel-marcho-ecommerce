@@ -125,7 +125,7 @@
 									</div>
 
 									<div id="holder" style="margin-top:15px">
-										<img src="{{ asset($slider->image) }}">
+										<img loading="lazy" src="{{ asset($slider->image) }}">
 									</div>
 								</div>
 							</div>

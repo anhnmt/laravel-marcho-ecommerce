@@ -1,9 +1,5 @@
 @php
 \Assets::addStyles([
-'animate',
-'bootstrap',
-'fontawesome',
-'jquery-ui',
 'font-roboto-quicksand',
 'nice-select',
 'custom-style',
@@ -11,8 +7,6 @@
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
 'nice-select',
 'jquery-scrollup',
 'custom',
@@ -92,14 +86,13 @@
                                         <div class="card">
                                             <div class="row">
                                                 <div class="product_image col-md-4 col-sm-12 col-12">
-
                                                     <a href="{{ route('product.show', $product->slug) }}">
-                                                        <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                                        <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
                                                     </a>
 
                                                     <div class="product_item">
                                                         <div class="d-flex align-items-center justify-content-center">
-                                                            <a class="add-wishlist @if(auth()->user()->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
+                                                            <a class="add-wishlist @if($user && $user->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
                                                                 <i class="fal fa-heart"></i>
                                                             </a>
                                                             <a class="add-cart">
@@ -116,10 +109,10 @@
                                                     </a>
                                                     <span class="price mr-5">
                                                         @if($product->sale_price)
-                                                        <span class="new">{{ $product->sale_price }}đ</span>
-                                                        <span class="old">{{ $product->price }}đ</span>
+                                                        <span class="new">{{ number_format($product->sale_price, 0) }}đ</span>
+                                                        <span class="old">{{ number_format($product->price, 0) }}đ</span>
                                                         @else
-                                                        <span class="new">{{ $product->price }}đ</span>
+                                                        <span class="new">{{ number_format($product->price, 0) }}đ</span>
                                                         @endif
                                                     </span>
                                                     <div class="star_rating d-inline-block">

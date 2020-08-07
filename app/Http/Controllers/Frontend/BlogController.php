@@ -20,7 +20,7 @@ class BlogController extends Controller
 
         $blogs = Blog::orderBy('id', 'desc')->paginate(8);
 
-        $latest_blog = Blog::latest();
+        $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
 
         $categories = Category::all();
 
@@ -43,7 +43,7 @@ class BlogController extends Controller
 
         $comments = $blog->comments()->all();
 
-        $latest_blog = Blog::latest();
+        $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
 
         $categories = Category::all();
 

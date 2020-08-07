@@ -6,10 +6,6 @@
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
-'nice-select',
-'select2',
 'jquery-scrollup',
 'custom',
 ]);
@@ -62,7 +58,7 @@
             <div class="col-lg-4">
                 <div class="makp_conent_box">
                     <div class="section_titles">
-                        <h2>Feel Free Don’t Hesitate To Contact Us</h2>
+                        <h2>Hãy thoải mái liên hệ với chúng tôi</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscingn elit, sed do eiusmod tempor incididunt ut labore etlai dolore magna aliqua. Quis ipsum suspendisse more ultrices gravida.</p>
                     </div>
                     <div class="contact_list">
@@ -97,32 +93,32 @@
             </div>
             <div class="col-lg-8">
                 <div class="contact_form">
-                    <h4>Contact Form</h4>
+                    <h4>Thông tin liên hệ</h4>
                     <form>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Name" name="name" required="">
+                                    <input type="text" class="form_control" placeholder="Họ và tên" name="name" required="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form_group">
-                                    <input type="email" class="form_control" placeholder="E-mail" name="email" required="">
+                                    <input type="email" class="form_control" placeholder="Địa chỉ email" name="email" required="">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Subject" name="subject" required="">
+                                    <input type="text" class="form_control" placeholder="Tiêu đề" name="subject" required="">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form_group">
-                                    <textarea class="form_control" placeholder="Your comment here" name="message"></textarea>
+                                    <textarea class="form_control" placeholder="Để lại bình luận của bạn ở đây" name="message"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="button_box">
-                                    <button class="makp_btn">Send Message</button>
+                                    <button class="btn btn-fill-out">Gửi tin nhắn</button>
                                 </div>
                             </div>
                         </div>

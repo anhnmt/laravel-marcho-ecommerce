@@ -32,6 +32,8 @@ Route::group([
     // Product
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+    // Product Attribute
+    Route::get('product-attribute/{productAttribute}', 'ProductController@quantity')->name('product.quantity');
 
     // Contact
     Route::view('contact', 'frontend.contact')->name('contact');
@@ -43,8 +45,14 @@ Route::group([
         // Blog Comment
         Route::resource('blog.comment', 'CommentController');
 
-        // Product Favorite
-        Route::post('favorite/{product}', 'ProductController@favorite')->name('product.favorite');
+        // Favorite
+        Route::group([
+            'prefix' => 'favorite',
+        ], function () {
+            Route::get('/', 'FavoriteController@index')->name('favorite.index');
+            Route::get('list', 'FavoriteController@list')->name('favorite.list');
+            Route::get('{product}', 'FavoriteController@favorite')->name('favorite.favorite');
+        });
 
         // Cart
         Route::group([
@@ -52,6 +60,8 @@ Route::group([
         ], function () {
             // Show Cart
             Route::get('/', 'CartController@index')->name('cart.index');
+            // List Cart
+            Route::get('list', 'CartController@list')->name('cart.list');
             // Add Cart
             Route::post('store', 'CartController@store')->name('cart.store');
             // Discount Cart
@@ -61,7 +71,7 @@ Route::group([
             // Remove Cart
             Route::post('destroy/{id}', 'CartController@destroy')->name('cart.destroy');
             // Clear All Cart
-            Route::get('clear', 'CartController@clear')->name('cart.clear');
+            Route::post('clear', 'CartController@clear')->name('cart.clear');
         });
 
         // Checkout
@@ -167,4 +177,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'],], function (
     });
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true
+]);

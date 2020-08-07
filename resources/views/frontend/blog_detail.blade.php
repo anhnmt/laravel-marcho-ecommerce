@@ -6,9 +6,6 @@
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
-'nice-select',
 'select2',
 'jquery-scrollup',
 'custom',
@@ -95,7 +92,7 @@
                         <div class="col-lg-12">
                             <div class="author_box mb-50">
                                 <div class="author_img">
-                                    <img src="{{asset('assets/img/user1-128x128.jpg')}}" class="img-fluid" alt="">
+                                    <img loading="lazy" src="{{asset('assets/img/user1-128x128.jpg')}}" class="img-fluid" alt="">
                                 </div>
                                 <div class="author_info">
                                     <h4>JOHN DOE</h4>
@@ -120,7 +117,7 @@
                                     <li class="comment_info">
                                         <div class="d-flex justify-content-between">
                                             <div class="comment_user">
-                                                <img src="{{ asset($comment->user->avatar ? $comment->user->avatar : 'assets/img/user2-160x160.jpg') }}" alt="user2" class="rounded-circle">
+                                                <img loading="lazy" src="{{ asset($comment->user->avatar ? $comment->user->avatar : 'assets/img/user2-160x160.jpg') }}" alt="user2" class="rounded-circle">
                                             </div>
                                             <div class="comment_content">
                                                 <div class="d-flex">
@@ -156,7 +153,7 @@
                                         <div class="col-lg-12">
                                             @if($user ?? '')
                                             <div class="form-group form_group">
-                                                <img src="{{asset($user->avatar)}}" width="40px" alt="user4" class="rounded-circle">
+                                                <img loading="lazy" src="{{asset($user->avatar)}}" width="40px" alt="user4" class="rounded-circle">
                                                 <span>{{ $user->name }}</span>
                                             </div>
                                             @else

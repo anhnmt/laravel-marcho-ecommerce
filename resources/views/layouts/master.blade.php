@@ -18,7 +18,7 @@
         <div class="container">
             <nav class="menu_bar navbar navbar-expand-lg align-items-center justify-content-between">
                 <a class="header_logo navbar-brand" href="{{ route('home') }}">
-                    <img class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
+                    <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,26 +48,28 @@
                             <i class="fal fa-search"></i>
                         </a>
                     </li>
+                    @php
+                    $user = auth()->user();
+                    $cart = Cart::name('shopping');
+                    $cartCount = $cart->sumItemsQuantity();
+                    $favoriteCount = $user ? $user->favorites()->count() : 0;
+                    @endphp
                     <li class="nav-item">
-                        <a class="nav-link icon_love" href="#">
+                        <a class="nav-link icon_love" href="{{ route('favorite.index') }}">
                             <i class="fal fa-heart"></i>
-                            <span class="wishlist_count">0</span>
+                            <span id="favorite_count" class="wishlist_count">{{ $favoriteCount }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
                             <i class="fal fa-shopping-cart"></i>
-                            @php
-                            $cart = Cart::name('shopping');
-                            $items = $cart->sumItemsQuantity();
-                            @endphp
-                            <span id="cart_count" class="cart_count">{{ $items }}</span>
+                            <span id="cart_count" class="cart_count">{{ $cartCount }}</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         @if(auth()->check())
                         <a class="nav-link user_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
+                            <img loading="lazy" src="{{ asset($user->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @can('admin.dashboard')
@@ -111,7 +113,7 @@
             <div class="row">
                 <div class="address col-md-3">
                     <h5 class="my-3">
-                        <img class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
+                        <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
                     </h5>
                     <p>
                         No. 342 - London Oxford Street,<br />
@@ -124,23 +126,23 @@
                 <hr class="clearfix w-100 d-md-none">
 
                 <div class="col-md-2">
-                    <h5 class="section_title my-3">Useful Links</h5>
+                    <h5 class="section_title my-3">Liên kết</h5>
 
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!">About Us</a>
+                            <a href="{{ route('home') }}">Trang chủ</a>
                         </li>
                         <li>
-                            <a href="#!">Privacy Policy</a>
+                            <a href="{{ route('product.index') }}">Sản phẩm</a>
                         </li>
                         <li>
-                            <a href="#!">Terms & Conditions</a>
+                            <a href="{{ route('blog.index') }}">Tin tức</a>
                         </li>
                         <li>
-                            <a href="#!">Contact Us</a>
+                            <a href="{{ route('contact') }}">Liên hệ</a>
                         </li>
                         <li>
-                            <a href="#!">Help & Support</a>
+                            <a href="{{ route('home') }}">Tìm kiếm</a>
                         </li>
                     </ul>
                 </div>
@@ -148,22 +150,22 @@
                 <hr class="clearfix w-100 d-md-none">
 
                 <div class="col-md-2">
-                    <h5 class="section_title my-3">My Account</h5>
+                    <h5 class="section_title my-3">Tài khoản</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!">My Account</a>
+                            <a href="{{ route('user.profile') }}">Tài khoản của tôi</a>
                         </li>
                         <li>
-                            <a href="#!">My Cart</a>
+                            <a href="{{ route('cart.index') }}">Giỏ hàng</a>
                         </li>
                         <li>
-                            <a href="#!">My Wishlist</a>
+                            <a href="{{ route('favorite.index') }}">Yêu thích</a>
                         </li>
                         <li>
-                            <a href="#!">Registration</a>
+                            <a href="{{ route('login') }}">Đăng nhập</a>
                         </li>
                         <li>
-                            <a href="#!">Check Out</a>
+                            <a href="{{ route('register') }}">Đăng ký</a>
                         </li>
                     </ul>
                 </div>
@@ -171,7 +173,7 @@
                 <hr class="clearfix w-100 d-md-none">
 
                 <div class="subscribe col-md-5">
-                    <h5 class="section_title my-3">Subscribe Our Newsletter</h5>
+                    <h5 class="section_title my-3">Theo dõi tin tức mới nhất</h5>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
 
@@ -193,27 +195,27 @@
                         <ul class="footer_payment text-center text-md-right">
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/visa.png') }}" alt="visa">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/visa.png') }}" alt="visa">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/discover.png') }}" alt="discover">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/discover.png') }}" alt="discover">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/master_card.png') }}" alt="master_card">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/master_card.png') }}" alt="master_card">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/paypal.png') }}" alt="paypal">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/paypal.png') }}" alt="paypal">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="{{ asset('assets/img/payment/amarican_express.png') }}" alt="amarican_express">
+                                    <img loading="lazy" src="{{ asset('assets/img/payment/amarican_express.png') }}" alt="amarican_express">
                                 </a>
                             </li>
                         </ul>
@@ -227,6 +229,36 @@
     {!! \Assets::renderFooter() !!}
 
     @yield('script')
+
+    @if(session('success'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "success",
+                title: "{{ session('success') }}",
+            });
+        });
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "error",
+                title: "{{ session('error') }}",
+            });
+        });
+    </script>
+    @endif
 </body>
 
 </html>
