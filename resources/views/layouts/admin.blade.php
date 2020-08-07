@@ -121,6 +121,17 @@
                             </ul>
                         </li>
                         @endcanany
+                        
+                        @can('admin.order.index')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.order.index') }}" class="nav-link {{ (request()->routeIs('admin.order.*')) ? 'active' : '' }}">
+                                <i class="fal fa-bags-shopping nav-icon"></i>
+                                <p>
+                                    Đơn hàng
+                                </p>
+                            </a>
+                        </li>
+                        @endcan
 
                         @canany(['admin.blog.index','admin.comment.index'])
                         <li class="nav-item has-treeview {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'menu-open' : '' }}">

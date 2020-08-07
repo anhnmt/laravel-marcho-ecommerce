@@ -84,16 +84,21 @@ Route::group([
             Route::post('wards', 'CheckoutController@wards')->name('checkout.wards');
         });
 
-        // Order
-        Route::resource('order', 'OrderController');
-
         // Profile
         Route::group([
-            'prefix' => 'profile',
+            'prefix' => 'user',
+            'as' => 'user.'
         ], function () {
-            Route::get('/', 'ProfileController@index')->name('profile.index');
-            Route::get('/password', 'ProfileController@password')->name('profile.password');
-            Route::put('/{profile}', 'ProfileController@update')->name('profile.update');
+            // Profile
+            Route::get('/profile', 'ProfileController@index')->name('profile');
+            Route::get('/password', 'ProfileController@password')->name('password');
+            Route::put('/{profile}', 'ProfileController@update')->name('update');
+
+            // Order
+            Route::get('order/trash', 'OrderController@trash')->name('order.trash');
+            Route::resource('order', 'OrderController');
+            Route::put('order/{order}/cancel', 'OrderController@cancelOrder')->name('order.cancel');
+            Route::put('order/{order}/repurchase', 'OrderController@repurchase')->name('order.repurchase');
         });
     });
 });
@@ -136,6 +141,10 @@ Route::group([
     // Blog
     Route::get('blog/list', 'BlogController@list')->name('blog.list');
     Route::resource('blog', 'BlogController', ['except' => ['show']]);
+
+    // Blog
+    Route::get('order/list', 'OrderController@list')->name('order.list');
+    Route::resource('order', 'OrderController', ['except' => ['show', 'create', 'store', 'destroy']]);
 
     // Comment
     Route::get('comment/list', 'CommentController@list')->name('comment.list');
