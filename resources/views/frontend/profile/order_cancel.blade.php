@@ -48,7 +48,7 @@
                     <div class="tab-content dashboard_content">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Đơn hàng</h3>
+                                <h3>Đơn hàng đã bị huỷ</h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -69,20 +69,10 @@
                                             <tr>
                                                 <td>#{{ $order->id }}</td>
                                                 <td>{{ $order->created_at }}</td>
-                                                <td>
-                                                    @if ($order->status == 0)
-                                                    {{'Đang xử lí'}}
-                                                    @elseif($order->status == 1)
-                                                    {{'Đã xử lí'}}
-                                                    @elseif($order->status == 2)
-                                                    {{'Đang giao hàng'}}
-                                                    @elseif($order->status == 3)
-                                                    {{'Đã giao hàng'}}
-                                                    @endif
-                                                </td>
+                                                <td>Đã huỷ</td>
                                                 <td>{{ number_format($order->total, 0) }}đ</td>
                                                 <td class="text-center">
-                                                    <a href="{{route('user.order.edit', $order->id)}}"
+                                                    <a href="{{route('user.order.show', $order->id)}}"
                                                         class="btn btn-outline-success btn-sm">Xem</a>
                                                 </td>
                                             </tr>

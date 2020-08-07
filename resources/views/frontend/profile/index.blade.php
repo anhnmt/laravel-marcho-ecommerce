@@ -4,6 +4,9 @@
 'custom-style',
 'custom-responsive',
 ]);
+\Assets::addScripts([
+'stand-alone-button',
+]);
 @endphp
 
 @extends('layouts.master')
@@ -39,31 +42,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4">
-                <div class="dashboard_menu">
-                    <ul class="nav nav-tabs flex-column" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="account-detail-tab" href="{{ route('profile.index') }}"
-                                role="tab" aria-controls="account-detail" aria-selected="true"><i
-                                    class="fal fa-address-card"></i>Hồ sơ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="account-detail-tab" href="{{ route('profile.password') }}"
-                                role="tab" aria-controls="account-detail" aria-selected="true"><i
-                                    class="fal fa-key"></i>Mật khẩu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="orders-tab" href="{{ route('order.index') }}" role="tab"
-                                aria-controls="orders" aria-selected="false"><i class="fal fa-bags-shopping"></i>Đơn
-                                hàng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="address-tab" href="#address" role="tab"
-                                aria-controls="address" aria-selected="true"><i
-                                    class="fal fa-map-marker-alt"></i>Địa
-                                chỉ</a>
-                        </li>
-                    </ul>
-                </div>
+                @include('layouts.profile_sidebar')
             </div>
             <div class="col-lg-9 col-md-8">
                 <div class="tab-content dashboard_content">
@@ -73,7 +52,7 @@
                             <span>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('profile.update', auth()->user()->id) }}" method="post">
+                            <form action="{{ route('user.update', auth()->user()->id) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
