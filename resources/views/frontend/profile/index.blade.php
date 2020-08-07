@@ -71,7 +71,7 @@
                                     <div class="text-center">
                                         <p>
                                             <div id="holder" class="lfm profile-user-img" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid rounded-circle" style="margin-top:15px">
-                                                <img loading="lazy" class="profile-user-img img-fluid rounded-circle" src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="User profile picture">
+                                                <img loading="lazy" class="profile-user-img img-fluid rounded-circle" lazyload="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="User profile picture">
                                             </div>
 
                                             <input class="form-control @error('avatar') is-invalid @enderror" type="hidden" name="avatar" id="avatar" value="{{ auth()->user()->avatar }}">

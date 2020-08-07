@@ -2506,7 +2506,7 @@ textarea {
 }
 .shop_cart_table td.product-price,
 .shop_cart_table td.product-subtotal {
-    font-weight: 600;
+    font-weight: 500;
 }
 .shop_cart_table .quantity {
     margin: 0 auto;
