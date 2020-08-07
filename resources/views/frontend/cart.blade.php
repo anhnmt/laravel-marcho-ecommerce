@@ -12,7 +12,6 @@
 \Assets::addScripts([
 'owlcarousel',
 'slick',
-'waypoints',
 'jquery-scrollup',
 'custom',
 ]);

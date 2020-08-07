@@ -79,7 +79,7 @@
                             @endcan
 
                             @cannot('admin.dashboard')
-                            <a class="dropdown-item" href="{{ route('profile.index') }}">Trang cá nhân</a>
+                            <a class="dropdown-item" href="{{ route('user.profile') }}">Trang cá nhân</a>
                             @endcan
 
                             <div class="dropdown-divider"></div>

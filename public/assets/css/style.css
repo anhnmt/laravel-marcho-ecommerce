@@ -1492,10 +1492,9 @@ header .navbar-collapse {
     align-items: center !important;
     -ms-flex-pack: center !important;
     justify-content: center !important;
-    padding: 15px;
+    padding: 10px;
     margin: 0 5px;
     background-color: #fff;
-    border-radius: 50%;
 }
 .product_section .product_info .price {
     font-family: "Quicksand";
@@ -2960,33 +2959,93 @@ select.not_chosen.form-control:focus {
 /*===================================*
     PROFILE SECTION
 *===================================*/
-.profile_section .list-group {
+.profile_section .section {
+    padding: 0;
+    position: relative;
+}
+.profile_section table {
+    counter-reset: tableCount;     
+}
+.profile_section .counterCell:before {              
+    content: counter(tableCount); 
+    counter-increment: tableCount; 
+}
+.dashboard_menu {
     box-shadow: 0 0px 4px 0 #e9e9e9;
 }
-.profile_section .list-group .list-group-item{
+.nav-tabs li.nav-item a {
+    background-color: transparent;
+    border: 0;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 5px 20px;
+}
+ul, li, ol {
+    margin: 0;
+    padding: 0;
+}
+.dashboard_menu .nav-tabs li.nav-item a {
+    text-align: left;
+    padding: 12px 20px;
     border-radius: 0;
-    border: none;
     border-bottom: 1px solid #efefef;
-    padding: 20px 20px;
-    font-size: 18px;
+    color: #2b2f4c;
 }
-.profile_section .list-group .active{
-    background: #fe3e57;
-    color: #ffffff;
-    border: none;
+.dashboard_menu .nav-tabs li.nav-item a.active {
+    background-color: #FF324D;
+    color: #fff;
+}
+.dashboard_menu .nav-tabs li.nav-item a i {
+    margin-right: 10px;
+}
+.dashboard_content .card {
     border-radius: 0;
-    font-size: 20px;
-}
-.profile_section .card{
+    border: 0;
     box-shadow: 0 0px 4px 0 #e9e9e9;
-    border: none;
-    border-radius: 0;
 }
-.profile_section .card .card-header {
-    background-color: #ffffff;
-    border: none;
-    border-bottom: 1px solid #efefef;
+.dashboard_content .card-header,  .dashboard_content .card-footer{
+    background-color: transparent;
+    border-color: #f0f0f0;
 }
+.dashboard_content .card-header * {
+    margin: 0;
+}
+.card-body p {
+    margin-bottom: 15px;
+}
+.dashboard_content .card-body p:last-child {
+    margin: 0;
+}
+.dashboard_content .table {
+    margin: 0;
+}
+.dashboard_content .table thead th {
+    border: 0;
+    padding-top: 0;
+    font-weight: 600;
+}
+.dashboard_content .table tbody tr td {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.dashboard_content label {
+    color: #333;
+}
+.profile_section .order_detail_title{
+    color: grey;
+}
+.profile_section .sub-total-head{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #888;
+}
+.profile_section .sub-total-foot span{
+    font-size: 14px;
+}
+
+
+
 /*===================================*
     CONTACT SECTION
 *===================================*/
@@ -3110,7 +3169,12 @@ textarea.form_control {
     padding: 0.46875rem 0.75rem;
     height: calc(2.25rem + 2px);
 }
-
+.select2-container .select2-selection--single{
+    height: 50px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 42px;
+}
 .select2-container--default.select2-container--open .select2-selection--single {
     border-color: #80bdff;
 }
@@ -3145,7 +3209,7 @@ textarea.form_control {
 .select2-container--default
     .select2-selection--single
     .select2-selection__arrow {
-    height: 31px;
+    height: 47px;
     right: 6px;
 }
 

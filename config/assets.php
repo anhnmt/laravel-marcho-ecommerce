@@ -7,8 +7,8 @@ return [
     'styles' => [
         'animate',
         'bootstrap',
-        'fontawesome',
         'jquery-ui',
+        'fontawesome',
     ],
     'scripts' => [
         'jquery',
@@ -72,7 +72,7 @@ return [
                 'use_cdn' => false,
                 'location' => 'header',
                 'src' => [
-                    'local' => 'assets/css/jquery-ui.min.css',
+                    'local' => 'assets/plugins/jquery-ui/jquery-ui.min.css',
                 ],
             ],
             'nice-select' => [
@@ -208,7 +208,7 @@ return [
                 'use_cdn'  => false,
                 'location' => 'footer',
                 'src' => [
-                    'local' => 'assets/js/jquery-ui.min.js',
+                    'local' => 'assets/plugins/jquery-ui/jquery-ui.min.js',
                 ],
             ],
             'bootstrap' => [
@@ -232,11 +232,11 @@ return [
                     'local' => 'assets/plugins/slick/slick.min.js',
                 ],
             ],
-            'waypoints' => [
+            'wowjs' => [
                 'use_cdn'  => false,
                 'location' => 'footer',
                 'src' => [
-                    'local' => 'assets/js/waypoints.min.js',
+                    'local' => 'assets/plugins/wowjs/wow.min.js',
                 ],
             ],
             'nice-select' => [
@@ -258,6 +258,55 @@ return [
                 'location' => 'footer',
                 'src' => [
                     'local' => 'assets/plugins/scrollup/jquery.scrollUp.min.js',
+                ],
+            ],
+            'custom-niceselect' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-niceselect.js',
+                ],
+            ],
+            'custom-owlcarousel' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-owlcarousel.js',
+                ],
+            ],
+            'custom-jqueryui' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-jqueryui.js',
+                ],
+            ],
+            'custom-scrollup' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-scrollup.js',
+                ],
+            ],
+            'custom-select2' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-select2.js',
+                ],
+            ],
+            'custom-slick' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-slick.js',
+                ],
+            ],
+            'custom-wow' => [
+                'use_cdn'  => false,
+                'location' => 'footer',
+                'src' => [
+                    'local' => 'assets/js/custom-wow.js',
                 ],
             ],
             'custom' => [

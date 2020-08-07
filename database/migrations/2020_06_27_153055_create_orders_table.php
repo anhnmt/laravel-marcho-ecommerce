@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->text('note')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
             //Foreign key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');

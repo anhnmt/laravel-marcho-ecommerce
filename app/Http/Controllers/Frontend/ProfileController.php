@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\User;
+use App\Models\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\FrontendProfileRequest as ProfileRequest;
 
@@ -32,16 +33,16 @@ class ProfileController extends Controller
 
         if ($request->exists('password') == false) {
             if ($user->update($request->all()))
-                return redirect()->route('profile.index')->withSuccess('Cập nhật hồ sơ thành công');
+                return redirect()->route('user.profile')->withSuccess('Cập nhật hồ sơ thành công');
 
-            return redirect()->route('profile.index')->withErrors('Cập nhật hồ sơ thất bại');
+            return redirect()->route('user.profile')->withErrors('Cập nhật hồ sơ thất bại');
         } else {
             $request['password'] = bcrypt($request->password);
 
             if ($user->update($request->all()))
-                return redirect()->route('profile.index')->withSuccess('Cập nhật mật khẩu thành công');
+                return redirect()->route('user.profile')->withSuccess('Cập nhật mật khẩu thành công');
 
-            return redirect()->route('profile.index')->withErrors('Cập nhật mật khẩu thất bại');
+            return redirect()->route('user.profile')->withErrors('Cập nhật mật khẩu thất bại');
         }
     }
 }

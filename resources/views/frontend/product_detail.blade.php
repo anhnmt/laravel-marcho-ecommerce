@@ -3,10 +3,8 @@
 'animate',
 'bootstrap',
 'fontawesome',
-'jquery-ui',
 'slick',
 'slick-theme',
-'nice-select',
 'select2',
 'select2-bootstrap4',
 'font-roboto-quicksand',
@@ -16,12 +14,11 @@
 
 \Assets::addScripts([
 'slick',
-'owlcarousel',
-'waypoints',
-'nice-select',
 'select2',
 'jquery-scrollup',
 'custom',
+'custom-slick',
+'custom-select2',
 ]);
 @endphp
 
@@ -196,7 +193,7 @@
                 </div>
             </div>
         </div>
-        <div class="body_product_detail mb-70">
+        <div class="body_product_detail mt-5 mb-70">
             <div class="row">
                 <div class="col-12">
                     <!-- Nav tabs -->
@@ -314,7 +311,7 @@
 
                                 <div class="product_item">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a class="add-wishlist">
+                                        <a class="add-wishlist @if(auth()->user()->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
                                             <i class="fal fa-heart"></i>
                                         </a>
                                         <a class="add-cart">

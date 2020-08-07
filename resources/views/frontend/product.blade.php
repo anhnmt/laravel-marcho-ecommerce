@@ -5,6 +5,7 @@
 'fontawesome',
 'jquery-ui',
 'font-roboto-quicksand',
+'nice-select',
 'custom-style',
 'custom-responsive',
 ]);
@@ -12,9 +13,11 @@
 \Assets::addScripts([
 'owlcarousel',
 'slick',
-'waypoints',
+'nice-select',
 'jquery-scrollup',
 'custom',
+'custom-niceselect',
+'custom-jqueryui',
 ]);
 @endphp
 
@@ -96,7 +99,7 @@
 
                                                     <div class="product_item">
                                                         <div class="d-flex align-items-center justify-content-center">
-                                                            <a class="add-wishlist">
+                                                            <a class="add-wishlist @if(auth()->user()->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
                                                                 <i class="fal fa-heart"></i>
                                                             </a>
                                                             <a class="add-cart">
