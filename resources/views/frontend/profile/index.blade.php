@@ -54,7 +54,7 @@
                         <span>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('profile.update', auth()->user()->id) }}" method="post">
+                        <form action="{{ route('user.update', auth()->user()->id) }}" method="post">
                             @csrf
                             @method('PUT')
                             <div class="row">

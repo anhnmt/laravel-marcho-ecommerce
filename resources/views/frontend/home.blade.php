@@ -129,7 +129,7 @@
 
 								<div class="product_item">
 									<div class="d-flex align-items-center justify-content-center">
-										<a class="add-wishlist @if($user && $user->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
+										<a class="add-wishlist @if($user && $user->favorited($product->id)) active @endif" data-product="{{ $product->id }}">
 											<i class="fal fa-heart"></i>
 										</a>
 										<a class="add-cart">
