@@ -99,13 +99,14 @@ Route::group([
             // Profile
             Route::get('/profile', 'ProfileController@index')->name('profile');
             Route::get('/password', 'ProfileController@password')->name('password');
+            Route::get('/address', 'ProfileController@address')->name('address');
+            // Route::post('/addressCreate', 'ProfileController@addressCreate')->name('address.create');
             Route::put('/{profile}', 'ProfileController@update')->name('update');
 
             // Order
             Route::get('order/trash', 'OrderController@trash')->name('order.trash');
-            Route::resource('order', 'OrderController');
             Route::put('order/{order}/cancel', 'OrderController@cancelOrder')->name('order.cancel');
-            Route::put('order/{order}/repurchase', 'OrderController@repurchase')->name('order.repurchase');
+            Route::resource('order', 'OrderController');
         });
     });
 });

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use Cart;
+use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\City;
@@ -58,20 +60,32 @@ class OrderController extends Controller
                     $itemDetail = $item->getDetails();
                     $itemOption = $item->getOptions();
                     if (!$itemOption) {
-                        OrderDetail::create([
+                        $orderDetail = OrderDetail::create([
                             'order_id' => $order->id,
                             'product_id' => $itemDetail->id,
                             'quantity' => $itemDetail->quantity,
                             'price' => $itemDetail->total_price
                         ]);
+
+                        if($orderDetail){
+                            $oldquan = (int) $orderDetail->product->quantity;
+                            $newquan = $oldquan - $itemDetail->quantity;
+                            Product::find($orderDetail->product->id)->update(['quantity' => $newquan]);
+                        }
                     } else {
-                        OrderDetail::create([
+                        $orderDetail = OrderDetail::create([
                             'order_id' => $order->id,
                             'product_id' => $itemDetail->id,
                             'product_attribute_id' => $itemOption['product_attribute_id'],
                             'quantity' => $itemDetail->quantity,
                             'price' => $itemDetail->total_price
                         ]);
+
+                        if($orderDetail){
+                            $oldquan = (int) $orderDetail->productAttribute->quantity;
+                            $newquan = $oldquan - $itemDetail->quantity;
+                            ProductAttribute::find($orderDetail->productAttribute->id)->update(['quantity' => $newquan]);
+                        }
                     }
                 }
             }
@@ -151,24 +165,22 @@ class OrderController extends Controller
         if($order->update($request->all()))
         {
             $order->delete();
+            $orderDetails = $order->orderDetails;
+            foreach ($orderDetails as $orderDetail) {
+                if(isset($orderDetail->product_attribute_id)){
+                    $id = $orderDetail->productAttribute->id;
+                    $newquan = $orderDetail->productAttribute->quantity + $orderDetail->quantity;
+                    ProductAttribute::find($id)->update(['quantity' => $newquan]);
+                }else{
+                    $id = $orderDetail->product->id;
+                    $newquan = $orderDetail->product->quantity + $orderDetail->quantity;
+                    Product::find($id)->update(['quantity' => $newquan]);
+                }
+            }
             return redirect()->route('user.order.index', $order->id)->withSuccess('Cập nhật đơn hàng thành công');
         }
 
         return redirect()->back()->withInput()->withErrors('Cập nhật đơn hàng thất bại, vui lòng thử lại!');
-    }
-
-    public function repurchase(Request $request, Order $order)
-    {
-
-        if($order->update($request->all()))
-        {
-            $order->restore();
-            return redirect()->route('user.order.index', $order->id)->withSuccess('Cập nhật đơn hàng thành công');
-        }
-
-        return redirect()->back()->withInput()->withErrors('Cập nhật đơn hàng thất bại, vui lòng thử lại!');
-    }
-
-    
+    }    
 
 }
