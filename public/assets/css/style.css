@@ -118,7 +118,7 @@ button:focus {
     box-shadow: none !important;
 }
 .btn-fill-out {
-    background-color: transparent;
+    background-color: #fff;
     border: 1px solid #ff324d;
     border-radius: 0;
     color: #fff;
@@ -925,6 +925,9 @@ section .section_title p {
 }
 .gallery-thumbs .swiper-slide-thumb-active {
     opacity: 1;
+}
+.form-control:focus {
+    box-shadow: unset;
 }
 
 /*===================================*

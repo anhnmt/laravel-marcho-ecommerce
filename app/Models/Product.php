@@ -83,15 +83,26 @@ class Product extends Model implements UseCartable
         return $this->hasMany('App\Models\Review');
     }
 
-    public function currentUserHasSubmittedReview()
+    public function scopeKeyword($query, $request)
     {
-        $countOfReviews = $this->reviews()
-            ->where([
-                'user_id' => auth()->id(),
-                'product_id' => $this->id
-            ])
-            ->get();
+        if ($request->has('keyword')) {
+            $search_fields = [
+                'name',
+                'slug',
+                // 'sku',
+                'description',
+                'body',
+            ];
+            $search_terms = explode(' ', $request->keyword);
+            foreach ($search_terms as $term) {
+                $query->orWhere(function ($query) use ($search_fields, $term) {
+                    foreach ($search_fields as $field) {
+                        $query->orWhere($field, 'LIKE', '%' . $term . '%');
+                    }
+                });
+            }
+        }
 
-        return ($countOfReviews > 1 ? true : false);
+        return $query;
     }
 }

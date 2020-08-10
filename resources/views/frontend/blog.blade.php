@@ -75,7 +75,7 @@
 
                 <div class="_pagination">
                     <div class="d-flex justify-content-center pt-4">
-                        {{ $blogs->links() }}
+                        {{ $blogs->appends(request()->except('page'))->links() }}
                     </div>
                 </div>
             </div>

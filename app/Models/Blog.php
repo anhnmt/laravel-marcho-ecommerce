@@ -40,4 +40,26 @@ class Blog extends Model
     {
         return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
     }
+
+    public function scopeKeyword($query, $request)
+    {
+        if ($request->has('keyword')) {
+            $search_fields = [
+                'name',
+                'slug',
+                'description',
+                'body',
+            ];
+            $search_terms = explode(' ', $request->keyword);
+            foreach ($search_terms as $term) {
+                $query->orWhere(function ($query) use ($search_fields, $term) {
+                    foreach ($search_fields as $field) {
+                        $query->orWhere($field, 'LIKE', '%' . $term . '%');
+                    }
+                });
+            }
+        }
+
+        return $query;
+    }
 }
