@@ -25,6 +25,10 @@ Route::group([
     // Home
     Route::get('/', 'HomeController@index')->name('home');
 
+    //Search
+    Route::get('blog/search', 'SearchController@blog')->name('search.blog');
+    Route::get('product/search', 'SearchController@product')->name('search.product');
+
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
@@ -32,11 +36,14 @@ Route::group([
     // Product
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+    
     // Product Attribute
     Route::get('product-attribute/{productAttribute}', 'ProductController@quantity')->name('product.quantity');
 
     // Contact
     Route::view('contact', 'frontend.contact')->name('contact');
+
+    
 
     // Frontend Auth
     Route::group([
