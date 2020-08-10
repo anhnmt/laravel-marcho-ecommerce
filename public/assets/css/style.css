@@ -1842,8 +1842,12 @@ header .navbar-collapse {
     font-size: 14px;
     font-family: cursive;
 }
-.all_product_section .product_category ul .active {
+.all_product_section .product_category ul .active,
+.all_product_section .product_category ul li:hover {
     background-color: #fe3e57;
+}
+.all_product_section .product_category ul .active a,
+.all_product_section .product_category ul li:hover a {
     color: #f6f6f6;
 }
 .all_product_section .pop_tags ._tags {
