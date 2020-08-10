@@ -157,8 +157,8 @@
         <div class="product_category">
             <ul class="list-group">
                 @foreach($categories as $category)
-                <li class="list-group-item mt-2">
-                    <a href="#/">
+                <li class="list-group-item mt-2 @if(request()->category == $category->id) active @endif">
+                    <a href="{{ request()->fullUrlWithQuery(['category' => $category->id]) }}">
                         <div class="row">
                             <span class="col-md-6">{{$category->name}}</span>
                             <span class="text-md-right col-md-6">{{$category->products->count()}}</span>
