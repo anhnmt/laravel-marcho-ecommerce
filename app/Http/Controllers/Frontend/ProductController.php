@@ -57,6 +57,8 @@ class ProductController extends Controller
             $user->avatar = $user->avatar ? $user->avatar : 'assets/img/user2-160x160.jpg';
         }
 
+        $reviews = $product->reviews()->all();
+
         return view('frontend.product_detail', compact(
             'user',
             'product',
@@ -64,6 +66,7 @@ class ProductController extends Controller
             'relatedProducts',
             'latest_blog',
             'categories',
+            'reviews',
         ));
     }
 

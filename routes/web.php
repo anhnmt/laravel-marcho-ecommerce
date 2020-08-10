@@ -43,7 +43,14 @@ Route::group([
         'middleware' => ['auth'],
     ], function () {
         // Blog Comment
-        Route::resource('blog.comment', 'CommentController');
+        Route::resource('blog.comment', 'CommentController')->only([
+            'store',
+        ]);
+
+        // Product Review
+        Route::resource('product.review', 'ReviewController')->only([
+            'store',
+        ]);
 
         // Favorite
         Route::group([

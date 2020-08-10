@@ -80,7 +80,7 @@ class Product extends Model implements UseCartable
 
     public function reviews()
     {
-        return $this->belongsToMany('App\Models\Reviews');
+        return $this->hasMany('App\Models\Review');
     }
 
     public function currentUserHasSubmittedReview()

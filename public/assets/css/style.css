@@ -1910,7 +1910,7 @@ header .navbar-collapse {
 }
 .all_product_section .product_grid .product_info {
     position: relative;
-    height: 100px;
+    height: 80px;
     margin-top: 20px;
     text-align: center;
 }
@@ -2068,6 +2068,7 @@ header .navbar-collapse {
     .product_info
     .product_quantity_review {
     color: #353439;
+    margin-left: 10px;
 }
 .product_detai_section .head_product_detail p {
     margin-bottom: 0;
@@ -2139,7 +2140,6 @@ header .navbar-collapse {
     .choose_star
     .star_rating
     .checked
-    a
     i {
     color: #fec35b;
 }
@@ -2396,8 +2396,7 @@ header .navbar-collapse {
     font-size: 12px;
     line-height: normal;
     margin-bottom: 8px;
-    text-transform: uppercase;
-    font-style: italic;
+    text-transform: lowercase;
 }
 .blog_details_section .comment_box .comment-reply i {
     margin-right: 5px;

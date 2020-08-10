@@ -58,11 +58,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Blog');
     }
 
-    public function address()
-    {
-        return $this->hasOne('App\Models\Address');
-    }
-
     public function getRoles()
     {
         return $this->belongsToMany('App\Models\Role', 'model_has_roles', 'role_id', 'model_id');

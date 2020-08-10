@@ -18,7 +18,7 @@ class ProductAttribute extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo('App\Models\Product');
     }
 
     /**
@@ -26,6 +26,6 @@ class ProductAttribute extends Model
      */
     public function attributesValues()
     {
-        return $this->belongsToMany(AttributeValue::class);
+        return $this->belongsToMany('App\Models\AttributeValue');
     }
 }
