@@ -138,7 +138,7 @@
 
                 </div>
                 <div class="_pagination d-flex justify-content-center ">
-                    {{$products->links()}}
+                    {{ $products->appends(request()->except('page'))->links() }}
                 </div>
             </div>
         </div>

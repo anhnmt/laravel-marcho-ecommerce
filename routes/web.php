@@ -25,6 +25,10 @@ Route::group([
     // Home
     Route::get('/', 'HomeController@index')->name('home');
 
+    // Search
+    Route::get('blog/search', 'SearchController@blog')->name('search.blog');
+    Route::get('product/search', 'SearchController@product')->name('search.product');
+
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
