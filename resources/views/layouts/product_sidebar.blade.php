@@ -4,7 +4,7 @@
         <form>
             <div class="form-group form_group">
                 <input type="text" class="form-control form_control" placeholder="Enter your keyword...">
-                <button class="search_btn"><i class="fal fa-search"></i></button>
+                <button class="btn-fill-out search_btn"><i class="fal fa-search"></i></button>
             </div>
         </form>
     </div>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
-                        <button class="btn filter_btn">FILTER</button>
+                        <button class="btn btn-fill-out">FILTER</button>
                     </div>
                 </div>
 

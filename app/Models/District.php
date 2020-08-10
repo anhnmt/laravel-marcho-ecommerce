@@ -10,11 +10,11 @@ class District extends Model
 
     public function city()
     {
-        return $this->belongsTo(City::class, 'parent_code', 'code');
+        return $this->belongsTo('App\Models\City', 'parent_code', 'code');
     }
 
     public function wards()
     {
-        return $this->hasMany(Ward::class, 'parent_code', 'code');
+        return $this->hasMany('App\Models\Ward', 'parent_code', 'code');
     }
 }

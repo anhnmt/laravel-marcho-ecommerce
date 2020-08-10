@@ -73,7 +73,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Product', 'favorites')->withTimeStamps();
     }
 
-    public function isFavorited($product_id)
+    public function favorited($product_id)
     {
         $check = $this->favorites()->where([
             'product_id' => $product_id,

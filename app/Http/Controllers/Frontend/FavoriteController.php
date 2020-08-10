@@ -59,7 +59,7 @@ class FavoriteController extends Controller
         try {
             $user = auth()->user();
 
-            if ($user->isFavorited($product->id)) {
+            if ($user->favorited($product->id)) {
                 $user->favorites()->detach($product->id);
 
                 return response()->json([
