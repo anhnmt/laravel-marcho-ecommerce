@@ -74,20 +74,20 @@
 </div>
 
 <script>
-  $(document).ready(function () {
+  $(document).ready(function() {
     renderResizedValues($("#width_display").val(), $("#height_display").val());
 
     $("#resize").resizable({
       aspectRatio: true,
       containment: "#containment",
       handles: "n, e, s, w, se, sw, ne, nw",
-      resize: function (event, ui) {
+      resize: function(event, ui) {
         renderResizedValues(ui.size.width, ui.size.height);
       }
     });
   });
 
-  $('#width_display, #height_display').change(function () {
+  $('#width_display, #height_display').change(function() {
     var newWidth = $("#width_display").val();
     var newHeight = $("#height_display").val();
 
