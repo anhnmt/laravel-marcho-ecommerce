@@ -121,7 +121,7 @@
 				<div class="row">
 					@foreach($products as $product)
 					<div class="col-lg-3 col-md-6 col-sm-12">
-						<div class="card ez-animate" data-animation="animate__fadeIn">
+						<div class="card ez-animate" data-animation="animate__fadeInUp">
 							<div class="product_image">
 								<a href="{{ route('product.show', $product->slug) }}">
 									<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
@@ -129,7 +129,7 @@
 
 								<div class="product_item">
 									<div class="d-flex align-items-center justify-content-center">
-										<a class="add-wishlist @if($user && $user->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
+										<a class="add-wishlist @if($user && $user->favorited($product->id)) active @endif" data-product="{{ $product->id }}">
 											<i class="fal fa-heart"></i>
 										</a>
 										<a class="add-cart">
@@ -181,7 +181,7 @@
 			@if($latest_blog ?? '')
 			@foreach ($latest_blog as $blog)
 			<div class="col-lg-3 col-md-6 col-sm-12">
-				<div class="grid_item ez-animate" data-animation="animate__fadeIn">
+				<div class="grid_item ez-animate" data-animation="animate__fadeInUp">
 					<div class="grid_inner_item">
 						<div class="blog_img">
 							<a href="{{ route('blog.show', $blog->slug) }}">

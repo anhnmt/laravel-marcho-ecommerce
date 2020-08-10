@@ -106,6 +106,8 @@ Number.prototype.formatMoney = function (
     $(".star").click(function () {
         $(this).parents(".star_rating").find(".checked").removeClass("checked");
         $(this).addClass("checked");
+        $(this).parents(".star_rating").find("#rating").val($(this).data("star"));
+        // $(this).data("star");
     });
 
     /*-------------------------------

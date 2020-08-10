@@ -1,15 +1,15 @@
 <div class="makp_sidebar product_sidebar">
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5">
         <h4 class="mb-4 head_sidebar">SEARCH</h4>
         <form>
             <div class="form_group">
                 <input type="text" class="form_control" placeholder="Enter your keyword...">
-                <button class="search_btn"><i class="fal fa-search"></i></button>
+                <button class="btn-fill-out search_btn"><i class="fal fa-search"></i></button>
             </div>
         </form>
     </div>
     
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5">
         <h4 class="head_sidebar">MỚI ĐĂNG</h4>
         <div class="post_wrapper">
             @foreach ($latest_blog as $blog)
@@ -34,7 +34,7 @@
             @endforeach
         </div>
     </div>
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5">
         <h4 class="mb-4 head_sidebar">DANH MỤC</h4>
         <div class="product_category">
             <ul class="list-group">
@@ -49,7 +49,7 @@
             </ul>
         </div>
     </div>
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5">
         <h4 class="mb-4 head_sidebar">Popular Tags</h4>
         <div class="pop_tags">
             <span class="_tags mb-2 mr-2">Sweet shirt</span>

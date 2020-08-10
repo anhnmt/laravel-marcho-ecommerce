@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use BinaryCats\Sku\HasSku;
 use BinaryCats\Sku\Concerns\SkuOptions;
@@ -68,7 +67,7 @@ class Product extends Model implements UseCartable
      */
     public function category()
     {
-        return $this->hasOne(Category::class, 'id', 'category_id');
+        return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
 
     /**
@@ -76,19 +75,23 @@ class Product extends Model implements UseCartable
      */
     public function attributes()
     {
-        return $this->hasMany(ProductAttribute::class);
+        return $this->hasMany('App\Models\ProductAttribute');
     }
 
-    /**
-     * Determine whether a post has been marked as favorite by a user.
-     *
-     * @return boolean
-     */
-    public function favorited()
+    public function reviews()
     {
-        $user = auth()->user();
-        return (bool) Favorite::where('user_id', Auth::id())
-            ->where('post_id', $this->id)
-            ->first();
+        return $this->hasMany('App\Models\Review');
+    }
+
+    public function currentUserHasSubmittedReview()
+    {
+        $countOfReviews = $this->reviews()
+            ->where([
+                'user_id' => auth()->id(),
+                'product_id' => $this->id
+            ])
+            ->get();
+
+        return ($countOfReviews > 1 ? true : false);
     }
 }

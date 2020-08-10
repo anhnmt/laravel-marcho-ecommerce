@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-4">
                 @include('layouts.blog_sidebar')
             </div>

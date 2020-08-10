@@ -36,9 +36,9 @@
                                         <i class="fal fa-home-alt mr-1"></i>Trang chủ
                                     </a>
                                 </li>
-								<li class="mx-1">
-									<i class="fal fa-angle-right"></i>
-								</li>
+                                <li class="mx-1">
+                                    <i class="fal fa-angle-right"></i>
+                                </li>
                                 <li class=" mx-1 active">Chi tiết sản phẩm</li>
                             </ul>
                         </div>
@@ -83,19 +83,29 @@
                                     <div class="swiper-container gallery-top" style="height: 500px;">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy"
+                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
+                                                    alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy"
+                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
+                                                    alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy"
+                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
+                                                    alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy"
+                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
+                                                    alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
+                                                <img loading="lazy"
+                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
+                                                    alt="">
                                             </div>
                                         </div>
                                         <!-- Add Arrows -->
@@ -117,7 +127,8 @@
                             <div class="row">
                                 <div class="left col-md-6">
                                     @if($product->sale_price)
-                                    <p class="product_sale_price d-inline">{{ number_format($product->sale_price, 0) }}đ</p>
+                                    <p class="product_sale_price d-inline">{{ number_format($product->sale_price, 0) }}đ
+                                    </p>
                                     <span class="product_price d-inline">{{ number_format($product->price, 0) }}đ</span>
                                     @else
                                     <p class="product_sale_price d-inline">{{ number_format($product->price, 0) }}đ</p>
@@ -132,7 +143,7 @@
                                         <i class="fas fa-star checked"></i>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <span class="product_quantity_review">(22)</span>
+                                    <span class="product_quantity_review">({{ $reviews->count() }})</span>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +197,8 @@
                                 <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
                                 <input type="button" value="+" class="plus">
                             </div>
-                            <input type="hidden" id="product_quantity" value="{{ $productAttributes->isNotEmpty() ? $productAttributes->first()->quantity : $product->quantity }}">
+                            <input type="hidden" id="product_quantity"
+                                value="{{ $productAttributes->isNotEmpty() ? $productAttributes->first()->quantity : $product->quantity }}">
                             <input type="hidden" name="product" value="{{ $product->id }}">
                             <button type="submit" class="btn btn-fill-out filter_btn">Thêm vào giỏ</button>
                         </div>
@@ -195,107 +207,174 @@
             </div>
         </div>
 
-        <div class="body_product_detail py-5">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#body">Nội dung</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#review">Nhận xét</a>
-                        </li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div id="body" class="container tab-pane active"><br>
-                            <h3>HOME</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua.</p>
-                        </div>
-                        <div id="review" class="container tab-pane fade"><br>
-                            <h3>Menu 2</h3>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam.</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="row body_product_detail pt-5">
+            <div class="col-12">
+                <h3>HOME</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
             </div>
         </div>
 
-        <div class="foot_product_detail">
-            <h4 class="title"><span class="underline">Thêm</span> nhận xét của bạn</h4>
-            <div class="choose_star">
-                <div class="d-inline">
-                    <span>Đánh giá</span>
-                    <div class="star_rating d-md-inline mt-2 ml-md-5 pl-md-2">
-                        <div class="star d-inline mr-4">
-                            <a href="#/"><i class="fas fa-star"></i></a>
-                        </div>
-                        <div class="star d-inline mr-4">
-                            <a href="#/">
+        @if ($reviews->count() > 0)
+        <div class="row blog_details_section">
+            <div class="col-12">
+                <div class="comment_box">
+                    <div class="quantity_comment my-4">
+                        <h3>{{ $reviews->count() }} Đánh Giá</h3>
+                    </div>
+
+                    <ul class="list_none comment_list">
+                        @foreach ($reviews as $review)
+                        <li class="comment_info">
+                            <div class="d-flex justify-content-between">
+                                <div class="comment_user">
+                                    <img loading="lazy"
+                                        src="{{ asset($review->user->avatar ? $review->user->avatar : 'assets/img/user2-160x160.jpg') }}"
+                                        alt="user2" class="rounded-circle">
+                                </div>
+                                <div class="comment_content">
+                                    <div class="d-flex">
+                                        <div class="meta_data">
+                                            <h6><a href="#">{{ $review->user->name }}</a></h6>
+
+                                            <div class="comment-time">
+                                                <div class="star_rating d-inline-block pr-2">
+                                                    @switch($review->rating)
+                                                    @case(1)
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    @break
+                                                    @case(2)
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    @break
+                                                    @case(3)
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    @break
+                                                    @case(4)
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    @break
+                                                    @case(5)
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    @break
+                                                    @default
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    <i class="fas fa-star checked"></i>
+                                                    @endswitch
+                                                </div>
+
+                                                {{ $review->created_at->ago() }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>{{ $review->body }}</p>
+                                </div>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <div class="foot_product_detail pt-5" id="review_section">
+            <form action="{{ route('product.review.store', $product->id) }}" method="POST">
+                @csrf
+
+                <h4 class="title">
+                    <span class="underline">Thêm</span> nhận xét của bạn
+                </h4>
+
+                <div class="choose_star">
+                    <div class="d-inline">
+                        <span>Đánh giá</span>
+                        <div class="star_rating d-md-inline mt-2 ml-md-5 pl-md-2">
+                            <input type="hidden" id="rating" name="rating" value="5">
+
+                            <div class="star d-inline mr-4" data-star="1">
+                                <i class="fas fa-star"></i>
+                            </div>
+
+                            <div class="star d-inline mr-4" data-star="2">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                            </a>
-                        </div>
-                        <div class="star d-inline mr-4">
-                            <a href="#/">
+                            </div>
+
+                            <div class="star d-inline mr-4" data-star="3">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                            </a>
-                        </div>
-                        <div class="star d-inline mr-4">
-                            <a href="#/">
+                            </div>
+
+                            <div class="star d-inline mr-4" data-star="4">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                            </a>
-                        </div>
-                        <div class="star d-inline mr-4 checked">
-                            <a href="#/">
+                            </div>
+
+                            <div class="star d-inline mr-4 checked" data-star="5">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-review mt-4">
-                <div class="contact_form">
-                    <form>
+                <div class="form-review mt-4">
+                    <div class="contact_form">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Tên bạn..." name="name" required="">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="email" class="form_control" placeholder="Địa chỉ E-mail..." name="email" required="">
-                                </div>
-                            </div>
                             <div class="col-lg-12">
-                                <div class="form_group">
-                                    <textarea class="form_control" placeholder="Đánh giá của bạn..." name="message"></textarea>
+                                @if($user ?? '')
+                                <div class="form-group form_group">
+                                    <img loading="lazy" src="{{asset($user->avatar)}}" width="40px" alt="user4"
+                                        class="rounded-circle">
+                                    <span>{{ $user->name }}</span>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
+                                @else
+                                <div class="form-group form_group">
+                                    <span class="text-danger">Vui lòng đăng nhập để bình luận</span>
+                                </div>
+                                @endif
+
+                                <div class="form_group">
+                                    <textarea class="form_control" placeholder="Đánh giá của bạn..."
+                                        name="body"></textarea>
+                                </div>
+
                                 <div class="button_box">
-                                    <button class="btn btn-fill-out">Để lại đánh giá</button>
+                                    <button type="submit" class="btn btn-fill-out">Để lại đánh giá</button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="related_products mt-5 pt-5">
@@ -311,12 +390,15 @@
                             <div class="row">
                                 <div class="product_image col-md-4 col-sm-12 col-12">
                                     <a href="{{ route('product.show', $product->slug) }}">
-                                        <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                        <img loading="lazy"
+                                            src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
+                                            class="card-img card-img-list" alt="">
                                     </a>
 
                                     <div class="product_item">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a class="add-wishlist @if($user && $user->isFavorited($product->id)) active @endif" data-product="{{ $product->id }}">
+                                            <a class="add-wishlist @if($user && $user->favorited($product->id)) active @endif"
+                                                data-product="{{ $product->id }}">
                                                 <i class="fal fa-heart"></i>
                                             </a>
                                             <a class="add-cart">

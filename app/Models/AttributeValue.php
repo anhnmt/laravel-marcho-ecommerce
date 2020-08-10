@@ -34,7 +34,7 @@ class AttributeValue extends Model
      */
     public function attribute()
     {
-        return $this->belongsTo(Attribute::class);
+        return $this->belongsTo('App\Models\Attribute');
     }
 
     /**
@@ -42,6 +42,6 @@ class AttributeValue extends Model
      */
     public function productAttributes()
     {
-        return $this->belongsToMany(ProductAttribute::class);
+        return $this->belongsToMany('App\Models\ProductAttribute');
     }
 }

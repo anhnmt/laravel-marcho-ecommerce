@@ -11,26 +11,6 @@ use Illuminate\Support\Facades\Validator;
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,17 +39,6 @@ class CommentController extends Controller
         // Comment::create($request->only('user_id', 'post_id', 'body'));
 
         return redirect()->route('blog.show', $blog->slug)->withSuccess('Đăng bình luận thành công');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
     }
 
     /**
