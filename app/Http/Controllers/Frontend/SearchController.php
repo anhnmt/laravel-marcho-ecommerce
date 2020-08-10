@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+
     public function product(Request $request)
     {
         // dd($request->all());
@@ -20,5 +21,11 @@ class SearchController extends Controller
             ->paginate(10);
 
         return view('frontend.product', compact('user', 'products', 'categories'));
+    }
+ 
+    public function blog(Request $request)
+    {
+        // dd($request->all());
+
     }
 }

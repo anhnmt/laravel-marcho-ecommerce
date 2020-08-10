@@ -36,6 +36,7 @@ Route::group([
     // Product
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+    
     // Product Attribute
     Route::get('product-attribute/{productAttribute}', 'ProductController@quantity')->name('product.quantity');
 

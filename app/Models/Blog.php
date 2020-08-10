@@ -40,4 +40,8 @@ class Blog extends Model
     {
         return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
     }
+
+    public function scopeKeyword($query, $request){
+        
+    }
 }
