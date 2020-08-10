@@ -94,7 +94,6 @@ class Product extends Model implements UseCartable
                 'body',
             ];
             $search_terms = explode(' ', $request->keyword);
-            // $query->where('name', 'LIKE', '%' . $request->keyword . '%');
             foreach ($search_terms as $term) {
                 $query->orWhere(function ($query) use ($search_fields, $term) {
                     foreach ($search_fields as $field) {

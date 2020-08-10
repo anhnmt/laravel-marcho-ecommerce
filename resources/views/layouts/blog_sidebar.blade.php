@@ -39,12 +39,14 @@
         <h4 class="mb-4 head_sidebar">DANH MỤC</h4>
         <div class="product_category">
             <ul class="list-group">
-                @foreach ($categories as $category)
+                @foreach($categories as $category)
                 <li class="list-group-item mt-2">
-                    <div class="row">
-                        <span class="col-md-6">{{ $category->name }}</span>
-                        <span class="text-md-right col-md-6">48</span>
-                    </div>
+                    <a href="#/">
+                        <div class="row">
+                            <span class="col-md-6">{{$category->name}}</span>
+                            <span class="text-md-right col-md-6">{{$category->products->count()}}</span>
+                        </div>
+                    </a>
                 </li>
                 @endforeach
             </ul>
