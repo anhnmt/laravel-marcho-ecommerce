@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Category;
+use App\Models\Blog;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +14,9 @@ class SearchController extends Controller
     {
         // dd($request->all());
         $user = auth()->user();
+      
         $categories = Category::all();
+      
         $products = Product::with('attributes')->where('status', 1)
             ->keyword($request)
             ->category($request)
@@ -22,5 +25,19 @@ class SearchController extends Controller
             ->paginate(10);
 
         return view('frontend.product', compact('user', 'products', 'categories'));
+    }
+
+    public function blog(Request $request)
+    {
+        $blogs = Blog::where('status', 1)
+            ->keyword($request)
+            ->orderBy('id', 'desc')
+            ->paginate(8);
+
+        $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
+
+        $categories = Category::all();
+
+        return view('frontend.blog', compact('blogs', 'latest_blog', 'categories'));
     }
 }
