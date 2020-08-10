@@ -25,7 +25,7 @@ Route::group([
     // Home
     Route::get('/', 'HomeController@index')->name('home');
 
-    //Search
+    // Search
     Route::get('blog/search', 'SearchController@blog')->name('search.blog');
     Route::get('product/search', 'SearchController@product')->name('search.product');
 
@@ -42,8 +42,6 @@ Route::group([
 
     // Contact
     Route::view('contact', 'frontend.contact')->name('contact');
-
-    
 
     // Frontend Auth
     Route::group([

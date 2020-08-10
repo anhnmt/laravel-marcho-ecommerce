@@ -1,15 +1,15 @@
 <div class="makp_sidebar product_sidebar">
     <div class="widget_box search_widget mb-55">
-        <h4 class="mb-4 head_sidebar">SEARCH</h4>
-        <form>
+        <h4 class="mb-4 head_sidebar">TÌM KIẾM</h4>
+        <form action="{{ route('search.product') }}" method="GET">
             <div class="form-group form_group">
-                <input type="text" class="form-control form_control" placeholder="Enter your keyword...">
+                <input type="text" class="form-control form_control" placeholder="Nhập thông tin cần tìm..." name="keyword">
                 <button class="btn-fill-out search_btn"><i class="fal fa-search"></i></button>
             </div>
         </form>
     </div>
     <div class="widget_box search_widget mb-55">
-        <h4 class="mb-5 head_sidebar">PRICE FILTER</h4>
+        <h4 class="mb-5 head_sidebar">MỨC GIÁ</h4>
         <div class="price-range-wrap">
             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="0" data-max="999">
                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="widget_box search_widget mb-55">
-        <h4 class="mb-3 head_sidebar">COLOR FILTER</h4>
+        <h4 class="mb-3 head_sidebar">MÀU SẮC</h4>
         <div class="color_filter">
             <ul class="list-group">
                 <li class="list-group-item">
@@ -101,7 +101,7 @@
         </div>
     </div>
     <div class="widget_box search_widget mb-55">
-        <h4 class="mb-4 head_sidebar">SIZE FILTER</h4>
+        <h4 class="mb-4 head_sidebar">KÍCH CỠ</h4>
         <div class="size_filter mt-3">
             <ul class="list-group">
                 <li class="list-group-item">
@@ -170,7 +170,7 @@
         </div>
     </div>
     <div class="widget_box search_widget mb-55">
-        <h4 class="mb-4 head_sidebar">Popular Tags</h4>
+        <h4 class="mb-4 head_sidebar">TỪ KHOÁ</h4>
         <div class="pop_tags">
             <span class="_tags mb-2 mr-2">Sweet shirt</span>
             <span class="_tags mb-2 mr-2 active">Man Accessories</span>

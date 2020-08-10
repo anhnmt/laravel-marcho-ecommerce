@@ -926,6 +926,9 @@ section .section_title p {
 .gallery-thumbs .swiper-slide-thumb-active {
     opacity: 1;
 }
+.form-control:focus {
+    box-shadow: unset;
+}
 
 /*===================================*
     HEADER STYLE
