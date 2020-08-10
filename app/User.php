@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'phone',
+        'name', 'email', 'password', 'avatar', 'phone', 'city_id', 'district_id', 'ward_id', 'address',
     ];
 
     /**
@@ -58,9 +58,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Blog');
     }
 
-    public function address()
+    public function ward()
     {
-        return $this->hasOne('App\Models\Address');
+        return $this->belongsTo('App\Models\Ward', 'ward_id', 'id');
     }
 
     public function getRoles()
