@@ -93,8 +93,9 @@ class Product extends Model implements UseCartable
                 'description',
                 'body',
             ];
+
             $search_terms = explode(' ', $request->keyword);
-            // $query->where('name', 'LIKE', '%' . $request->keyword . '%');
+
             foreach ($search_terms as $term) {
                 $query->orWhere(function ($query) use ($search_fields, $term) {
                     foreach ($search_fields as $field) {
@@ -102,6 +103,33 @@ class Product extends Model implements UseCartable
                     }
                 });
             }
+        }
+
+        return $query;
+    }
+
+    public function scopeCategory($query, $request)
+    {
+        if ($request->has('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        return $query;
+    }
+
+    public function scopePrice($query, $request)
+    {
+        if ($request->has('from_price') && $request->has('to_price')) {
+            $query->whereBetween('price', [$request->from_price, $request->to_price]);
+        }
+
+        return $query;
+    }
+
+    public function scopeAttributes($query, $request)
+    {
+        if ($request->has('attributes')) {
+            $query->whereBetween('price', [$request->min_price, $request->max_price]);
         }
 
         return $query;
