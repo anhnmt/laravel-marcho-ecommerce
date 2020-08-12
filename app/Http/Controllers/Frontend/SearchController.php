@@ -14,9 +14,9 @@ class SearchController extends Controller
     {
         // dd($request->all());
         $user = auth()->user();
-      
+
         $categories = Category::all();
-      
+
         $products = Product::with('attributes')->where('status', 1)
             ->keyword($request)
             ->category($request)
@@ -29,11 +29,12 @@ class SearchController extends Controller
 
     public function blog(Request $request)
     {
+        
         $blogs = Blog::where('status', 1)
             ->keyword($request)
             ->orderBy('id', 'desc')
             ->paginate(8);
-
+            // dd($blogs);
         $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
 
         $categories = Category::all();

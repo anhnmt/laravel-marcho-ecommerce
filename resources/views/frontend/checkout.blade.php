@@ -98,16 +98,19 @@
 						</div>
 						<div class="col-lg-12 mt-3">
 							<div class="row">
-								<div class="col-lg-4 mt-2">
-									<div class="form-group">
+								<div class="col-xl-4 col-12 mt-2">
+									<div class="form-group @error('city_id') is-invalid @enderror">
 										<label for="">Tỉnh/Thành phố <span class="text-danger">*</span></label>
 
 										<select
 											class="form-control select2 checkout_select2 @error('city_id') is-invalid @enderror"
-											name="city_id" id="cities">
+											name="city_id" id="cities" width="100%">
 											<option value="0">--Tỉnh/Thành phố--</option>
+
 											@foreach ($cities as $city)
-											<option value="{{$city->id}}">{{$city->name}}</option>
+											<option value="{{$city->id}}"
+												{{(old('city_id') ?? old('city_id', auth()->user()->city_id)) == $city->id ? 'selected' : ''}}>
+												{{$city->name}}</option>
 											@endforeach
 										</select>
 
@@ -116,12 +119,18 @@
 										@enderror
 									</div>
 								</div>
-								<div class="col-lg-4 mt-2">
-									<div class="form-group">
+								<div class="col-xl-4 col-12 mt-2">
+									<div class="form-group @error('district_id') is-invalid @enderror">
 										<label for="">Quận/Huyện <span class="text-danger">*</span></label>
 										<select class="form-control select2 @error('district_id') is-invalid @enderror"
-											name="district_id" id="districts">
+											name="district_id" id="districts" width="100%">
 											<option value="0">--Quận/Huyện--</option>
+
+											@foreach ($districts as $district)
+											<option value="{{$district->id}}"
+												{{(old('district_id') ?? old('district_id', auth()->user()->district_id)) == $district->id ? 'selected' : ''}}>
+												{{$district->name}}</option>
+											@endforeach
 										</select>
 
 										@error('district_id')
@@ -129,12 +138,18 @@
 										@enderror
 									</div>
 								</div>
-								<div class="col-lg-4 mt-2">
-									<div class="form-group">
+								<div class="col-xl-4 col-12 mt-2">
+									<div class="form-group @error('ward_id') is-invalid @enderror">
 										<label for="">Xã/Phường <span class="text-danger">*</span></label>
 										<select class="form-control select2 @error('ward_id') is-invalid @enderror"
-											name="ward_id" id="wards">
+											name="ward_id" id="wards" width="100%">
 											<option value="0">--Xã/Phường--</option>
+
+											@foreach ($wards as $ward)
+											<option value="{{$ward->id}}"
+												{{(old('ward_id') ?? old('ward_id', auth()->user()->ward_id)) == $ward->id ? 'selected' : ''}}>
+												{{$ward->name}}</option>
+											@endforeach
 										</select>
 
 										@error('ward_id')
@@ -146,8 +161,9 @@
 									<div class="form-group">
 										<label for="" class="required">Địa chỉ cụ thể <span
 												class="text-danger">*</span></label>
-										<input type="text" class="form-control coupon_code_input @error('address') is-invalid @enderror"
-											placeholder="Số nhà, tòa nhà ..." name="address">
+										<input type="text"
+											class="form-control coupon_code_input @error('address') is-invalid @enderror"
+											placeholder="Số nhà, tòa nhà ..." name="address" value="{{old('address') ?? old('address', auth()->user()->address)}}">
 
 										@error('address')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -160,12 +176,12 @@
 							<div class="form-group">
 								<label for="" class="required">Lời nhắn</label>
 								<textarea class="form-control coupon_code_input" name="note" id="" rows="5"
-									placeholder="Ghi chú của bạn..."></textarea>
+								placeholder="Ghi chú của bạn...">{{old('note') ?? old('note')}}</textarea>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-4 mt-sm-5 mt-lg-0">
 					<div class="border p-3 p-lg-4 mb-5">
 						<div class="text-center">
 							<h4 class="order_product_title">Đơn hàng của bạn</h4>

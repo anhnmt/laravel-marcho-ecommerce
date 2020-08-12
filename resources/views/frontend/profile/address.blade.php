@@ -51,7 +51,7 @@
                 @include('layouts.profile_sidebar')
             </div>
 
-            <div class="col-lg-9">
+            <div class="col-lg-9 col-md-8 mt-md-0 mt-5">
                 <div class="tab-content dashboard_content">
                     <div class="card">
                         <div class="card-header">
@@ -148,7 +148,7 @@
                                                 <p class="mb-3">
                                                     Bạn hiện chưa đăng kí địa chỉ...
                                                 </p>
-                                                <div class="form-group">
+                                                <div class="form-group  @error('city_id') is-invalid @enderror">
                                                     <label for="">Tỉnh/Thành phố</label>
                                                     <select
                                                         class="form-control select2 @error('city_id') is-invalid @enderror"
@@ -167,7 +167,7 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group @error('district_id') is-invalid @enderror">
                                                     <label for="">Quận/Huyện</label>
                                                     <select
                                                         class="form-control select2 @error('district_id') is-invalid @enderror"
@@ -186,7 +186,7 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group @error('ward_id') is-invalid @enderror">
                                                     <label for="">Xã/Phường</label>
                                                     <select
                                                         class="form-control select2 @error('ward_id') is-invalid @enderror"

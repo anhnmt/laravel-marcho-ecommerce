@@ -114,28 +114,6 @@
 							</tr>
 							@endforeach
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="6" class="px-0 mt-5 pt-5">
-									<div class="row no-gutters">
-										<div class="col-md-6 mb-3 mb-md-0 text-md-left">
-											<div class="fix_btn_line_fill d-inline-block">
-												<form action="{{ route('cart.clear') }}" method="POST">
-													@csrf
-													<button type="submit" class="btn btn-fill-line">Xóa giỏ
-														hàng</button>
-												</form>
-											</div>
-										</div>
-
-										<div class="col-md-6 text-left text-md-right">
-											<a href="{{ route('product.index') }}" class="btn btn-fill-out">Tiếp tục mua
-												sắm</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tfoot>
 						@else
 						<tbody>
 							<tr>
@@ -153,6 +131,24 @@
 						</tbody>
 						@endif
 					</table>
+				</div>
+			</div>
+		</div>
+		<div class="button-cart-mobile d-sm-block mt-5">
+			<div class="row no-gutters">
+				<div class="col-sm-6 col-12 text-sm-left text-center">
+					<div class="fix_btn_line_fill d-inline-block">
+						<form action="{{ route('cart.clear') }}" method="POST">
+							@csrf
+							<button type="submit" class="btn btn-fill-line">Xóa giỏ
+								hàng</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-12 mt-3 mt-sm-0 text-sm-right text-center">
+					<a href="{{ route('product.index') }}" class="btn btn-fill-out">Tiếp tục mua
+						sắm</a>
 				</div>
 			</div>
 		</div>
@@ -176,7 +172,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6 mt-lg-0 mt-md-0 mt-sm-5 mt-5">
 				<div class="border p-3 p-md-4">
 					<div class="heading_s1 mb-3">
 						<h6>Tổng chi phí</h6>
