@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
-use App\Models\Comment;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,13 +14,14 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $blogs = Blog::orderBy('id', 'desc')->paginate(8);
+        $blogs = Blog::where('status', 1)
+            ->keyword($request)
+            ->orderBy('id', 'desc')
+            ->paginate(8);
 
         $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
-
         $categories = Category::all();
 
         // dd($latest_blog);

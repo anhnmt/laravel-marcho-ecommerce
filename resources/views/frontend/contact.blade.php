@@ -94,7 +94,9 @@
             <div class="col-lg-8">
                 <div class="contact_form">
                     <h4>Thông tin liên hệ</h4>
-                    <form>
+                    <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form_group">

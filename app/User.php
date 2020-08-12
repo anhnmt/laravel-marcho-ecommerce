@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Models\Favorite;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +14,17 @@ class User extends Authenticatable
     use Notifiable;
     use Cachable;
 
-    protected $with = ['roles', 'permissions'];
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'roles',
+        'roles.permissions',
+        'permissions',
+    ];
+
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +32,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'phone', 'city_id', 'district_id', 'ward_id', 'address',
+        'name',
+        'email',
+        'password',
+        'avatar',
+        'phone',
+        'city_id',
+        'district_id',
+        'ward_id',
+        'address',
     ];
 
     /**
