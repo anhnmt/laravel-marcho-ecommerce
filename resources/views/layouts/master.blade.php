@@ -36,8 +36,8 @@
                         <li class="nav-item {{ (request()->routeIs('blog.*')) ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('blog.index') }}">Tin tức</a>
                         </li>
-                        <li class="nav-item {{ (request()->routeIs('contact')) ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('contact') }}">Liên hệ</a>
+                        <li class="nav-item {{ (request()->routeIs('contact.*')) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('contact.index') }}">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -139,7 +139,7 @@
                             <a href="{{ route('blog.index') }}">Tin tức</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact') }}">Liên hệ</a>
+                            <a href="{{ route('contact.index') }}">Liên hệ</a>
                         </li>
                         <li>
                             <a href="{{ route('home') }}">Tìm kiếm</a>

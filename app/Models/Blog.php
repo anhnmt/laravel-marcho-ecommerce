@@ -50,9 +50,11 @@ class Blog extends Model
                 'description',
                 'body',
             ];
+
             $search_terms = explode(' ', $request->keyword);
+
             foreach ($search_terms as $term) {
-                $query->orWhere(function ($query) use ($search_fields, $term) {
+                $query->where(function ($query) use ($search_fields, $term) {
                     foreach ($search_fields as $field) {
                         $query->orWhere($field, 'LIKE', '%' . $term . '%');
                     }
