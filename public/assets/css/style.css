@@ -2730,7 +2730,7 @@ select.not_chosen.form-control:focus {
 }
 .checkout_section .select2-container--default .select2-selection--single {
     background: #f6f6f6;
-    border: none;
+    border: 1px solid transparent;
 }
 .checkout_section
     .select2-container--default
@@ -3175,6 +3175,9 @@ textarea.form_control {
 /*===================================*
     SELECT2 STYLE
 *===================================*/
+.select2 {
+    width:100%!important;
+}
 .select2-container--default .select2-selection--single {
     border: 1px solid #ced4da;
     padding: 0.46875rem 0.75rem;
@@ -6505,7 +6508,9 @@ select.form-control-sm
     .select2-selection--multiple {
     border-color: #6d7a86;
 }
-
+.is-invalid .select2-container--default .select2-selection--single {
+    border-color: #dc3545;
+}
 /*===================================*
     Pagination
 *===================================*/

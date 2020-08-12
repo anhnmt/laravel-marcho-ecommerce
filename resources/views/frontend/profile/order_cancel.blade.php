@@ -44,7 +44,7 @@
                         @include('layouts.profile_sidebar')
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-8">
+                <div class="col-lg-9 col-md-8 mt-md-0 mt-5">
                     <div class="tab-content dashboard_content">
                         <div class="card">
                             <div class="card-header">

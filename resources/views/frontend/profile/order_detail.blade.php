@@ -228,7 +228,7 @@
                                                                 @enderror
                                                             </div>
 
-                                                            <div class="form-group">
+                                                            <div class="form-group @error('city_id') is-invalid @enderror">
                                                                 <label for="">Tỉnh/Thành phố</label>
                                                                 <select
                                                                     class="form-control select2 @error('city_id') is-invalid @enderror"
@@ -248,7 +248,7 @@
                                                                 @enderror
                                                             </div>
 
-                                                            <div class="form-group">
+                                                            <div class="form-group @error('district_id') is-invalid @enderror">
                                                                 <label for="">Quận/Huyện</label>
                                                                 <select
                                                                     class="form-control select2 @error('district_id') is-invalid @enderror"
@@ -268,7 +268,7 @@
                                                                 @enderror
                                                             </div>
 
-                                                            <div class="form-group">
+                                                            <div class="form-group @error('ward_id') is-invalid @enderror">
                                                                 <label for="">Xã/Phường</label>
                                                                 <select
                                                                     class="form-control select2 @error('ward_id') is-invalid @enderror"
@@ -324,7 +324,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mt-md-0 mt-5">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4>Tổng cộng</h4>
