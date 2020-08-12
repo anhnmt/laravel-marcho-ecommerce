@@ -12,7 +12,9 @@ class AttributeValue extends Model
     use Cachable;
 
     protected $fillable = [
-        'attribute_id', 'value', 'code',
+        'attribute_id',
+        'value',
+        'code',
     ];
 
     /**

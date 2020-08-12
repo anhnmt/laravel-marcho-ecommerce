@@ -4,13 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class OrderDetail extends Model
 {
     use SoftDeletes;
+    use Cachable;
 
     protected $fillable = [
-        'order_id',	'product_id', 'product_attribute_id', 'quantity', 'price',
+        'order_id',
+        'product_id',
+        'product_attribute_id',
+        'quantity',
+        'price',
     ];
 
     public function product()

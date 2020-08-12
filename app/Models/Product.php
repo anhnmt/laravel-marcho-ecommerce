@@ -19,8 +19,6 @@ class Product extends Model implements UseCartable
     use HasSku;
     use Cachable;
 
-    // protected $with = ['roles.permissions', 'permissions'];
-
     protected $fillable = [
         'category_id',
         'name',

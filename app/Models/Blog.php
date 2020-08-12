@@ -14,7 +14,13 @@ class Blog extends Model
     use Cachable;
 
     protected $fillable = [
-        'user_id', 'name', 'slug', 'image', 'description', 'body', 'status',
+        'user_id',
+        'name',
+        'slug',
+        'image',
+        'description',
+        'body',
+        'status',
     ];
 
     /**
