@@ -17,13 +17,11 @@
     <header>
         <div class="container">
             <nav class="menu_bar navbar navbar-expand-lg align-items-center justify-content-between">
-                <a class="header_logo navbar-brand" href="{{ route('home') }}">
-                    <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
-                </a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="d-flex justify-content-center my-md-0 my-3 col-sm-auto col-xs-12">
+                    <a class="header_logo navbar-brand" href="{{ route('home') }}">
+                        <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
+                    </a>
+                </div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="header_menu navbar-nav">
@@ -42,64 +40,59 @@
                     </ul>
                 </div>
 
-                <ul class="header_icon navbar-nav flex-row align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="tooltip" title="Tìm kiếm">
-                            <i class="fal fa-search"></i>
-                        </a>
-                    </li>
-                    @php
-                    $user = auth()->user();
-                    $cart = Cart::name('shopping');
-                    $cartCount = $cart->sumItemsQuantity();
-                    $favoriteCount = $user ? $user->favorites()->count() : 0;
-                    @endphp
-                    <li class="nav-item">
-                        <a class="nav-link icon_love" href="{{ route('favorite.index') }}">
-                            <i class="fal fa-heart"></i>
-                            <span id="favorite_count" class="wishlist_count">{{ $favoriteCount }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link icon_cart" href="{{ route('cart.index') }}">
-                            <i class="fal fa-shopping-cart"></i>
-                            <span id="cart_count" class="cart_count">{{ $cartCount }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        @if(auth()->check())
-                        <a class="nav-link user_header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img loading="lazy" src="{{ asset($user->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @can('admin.dashboard')
-                            <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
-                            @endcan
+                @php
+                $user = auth()->user();
+                $cart = Cart::name('shopping');
+                $cartCount = $cart->sumItemsQuantity();
+                $favoriteCount = $user ? $user->favorites()->count() : 0;
+                @endphp
+                <div class="navbar-nav header_icon flex-row align-items-center col-sm-auto col-xs-12">
+                    <a class="nav-item nav-link navbar-toggler" href="#" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fal fa-bars"></i>
+                    </a>
+                    <!-- <a class="nav-item nav-link" href="#" title="Tìm kiếm">
+                        <i class="fal fa-search"></i>
+                    </a> -->
+                    <a class="nav-item nav-link icon_love" href="{{ route('favorite.index') }}">
+                        <i class="fal fa-heart"></i>
+                        <span id="favorite_count" class="wishlist_count">{{ $favoriteCount }}</span>
+                    </a>
+                    <a class="nav-item nav-link icon_cart" href="{{ route('cart.index') }}">
+                        <i class="fal fa-shopping-cart"></i>
+                        <span id="cart_count" class="cart_count">{{ $cartCount }}</span>
+                    </a>
+                    @if(auth()->check())
+                    <a class="nav-item nav-link user_header dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img loading="lazy" src="{{ asset($user->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" alt="" class="rounded-circle img-fluid" width="35px" height="35px">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @can('admin.dashboard')
+                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
+                        @endcan
 
-                            @can('admin.dashboard')
-                            <a class="dropdown-item" href="{{ route('admin.profile') }}">Trang cá nhân</a>
-                            @endcan
+                        @can('admin.dashboard')
+                        <a class="dropdown-item" href="{{ route('admin.profile') }}">Trang cá nhân</a>
+                        @endcan
 
-                            @cannot('admin.dashboard')
-                            <a class="dropdown-item" href="{{ route('user.profile') }}">Trang cá nhân</a>
-                            @endcan
+                        @cannot('admin.dashboard')
+                        <a class="dropdown-item" href="{{ route('user.profile') }}">Trang cá nhân</a>
+                        @endcan
 
-                            <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item">
-                                    <i class="fal fa-sign-out"></i> Đăng xuất
-                                </button>
-                            </form>
-                        </div>
-                        @else
-                        <a class="nav-link" href="{{ route('login') }}" data-toggle="tooltip" title="Đăng nhập">
-                            <i class="fal fa-user-circle"></i>
-                        </a>
-                        @endif
-                    </li>
-                </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                <i class="fal fa-sign-out"></i> Đăng xuất
+                            </button>
+                        </form>
+                    </div>
+                    @else
+                    <a class="nav-item nav-link" href="{{ route('login') }}" title="Đăng nhập">
+                        <i class="fal fa-user-circle"></i>
+                    </a>
+                    @endif
+                </div>
             </nav>
         </div>
     </header>

@@ -1,4 +1,22 @@
 /*===================================*
+    HEADER SECTION
+*===================================*/
+@media (max-width: 575.98px) {
+    header .menu_bar {
+        -ms-flex-pack: center!important;
+        justify-content: center!important;
+    }
+    header .header_icon {
+        -ms-flex-pack: justify!important;
+        justify-content: space-between!important;
+    }
+    .navbar-nav .dropdown-menu {
+        position: absolute;
+    }
+}
+
+
+/*===================================*
     LOGIN SECTION
 *===================================*/
 @media (min-width: 0px) and (max-width: 767.98px) {
