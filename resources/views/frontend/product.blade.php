@@ -47,32 +47,24 @@
 <section class="login-wrapper all_product_section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-12 col-12 col-lg-4">
+            <div class="col-lg-4 col-sm-12 col-12">
                 @include('layouts.product_sidebar')
             </div>
 
-            <div class="col-md-8 col-sm-12 col-12 col-lg-8">
+            <div class="col-lg-8 col-sm-12 col-12">
                 <div class="widget_box search_widget mb-55 option_product">
                     <div class="row">
                         <div class="col-6">
                             <div class="view_icon float-left">
-                                <span class="mr-2">View </span>
+                                <h5>Danh sách sản phẩm</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="view_icon float-right">
+                                <span class="mr-2">Hiển thị </span>
                                 <a href="#/" class="product_grid active product_present"><i class="fas fa-th mr-2"></i></a>
                                 <a href="#/" class="product_list product_present"><i class="far fa-list mr-2"></i></a>
                             </div>
-                        </div>
-                        <div class="col-6 d-flex justify-content-end">
-                            <span>Sort By </span>
-                            <select class="nice_select">
-                                <option value="1">Default</option>
-                                <option value="2">Newest</option>
-                            </select>
-                            <span>Show </span>
-                            <select class="nice_select">
-                                <option>9</option>
-                                <option value="1">12</option>
-                                <option value="2">24</option>
-                            </select>
                         </div>
                     </div>
                 </div>

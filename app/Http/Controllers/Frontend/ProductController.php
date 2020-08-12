@@ -22,7 +22,7 @@ class ProductController extends Controller
             ->category($request)
             ->price($request)
             ->orderBy('id', 'desc')
-            ->paginate(10);
+            ->paginate(8);
 
         return view('frontend.product', compact(
             'user',
