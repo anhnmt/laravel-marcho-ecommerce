@@ -14,7 +14,13 @@ class Blog extends Model
     use Cachable;
 
     protected $fillable = [
-        'user_id', 'name', 'slug', 'image', 'description', 'body', 'status',
+        'user_id',
+        'name',
+        'slug',
+        'image',
+        'description',
+        'body',
+        'status',
     ];
 
     /**
@@ -50,7 +56,9 @@ class Blog extends Model
                 'description',
                 'body',
             ];
+
             $search_terms = explode(' ', $request->keyword);
+
             foreach ($search_terms as $term) {
                 $query->where(function ($query) use ($search_fields, $term) {
                     foreach ($search_fields as $field) {

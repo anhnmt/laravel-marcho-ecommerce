@@ -10,7 +10,10 @@ class Review extends Model
     use Cachable;
 
     protected $fillable = [
-        'user_id', 'product_id', 'rating', 'body',
+        'user_id',
+        'product_id',
+        'rating',
+        'body',
     ];
 
     /**

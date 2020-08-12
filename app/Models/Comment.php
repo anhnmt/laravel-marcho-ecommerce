@@ -11,7 +11,10 @@ class Comment extends Model
     use Cachable;
 
     protected $fillable = [
-        'parent_id', 'user_id', 'blog_id', 'body',
+        'parent_id',
+        'user_id',
+        'blog_id',
+        'body',
     ];
 
     /**

@@ -7,16 +7,29 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
         $categories = Category::all();
-        $products = Product::orderBy('id', 'desc')->paginate(10);
+        $max_price = Product::max('price');
 
-        return view('frontend.product', compact('user', 'products', 'categories'));
+        $products = Product::with('attributes')->where('status', 1)
+            ->keyword($request)
+            ->category($request)
+            ->price($request)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return view('frontend.product', compact(
+            'user',
+            'products',
+            'categories',
+            'max_price',
+        ));
     }
 
     /**
@@ -28,15 +41,14 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product = Product::findBySlug($product->slug);
-        // dd($product->name);
 
         $relatedProducts = Product::where([
             ['category_id', $product->category_id],
             ['id', '!=', $product->id],
         ])
-        ->orderBy('name', 'desc')
-        ->select('id', 'name', 'slug', 'price', 'sale_price', 'image')
-        ->take(10)->get();
+            ->orderBy('name', 'desc')
+            ->select('id', 'name', 'slug', 'price', 'sale_price', 'image')
+            ->take(10)->get();
 
         $productAttributes = $product->attributes;
 
@@ -44,8 +56,6 @@ class ProductController extends Controller
             $product->price = $productAttributes->first()->price;
             $product->sale_price = $productAttributes->first()->sale_price;
         }
-
-        // dd($productAttributes);
 
         $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
 

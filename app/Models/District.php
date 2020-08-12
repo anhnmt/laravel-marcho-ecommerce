@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class District extends Model
 {
+    use Cachable;
+
     protected $guarded = [];
 
     public function city()
