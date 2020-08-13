@@ -40,7 +40,7 @@
 	</section>
 </div>
 
-<section class="cart_section my-5 py-5">
+<section class="cart_section my-md-5 my-0 py-5">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -136,7 +136,7 @@
 		</div>
 		<div class="button-cart-mobile d-sm-block mt-5">
 			<div class="row no-gutters">
-				<div class="col-sm-6 col-12 text-sm-left text-center">
+				<div class="col-sm-6 col-6 text-sm-left text-center">
 					<div class="fix_btn_line_fill d-inline-block">
 						<form action="{{ route('cart.clear') }}" method="POST">
 							@csrf
@@ -146,13 +146,12 @@
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-12 mt-3 mt-sm-0 text-sm-right text-center">
-					<a href="{{ route('product.index') }}" class="btn btn-fill-out">Tiếp tục mua
-						sắm</a>
+				<div class="col-sm-6 col-6 text-sm-right text-center">
+					<a href="{{ route('product.index') }}" class="btn btn-fill-out">Mua sắm thêm</a>
 				</div>
 			</div>
 		</div>
-		<div class="row mt-5 pt-5">
+		<div class="row mt-md-5 mt-0 pt-5">
 			<div class="col-md-6">
 				<div class="border p-3 p-md-4">
 					<form action="{{ route('cart.discount') }}" method="POST">

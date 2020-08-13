@@ -48,6 +48,21 @@ Number.prototype.formatMoney = function (
         },
     });
     /*===================================*
+        Offcanvas Menu
+    *===================================*/
+    $(".navbar-toggler").on("click", function () {
+        $("body").addClass("block");
+        $("#header-navbar").addClass("show");
+        $(".overlay").show();
+    });
+
+    $(".overlay").on("click", function () {
+        $("body").removeClass("block");
+        $("#header-navbar").removeClass("show");
+        $(".overlay").hide();
+    });
+
+    /*===================================*
         BACKGROUND IMAGE JS
 	*===================================*/
     $(".background_bg").each(function () {
@@ -65,9 +80,13 @@ Number.prototype.formatMoney = function (
         var scroll = $(window).scrollTop();
 
         if (scroll >= 150) {
-            $("header").addClass("fixed-top animated backInDown");
+            $("header").addClass(
+                "fixed-top animate__animated animate__slideInDown"
+            );
         } else {
-            $("header").removeClass("fixed-top animated backInDown");
+            $("header").removeClass(
+                "fixed-top animate__animated animate__slideInDown"
+            );
         }
     });
 
@@ -106,7 +125,10 @@ Number.prototype.formatMoney = function (
     $(".star").click(function () {
         $(this).parents(".star_rating").find(".checked").removeClass("checked");
         $(this).addClass("checked");
-        $(this).parents(".star_rating").find("#rating").val($(this).data("star"));
+        $(this)
+            .parents(".star_rating")
+            .find("#rating")
+            .val($(this).data("star"));
         // $(this).data("star");
     });
 
@@ -147,4 +169,14 @@ Number.prototype.formatMoney = function (
             }
         });
     });
+
+    // ANIMATION
+    // $(".blog_img, .post_img").on("mouseover", function () {
+    //     $(this).addClass(
+    //         "animate__animated animate__zoomIn"
+    //     );
+    //     // $(this).removeClass(
+    //     //     "animate__animated animate__slideInDown"
+    //     // );
+    // });
 })(window.jQuery);

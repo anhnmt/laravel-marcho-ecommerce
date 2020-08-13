@@ -106,13 +106,13 @@
 
 </section>
 
-<section class="product_section py-5">
+<section class="product_section py-5 ez-animate" data-animation="animate__fadeInUp">
 	<div class="container">
 		<div class="row justify-content-center py-4">
 			<div class="col-lg-8">
 				<div class="section_title text-center">
 					<h2>Sản Phẩm Nổi Bật</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+					<p class="line-clamp">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
 				</div>
 			</div>
 		</div>
@@ -121,7 +121,7 @@
 				<div class="row">
 					@foreach($products as $product)
 					<div class="col-lg-3 col-md-6 col-6">
-						<div class="card ez-animate" data-animation="animate__fadeInUp">
+						<div class="card card-shadow">
 							<div class="product_image">
 								<a href="{{ route('product.show', $product->slug) }}">
 									<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img-top" alt="">
@@ -132,7 +132,7 @@
 										<a class="add-wishlist @if($user && $user->favorited($product->id)) active @endif" data-product="{{ $product->id }}">
 											<i class="fal fa-heart"></i>
 										</a>
-										<a class="add-cart">
+										<a href="{{ route('product.show', $product->slug) }}" class="add-cart">
 											<i class="fal fa-shopping-bag"></i>
 										</a>
 									</div>
@@ -147,7 +147,7 @@
 									<i class="fas fa-star"></i>
 								</div>
 								<a href="{{ route('product.show', $product->slug) }}">
-									<h5 class="card-title mt-2">{{ $product->name }}</h5>
+									<h5 class="card-title mt-2 line-clamp">{{ $product->name }}</h5>
 								</a>
 								<span class="price mt-2">
 									@if($product->sale_price)
@@ -167,13 +167,13 @@
 	</div>
 </section>
 
-<section class="blog_section bg_gray py-5">
+<section class="blog_section bg_gray py-5 ez-animate" data-animation="animate__fadeInUp">
 	<div class="container">
 		<div class="row justify-content-center py-4">
 			<div class="col-lg-8">
 				<div class="section_title text-center">
 					<h2>Tin tức</h2>
-					<p>Nơi chia sẻ những bí quyết mặc đẹp hữu ích, mẹo làm đẹp, khơi gợi cảm hứng thời trang trong bạn.</p>
+					<p class="line-clamp">Nơi chia sẻ những bí quyết mặc đẹp hữu ích, mẹo làm đẹp, khơi gợi cảm hứng thời trang trong bạn.</p>
 				</div>
 			</div>
 		</div>
@@ -181,7 +181,7 @@
 			@if($latest_blog ?? '')
 			@foreach ($latest_blog as $blog)
 			<div class="col-lg-3 col-md-6 col-6">
-				<div class="grid_item ez-animate" data-animation="animate__fadeInUp">
+				<div class="grid_item">
 					<div class="grid_inner_item">
 						<div class="blog_img">
 							<a href="{{ route('blog.show', $blog->slug) }}">
@@ -189,9 +189,12 @@
 							</a>
 						</div>
 						<div class="blog_info">
-							<p>January 19, 2020 by Admin</p>
+							<p>
+								<i class="fad fa-calendar-alt"></i>
+								{{ $blog->created_at->format('d-m-Y') }}
+							</p>
 							<h3>
-								<a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
+								<a class="line-clamp" href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
 							</h3>
 						</div>
 					</div>

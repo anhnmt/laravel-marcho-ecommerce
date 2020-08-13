@@ -63,7 +63,7 @@
                                             {{ $blog->created_at->format('d-m-Y') }}
                                         </p>
                                         <h3>
-                                            <a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
+                                            <a class="line-clamp" href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
                                         </h3>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 mt-md-0 mt-5">
                 @include('layouts.blog_sidebar')
             </div>
         </div>

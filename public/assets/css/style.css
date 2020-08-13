@@ -928,23 +928,47 @@ section .section_title p {
 .form-control:focus {
     box-shadow: unset;
 }
+body.block {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    display: block;
+}
+.overlay {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    background-color: #000;
+    opacity: 0.3;
+    z-index: 9990;
+}
+.line-clamp {
+    display: -webkit-box;
+    line-height: 28px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-shadow:hover {
+    -webkit-box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
 
 /*===================================*
     HEADER STYLE
 *===================================*/
 header {
     background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 header.fixed-top {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-    -webkit-animation: slideInDown 0.65s cubic-bezier(0.23, 1, 0.32, 1);
-    -moz-animation: slideInDown 0.65s cubic-bezier(0.23, 1, 0.32, 1);
-    -o-animation: slideInDown 0.65s cubic-bezier(0.23, 1, 0.32, 1);
-    animation: slideInDown 0.65s cubic-bezier(0.23, 1, 0.32, 1);
-    -webkit-animation-fill-mode: none;
-    -moz-animation-fill-mode: none;
-    -o-animation-fill-mode: none;
-    animation-fill-mode: none;
+    position: unset;
 }
 header .menu_bar {
     padding: 15px 0;
@@ -1357,7 +1381,6 @@ header .navbar-collapse {
         transform: scale(1) rotate(0deg);
     }
 }
-
 .header_with_topbar.transparent_header + .slider_section .banner_slide_content {
     margin-top: 45px;
 }
@@ -1473,13 +1496,22 @@ header .navbar-collapse {
     line-height: 1.2;
     font-weight: 500;
 }
+.product_section .product_image,
+.product_section .product_image a {
+    overflow: hidden;
+}
+.product_section .product_image:hover img {
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    transform: scale(1.03);
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
 .product_section .product_image:hover .product_item {
     opacity: 1;
     visibility: visible;
     bottom: 50%;
-}
-.product_section .product_image {
-    position: relative;
 }
 .product_section .product_item {
     position: absolute;
@@ -1553,15 +1585,16 @@ header .navbar-collapse {
     BLOG SECTION
 *===================================*/
 .blog_section .blog_info {
-    padding: 10px 0;
+    padding: 10px 5px;
 }
 .blog_section .blog_info a {
     color: #29282d;
     text-decoration: none;
 }
 .blog_section .blog_info h3 a {
-    font-size: 20px;
+    font-size: 18px;
     font-family: "Roboto";
+    line-height: 26px;
 }
 .blog_section .blog_info p {
     font-size: 13px;
@@ -1570,6 +1603,18 @@ header .navbar-collapse {
     color: rgb(141, 141, 141);
     margin-bottom: 0;
     text-transform: uppercase;
+}
+.blog_img,
+.post_img {
+    overflow: hidden;
+}
+.blog_img img,
+.post_img img {
+    transition: all.5s;
+}
+.blog_img:hover img,
+.post_img:hover img {
+    transform: scale(1.2);
 }
 
 /*===================================*
@@ -1588,7 +1633,7 @@ header .navbar-collapse {
 }
 
 .custom-container .banner {
-    padding: 100px 0 100px 0;
+    padding: 100px 0;
 }
 .bg_image {
     background-image: url("../img/banner/banner-marcho.png");
@@ -2165,10 +2210,6 @@ header .navbar-collapse {
     -o-transition: all 0.3s ease-out 0s;
     transition: all 0.3s ease-out 0s;
 }
-.product_detai_section .products .product_image {
-    flex: 0 0 100%;
-    max-width: 100%;
-}
 .product_detai_section .products .product_info {
     flex: 0 0 100%;
     max-width: 100%;
@@ -2221,8 +2262,7 @@ header .navbar-collapse {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
+    overflow: hidden;
 }
 /*===================================*
     BLOG SECTION
@@ -3175,7 +3215,7 @@ textarea.form_control {
     SELECT2 STYLE
 *===================================*/
 .select2 {
-    width:100%!important;
+    width: 100% !important;
 }
 .select2-container--default .select2-selection--single {
     border: 1px solid #ced4da;
