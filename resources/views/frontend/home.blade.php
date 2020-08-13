@@ -54,7 +54,7 @@
 	</div>
 </section>
 
-<section class="feature_section py-5">
+<section class="feature_section py-md-5 py-0 d-md-block d-none">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-12">
@@ -104,9 +104,10 @@
 
 <section class="trending_item">
 
+	<hr class="mt-5 clearfix d-md-none d-block">
 </section>
 
-<section class="product_section py-5 ez-animate" data-animation="animate__fadeInUp">
+<section class="product_section py-md-5 py-0 ez-animate" data-animation="animate__fadeInUp">
 	<div class="container">
 		<div class="row justify-content-center py-4">
 			<div class="col-lg-8">
@@ -167,7 +168,7 @@
 	</div>
 </section>
 
-<section class="blog_section bg_gray py-5 ez-animate" data-animation="animate__fadeInUp">
+<section class="blog_section bg_gray py-md-5 py-0 ez-animate" data-animation="animate__fadeInUp">
 	<div class="container">
 		<div class="row justify-content-center py-4">
 			<div class="col-lg-8">
@@ -216,12 +217,12 @@
 			<div class="col-md-6 offset-md-1">
 				<div class="medium_divider d-none d-md-block clearfix"></div>
 				<div class="trand_banner_text text-center text-md-left">
-					<div class="heading_s1 mb-3">
-						<span class="sub_heading">New season trends!</span>
-						<h2>Best Summer Collection</h2>
+					<div class="heading_s1 my-4">
+						<span class="sub_heading">Xu hướng mùa mới!!</span>
+						<h2>Bộ sưu tập mùa hè đẹp nhất</h2>
 					</div>
-					<h5 class="mb-4">Sale Get up to 50% Off</h5>
-					<a href="#/" class="btn btn-fill-out rounded-0">Shop Now</a>
+					<h5 class="mb-4">Giảm giá lên đến 30%</h5>
+					<a href="#/" class="btn btn-fill-out rounded-0">Mua ngay</a>
 				</div>
 				<div class="medium_divider clearfix"></div>
 			</div>
@@ -234,7 +235,7 @@
 	</div>
 </section>
 
-<section class="sponssor_logo my-4 py-5">
+<section class="sponssor_logo my-md-4 my-0 py-5">
 	<div class="swiper_sponssor swiper-container">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">

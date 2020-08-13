@@ -1,4 +1,15 @@
 /*===================================*
+    CUSTOM SECTION
+*===================================*/
+@media (max-width: 767.98px) {
+    section .section_title h2 {
+        font-size: 24px;
+    }
+    section .section_title p {
+        font-size: 16px;
+    }
+}
+/*===================================*
     HEADER SECTION
 *===================================*/
 @media (min-width: 1200px) {
@@ -71,7 +82,6 @@
         padding: 5px 0;
     }
 }
-
 /*===================================*
     BREADCUM SECTION
 *===================================*/
@@ -89,7 +99,6 @@
         font-size: 25px;
     }
 }
-
 /*===================================*
     SLIDER SECTION
 *===================================*/
@@ -105,7 +114,6 @@
         height: 350px;
     }
 }
-
 @media (max-width: 991.98px) {
     .slider_section .banner_content h5 {
         font-size: 16px;
@@ -117,7 +125,6 @@
         font-size: 12px;
     }
 }
-
 /*===================================*
     CART SECTION
 *===================================*/
@@ -129,7 +136,11 @@
 /*===================================*
     LOGIN SECTION
 *===================================*/
-@media (min-width: 0px) and (max-width: 767.98px) {
+@media (max-width: 767.98px) {
+    .blog_section .blog_info h3 a {
+        font-size: 16px;
+        line-height: 22px;
+    }
     .login-wrapper {
         margin: 35px 0;
     }
@@ -137,7 +148,26 @@
         padding: 60px 0;
     }
 }
-
+/*===================================*
+    PRODUCT SECTION
+*===================================*/
+@media (max-width: 767.98px) {
+    .product_section .star_rating i {
+        font-size: 12px;
+    }
+    .product_section .product_info .card-title {
+        font-size: 16px;
+    }
+}
+/*===================================*
+    BLOG SECTION
+*===================================*/
+@media (max-width: 767.98px) {
+    .blog_section .blog_info h3 a {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
 /*===================================*
     SLIDER SECTION
 *===================================*/
@@ -146,19 +176,16 @@
         padding: 85px 100px 60px 100px;
     }
 }
-
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .hero_item {
         padding: 50px 50px 40px 50px;
     }
 }
-
 @media only screen and (max-width: 767px) {
     .hero_item {
         padding: 70px 50px;
     }
 }
-
 @media only screen and (max-width: 479px) {
     .hero_item {
         padding: 50px 40px;
@@ -266,7 +293,6 @@
         line-height: 40px;
     }
 }
-
 /*===================================*
     CART SECTION
 *===================================*/
