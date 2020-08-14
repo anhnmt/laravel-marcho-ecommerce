@@ -932,16 +932,10 @@ body.block {
     display: block;
 }
 .overlay {
-    position: fixed;
-    display: none;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    cursor: pointer;
-    background-color: #000;
-    opacity: 0.3;
-    z-index: 9990;
+    position: unset;
+    background-color: unset;
+    opacity: unset;
+    z-index: unset;
 }
 .line-clamp {
     display: -webkit-box;
@@ -991,6 +985,14 @@ header .navbar-collapse {
     color: #1a1a1a;
     padding: 2px !important;
     border-bottom: 1px solid transparent;
+}
+.header_menu .nav-item .nav-link i{
+    opacity: 0;
+    font-size: 0;
+}
+.header_menu .nav-item button{
+    border: none;
+    background: none;
 }
 .header_menu .nav-item.active .nav-link,
 .header_menu .nav-item:hover .nav-link {
@@ -1965,7 +1967,7 @@ header .navbar-collapse {
 }
 .all_product_section .product_grid .product_info {
     position: relative;
-    height: 80px;
+    height: 100px;
     margin-top: 20px;
     text-align: center;
 }
@@ -2409,7 +2411,7 @@ header .navbar-collapse {
     margin-bottom: 20px;
     font-weight: 400;
     font-size: 16px;
-    display: inline;
+    display: inline-block;
     text-transform: uppercase;
 }
 .blog_details_section .blog_wrapper_content .blog_content .blog_post_tag a {

@@ -24,22 +24,40 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="header-navbar">
-                    <a class="d-md-none d-block header_logo navbar-brand" href="{{ route('home') }}">
-                        <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
-                    </a>
                     <ul class="header_menu navbar-nav">
                         <li class="nav-item {{ (request()->routeIs('home')) ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('home') }}">Trang chủ</a>
+                            <a class="nav-link" href="{{ route('home') }}"><i class="fad fa-home-lg-alt"></i> Trang chủ</a>
                         </li>
                         <li class="nav-item {{ (request()->routeIs('product*')) ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('product.index') }}">Sản phẩm</a>
+                            <a class="nav-link" href="{{ route('product.index') }}"><i class="far fa-tshirt"></i> Sản phẩm</a>
                         </li>
                         <li class="nav-item {{ (request()->routeIs('blog.*')) ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('blog.index') }}">Tin tức</a>
+                            <a class="nav-link" href="{{ route('blog.index') }}"><i class="fal fa-newspaper"></i> Tin tức</a>
                         </li>
                         <li class="nav-item {{ (request()->routeIs('contact.*')) ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('contact.index') }}">Liên hệ</a>
+                            <a class="nav-link" href="{{ route('contact.index') }}"><i class="fal fa-phone"></i> Liên hệ</a>
                         </li>
+                        <li class="nav-item {{ (request()->routeIs('cart.*')) ? 'active' : '' }} d-lg-none">
+                            <a class="nav-link" href="{{ route('cart.index') }}"><i class="fal fa-shopping-cart"></i> Giỏ hàng</a>
+                        </li>
+                        <li class="nav-item {{ (request()->routeIs('favorite.*')) ? 'active' : '' }} d-lg-none">
+                            <a class="nav-link" href="{{ route('favorite.index') }}"><i class="fal fa-heart"></i> Sản phẩm yêu thích</a>
+                        </li>
+                        @if(auth()->check())
+                        <li class="nav-item {{ (request()->routeIs('user.*')) ? 'active' : '' }} d-lg-none">
+                            <a class="nav-link" href="{{ route('user.profile') }}"><i class="fal fa-user"></i> Trang cá nhân</a>
+                        </li>
+                        <li class="nav-item d-lg-none">
+                            <a class="nav-link" onclick="document.getElementById('logout-form').submit();"><i class="fal fa-sign-out-alt"></i> Đăng xuất</a>
+                        </li>
+                        @else
+                        <li class="nav-item {{ (request()->routeIs('login')) ? 'active' : '' }} d-lg-none">
+                            <a class="nav-link" href="{{ route('login') }}"><i class="fal fa-sign-in-alt"></i> Đăng nhập</a>
+                        </li>
+                        <li class="nav-item {{ (request()->routeIs('register')) ? 'active' : '' }} d-lg-none">
+                            <a class="nav-link" href="{{ route('register') }}"><i class="fal fa-user-plus"></i> Đăng ký</a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
 
