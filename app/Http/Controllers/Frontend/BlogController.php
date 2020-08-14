@@ -41,7 +41,7 @@ class BlogController extends Controller
 
         $blog = Blog::findBySlug($blog->slug);
 
-        $comments = $blog->comments()->all();
+        $comments = $blog->comments()->get();
 
         $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
 

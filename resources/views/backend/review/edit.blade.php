@@ -18,8 +18,8 @@
 			<div class="col-sm-12">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Bảng điều khiển</a></li>
-					<li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Đánh giá</a></li>
-					<li class="breadcrumb-item active">Sửa danh mục</li>
+					<li class="breadcrumb-item"><a href="{{ route('admin.product.review.index', $product->id) }}">Đánh giá</a></li>
+					<li class="breadcrumb-item active">Sửa đánh giá</li>
 				</ol>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				<form id="edit-form" action="{{ route('admin.category.update', $category->id) }}" method="POST">
+				<form id="edit-form" action="{{ route('admin.product.review.update', [$product->id, $review->id]) }}" method="POST">
 					@csrf
 					@method('PUT')
 
@@ -39,26 +39,44 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="form-group">
-										<label class="required" for="name">Tên</label>
-										<input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nhập tên" value="{{ $category->name }}">
+										<label class="required pr-3" for="body">Xếp hạng</label>
+										<input type="hidden" id="rating" name="rating" value="5">
 
-										@error('name')
-										<span class="invalid-feedback" role="alert">{{ $message }}</span>
-										@enderror
+										<div class="star d-block d-md-inline mr-4 @if($review->rating == 1) checked @endif" data-star="1">
+											<i class="fas fa-star"></i>
+										</div>
+
+										<div class="star d-block d-md-inline mr-4 @if($review->rating == 2) checked @endif" data-star="2">
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+										</div>
+
+										<div class="star d-block d-md-inline mr-4 @if($review->rating == 3) checked @endif" data-star="3">
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+										</div>
+
+										<div class="star d-block d-md-inline mr-4 @if($review->rating == 4) checked @endif" data-star="4">
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+										</div>
+
+										<div class="star d-block d-md-inline mr-4 @if($review->rating == 5) checked @endif" data-star="5">
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+										</div>
 									</div>
 									<div class="form-group">
-										<label for="slug">Đường dẫn (Để trống sẽ tự động tạo)</label>
-										<input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="Nhập dường dẫn" value="{{ $category->slug }}">
+										<label class="required" for="body">Đánh giá</label>
+										<textarea class="form-control @error('body') is-invalid @enderror" placeholder="Nhập đánh giá" name="body" id="body" rows="5">{{ old('body') ?? old('body', $review->body) }}</textarea>
 
-										@error('slug')
-										<span class="invalid-feedback" role="alert">{{ $message }}</span>
-										@enderror
-									</div>
-									<div class="form-group">
-										<label for="description">Mô tả</label>
-										<textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="10" placeholder="Nhập mô tả">{{ $category->description }}</textarea>
-
-										@error('description')
+										@error('body')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror
 									</div>
@@ -73,59 +91,14 @@
 								</div>
 
 								<div class="card-body">
-									@can('admin.category.update')
+									@can('admin.product.review.update')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
 									@endcan
-									<a href="{{ route('admin.category.index') }}" class="btn btn-default">
+									<a href="{{ route('admin.product.review.index', $product->id) }}" class="btn btn-default">
 										<i class="fal fa-save"></i> Quay lại
 									</a>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<h5>Trạng thái</h5>
-								</div>
-
-								<div class="card-body">
-									<select class="form-control @error('status') is-invalid @enderror" name="status" id="status">
-										<option value="1" {{ $category->status ? 'selected' : ''}}>Kích hoạt</option>
-										<option value="0" {{ $category->status ? '' : 'selected'}}>Bản nháp</option>
-									</select>
-
-									@error('status')
-									<span class="invalid-feedback" role="alert">{{ $message }}</span>
-									@enderror
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<h5>Hình ảnh</h5>
-								</div>
-
-								<div class="card-body">
-									<div class="input-group">
-										<span class="input-group-btn">
-											<a id="lfm" data-input="image" data-preview="holder" data-type="category" class="btn btn-primary text-white">
-												<i class="fal fa-camera"></i> Chọn ảnh
-											</a>
-											<button type="button" id="remove_img" class="btn btn-danger text-white">
-												<i class="fal fa-trash-alt"></i> Xoá
-											</button>
-										</span>
-										<input class="form-control @error('image') is-invalid @enderror" type="hidden" name="image" id="image" value="{{ $category->image }}">
-
-										@error('image')
-										<span class="invalid-feedback" role="alert">{{ $message }}</span>
-										@enderror
-									</div>
-
-									<div id="holder" style="margin-top:15px">
-										<img loading="lazy" src="{{ $category->image }}">
-									</div>
 								</div>
 							</div>
 						</div>
@@ -137,17 +110,31 @@
 </section>
 @stop
 
+@section('style')
+<style>
+	.star.checked i {
+		color: #fec35b;
+	}
+
+	.star i {
+		color: #ccccce;
+	}
+	.star:hover{
+		cursor: pointer;
+	}
+</style>
+@endsection
+
 @section('script')
 <script>
-	$(function() {
-		$('#lfm').filemanager('category');
-
-		$('#remove_img').click(function(e) {
-			if ($('#image').val()) {
-				$('#image').val('');
-				$('#holder').html('');
-			}
-		});
+	$(".star").click(function() {
+		$(this).parents(".form-group").find(".checked").removeClass("checked");
+		$(this).addClass("checked");
+		$(this)
+			.parents(".form-group")
+			.find("#rating")
+			.val($(this).data("star"));
+		// $(this).data("star");
 	});
 </script>
 @stop

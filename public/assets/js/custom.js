@@ -185,14 +185,4 @@ Number.prototype.formatMoney = function (
             }
         });
     });
-
-    // ANIMATION
-    // $(".blog_img, .post_img").on("mouseover", function () {
-    //     $(this).addClass(
-    //         "animate__animated animate__zoomIn"
-    //     );
-    //     // $(this).removeClass(
-    //     //     "animate__animated animate__slideInDown"
-    //     // );
-    // });
 })(window.jQuery);

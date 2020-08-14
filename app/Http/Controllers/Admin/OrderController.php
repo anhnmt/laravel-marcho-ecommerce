@@ -24,33 +24,33 @@ class OrderController extends Controller
             })
             ->addColumn('phone', function ($order) {
                 return $order->phone;
-                
             })
             ->addColumn('address', function ($order) {
                 return $order->address . ', ' . $order->ward->path_with_type;
             })
             ->addColumn('total', function ($order) {
                 return number_format($order->total, 0) . 'đ';
-                
             })
             ->addColumn('status', function ($order) {
-                if($order->status === 0) return '<span>Đang xử lí</span>';
-                if($order->status === 1) return '<span>Đã xử lí</span>';
-                if($order->status === 2) return '<span>Đang giao hàng</span>';
-                if($order->status === 3) return '<span>Đã giao hàng</span>';
-                if($order->status === 4) return '<span>Đã huỷ</span>';
-                
+                if ($order->status === 0) return '<span>Đang xử lí</span>';
+                if ($order->status === 1) return '<span>Đã xử lí</span>';
+                if ($order->status === 2) return '<span>Đang giao hàng</span>';
+                if ($order->status === 3) return '<span>Đã giao hàng</span>';
+                if ($order->status === 4) return '<span>Đã huỷ</span>';
             })
             ->addColumn('action', function ($order) {
-                if (auth()->user()->can('admin.order.edit') && $order->status !== 4)
+                $user = auth()->user();
+
+                if ($user->can('admin.order.edit') && $order->status !== 4) {
                     return '<a href="' . route('admin.order.edit', $order->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-                else
+                } else {
                     return "<span>Không có hành động nào</span>";
+                }
             })
             ->rawColumns(['id', 'user', 'phone', 'address', 'total', 'status', 'action'])
             ->toJson();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -83,8 +83,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        if($order->update($request->all()))
-        {
+        if ($order->update($request->all())) {
             return redirect()->route('admin.order.index')->withSuccess('Cập nhật đơn hàng thành công');
         }
         return back()->withInput()->withErrors('Cập nhật đơn hàng thất bại, vui lòng thử lại!');

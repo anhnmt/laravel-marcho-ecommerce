@@ -3,19 +3,45 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Comment;
+use App\Models\Blog;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function list()
+    public function list(Blog $blog)
     {
-        $comments = Comment::select('id', 'parent_id', 'blog_id', 'user_id', 'body');
+        $this->blog = $blog;
+        $comments = Comment::where('blog_id', $blog->id)->get();
+        // dd($comments);
 
         return datatables($comments)
-            ->addColumn('action', function ($comment) {
-                return '<button data-delete="' . $comment->id . '" class="btn btn-sm btn-danger"><i class="far fa-trash"></i></button>';
+            ->addColumn('user', function ($comment) {
+                return $comment->user->name;
             })
-            ->rawColumns(['action'])
+            ->addColumn('action', function ($comment) {
+                $user = auth()->user();
+
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.blog.comment.destroy', [$this->blog->id, $comment->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+
+                if ($user->can('admin.blog.comment.edit')) {
+                    $action .= '<a href="' . route('admin.blog.comment.edit', [$this->blog->id, $comment->id]) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                }
+
+                if ($user->can('admin.blog.comment.destroy')) {
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                }
+
+                if ($user->cannot(['admin.blog.comment.edit', 'admin.blog.comment.destroy'])) {
+                    $action .= "<span>Không có hành động nào</span>";
+                }
+
+                $action .= '</div></form>';
+
+                return $action;
+                dd($action);
+            })
+            ->rawColumns(['id', 'user', 'body', 'action'])
             ->toJson();
     }
 
@@ -24,9 +50,38 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Blog $blog)
     {
-        return view('backend.comment.index');
+        return view('backend.comment.index', compact('blog'));
+    }
+
+    public function edit(Blog $blog, Comment $comment)
+    {
+        return view('backend.comment.edit', compact('blog', 'comment'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Comment  $comment
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Blog $blog, Request $request, Comment $comment)
+    {
+        $request->validate(
+            [
+                'body' => 'required',
+            ],
+            [
+                'body.required' => 'Đánh giá không được để trống',
+            ]
+        );
+
+        if ($comment->update($request->all())) {
+            return redirect()->route('admin.blog.comment.index', $blog->id)->withSuccess('Cập nhật đánh giá thành công!');
+        }
+        return redirect()->back()->withErrors('Cập nhật đánh giá thất bại!');
     }
 
     /**
@@ -35,10 +90,11 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Blog $blog, Comment $comment)
     {
-        $comment->delete();
-
-        return redirect()->route('admin.comment.index')->withSuccess('Xoá bình luận thành công');
+        if ($comment->delete()) {
+            return redirect()->route('admin.blog.comment.index', $blog->id)->withSuccess('Xoá đánh giá thành công!');
+        }
+        return redirect()->back()->withErrors('Xoá đánh giá thất bại!');
     }
 }

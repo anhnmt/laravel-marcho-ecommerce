@@ -17,7 +17,7 @@ class ReviewController extends Controller
     public function list(Product $product)
     {
         $this->product = $product;
-        $reviews = Review::where('product_id', $product->id)->all();
+        $reviews = Review::where('product_id', $product->id)->get();
 
         return datatables($reviews)
             ->addColumn('user', function ($review) {
@@ -27,16 +27,21 @@ class ReviewController extends Controller
                 return $review->rating . ' <span><i class="fas fa-star" style="color:#fec35b"></i></span>';
             })
             ->addColumn('action', function ($review) {
+                $user = auth()->user();
+
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.review.destroy', [$this->product->id, $review->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
-                if (auth()->user()->can('admin.product.review.edit'))
+                if ($user->can('admin.product.review.edit')) {
                     $action .= '<a href="' . route('admin.product.review.edit', [$this->product->id, $review->id]) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                }
 
-                if (auth()->user()->can('admin.product.review.destroy'))
+                if ($user->can('admin.product.review.destroy')) {
                     $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                }
 
-                if ((auth()->user()->cannot('admin.product.review.edit') && auth()->user()->cannot('admin.product.review.destroy')))
+                if ($user->cannot(['admin.product.review.edit', 'admin.product.review.destroy'])) {
                     $action .= "<span>Không có hành động nào</span>";
+                }
 
                 $action .= '</div></form>';
 
@@ -76,9 +81,25 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Product $product, Request $request, Review $review)
     {
-        //
+        $request->validate(
+            [
+                'body' => 'required',
+                'rating' => 'required|min:1|max:5'
+            ],
+            [
+                'body.required' => 'Đánh giá không được để trống',
+                'rating.required' => 'Vui lòng chọn sao',
+                'rating.min' => 'Số sao nhỏ nhất là 1',
+                'rating.max' => 'Số sao lớn nhất là 5',
+            ]
+        );
+
+        if($review->update($request->all())){
+            return redirect()->route('admin.product.review.index', $product->id)->withSuccess('Cập nhật đánh giá thành công!');
+        }
+        return redirect()->back()->withErrors('Cập nhật đánh giá thất bại!');
     }
 
     /**
@@ -87,8 +108,11 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(Product $product, Review $review)
     {
-        //
+        if($review->delete()){
+            return redirect()->route('admin.product.review.index', $product->id)->withSuccess('Xoá đánh giá thành công!');
+        }
+        return redirect()->back()->withErrors('Xoá đánh giá thất bại!');
     }
 }

@@ -95,7 +95,7 @@
                                                 </div>
                                                 <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
                                                     <a href="{{ route('product.show', $product->slug) }}">
-                                                        <h4 class="card-title">
+                                                        <h4 class="card-title line-clamp">
                                                             {{ $product->name }}
                                                         </h4>
                                                     </a>

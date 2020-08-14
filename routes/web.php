@@ -141,31 +141,31 @@ Route::group([
     Route::get('attribute/{attribute}/value/list', 'AttributeValueController@list')->name('attribute.value.list');
     Route::resource('attribute.value', 'AttributeValueController', ['except' => ['show', 'create', 'edit', 'update']]);
 
+    // Blog
+    Route::get('blog/list', 'BlogController@list')->name('blog.list');
+    Route::resource('blog', 'BlogController', ['except' => ['show']]);
+
+    // Comment
+    Route::get('blog/{blog}/comment/list', 'CommentController@list')->name('comment.list');
+    Route::resource('blog.comment', 'CommentController')->only([
+        'index', 'destroy', 'edit', 'update'
+    ]);
+
     // Product
     Route::get('product/list', 'ProductController@list')->name('product.list');
     Route::resource('product', 'ProductController', ['except' => ['show']]);
+
+    // Review
+    Route::get('product/{product}/review/list', 'ReviewController@list')->name('review.list');
+    Route::resource('product.review', 'ReviewController', ['except' => ['show']]);
 
     // Product Attributes
     Route::get('product/{product}/attribute/list', 'ProductAttributeController@list')->name('product.attribute.list');
     Route::resource('product.attribute', 'ProductAttributeController', ['except' => ['show']]);
 
-    // Blog
-    Route::get('blog/list', 'BlogController@list')->name('blog.list');
-    Route::resource('blog', 'BlogController', ['except' => ['show']]);
-
-    // Blog
+    // Order
     Route::get('order/list', 'OrderController@list')->name('order.list');
     Route::resource('order', 'OrderController', ['except' => ['show', 'create', 'store', 'destroy']]);
-
-    // Comment
-    Route::get('comment/list', 'CommentController@list')->name('comment.list');
-    Route::resource('comment', 'CommentController')->only([
-        'index', 'destroy'
-    ]);
-
-    // Review
-    Route::get('product/{product}/review/list', 'ReviewController@list')->name('review.list');
-    Route::resource('product.review', 'ReviewController', ['except' => ['show']]);
 
     // User
     Route::get('user/list', 'UserController@list')->name('user.list');

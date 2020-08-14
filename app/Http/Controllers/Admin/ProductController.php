@@ -30,25 +30,24 @@ class ProductController extends Controller
                 return $product->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
             })
             ->addColumn('action', function ($product) {
+                $user = auth()->user();
+
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-                if (auth()->user()->can('admin.product.review.index')) {
+
+                if ($user->can('admin.product.review.index')) {
                     $action .= '<a href="' . route('admin.product.review.index', $product->id) . '" class="btn btn-sm btn-primary">Đánh giá</a>';
                 }
-                if (auth()->user()->can('admin.product.attribute.index')) {
+                if ($user->can('admin.product.attribute.index')) {
                     $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
                 }
-                if (auth()->user()->can('admin.product.edit')) {
+                if ($user->can('admin.product.edit')) {
                     $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
                 }
-                if (auth()->user()->can('admin.product.destroy')) {
+                if ($user->can('admin.product.destroy')) {
                     $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
                 }
 
-                if (
-                    (auth()->user()->cannot('admin.product.edit')
-                    && auth()->user()->cannot('admin.product.destroy')
-                    && auth()->user()->cannot('admin.admin.product.attribute.index')
-                )) {
+                if ($user->cannot(['admin.product.review.index', 'admin.product.edit', 'admin.product.destroy', 'admin.admin.product.attribute.index'])) {
                     $action .= "<span>Không có hành động nào</span>";
                 }
 

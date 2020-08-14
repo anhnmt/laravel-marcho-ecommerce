@@ -28,6 +28,16 @@ class Comment extends Model
     }
 
     /**
+     * The belongs to Relationship
+     *
+     * @var array
+     */
+    public function blog()
+    {
+        return $this->belongsTo('App\Models\Blog');
+    }
+
+    /**
      * The has Many Relationship
      *
      * @var array
