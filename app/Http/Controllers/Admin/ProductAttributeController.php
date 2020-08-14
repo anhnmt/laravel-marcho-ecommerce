@@ -23,13 +23,21 @@ class ProductAttributeController extends Controller
 
         $this->product = $product;
 
-        $product_attributes = ProductAttribute::where('product_id', $product->id)->orderBy('id', 'desc');
+        $productAttributes = ProductAttribute::where('product_id', $product->id)->select('id', 'quantity', 'price', 'sale_price', 'default');
 
-        return datatables($product_attributes)
-            ->addColumn('attributeValue', function ($product_attribute) {
+        // dd($productAttributes->product->id);
+
+        return datatables($productAttributes)
+            ->addColumn('price', function ($productAttribute) {
+                return number_format($productAttribute->price, 0) . 'đ';
+            })
+            ->addColumn('sale_price', function ($productAttribute) {
+                return number_format($productAttribute->sale_price, 0) . 'đ';
+            })
+            ->addColumn('attributeValue', function ($productAttribute) {
                 $action = '<ul class="list-unstyled">';
 
-                foreach ($product_attribute->attributesValues as $item) {
+                foreach ($productAttribute->attributesValues as $item) {
                     $action .= '<li>' . $item->attribute->name . ': ' . $item->value . '</li>';
                 }
 
@@ -37,14 +45,17 @@ class ProductAttributeController extends Controller
 
                 return $action;
             })
-            ->addColumn('action', function ($product_attribute) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.attribute.destroy', [$this->product->id, $product_attribute->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+            ->addColumn('action', function ($productAttribute) {
+                $user = auth()->user();
 
-                if(auth()->user()->can('admin.product.attribute.destroy'))
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
-                else
-                $action .= "<span>Không có hành động nào</span>";
-                
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.attribute.destroy', [$this->product->id, $productAttribute->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+
+                if ($user->can('admin.product.attribute.destroy')) {
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                } else {
+                    $action .= "<span>Không có hành động nào</span>";
+                }
+
                 $action .= '</div></form>';
 
                 return $action;
@@ -74,7 +85,7 @@ class ProductAttributeController extends Controller
     public function store(CreateProductAttributeRequest $request, Product $product)
     {
         DB::beginTransaction();
-        
+
         try {
             $request['product_id'] = $product->id;
 
@@ -89,7 +100,7 @@ class ProductAttributeController extends Controller
             DB::rollback();
             return back()->with('error', 'Thêm thuộc tính sản phẩm không thành công!');
         }
-        
+
         try {
             // dd($request->attributeValue);
             foreach ($request->attributeValue as $attribute_value_id) {
@@ -100,7 +111,7 @@ class ProductAttributeController extends Controller
             }
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->with('error', 'Thêm thuộc tính sản phẩm không thành công!');
+            return back()->with('error', 'Thêm giá trị thuộc tính không thành công!');
         }
 
         DB::commit();
@@ -116,23 +127,23 @@ class ProductAttributeController extends Controller
      */
     public function destroy(Product $product, $productAttribute)
     {
+        // dd([$product, $productAttribute]);
+
         DB::beginTransaction();
-        // Tìm và xóa trong ProductAttribute
-        try {
-            $productAttribute = ProductAttribute::findOrFail($productAttribute);
-            $productAttribute->delete();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return back()->with('error', 'Xóa thuộc tính sản phẩm không thành công!');
-        }
+
+        $productAttribute = ProductAttribute::findOrFail($productAttribute);
 
         // Tìm và xóa trong AttributeValueProductAttribute
         try {
-            $attributeValueProductAttribute = AttributeValueProductAttribute::findOrFail($productAttribute->id)->all();
-    
-            foreach ($attributeValueProductAttribute as $attrValueProductAttr) {
-                $attrValueProductAttr->delete();
-            }
+            AttributeValueProductAttribute::where('product_attribute_id', $productAttribute->id)->delete();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('error', 'Xóa giá trị thuộc tính không thành công!');
+        }
+
+        // Tìm và xóa trong ProductAttribute
+        try {
+            $productAttribute->delete();
         } catch (\Exception $e) {
             DB::rollback();
             return back()->with('error', 'Xóa thuộc tính sản phẩm không thành công!');

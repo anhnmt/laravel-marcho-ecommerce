@@ -1,3 +1,16 @@
+@php
+\Assets::addStyles([
+'summernote',
+'adminlte'
+]);
+
+\Assets::addScripts([
+'summernote',
+'stand-alone-button',
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -121,7 +134,7 @@
 										@enderror
 									</div>
 									<div id="holder" style="margin-top:15px">
-										<img src="{{ $blog->image }}">
+										<img loading="lazy" src="{{ $blog->image }}">
 									</div>
 								</div>
 							</div>

@@ -16,27 +16,32 @@ class SliderController extends Controller
      */
     public function list()
     {
-        $sliders = Slider::select(['id', 'name', 'body', 'link', 'image', 'status'])->orderBy('id', 'desc');
+        $sliders = Slider::select(['id', 'name', 'body', 'link', 'image', 'status']);
 
         return datatables($sliders)
             ->addColumn('image', function ($slider) {
                 $thumb_url = $slider->image ? $slider->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . asset($thumb_url) . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . asset($thumb_url) . '"/>';
             })
             ->addColumn('status', function ($slider) {
                 return $slider->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
             })
             ->addColumn('action', function ($slider) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.slider.destroy', $slider->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-                
-                if(auth()->user()->can('admin.slider.edit'))
-                $action .= '<a href="' . route('admin.slider.edit', $slider->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-              
-                if(auth()->user()->can('admin.slider.destroy'))
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                $user = auth()->user();
 
-                if(!auth()->user()->hasRole(['admin.slider.edit', 'admin.slider.destroy'])) 
-                $action .= "<span>Không có hành động nào</span>";
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.slider.destroy', $slider->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+
+                if ($user->can('admin.slider.edit')) {
+                    $action .= '<a href="' . route('admin.slider.edit', $slider->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                }
+
+                if ($user->can('admin.slider.destroy')) {
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                }
+
+                if ($user->cannot(['admin.slider.edit', 'admin.slider.destroy'])) {
+                    $action .= "<span>Không có hành động nào</span>";
+                }
 
                 $action .= '</div></form>';
 

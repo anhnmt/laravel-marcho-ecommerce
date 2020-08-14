@@ -19,27 +19,37 @@ class ProductController extends Controller
      */
     public function list()
     {
-        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status'])->orderBy('id', 'desc');
+        $categories = Product::select(['id', 'name', 'slug', 'sku', 'image', 'status']);
 
         return datatables($categories)
             ->addColumn('image', function ($product) {
                 $product->image = $product->image ? $product->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . asset($product->image) . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . asset($product->image) . '"/>';
             })
             ->addColumn('status', function ($product) {
                 return $product->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
             })
             ->addColumn('action', function ($product) {
-                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
-                if(auth()->user()->can('admin.product.attribute.index'))
-                $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
-                if(auth()->user()->can('admin.product.edit'))
-                $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-                if(auth()->user()->can('admin.product.destroy'))
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                $user = auth()->user();
 
-                if(!auth()->user()->hasRole(['admin.product.attribute.index','admin.product.edit', 'admin.product.destroy'])) 
-                $action .= "<span>Không có hành động nào</span>";
+                $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+
+                if ($user->can('admin.product.review.index')) {
+                    $action .= '<a href="' . route('admin.product.review.index', $product->id) . '" class="btn btn-sm btn-primary">Đánh giá</a>';
+                }
+                if ($user->can('admin.product.attribute.index')) {
+                    $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
+                }
+                if ($user->can('admin.product.edit')) {
+                    $action .= '<a href="' . route('admin.product.edit', $product->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                }
+                if ($user->can('admin.product.destroy')) {
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                }
+
+                if ($user->cannot(['admin.product.review.index', 'admin.product.edit', 'admin.product.destroy', 'admin.admin.product.attribute.index'])) {
+                    $action .= "<span>Không có hành động nào</span>";
+                }
 
                 $action .= '</div></form>';
 

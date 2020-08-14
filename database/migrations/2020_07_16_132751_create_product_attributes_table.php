@@ -17,12 +17,12 @@ class CreateProductAttributesTable extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->integer('quantity');
-            $table->decimal('price')->nullable();
-            $table->decimal('sale_price')->nullable();
+            $table->decimal('price', 15)->nullable();
+            $table->decimal('sale_price', 15)->nullable();
             $table->boolean('default')->default(0);
             $table->timestamps();
             // Foreign key
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

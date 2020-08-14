@@ -30,6 +30,8 @@ class CheckPermission
             foreach ($permission as $value) array_push($permissions, $value->name);
 
             if (!in_array('admin.dashboard', $permissions)) array_push($permissions, 'admin.dashboard');
+            if (!in_array('admin.profile', $permissions)) array_push($permissions, 'admin.profile');
+            if (!in_array('admin.profile.update', $permissions)) array_push($permissions, 'admin.profile.update');
 
             if ($user->hasRole('super-admin') || in_array($current_route, $permissions)) {
                 return $next($request);

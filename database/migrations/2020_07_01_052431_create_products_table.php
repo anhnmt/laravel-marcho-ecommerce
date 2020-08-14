@@ -23,8 +23,8 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->text('body')->nullable();
             $table->integer('quantity');
-            $table->decimal('price');
-            $table->decimal('sale_price')->nullable();
+            $table->decimal('price', 15);
+            $table->decimal('sale_price', 15)->nullable();
             $table->boolean('status')->default(0);
             // $table->decimal('length')->nullable();
             // $table->decimal('width')->nullable();

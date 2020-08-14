@@ -1,9 +1,21 @@
-@extends('layouts.master')
+@php
+\Assets::addStyles([
+'font-roboto-quicksand',
+'nice-select',
+'custom-style',
+'custom-responsive',
+]);
 
-@section('style')
-<link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
-@endsection
+\Assets::addScripts([
+'nice-select',
+'jquery-scrollup',
+'custom',
+'custom-niceselect',
+'custom-jqueryui',
+]);
+@endphp
+
+@extends('layouts.master')
 
 @section('main')
 <div class="custom-container">
@@ -35,32 +47,24 @@
 <section class="login-wrapper all_product_section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-12 col-12 col-lg-4">
+            <div class="col-lg-4 col-sm-12 col-12">
                 @include('layouts.product_sidebar')
             </div>
 
-            <div class="col-md-8 col-sm-12 col-12 col-lg-8">
+            <div class="col-lg-8 col-sm-12 col-12 mt-md-0 mt-5">
                 <div class="widget_box search_widget mb-55 option_product">
                     <div class="row">
                         <div class="col-6">
                             <div class="view_icon float-left">
-                                <span class="mr-2">View </span>
+                                <h5>Danh sách sản phẩm</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="view_icon float-right">
+                                <span class="mr-2">Hiển thị </span>
                                 <a href="#/" class="product_grid active product_present"><i class="fas fa-th mr-2"></i></a>
                                 <a href="#/" class="product_list product_present"><i class="far fa-list mr-2"></i></a>
                             </div>
-                        </div>
-                        <div class="col-6 d-flex justify-content-end">
-                            <span>Sort By </span>
-                            <select>
-                                <option value="1">Default</option>
-                                <option value="2">Newest</option>
-                            </select>
-                            <span>Show </span>
-                            <select>
-                                <option>9</option>
-                                <option value="1">12</option>
-                                <option value="2">24</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -74,11 +78,13 @@
                                         <div class="card">
                                             <div class="row">
                                                 <div class="product_image col-md-4 col-sm-12 col-12">
-                                                    <img src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                                    <a href="{{ route('product.show', $product->slug) }}">
+                                                        <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" class="card-img card-img-list" alt="">
+                                                    </a>
 
                                                     <div class="product_item">
                                                         <div class="d-flex align-items-center justify-content-center">
-                                                            <a class="add-wishlist">
+                                                            <a class="add-wishlist @if($user && $user->favorited($product->id)) active @endif" data-product="{{ $product->id }}">
                                                                 <i class="fal fa-heart"></i>
                                                             </a>
                                                             <a class="add-cart">
@@ -88,17 +94,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="product_info card-body col-md-8 col-sm-12 col-12 pl-4 pr-5">
-                                                    <a href="{{ url($product->slug) }}">
-                                                        <h4 class="card-title">
+                                                    <a href="{{ route('product.show', $product->slug) }}">
+                                                        <h4 class="card-title line-clamp">
                                                             {{ $product->name }}
                                                         </h4>
                                                     </a>
                                                     <span class="price mr-5">
                                                         @if($product->sale_price)
-                                                        <span class="new">{{ $product->sale_price }}đ</span>
-                                                        <span class="old">{{ $product->price }}đ</span>
+                                                        <span class="new">{{ number_format($product->sale_price, 0) }}đ</span>
+                                                        <span class="old">{{ number_format($product->price, 0) }}đ</span>
                                                         @else
-                                                        <span class="new">{{ $product->price }}đ</span>
+                                                        <span class="new">{{ number_format($product->price, 0) }}đ</span>
                                                         @endif
                                                     </span>
                                                     <div class="star_rating d-inline-block">
@@ -111,7 +117,7 @@
                                                     <div class="product_description">
                                                         <p>{{ $product->description }}</p>
                                                     </div>
-                                                    <button class="btn filter_btn">Thêm vào giỏ</button>
+                                                    <button class="btn btn-fill-out">Thêm vào giỏ</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,18 +129,11 @@
                     </div>
 
                 </div>
-                <div class="_pagination">
-                    <ul class="pagination d-flex justify-content-lg-center pt-4">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+                <div class="_pagination d-flex justify-content-center ">
+                    {{ $products->appends(request()->except('page'))->links() }}
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 @endsection

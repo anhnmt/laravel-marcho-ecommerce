@@ -16,19 +16,24 @@ class AttributeController extends Controller
      */
     public function list()
     {
-        $attributes = Attribute::orderBy('id', 'desc')->select(['id', 'name', 'slug']);
+        $attributes = Attribute::select(['id', 'name', 'slug']);
 
         return datatables($attributes)
             ->addColumn('action', function ($attribute) {
+                $user = auth()->user();
+
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.attribute.destroy', $attribute->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
                 $action .= '<a href="' . route('admin.attribute.value.index', $attribute->id) . '" class="btn btn-sm btn-success">Giá trị</a>';
-                if(auth()->user()->can('admin.attribute.edit'))
-                $action .= '<a href="' . route('admin.attribute.edit', $attribute->id) . '" class="btn btn-sm btn-warning">Sửa</a>';
-                if(auth()->user()->can('admin.attribute.destroy'))
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                if ($user->can('admin.attribute.edit')) {
+                    $action .= '<a href="' . route('admin.attribute.edit', $attribute->id) . '" class="btn btn-sm btn-warning">Sửa</a>';
+                }
+                if ($user->can('admin.attribute.destroy')) {
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                }
 
-                if(!auth()->user()->hasRole(['admin.attribute.edit', 'admin.attribute.destroy'])) 
-                $action .= "<span>Không có hành động nào</span>"; 
+                if ($user->cannot(['admin.attribute.edit', 'admin.attribute.destroy'])) {
+                    $action .= "<span>Không có hành động nào</span>";
+                }
 
                 $action .= '</div></form>';
 
@@ -66,7 +71,7 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string|unique:attributes,name',
             'slug' => 'nullable|unique:attributes,slug',
         ], [

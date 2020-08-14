@@ -1,3 +1,14 @@
+@php
+\Assets::addStyles([
+'adminlte'
+]);
+
+\Assets::addScripts([
+'stand-alone-button',
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -105,7 +116,7 @@
 											</button>
 										</span>
 										<input class="form-control @error('image') is-invalid @enderror" type="hidden" name="image" id="image" value="{{ old('image') }}">
-		
+
 										@error('image')
 										<span class="invalid-feedback" role="alert">{{ $message }}</span>
 										@enderror
@@ -123,8 +134,6 @@
 @stop
 
 @section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <script>
 	$(function() {
 		$('#lfm').filemanager('category');

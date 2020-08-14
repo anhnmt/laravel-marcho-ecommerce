@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'vi_VN',
 
     /*
     |--------------------------------------------------------------------------
@@ -180,6 +180,7 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Jackiedo\Cart\CartServiceProvider::class,
 
     ],
 
@@ -236,6 +237,7 @@ return [
         // Custom
         'Date' => Jenssegers\Date\Date::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Cart' => Jackiedo\Cart\Facades\Cart::class,
     ],
 
 ];

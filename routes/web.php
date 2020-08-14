@@ -16,9 +16,7 @@ use UniSharp\LaravelFilemanager\Lfm;
 |
 */
 
-Route::view('contact', 'frontend.contact')->name('contact');
-Route::view('cart', 'frontend.cart')->name('cart');
-Route::view('checkout', 'frontend.cart')->name('checkout');
+
 
 // ROUTE FRONTEND
 Route::group([
@@ -26,21 +24,95 @@ Route::group([
 ], function () {
     // Home
     Route::get('/', 'HomeController@index')->name('home');
+
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog.index');
     Route::get('blog/{blog:slug}', 'BlogController@show')->name('blog.show');
-    //Product
+
+    // Product
     Route::get('product', 'ProductController@index')->name('product.index');
-    Route::view('product_detail', 'frontend.product_detail')->name('product.show');
+    Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+    
+    // Product Attribute
+    Route::get('product-attribute/{productAttribute}', 'ProductController@quantity')->name('product.quantity');
+
+    // Contact
+    Route::resource('contact', 'ContactController')->only([
+        'index', 'store',
+    ]);
+
     // Frontend Auth
     Route::group([
         'middleware' => ['auth'],
     ], function () {
-        // Comment
-        Route::resource('blog.comment', 'CommentController');
+        // Blog Comment
+        Route::resource('blog.comment', 'CommentController')->only([
+            'store',
+        ]);
+
+        // Product Review
+        Route::resource('product.review', 'ReviewController')->only([
+            'store',
+        ]);
+
+        // Favorite
+        Route::group([
+            'prefix' => 'favorite',
+        ], function () {
+            Route::get('/', 'FavoriteController@index')->name('favorite.index');
+            Route::get('list', 'FavoriteController@list')->name('favorite.list');
+            Route::get('{product}', 'FavoriteController@favorite')->name('favorite.favorite');
+        });
+
+        // Cart
+        Route::group([
+            'prefix' => 'cart',
+        ], function () {
+            // Show Cart
+            Route::get('/', 'CartController@index')->name('cart.index');
+            // List Cart
+            Route::get('list', 'CartController@list')->name('cart.list');
+            // Add Cart
+            Route::post('store', 'CartController@store')->name('cart.store');
+            // Discount Cart
+            Route::post('discount', 'CartController@discount')->name('cart.discount');
+            // Update Cart
+            Route::post('update/{id}', 'CartController@update')->name('cart.update');
+            // Remove Cart
+            Route::post('destroy/{id}', 'CartController@destroy')->name('cart.destroy');
+            // Clear All Cart
+            Route::post('clear', 'CartController@clear')->name('cart.clear');
+        });
+
+        // Checkout
+        Route::group([
+            'prefix' => 'checkout',
+        ], function () {
+            // Checkout
+            Route::get('/', 'CheckoutController@index')->name('checkout.index');
+            Route::post('districts', 'CheckoutController@districts')->name('checkout.districts');
+            Route::post('wards', 'CheckoutController@wards')->name('checkout.wards');
+        });
+
+        // Profile
+        Route::group([
+            'prefix' => 'user',
+            'as' => 'user.'
+        ], function () {
+            // Profile
+            Route::get('/profile', 'ProfileController@index')->name('profile');
+            Route::get('/password', 'ProfileController@password')->name('password');
+            Route::get('/address', 'ProfileController@address')->name('address');
+            // Route::post('/addressCreate', 'ProfileController@addressCreate')->name('address.create');
+            Route::put('/{profile}', 'ProfileController@update')->name('update');
+
+            // Order
+            Route::get('order/trash', 'OrderController@trash')->name('order.trash');
+            Route::put('order/{order}/cancel', 'OrderController@cancelOrder')->name('order.cancel');
+            Route::resource('order', 'OrderController');
+        });
     });
 });
-
 
 // ROUTE ADMIN
 Route::group([
@@ -69,23 +141,31 @@ Route::group([
     Route::get('attribute/{attribute}/value/list', 'AttributeValueController@list')->name('attribute.value.list');
     Route::resource('attribute.value', 'AttributeValueController', ['except' => ['show', 'create', 'edit', 'update']]);
 
-    // Product
-    Route::get('product/list', 'ProductController@list')->name('product.list');
-    Route::resource('product', 'ProductController', ['except' => ['show']]);
-
-    // Product Attributes
-    Route::get('product/{product}/attribute/list', 'ProductAttributeController@list')->name('product.attribute.list');
-    Route::resource('product.attribute', 'ProductAttributeController', ['except' => ['show']]);
-
     // Blog
     Route::get('blog/list', 'BlogController@list')->name('blog.list');
     Route::resource('blog', 'BlogController', ['except' => ['show']]);
 
     // Comment
-    Route::get('comment/list', 'CommentController@list')->name('comment.list');
-    Route::resource('comment', 'CommentController')->only([
-        'index', 'destroy'
+    Route::get('blog/{blog}/comment/list', 'CommentController@list')->name('comment.list');
+    Route::resource('blog.comment', 'CommentController')->only([
+        'index', 'destroy', 'edit', 'update'
     ]);
+
+    // Product
+    Route::get('product/list', 'ProductController@list')->name('product.list');
+    Route::resource('product', 'ProductController', ['except' => ['show']]);
+
+    // Review
+    Route::get('product/{product}/review/list', 'ReviewController@list')->name('review.list');
+    Route::resource('product.review', 'ReviewController', ['except' => ['show']]);
+
+    // Product Attributes
+    Route::get('product/{product}/attribute/list', 'ProductAttributeController@list')->name('product.attribute.list');
+    Route::resource('product.attribute', 'ProductAttributeController', ['except' => ['show']]);
+
+    // Order
+    Route::get('order/list', 'OrderController@list')->name('order.list');
+    Route::resource('order', 'OrderController', ['except' => ['show', 'create', 'store', 'destroy']]);
 
     // User
     Route::get('user/list', 'UserController@list')->name('user.list');
@@ -100,10 +180,6 @@ Route::group([
     Route::get('permission/list', 'PermissionController@list')->name('permission.list');
     Route::resource('permission', 'PermissionController', ['except' => ['show', 'create', 'store', 'edit', 'update']]);
 
-    // Comment
-    Route::get('comment/list', 'CommentController@list')->name('comment.list');
-    Route::resource('comment', 'CommentController', ['only' => ['index', 'destroy']]);
-
     // Slider
     Route::get('slider/list', 'SliderController@list')->name('slider.list');
     Route::resource('slider', 'SliderController', ['except' => ['show']]);
@@ -116,4 +192,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'],], function (
     });
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true
+]);

@@ -11,7 +11,10 @@ class Comment extends Model
     use Cachable;
 
     protected $fillable = [
-        'parent_id', 'user_id', 'blog_id', 'body',
+        'parent_id',
+        'user_id',
+        'blog_id',
+        'body',
     ];
 
     /**
@@ -21,7 +24,17 @@ class Comment extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * The belongs to Relationship
+     *
+     * @var array
+     */
+    public function blog()
+    {
+        return $this->belongsTo('App\Models\Blog');
     }
 
     /**
@@ -31,6 +44,6 @@ class Comment extends Model
      */
     public function replies()
     {
-        return $this->hasMany(Comment::class, 'parent_id');
+        return $this->hasMany('App\Models\Comment', 'parent_id');
     }
 }

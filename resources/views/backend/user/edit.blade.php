@@ -1,3 +1,13 @@
+@php
+\Assets::addStyles([
+'adminlte'
+]);
+
+\Assets::addScripts([
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -41,7 +51,7 @@
 								</div>
 
 								<div class="card-body">
-									@can('admin.user.edit')
+									@can('admin.user.update')
 									<button type="submit" class="btn btn-success">
 										<i class="fal fa-check-circle"></i> Lưu
 									</button>
@@ -59,12 +69,6 @@
 								<label for="name">Chọn nhóm quyền</label>
 								<div class="row">
 									<div class="col-12">
-										<div class="card-header d-flex p-0">
-											<ul class="nav nav-pills p-2">
-												<li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Nhóm quyền</a></li>
-												<li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Quyền</a></li>
-											</ul>
-										</div><!-- /.card-header -->
 										<div class="card-body">
 											<div class="tab-content">
 												<div class="tab-pane active" id="tab_1">
@@ -86,13 +90,7 @@
 														</div>
 													</div>
 												</div>
-												<!-- /.tab-pane -->
-												<div class="tab-pane" id="tab_2">
-													None
-												</div>
-												<!-- /.tab-pane -->
 											</div>
-											<!-- /.tab-content -->
 										</div><!-- /.card-body -->
 									</div>
 									<!-- /.col -->
@@ -114,13 +112,3 @@
 	}
 </style>
 @endsection
-
-@section('script')
-<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-<script>
-	$(function() {
-		$('#lfm').filemanager('user');
-	});
-</script>
-@stop

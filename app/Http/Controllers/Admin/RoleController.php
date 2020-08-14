@@ -13,23 +13,28 @@ class RoleController extends Controller
 {
     public function list()
     {
-        $roles = Role::select(['id', 'name', 'guard_name'])->orderBy('id', 'desc');
+        $roles = Role::select(['id', 'name', 'guard_name']);
 
         return datatables($roles)
             ->addColumn('action', function ($role) {
+                $user = auth()->user();
+
                 $action = '<form class="delete-form" action="' . route('admin.role.destroy', $role->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
-                
-                if($role->name !=  'super-admin'){
-                    if(auth()->user()->can('admin.role.edit'))
-                    $action .= '<a href="' . route('admin.role.edit', $role->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-                    if(auth()->user()->can('admin.role.destroy'))
-                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
-                } 
-                else $action .= '<span>Không có hành động nào</span>';
-                
-                if(!auth()->user()->hasRole(['admin.role.edit', 'admin.role.destroy'])) 
-                $action .= "<span>Không có hành động nào</span>";
-              
+
+                if ($role->name != 'super-admin') {
+                    if ($user->can('admin.role.edit')) {
+                        $action .= '<a href="' . route('admin.role.edit', $role->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                    }
+                    if ($user->can('admin.role.destroy')) {
+                        $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                    }
+                } else {
+                    $action .= '<span>Không có hành động nào</span>';
+                }
+
+                if ($user->cannot(['admin.role.edit', 'admin.role.destroy'])) {
+                    $action .= "<span>Không có hành động nào</span>";
+                }
                 $action .= '</form>';
 
                 return $action;

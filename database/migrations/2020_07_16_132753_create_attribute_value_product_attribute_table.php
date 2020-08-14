@@ -18,8 +18,8 @@ class CreateAttributeValueProductAttributeTable extends Migration
             $table->foreignId('attribute_value_id');
             $table->foreignId('product_attribute_id');
             // Foreign key
-            $table->foreign('attribute_value_id')->references('id')->on('attribute_values');
-            $table->foreign('product_attribute_id')->references('id')->on('product_attributes');
+            $table->foreign('attribute_value_id')->references('id')->on('attribute_values')->onDelete('cascade');
+            $table->foreign('product_attribute_id')->references('id')->on('product_attributes')->onDelete('cascade');
         });
     }
 

@@ -15,12 +15,32 @@ class User extends Authenticatable
     use Cachable;
 
     /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'roles',
+        'roles.permissions',
+        'permissions',
+    ];
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar',
+        'name',
+        'email',
+        'password',
+        'avatar',
+        'phone',
+        'city_id',
+        'district_id',
+        'ward_id',
+        'address',
     ];
 
     /**
@@ -41,7 +61,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getShortName() {
+    public function getShortName()
+    {
         $name = auth()->user()->name;
 
         $arr_name = explode(' ', $name);
@@ -54,8 +75,27 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Blog');
     }
 
+    public function ward()
+    {
+        return $this->belongsTo('App\Models\Ward', 'ward_id', 'id');
+    }
+
     public function getRoles()
     {
         return $this->belongsToMany('App\Models\Role', 'model_has_roles', 'role_id', 'model_id');
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Models\Product', 'favorites')->withTimeStamps();
+    }
+
+    public function favorited($product_id)
+    {
+        $check = $this->favorites()->where([
+            'product_id' => $product_id,
+        ])->exists();
+
+        return $check;
     }
 }

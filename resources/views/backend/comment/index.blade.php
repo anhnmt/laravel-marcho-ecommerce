@@ -1,3 +1,18 @@
+@php
+\Assets::addStyles([
+'datatables-bs4',
+'adminlte'
+]);
+
+\Assets::addScripts([
+'datatables',
+'datatables-bs4',
+'datatables-responsive',
+'datatables-responsive-bs4',
+'adminlte'
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -25,10 +40,8 @@
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Ảnh</th>
-										<th>Tên</th>
-										<th>Đường dẫn</th>
-										<th>Trạng thái</th>
+										<th>Tên người dùng</th>
+										<th>Nội dung</th>
 										<th>Hành động</th>
 									</tr>
 								</thead>
@@ -42,28 +55,10 @@
 </section>
 @stop
 
-@section('style')
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-@stop
-
 @section('script')
-<!-- DataTables -->
-<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<!-- SweetAlert2 -->
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <script>
-	$.fn.dataTable.ext.errMode = 'throw';
-
 	$(function() {
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
+		$.fn.dataTable.ext.errMode = 'throw';
 
 		$('#datatables').DataTable({
 			"paging": true,
@@ -71,28 +66,21 @@
 			"autoWidth": false,
 			"responsive": true,
 			"serverSide": true,
-			"ajax": "{{ route('admin.comment.list') }}",
+			"ajax": "{{ route('admin.comment.list', $blog->id) }}",
+			"order": [
+				[0, 'desc']
+			],
 			"columns": [{
 					data: 'id',
 					className: 'align-middle text-center',
 				},
 				{
-					data: 'image',
-					className: 'align-middle text-center',
-					orderable: false,
-					searchable: false
-				},
-				{
-					data: 'name',
+					data: 'user',
 					className: 'align-middle',
 				},
 				{
-					data: 'slug',
+					data: 'body',
 					className: 'align-middle',
-				},
-				{
-					data: 'status',
-					className: 'align-middle text-center',
 				},
 				{
 					data: 'action',

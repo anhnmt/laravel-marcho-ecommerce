@@ -9,16 +9,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/ionicons/css/ionicons.min.css') }}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="{{ asset('assets/css/SourceSansPro.css') }}" rel="stylesheet">
-    <!-- Custom CSS -->
+    <!-- Custom Style -->
+    {!! \Assets::renderHeader() !!}
+
     @yield('style')
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -31,27 +25,26 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('home') }}" class="nav-link"><i class="fal fa-undo"></i> Trang chủ</a>
+                </li>
+
                 <li class="dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
+                        <img loading="lazy" src="{{ asset(auth()->user()->avatar ? auth()->user()->avatar : 'assets/img/user2-160x160.jpg') }}" class="img-circle elevation-1 user-image" alt="User Image">
                         <span class="hidden-xs text-capitalize">{{ auth()->user()->name }}</span>
                     </a>
+
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{route('admin.profile')}}" class="dropdown-item">
                             <i class="fal fa-id-card"></i> Trang cá nhân
                         </a>
                         <div class="dropdown-divider"></div>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item">
                                 <i class="fal fa-sign-out"></i> Đăng xuất
@@ -67,7 +60,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ route('admin.dashboard') }}" class="brand-link">
-                <img src="{{ asset('assets/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img loading="lazy" src="{{ asset('assets/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
 
@@ -131,40 +124,27 @@
                         </li>
                         @endcanany
 
-                        @canany(['admin.blog.index','admin.comment.index'])
+                        @can('admin.order.index')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.order.index') }}" class="nav-link {{ (request()->routeIs('admin.order.*')) ? 'active' : '' }}">
+                                <i class="fal fa-bags-shopping nav-icon"></i>
+                                <p>
+                                    Đơn hàng
+                                </p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('admin.blog.index')
                         <li class="nav-item has-treeview {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'active' : '' }}">
+                            <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'active' : '' }}">
                                 <i class="nav-icon fal fa-book-alt"></i>
                                 <p>
                                     Bài viết
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                @can('admin.blog.index')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs('admin.blog.*')) ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Danh sách bài viết
-                                        </p>
-                                    </a>
-                                </li>
-                                @endcan
-
-                                @can('admin.comment.index')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.comment.index') }}" class="nav-link {{ (request()->routeIs('admin.comment.*')) ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Danh sách bình luận
-                                        </p>
-                                    </a>
-                                </li>
-                                @endcan
-                            </ul>
                         </li>
-                        @endcanany
+                        @endcan
 
                         @canany(['admin.user.index','admin.role.index','admin.permission.index'])
                         <li class="nav-item has-treeview {{ (request()->routeIs(['admin.user*', 'admin.role*','admin.permission*'])) ? 'menu-open' : '' }}">
@@ -247,24 +227,44 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- Vuejs -->
-    <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script>
-    <!-- jQuery -->
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <!-- Custom Script -->
+    {!! \Assets::renderFooter() !!}
+
+    @yield('script')
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button);
     </script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('assets/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('assets/js/demo.js') }}"></script>
-    <!-- Custom JS -->
-    @yield('script')
+
+    @if(session('success'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "success",
+                title: "{{ session('success') }}",
+            });
+        });
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        $(function() {
+            Swal.fire({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                icon: "error",
+                title: "{{ session('error') }}",
+            });
+        });
+    </script>
+    @endif
 </body>
 
 </html>

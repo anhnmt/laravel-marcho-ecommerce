@@ -20,7 +20,7 @@ class CreateAttributeValuesTable extends Migration
             $table->string('code')->unique();
             $table->timestamps();
             // Foreign key
-            $table->foreign('attribute_id')->references('id')->on('attributes');
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });
     }
 

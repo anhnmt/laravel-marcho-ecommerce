@@ -1,13 +1,86 @@
+function debounce(func, wait) {
+    var timeout;
+
+    return function () {
+        var context = this,
+            args = arguments;
+
+        var executeFunction = function () {
+            func.apply(context, args);
+        };
+
+        clearTimeout(timeout);
+        timeout = setTimeout(executeFunction, wait);
+    };
+}
+
+Number.prototype.formatMoney = function (
+    decPlaces,
+    thouSeparator,
+    decSeparator
+) {
+    var n = this,
+        decPlaces = isNaN((decPlaces = Math.abs(decPlaces))) ? 2 : decPlaces,
+        decSeparator = decSeparator == undefined ? "." : decSeparator,
+        thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+        sign = n < 0 ? "-" : "",
+        i = parseInt((n = Math.abs(+n || 0).toFixed(decPlaces))) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return (
+        sign +
+        (j ? i.substr(0, j) + thouSeparator : "") +
+        i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) +
+        (decPlaces
+            ? decSeparator +
+              Math.abs(n - i)
+                  .toFixed(decPlaces)
+                  .slice(2)
+            : "")
+    );
+};
+
 (function ($) {
     "use strict";
-    $(".carouselExampleControls").owlCarousel({
-        margin: 10,
-        loop: true,
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
+    
+    /*===================================*
+        Offcanvas Menu
+	*===================================*/
+    $('.navbar-toggler').on('click', function() {
+        $('body').addClass('block');
+        $('#header-navbar').addClass('show');
+        $('.overlay').show();
+    });
+
+    $('.overlay').on('click', function() {
+        $('body').removeClass('block');
+        $('#header-navbar').removeClass('show');
+        $('.overlay').hide();
+    });
+
+    /*===================================*
+        Offcanvas Menu
+    *===================================*/
+    $(".navbar-toggler").on("click", function () {
+        $("body").addClass("block");
+        $("#header-navbar").addClass("show");
+        $(".overlay").show();
+    });
+
+    $(".overlay").on("click", function () {
+        $("body").removeClass("block");
+        $("#header-navbar").removeClass("show");
+        $(".overlay").hide();
+    });
+
     /*===================================*
         BACKGROUND IMAGE JS
 	*===================================*/
-    /*data image src*/
     $(".background_bg").each(function () {
         var attr = $(this).attr("data-img-src");
         if (typeof attr !== typeof undefined && attr !== false) {
@@ -16,103 +89,32 @@
     });
 
     /*===================================*
-        ANIMATION JS
+        MENU JS
 	*===================================*/
-    $(function () {
-        function ckScrollInit(items, trigger) {
-            items.each(function () {
-                var ckElement = $(this),
-                    AnimationClass = ckElement.attr("data-animation"),
-                    AnimationDelay = ckElement.attr("data-animation-delay");
+    //Main navigation scroll spy for shadow
+    $(window).on("scroll", function () {
+        var scroll = $(window).scrollTop();
 
-                ckElement.css({
-                    "-webkit-animation-delay": AnimationDelay,
-                    "-moz-animation-delay": AnimationDelay,
-                    "animation-delay": AnimationDelay,
-                    opacity: 0,
-                });
-
-                var ckTrigger = trigger ? trigger : ckElement;
-
-                ckTrigger.waypoint(
-                    function () {
-                        ckElement.addClass("animated").css("opacity", "1");
-                        ckElement.addClass("animated").addClass(AnimationClass);
-                    },
-                    {
-                        triggerOnce: true,
-                        offset: "90%",
-                    }
-                );
-            });
+        if (scroll >= 150) {
+            $("header").addClass(
+                "fixed-top animate__animated animate__slideInDown"
+            );
+        } else {
+            $("header").removeClass(
+                "fixed-top animate__animated animate__slideInDown"
+            );
         }
-
-        ckScrollInit($(".animation"));
-        ckScrollInit($(".staggered-animation"), $(".staggered-animation-wrap"));
     });
-
-    /*===================================*
-        SLIDER JS
-	*===================================*/
-    $(".slick_sponssor").slick({
-        infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                },
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    });
-    /*-----------------------
-		Price Range Slider
-	------------------------ */
-    var rangeSlider = $(".price-range"),
-        minamount = $("#minamount"),
-        maxamount = $("#maxamount"),
-        minPrice = rangeSlider.data("min"),
-        maxPrice = rangeSlider.data("max");
-    rangeSlider.slider({
-        range: true,
-        min: minPrice,
-        max: maxPrice,
-        values: [minPrice, maxPrice],
-        slide: function (event, ui) {
-            minamount.html("$" + ui.values[0]);
-            maxamount.html("$" + ui.values[1]);
-        },
-    });
-    minamount.html("$" + rangeSlider.slider("values", 0));
-    maxamount.html("$" + rangeSlider.slider("values", 1));
 
     /*-----------------------
 		Size Filter
     ------------------------ */
     $(".input_size").click(function () {
-        $(this).parents("label").toggleClass("_highlight");
+        $(this)
+            .parents(".list-group-item")
+            .find("label")
+            .toggleClass("_highlight");
     });
-    /*-----------------------
-		Nice Select
-    ------------------------ */
-    $("select").niceSelect();
 
     /*-----------------------
         Product List Style
@@ -121,65 +123,66 @@
         $(this).parents(".view_icon").find(".active").removeClass("active");
         $(this).addClass("active");
         if ($(this).hasClass("product_grid")) {
-            $(".product_section").find(".product_list").removeClass('product_list').addClass('product_grid');
+            $(".product_section")
+                .find(".product_list")
+                .removeClass("product_list")
+                .addClass("product_grid");
         } else {
-            $(".product_section").find(".product_grid").removeClass('product_grid').addClass('product_list');
+            $(".product_section")
+                .find(".product_grid")
+                .removeClass("product_grid")
+                .addClass("product_list");
         }
     });
 
     /*-------------------------------
-	Slick Slider for Product Image
+        Choose Star
     ------------------------------ */
-    $('.slider-for').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.slider-nav'
+    $(".star").click(function () {
+        $(this).parents(".star_rating").find(".checked").removeClass("checked");
+        $(this).addClass("checked");
+        $(this)
+            .parents(".star_rating")
+            .find("#rating")
+            .val($(this).data("star"));
+        // $(this).data("star");
     });
-    $('.slider-nav').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        dots: false,
-        focusOnSelect: true,
-        vertical: true,
-        arrows: true,
-        prevArrow: '<span class="prev"><i class="fa fa-angle-up" aria-hidden="true"></i></span>',
-        nextArrow: '<span class="next"><i class="fa fa-angle-down" aria-hidden="true"></i></span>'
-    });
-    /*-------------------------------
-                Choose Star
-    ------------------------------ */
-    $('.star').click(function(){
-        $(this).parents('.star_rating').find('.checked').removeClass('checked');
-        $(this).addClass('checked');
-    })
 
-    $(".related_products .products").slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        arrows: true
-    })
     /*-------------------------------
-        Plus and minus quantity
+        Add To Favorite
     ------------------------------ */
-    $(".plus").on("click", function () {
-        if ($(this).prev().val()) {
-            $(this).prev().val(+$(this).prev().val() + 1);
-        }
+    $(".add-wishlist").on("click", function () {
+        var self = this;
+        var id = $(self).data("product");
+        $(self).toggleClass("active");
+        // console.log(id);
+
+        $.ajax({
+            url: "/favorite/" + id,
+            method: "GET",
+        }).done(function (json) {
+            console.log(json);
+            if (json.success === true) {
+                $("#favorite_count").html(json.favoriteCount);
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    icon: "success",
+                    title: json.msg,
+                });
+            } else {
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    icon: "error",
+                    title: json.msg,
+                });
+            }
+        });
     });
-    $(".minus").on("click", function () {
-        if ($(this).next().val() > 1) {
-            if ($(this).next().val() > 1)
-                $(this).next().val(+$(this).next().val() - 1);
-        }
-    });
-    $(".qty").on("change", function(){
-        if($(this).val() <= 0){
-            $(this).val(1);
-        }
-    })
 })(window.jQuery);

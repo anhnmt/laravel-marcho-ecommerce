@@ -1,3 +1,32 @@
+@php
+\Assets::addStyles([
+'ionicons',
+'tempusdominus-bootstrap4',
+'icheck-bootstrap',
+'jqvmap',
+'font-sourcesanspro',
+'adminlte',
+'overlayscrollbars',
+'daterangepicker',
+'summernote',
+]);
+
+\Assets::addScripts([
+'chart',
+'sparklines',
+'jqvmap',
+'jqvmap-usa',
+'jquery-knob',
+'moment',
+'daterangepicker',
+'tempusdominus-bootstrap4',
+'summernote',
+'overlayscrollbars',
+'adminlte',
+'dashboard',
+]);
+@endphp
+
 @extends('layouts.admin')
 
 @section('main')
@@ -146,7 +175,7 @@
 									<span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
 								</div>
 								<!-- /.direct-chat-infos -->
-								<img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+								<img loading="lazy" class="direct-chat-img" src="{{ asset('assets/img/user1-128x128.jpg') }}" alt="message user image">
 								<!-- /.direct-chat-img -->
 								<div class="direct-chat-text">
 									Is this template really for free? That's unbelievable!
@@ -162,7 +191,7 @@
 									<span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
 								</div>
 								<!-- /.direct-chat-infos -->
-								<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+								<img loading="lazy" class="direct-chat-img" src="{{ asset('assets/img/user3-128x128.jpg') }}" alt="message user image">
 								<!-- /.direct-chat-img -->
 								<div class="direct-chat-text">
 									You better believe it!
@@ -178,7 +207,7 @@
 									<span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
 								</div>
 								<!-- /.direct-chat-infos -->
-								<img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+								<img loading="lazy" class="direct-chat-img" src="{{ asset('assets/img/user1-128x128.jpg') }}" alt="message user image">
 								<!-- /.direct-chat-img -->
 								<div class="direct-chat-text">
 									Working with AdminLTE on a great new app! Wanna join?
@@ -194,7 +223,7 @@
 									<span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
 								</div>
 								<!-- /.direct-chat-infos -->
-								<img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+								<img loading="lazy" class="direct-chat-img" src="{{ asset('assets/img/user3-128x128.jpg') }}" alt="message user image">
 								<!-- /.direct-chat-img -->
 								<div class="direct-chat-text">
 									I would love to.
@@ -211,7 +240,7 @@
 							<ul class="contacts-list">
 								<li>
 									<a href="#">
-										<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+										<img loading="lazy" class="contacts-list-img" src="{{ asset('assets/img/user1-128x128.jpg') }}">
 
 										<div class="contacts-list-info">
 											<span class="contacts-list-name">
@@ -226,7 +255,7 @@
 								<!-- End Contact Item -->
 								<li>
 									<a href="#">
-										<img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
+										<img loading="lazy" class="contacts-list-img" src="{{ asset('assets/img/user7-128x128.jpg') }}">
 
 										<div class="contacts-list-info">
 											<span class="contacts-list-name">
@@ -241,7 +270,7 @@
 								<!-- End Contact Item -->
 								<li>
 									<a href="#">
-										<img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
+										<img loading="lazy" class="contacts-list-img" src="{{ asset('assets/img/user3-128x128.jpg') }}">
 
 										<div class="contacts-list-info">
 											<span class="contacts-list-name">
@@ -256,7 +285,7 @@
 								<!-- End Contact Item -->
 								<li>
 									<a href="#">
-										<img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
+										<img loading="lazy" class="contacts-list-img" src="{{ asset('assets/img/user5-128x128.jpg') }}">
 
 										<div class="contacts-list-info">
 											<span class="contacts-list-name">
@@ -271,7 +300,7 @@
 								<!-- End Contact Item -->
 								<li>
 									<a href="#">
-										<img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
+										<img loading="lazy" class="contacts-list-img" src="{{ asset('assets/img/user6-128x128.jpg') }}">
 
 										<div class="contacts-list-info">
 											<span class="contacts-list-name">
@@ -286,7 +315,7 @@
 								<!-- End Contact Item -->
 								<li>
 									<a href="#">
-										<img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
+										<img loading="lazy" class="contacts-list-img" src="{{ asset('assets/img/user8-128x128.jpg') }}">
 
 										<div class="contacts-list-info">
 											<span class="contacts-list-name">
@@ -591,46 +620,4 @@
 		<!-- /.row (main row) -->
 	</div><!-- /.container-fluid -->
 </section>
-@stop()
-
-@section('style')
-<!-- Tempusdominus Bbootstrap 4 -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
-<!-- iCheck -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-<!-- JQVMap -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/jqvmap/jqvmap.min.css') }}">
-<!-- overlayScrollbars -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-<!-- Daterange picker -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
-<!-- summernote -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}">
-@stop()
-
-@section('script')
-<!-- ChartJS -->
-<script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>
-<!-- Sparkline -->
-<script src="{{ asset('assets/plugins/sparklines/sparkline.js') }}"></script>
-<!-- JQVMap -->
-<script src="{{ asset('assets/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{ asset('assets/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-<!-- daterangepicker -->
-<script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<!-- Summernote -->
-<script src="{{ asset('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
-<!-- overlayScrollbars -->
-<script src="{{ asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('assets/js/adminlte.js') }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('assets/js/demo.js') }}"></script>
 @stop()

@@ -14,7 +14,13 @@ class Blog extends Model
     use Cachable;
 
     protected $fillable = [
-        'user_id', 'name', 'slug', 'image', 'description', 'body', 'status',
+        'user_id',
+        'name',
+        'slug',
+        'image',
+        'description',
+        'body',
+        'status',
     ];
 
     /**
@@ -41,8 +47,27 @@ class Blog extends Model
         return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
     }
 
-    public static function latest($take = 5)
+    public function scopeKeyword($query, $request)
     {
-        return Blog::orderBy('id', 'desc')->take($take)->get();
+        if ($request->has('keyword')) {
+            $search_fields = [
+                'name',
+                'slug',
+                'description',
+                'body',
+            ];
+
+            $search_terms = explode(' ', $request->keyword);
+
+            foreach ($search_terms as $term) {
+                $query->where(function ($query) use ($search_fields, $term) {
+                    foreach ($search_fields as $field) {
+                        $query->orWhere($field, 'LIKE', '%' . $term . '%');
+                    }
+                });
+            }
+        }
+
+        return $query;
     }
 }

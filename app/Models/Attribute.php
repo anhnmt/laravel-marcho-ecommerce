@@ -12,7 +12,9 @@ class Attribute extends Model
     use Cachable;
 
     protected $fillable = [
-        'name', 'slug', 'status',
+        'name',
+        'slug',
+        'status',
     ];
 
     /**
