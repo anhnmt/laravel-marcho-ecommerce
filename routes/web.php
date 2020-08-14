@@ -32,19 +32,37 @@ Route::group([
     // Product
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/{product:slug}', 'ProductController@show')->name('product.show');
+    
+    // Product Attribute
+    Route::get('product-attribute/{productAttribute}', 'ProductController@quantity')->name('product.quantity');
 
     // Contact
-    Route::view('contact', 'frontend.contact')->name('contact');
+    Route::resource('contact', 'ContactController')->only([
+        'index', 'store',
+    ]);
 
     // Frontend Auth
     Route::group([
         'middleware' => ['auth'],
     ], function () {
         // Blog Comment
-        Route::resource('blog.comment', 'CommentController');
+        Route::resource('blog.comment', 'CommentController')->only([
+            'store',
+        ]);
 
-        // Product Favorite
-        Route::post('favorite/{product}', 'ProductController@favorite')->name('product.favorite');
+        // Product Review
+        Route::resource('product.review', 'ReviewController')->only([
+            'store',
+        ]);
+
+        // Favorite
+        Route::group([
+            'prefix' => 'favorite',
+        ], function () {
+            Route::get('/', 'FavoriteController@index')->name('favorite.index');
+            Route::get('list', 'FavoriteController@list')->name('favorite.list');
+            Route::get('{product}', 'FavoriteController@favorite')->name('favorite.favorite');
+        });
 
         // Cart
         Route::group([
@@ -52,6 +70,8 @@ Route::group([
         ], function () {
             // Show Cart
             Route::get('/', 'CartController@index')->name('cart.index');
+            // List Cart
+            Route::get('list', 'CartController@list')->name('cart.list');
             // Add Cart
             Route::post('store', 'CartController@store')->name('cart.store');
             // Discount Cart
@@ -61,7 +81,7 @@ Route::group([
             // Remove Cart
             Route::post('destroy/{id}', 'CartController@destroy')->name('cart.destroy');
             // Clear All Cart
-            Route::get('clear', 'CartController@clear')->name('cart.clear');
+            Route::post('clear', 'CartController@clear')->name('cart.clear');
         });
 
         // Checkout
@@ -74,16 +94,22 @@ Route::group([
             Route::post('wards', 'CheckoutController@wards')->name('checkout.wards');
         });
 
-        // Order
-        Route::resource('order', 'OrderController');
-
         // Profile
         Route::group([
-            'prefix' => 'profile',
+            'prefix' => 'user',
+            'as' => 'user.'
         ], function () {
-            Route::get('/', 'ProfileController@index')->name('profile.index');
-            Route::get('/password', 'ProfileController@password')->name('profile.password');
-            Route::put('/{profile}', 'ProfileController@update')->name('profile.update');
+            // Profile
+            Route::get('/profile', 'ProfileController@index')->name('profile');
+            Route::get('/password', 'ProfileController@password')->name('password');
+            Route::get('/address', 'ProfileController@address')->name('address');
+            // Route::post('/addressCreate', 'ProfileController@addressCreate')->name('address.create');
+            Route::put('/{profile}', 'ProfileController@update')->name('update');
+
+            // Order
+            Route::get('order/trash', 'OrderController@trash')->name('order.trash');
+            Route::put('order/{order}/cancel', 'OrderController@cancelOrder')->name('order.cancel');
+            Route::resource('order', 'OrderController');
         });
     });
 });
@@ -127,6 +153,10 @@ Route::group([
     Route::get('blog/list', 'BlogController@list')->name('blog.list');
     Route::resource('blog', 'BlogController', ['except' => ['show']]);
 
+    // Blog
+    Route::get('order/list', 'OrderController@list')->name('order.list');
+    Route::resource('order', 'OrderController', ['except' => ['show', 'create', 'store', 'destroy']]);
+
     // Comment
     Route::get('comment/list', 'CommentController@list')->name('comment.list');
     Route::resource('comment', 'CommentController')->only([
@@ -158,4 +188,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'],], function (
     });
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true
+]);

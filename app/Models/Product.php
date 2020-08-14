@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use BinaryCats\Sku\HasSku;
 use BinaryCats\Sku\Concerns\SkuOptions;
@@ -19,8 +18,6 @@ class Product extends Model implements UseCartable
     use SluggableScopeHelpers;
     use HasSku;
     use Cachable;
-
-    // protected $with = ['roles.permissions', 'permissions'];
 
     protected $fillable = [
         'category_id',
@@ -68,7 +65,7 @@ class Product extends Model implements UseCartable
      */
     public function category()
     {
-        return $this->hasOne(Category::class, 'id', 'category_id');
+        return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
 
     /**
@@ -76,6 +73,62 @@ class Product extends Model implements UseCartable
      */
     public function attributes()
     {
-        return $this->hasMany(ProductAttribute::class);
+        return $this->hasMany('App\Models\ProductAttribute');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
+
+    public function scopeKeyword($query, $request)
+    {
+        if ($request->has('keyword')) {
+            $search_fields = [
+                'name',
+                'slug',
+                'description',
+                'body',
+            ];
+
+            $search_terms = explode(' ', $request->keyword);
+
+            foreach ($search_terms as $term) {
+                $query->where(function ($query) use ($search_fields, $term) {
+                    foreach ($search_fields as $field) {
+                        $query->orWhere($field, 'LIKE', '%' . $term . '%');
+                    }
+                });
+            }
+        }
+
+        return $query;
+    }
+
+    public function scopeCategory($query, $request)
+    {
+        if ($request->has('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        return $query;
+    }
+
+    public function scopePrice($query, $request)
+    {
+        if ($request->has('min_price') && $request->has('max_price')) {
+            $query->whereBetween('price', [$request->min_price, $request->max_price]);
+        }
+
+        return $query;
+    }
+
+    public function scopeAttributes($query, $request)
+    {
+        if ($request->has('attributes')) {
+            $query->whereBetween('price', [$request->min_price, $request->max_price]);
+        }
+
+        return $query;
     }
 }

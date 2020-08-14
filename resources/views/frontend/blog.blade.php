@@ -6,8 +6,6 @@
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
 'nice-select',
 'select2',
 'jquery-scrollup',
@@ -56,7 +54,7 @@
                                 <div class="grid_inner_item">
                                     <div class="blog_img">
                                         <a href="{{ route('blog.show', $blog->slug) }}">
-                                            <img src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="{{ $blog->name }}">
+                                            <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="{{ $blog->name }}">
                                         </a>
                                     </div>
                                     <div class="blog_info">
@@ -65,7 +63,7 @@
                                             {{ $blog->created_at->format('d-m-Y') }}
                                         </p>
                                         <h3>
-                                            <a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
+                                            <a class="line-clamp" href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
                                         </h3>
                                     </div>
                                 </div>
@@ -77,12 +75,12 @@
 
                 <div class="_pagination">
                     <div class="d-flex justify-content-center pt-4">
-                        {{ $blogs->links() }}
+                        {{ $blogs->appends(request()->except('page'))->links() }}
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-4">
+
+            <div class="col-lg-4 mt-md-0 mt-5">
                 @include('layouts.blog_sidebar')
             </div>
         </div>

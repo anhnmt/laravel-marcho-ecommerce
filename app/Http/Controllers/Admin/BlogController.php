@@ -21,7 +21,7 @@ class BlogController extends Controller
         return datatables($blogs)
             ->addColumn('image', function ($blog) {
                 $thumb_url = $blog->image ? $blog->image : 'assets/img/placeholder.png';
-                return '<img height="70px" width="70px" src="' . $thumb_url . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . $thumb_url . '"/>';
             })
             ->addColumn('status', function ($blog) {
                 return $blog->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
@@ -29,15 +29,15 @@ class BlogController extends Controller
             ->addColumn('action', function ($blog) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.blog.destroy', $blog->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
-                if(auth()->user()->can('admin.blog.edit'))
-                $action .= '<a href="' . route('admin.blog.edit', $blog->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                if (auth()->user()->can('admin.blog.edit'))
+                    $action .= '<a href="' . route('admin.blog.edit', $blog->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
 
-                if(auth()->user()->can('admin.blog.destroy'))
-                $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
-                
-                if((auth()->user()->can('admin.blog.edit') && auth()->user()->can('admin.blog.destroy')) == false) 
-                $action .= "<span>Không có hành động nào</span>"; 
-                
+                if (auth()->user()->can('admin.blog.destroy'))
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+
+                if ((auth()->user()->can('admin.blog.edit') && auth()->user()->can('admin.blog.destroy')) == false)
+                    $action .= "<span>Không có hành động nào</span>";
+
                 $action .= '</div></form>';
 
                 return $action;

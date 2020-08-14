@@ -14,6 +14,31 @@ function debounce(func, wait) {
     };
 }
 
+Number.prototype.formatMoney = function (
+    decPlaces,
+    thouSeparator,
+    decSeparator
+) {
+    var n = this,
+        decPlaces = isNaN((decPlaces = Math.abs(decPlaces))) ? 2 : decPlaces,
+        decSeparator = decSeparator == undefined ? "." : decSeparator,
+        thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+        sign = n < 0 ? "-" : "",
+        i = parseInt((n = Math.abs(+n || 0).toFixed(decPlaces))) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return (
+        sign +
+        (j ? i.substr(0, j) + thouSeparator : "") +
+        i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) +
+        (decPlaces
+            ? decSeparator +
+              Math.abs(n - i)
+                  .toFixed(decPlaces)
+                  .slice(2)
+            : "")
+    );
+};
+
 (function ($) {
     "use strict";
 
@@ -22,6 +47,21 @@ function debounce(func, wait) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
+    /*===================================*
+        Offcanvas Menu
+    *===================================*/
+    $(".navbar-toggler").on("click", function () {
+        $("body").addClass("block");
+        $("#header-navbar").addClass("show");
+        $(".overlay").show();
+    });
+
+    $(".overlay").on("click", function () {
+        $("body").removeClass("block");
+        $("#header-navbar").removeClass("show");
+        $(".overlay").hide();
+    });
+
     /*===================================*
         BACKGROUND IMAGE JS
 	*===================================*/
@@ -40,9 +80,13 @@ function debounce(func, wait) {
         var scroll = $(window).scrollTop();
 
         if (scroll >= 150) {
-            $("header").addClass("fixed-top animated backInDown");
+            $("header").addClass(
+                "fixed-top animate__animated animate__slideInDown"
+            );
         } else {
-            $("header").removeClass("fixed-top animated backInDown");
+            $("header").removeClass(
+                "fixed-top animate__animated animate__slideInDown"
+            );
         }
     });
 
@@ -81,6 +125,11 @@ function debounce(func, wait) {
     $(".star").click(function () {
         $(this).parents(".star_rating").find(".checked").removeClass("checked");
         $(this).addClass("checked");
+        $(this)
+            .parents(".star_rating")
+            .find("#rating")
+            .val($(this).data("star"));
+        // $(this).data("star");
     });
 
     /*-------------------------------
@@ -94,9 +143,12 @@ function debounce(func, wait) {
 
         $.ajax({
             url: "/favorite/" + id,
-            method: "POST",
+            method: "GET",
         }).done(function (json) {
+            console.log(json);
             if (json.success === true) {
+                $("#favorite_count").html(json.favoriteCount);
+
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -117,4 +169,14 @@ function debounce(func, wait) {
             }
         });
     });
+
+    // ANIMATION
+    // $(".blog_img, .post_img").on("mouseover", function () {
+    //     $(this).addClass(
+    //         "animate__animated animate__zoomIn"
+    //     );
+    //     // $(this).removeClass(
+    //     //     "animate__animated animate__slideInDown"
+    //     // );
+    // });
 })(window.jQuery);

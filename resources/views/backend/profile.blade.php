@@ -37,7 +37,7 @@
                             <div class="text-center">
                                 <p>
                                     <div id="holder" class="lfm profile-user-img" data-input="avatar" data-preview="holder" data-class="profile-user-img img-fluid rounded-circle" style="margin-top:15px">
-                                        <img class="profile-user-img img-fluid rounded-circle" src="{{ asset($user->avatar) }}" alt="User profile picture">
+                                        <img loading="lazy" class="profile-user-img img-fluid rounded-circle" src="{{ asset($user->avatar) }}" alt="User profile picture">
                                     </div>
                                 </p>
                                 <p>

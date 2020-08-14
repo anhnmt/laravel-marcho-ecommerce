@@ -22,6 +22,8 @@ class CheckoutController extends Controller
         $quantity = $cart->sumItemsQuantity();
 
         $cities = City::all();
+        $districts = District::where('parent_code', auth()->user()->city_id)->get();
+        $wards = Ward::where('parent_code', auth()->user()->district_id)->get();
 
         return view('frontend.checkout', compact(
             'cities',
@@ -29,6 +31,8 @@ class CheckoutController extends Controller
             'subtotal',
             'action',
             'quantity',
+            'districts',
+            'wards',
         ));
     }
 

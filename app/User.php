@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Models\Favorite;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +14,17 @@ class User extends Authenticatable
     use Notifiable;
     use Cachable;
 
-    protected $with = ['roles', 'permissions'];
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'roles',
+        'roles.permissions',
+        'permissions',
+    ];
+
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +32,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'phone',
+        'name',
+        'email',
+        'password',
+        'avatar',
+        'phone',
+        'city_id',
+        'district_id',
+        'ward_id',
+        'address',
     ];
 
     /**
@@ -58,9 +75,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Blog');
     }
 
-    public function address()
+    public function ward()
     {
-        return $this->hasOne('App\Models\Address');
+        return $this->belongsTo('App\Models\Ward', 'ward_id', 'id');
     }
 
     public function getRoles()
@@ -70,17 +87,15 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->belongsToMany('App\Models\Favorite', 'favorites', 'user_id', 'product_id')->withTimeStamps();
+        return $this->belongsToMany('App\Models\Product', 'favorites')->withTimeStamps();
     }
 
-    public function isFavorited($product_id)
+    public function favorited($product_id)
     {
-        $user = auth()->user();
-        $check = Favorite::where([
-            'user_id' => $user->id,
+        $check = $this->favorites()->where([
             'product_id' => $product_id,
-        ]);
+        ])->exists();
 
-        return $check->exists();
+        return $check;
     }
 }

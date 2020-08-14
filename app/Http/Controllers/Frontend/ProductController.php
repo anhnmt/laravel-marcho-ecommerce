@@ -3,19 +3,33 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Blog;
-use App\Models\Product;
 use App\Models\Category;
-use App\Models\Favorite;
+use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $user = auth()->user();
         $categories = Category::all();
-        $products = Product::orderBy('id', 'desc')->paginate(10);
+        $max_price = Product::max('price');
 
-        return view('frontend.product', compact('products', 'categories'));
+        $products = Product::with('attributes')->where('status', 1)
+            ->keyword($request)
+            ->category($request)
+            ->price($request)
+            ->orderBy('id', 'desc')
+            ->paginate(8);
+
+        return view('frontend.product', compact(
+            'user',
+            'products',
+            'categories',
+            'max_price',
+        ));
     }
 
     /**
@@ -26,30 +40,34 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        // dd($blog->user->getShortName());
-
         $product = Product::findBySlug($product->slug);
-        // dd($product->name);
 
         $relatedProducts = Product::where([
             ['category_id', $product->category_id],
             ['id', '!=', $product->id],
-        ])->orderBy('name', 'desc')->select('id', 'name', 'slug', 'price', 'sale_price', 'image')->take(6)->get();
+        ])
+            ->orderBy('name', 'desc')
+            ->select('id', 'name', 'slug', 'price', 'sale_price', 'image')
+            ->take(10)->get();
 
         $productAttributes = $product->attributes;
 
-        // dd($productAttributes);
-        // $comments = $product->comments()->all();
+        if ($productAttributes->isNotEmpty()) {
+            $product->price = $productAttributes->first()->price;
+            $product->sale_price = $productAttributes->first()->sale_price;
+        }
 
-        $latest_blog = Blog::latest();
+        $latest_blog = Blog::orderBy('updated_at', 'desc')->paginate(6);
 
         $categories = Category::all();
 
         $user = auth()->user();
 
-        if (auth()->check()) {
+        if ($user) {
             $user->avatar = $user->avatar ? $user->avatar : 'assets/img/user2-160x160.jpg';
         }
+
+        $reviews = $product->reviews()->all();
 
         return view('frontend.product_detail', compact(
             'user',
@@ -58,34 +76,20 @@ class ProductController extends Controller
             'relatedProducts',
             'latest_blog',
             'categories',
+            'reviews',
         ));
     }
 
-    /**
-     * Favorite a particular post
-     *
-     * @param  Product $product
-     * @return Response
-     */
-    public function favorite(Product $product)
+    public function quantity(ProductAttribute $productAttribute)
     {
+        // dd($productAttribute);
         try {
-            $user = auth()->user();
-
-            if ($user->isFavorited($product->id)) {
-                $user->favorites()->detach($product->id);
-
-                return response()->json([
-                    'success' => true,
-                    'msg' => 'Bỏ thích sản phẩm thành công',
-                ]);
-            }
-
-            $user->favorites()->attach($product->id);
-
             return response()->json([
                 'success' => true,
-                'msg' => 'Thích sản phẩm thành công',
+                'msg' => 'Lấy thông tin thuộc tính sản phẩm thành công',
+                'quantity' => $productAttribute->quantity,
+                'price' => $productAttribute->price,
+                'sale_price' => $productAttribute->sale_price,
             ]);
         } catch (\Exception $e) {
             return response()->json([

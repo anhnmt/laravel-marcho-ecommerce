@@ -1,17 +1,11 @@
 @php
 \Assets::addStyles([
-'animate',
-'bootstrap',
-'fontawesome',
-'jquery-ui',
 'font-roboto-quicksand',
 'custom-style',
 'custom-responsive',
 ]);
 
 \Assets::addScripts([
-'owlcarousel',
-'slick',
 'jquery-scrollup',
 'custom',
 ]);
@@ -46,7 +40,7 @@
 	</section>
 </div>
 
-<section class="cart_section my-5 py-5">
+<section class="cart_section my-md-5 my-0 py-5">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -70,9 +64,11 @@
 							$itemOption = $item->getOptions();
 							@endphp
 							<tr id="{{ $item->getHash() }}">
-								<td class="product-thumbnail"><a href="#"><img
-											src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}"
-											alt="product1"></a></td>
+								<td class="product-thumbnail">
+									<a href="{{ route('product.show', $itemDetail->model->slug) }}">
+										<img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $itemDetail->model->image)) }}" alt="product1">
+									</a>
+								</td>
 								<td class="product-name" data-title="Product">
 									<a href="{{ route('product.show', $itemDetail->model->slug) }}">
 										{{ $itemDetail->title }}
@@ -90,14 +86,21 @@
 										@endif
 									</a>
 								</td>
+								@php
+								$product_quantity = $itemDetail->model->quantity;
+								if(isset($itemOption['product_attribute_id'])) {
+								$productAttribute = \App\Models\ProductAttribute::find($itemOption['product_attribute_id']);
+								$product_quantity= $productAttribute->quantity;
+								}
+								@endphp
 								<td class="product-price" data-title="Price">{{ number_format($itemDetail->price, 0) }}đ
 								</td>
 								<td class="product-quantity" data-title="Quantity">
 									<div class="quantity">
 										<input type="button" value="-" class="minus">
-										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}"
-											title="Qty" class="qty" size="4">
+										<input type="text" name="quantity" value="{{ $itemDetail->quantity }}" title="Qty" class="qty" size="4">
 										<input type="button" value="+" class="plus">
+										<input type="hidden" class="product_quantity" value="{{ $product_quantity }}">
 									</div>
 								</td>
 								<td class="product-subtotal" data-title="Total">
@@ -111,28 +114,6 @@
 							</tr>
 							@endforeach
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="6" class="px-0 mt-5 pt-5">
-									<div class="row no-gutters">
-										<div class="col-md-6 mb-3 mb-md-0 text-md-left">
-											<div class="fix_btn_line_fill d-inline-block">
-												<form action="{{ route('cart.clear') }}" method="POST">
-													@csrf
-													<button type="submit" class="btn btn-fill-line">Xóa giỏ
-														hàng</button>
-												</form>
-											</div>
-										</div>
-
-										<div class="col-md-6 text-left text-md-right">
-											<a href="{{ route('product.index') }}" class="btn btn-fill-out">Tiếp tục mua
-												sắm</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tfoot>
 						@else
 						<tbody>
 							<tr>
@@ -153,7 +134,24 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-5 pt-5">
+		<div class="button-cart-mobile d-sm-block mt-5">
+			<div class="row no-gutters">
+				<div class="col-sm-6 col-6 text-sm-left text-center">
+					<div class="fix_btn_line_fill d-inline-block">
+						<form action="{{ route('cart.clear') }}" method="POST">
+							@csrf
+							<button type="submit" class="btn btn-fill-line">Xóa giỏ
+								hàng</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-6 text-sm-right text-center">
+					<a href="{{ route('product.index') }}" class="btn btn-fill-out">Mua sắm thêm</a>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-md-5 mt-0 pt-5">
 			<div class="col-md-6">
 				<div class="border p-3 p-md-4">
 					<form action="{{ route('cart.discount') }}" method="POST">
@@ -164,18 +162,16 @@
 						</div>
 						<div class="mt-3">
 							<div class="form_group">
-								<input type="text" class="form_control coupon_code_input"
-									placeholder="Nhập mã giảm giá..." name="coupon">
+								<input type="text" class="form_control coupon_code_input" placeholder="Nhập mã giảm giá..." name="coupon">
 							</div>
 						</div>
 						<div class="text-right">
-							<button type="submit" class="btn btn-fill-out" @if ($quantity <=0) disabled @endif>Áp
-								dụng</button>
+							<button type="submit" class="btn btn-fill-out" @if ($quantity <=0) disabled @endif>Áp dụng</button>
 						</div>
 					</form>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6 mt-lg-0 mt-md-0 mt-sm-5 mt-5">
 				<div class="border p-3 p-md-4">
 					<div class="heading_s1 mb-3">
 						<h6>Tổng chi phí</h6>
@@ -200,8 +196,7 @@
 							</tbody>
 						</table>
 					</div>
-					<a href="{{ route('checkout.index') }}"
-						class="btn btn-fill-out @if ($quantity <= 0) disabled @endif">Thanh toán ngay</a>
+					<a href="{{ route('checkout.index') }}" class="btn btn-fill-out @if ($quantity <= 0) disabled @endif">Thanh toán ngay</a>
 				</div>
 			</div>
 		</div>
@@ -210,61 +205,36 @@
 @endsection
 
 @section('script')
-<!-- SweetAlert2 -->
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-@if(session('success'))
-<script>
-	$(function() {
-		Swal.fire({
-			toast: true,
-			position: "top-end",
-			showConfirmButton: false,
-			timer: 3000,
-			icon: "success",
-			title: "{{ session('success') }}",
-		});
-	});
-</script>
-@endif
-
-@if(session('error'))
-<script>
-	$(function() {
-		Swal.fire({
-			toast: true,
-			position: "top-end",
-			showConfirmButton: false,
-			timer: 3000,
-			icon: "error",
-			title: "{{ session('error') }}",
-		});
-	});
-</script>
-@endif
-
 <script>
 	/*-------------------------------
         Plus and minus quantity
 	------------------------------ */
 	$(function() {
-
 		$(".plus").on("click", function() {
-			var qty = $(this).closest("tr").find(".qty");
-			if (qty.val()) {
-				qty.val(+qty.val() + 1);
-				$(this).closest("tr").find(".minus").attr("disabled", false);
+			var self = this;
+			var qty = $(self).closest("tr").find(".qty");
+			var maxQty = $(self).closest("tr").find(".product_quantity").val();
+
+			if (parseInt(qty.val()) < parseInt(maxQty)) {
+				qty.val(+parseInt(qty.val()) + 1);
+				$(self).closest("tr").find(".minus").attr("disabled", false);
 				//Trigger change event
 				qty.trigger("change");
+			} else {
+				$(self).attr("disabled", true);
 			}
 		});
 
 		$(".minus").on("click", function() {
-			var qty = $(this).closest("tr").find(".qty");
-			if (qty.val() <= 1) {
-				$(this).attr("disabled", true);
+			var self = this;
+
+			var qty = $(self).closest("tr").find(".qty");
+
+			if (parseInt(qty.val()) < 2) {
+				$(self).attr("disabled", true);
 			} else {
-				qty.val(+qty.val() - 1);
+				qty.val(+parseInt(qty.val()) - 1);
+				$(self).closest("tr").find(".plus").attr("disabled", false);
 				//Trigger change event
 				qty.trigger("change");
 			}
@@ -272,10 +242,18 @@
 
 		$(".qty").on("change", debounce(function(e) {
 			var self = this;
+			var maxQty = $(self).closest("tr").find(".product_quantity").val();
 
-			if ($(self).val() <= 0) {
+			if (parseInt($(self).val()) <= 0 || isNaN($(self).val())) {
 				$(self).val(1);
 			}
+
+			if (parseInt($(self).val()) > maxQty) {
+				$(self).val(maxQty);
+			}
+
+			$(self).closest("tr").find(".plus").attr("disabled", false);
+			$(self).closest("tr").find(".minus").attr("disabled", false);
 
 			var id = $(self).closest("tr").attr('id');
 			var qty = $(self).val();

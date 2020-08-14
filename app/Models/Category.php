@@ -12,7 +12,11 @@ class Category extends Model
     use Cachable;
 
     protected $fillable = [
-        'name', 'slug', 'image', 'description', 'status',
+        'name',
+        'slug',
+        'image',
+        'description',
+        'status',
     ];
 
     /**

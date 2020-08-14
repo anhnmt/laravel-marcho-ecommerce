@@ -21,6 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantity');
             $table->float('price', 10);
             $table->timestamps();
+            $table->softDeletes();
             //Foreign key
             $table->foreign('order_id')->references('id')->on('orders')
             ->onDelete('cascade');

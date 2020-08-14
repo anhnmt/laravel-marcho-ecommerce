@@ -134,7 +134,7 @@
 										@enderror
 									</div>
 									<div id="holder" style="margin-top:15px">
-										<img src="{{ $blog->image }}">
+										<img loading="lazy" src="{{ $blog->image }}">
 									</div>
 								</div>
 							</div>

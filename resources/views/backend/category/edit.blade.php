@@ -124,7 +124,7 @@
 									</div>
 
 									<div id="holder" style="margin-top:15px">
-										<img src="{{ $category->image }}">
+										<img loading="lazy" src="{{ $category->image }}">
 									</div>
 								</div>
 							</div>
