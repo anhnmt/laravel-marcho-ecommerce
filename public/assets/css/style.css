@@ -1497,6 +1497,12 @@ header .navbar-collapse {
 .product_section .product_image a {
     overflow: hidden;
 }
+.product_section .product_image img {
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    overflow: hidden;
+}
 .product_section .product_image:hover img {
     -webkit-transform: scale(1.03);
     -ms-transform: scale(1.03);
@@ -1534,9 +1540,10 @@ header .navbar-collapse {
     align-items: center !important;
     -ms-flex-pack: center !important;
     justify-content: center !important;
-    padding: 10px;
+    padding: 15px;
     margin: 0 5px;
     background-color: #fff;
+    border-radius: 50%;
 }
 .product_section .product_info .price {
     font-family: "Quicksand";
@@ -2055,12 +2062,25 @@ header .navbar-collapse {
     margin: -15px 0;
     text-align: center;
 }
-.product_detai_section .head_product_detail .slider-nav i {
+.product_detai_section .swiper-arrow {
     opacity: 0;
-    padding: 10px 15px;
-    font-size: 20px;
+    padding: 25px 23px;
     background: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: .5s;
+}
+.product_detai_section .swiper-arrow:after{
+    font-size: 25px;
+    font-weight: bold;
+    color: #fe3e57;
+}
+.product_detai_section .gallery-top:hover .swiper-arrow{
+    opacity: 1;
+    transition: .5s;
+}
+.product_detai_section .swiper_related_products:hover .swiper-arrow{
+    opacity: 1;
+    transition: .5s;
 }
 .product_detai_section .head_product_detail .slider-nav .prev {
     position: absolute;
@@ -2087,7 +2107,7 @@ header .navbar-collapse {
     opacity: 1;
 }
 
-.product_detai_section .head_product_detail .slider-nav:hover i {
+.product_detai_section .head_product_detail .swiper-arrow:hover i {
     opacity: 0.9;
     transition: 0.5s;
 }

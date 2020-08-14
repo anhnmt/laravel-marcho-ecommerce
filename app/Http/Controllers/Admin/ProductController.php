@@ -31,6 +31,8 @@ class ProductController extends Controller
             })
             ->addColumn('action', function ($product) {
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.destroy', $product->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
+                if (auth()->user()->can('admin.product.review.index'))
+                    $action .= '<a href="' . route('admin.product.review.index', $product->id) . '" class="btn btn-sm btn-primary">Đánh giá</a>';
                 if (auth()->user()->can('admin.product.attribute.index'))
                     $action .= '<a href="' . route('admin.product.attribute.index', $product->id) . '" class="btn btn-sm btn-success">Thuộc tính</a>';
                 if (auth()->user()->can('admin.product.edit'))

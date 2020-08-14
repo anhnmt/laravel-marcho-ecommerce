@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb_content text-center">
-                            <h1 class="font-weight-normal">Tất cả sản phẩm</h1>
+                            <h1 class="font-weight-normal">Chi tiết sản phẩm</h1>
                             <ul>
                                 <li class="mx-1">
                                     <a href="{{ route('home') }}">
@@ -57,22 +57,22 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 d-none d-lg-block">
                                     <div class="swiper-container gallery-thumbs" style="height: 500px;">
                                         <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
+                                            <div class="swiper-slide d-block ml-auto mr-auto">
+                                                <img loading="lazy " src="{{ asset($product->image) }}" alt="">
+                                            </div>
+                                            <div class="swiper-slide d-block ml-auto mr-auto">
                                                 <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
-                                            <div class="swiper-slide">
+                                            <div class="swiper-slide d-block ml-auto mr-auto">
                                                 <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
-                                            <div class="swiper-slide">
+                                            <div class="swiper-slide d-block ml-auto mr-auto">
                                                 <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
-                                            <div class="swiper-slide">
-                                                <img loading="lazy" src="{{ asset($product->image) }}" alt="">
-                                            </div>
-                                            <div class="swiper-slide">
+                                            <div class="swiper-slide d-block ml-auto mr-auto">
                                                 <img loading="lazy" src="{{ asset($product->image) }}" alt="">
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
                                 </div>
 
                                 <div class="col-lg-8 text-center">
-                                    <div class="swiper-container gallery-top" style="height: 500px;">
+                                    <div class="swiper-container gallery-top">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
@@ -99,8 +99,8 @@
                                             </div>
                                         </div>
                                         <!-- Add Arrows -->
-                                        <div class="swiper-button-next swiper-button-white"></div>
-                                        <div class="swiper-button-prev swiper-button-white"></div>
+                                        <div class="swiper-arrow swiper-button-next"></div>
+                                        <div class="swiper-arrow swiper-button-prev"></div>
                                     </div>
                                 </div>
                             </div>
@@ -108,14 +108,14 @@
                     </div>
                 </div>
 
-                <div class="col-lg-5">
+                <div class="col-lg-5 mt-5">
                     <form action="{{ route('cart.store') }}" method="POST">
                         @csrf
 
                         <h5 class="product_name">{{ $product->name }}</h5>
                         <div class="product_info">
                             <div class="row">
-                                <div class="left col-md-6">
+                                <div class="left col-6">
                                     @if($product->sale_price)
                                     <p class="product_sale_price d-inline">{{ number_format($product->sale_price, 0) }}đ
                                     </p>
@@ -125,7 +125,7 @@
                                     <span class="product_price d-inline"></span>
                                     @endif
                                 </div>
-                                <div class="right d-flex col-md-6 justify-content-end">
+                                <div class="right d-flex col-6 justify-content-end align-items-center">
                                     <div class="star_rating d-inline">
                                         <i class="fas fa-star checked"></i>
                                         <i class="fas fa-star checked"></i>
@@ -160,24 +160,26 @@
                             @endif
 
                             <div class="attribute mt-3">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <p class="title">SKU</p>
-                                        <p class="title">Danh mục</p>
-                                        <p class="title">Nhãn</p>
-                                        <p class="title">Chia sẻ</p>
-                                    </div>
-                                    <div class="col-8">
-                                        <p>{{ $product->sku }}</p>
-                                        <p>{{ $product->category->name }}</p>
-                                        <p>Thời trang | Đàn ông | Lịch lãm</p>
-                                        <p class="product_sharing">
-                                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                                            <a href=""><i class="fab fa-twitter"></i></a>
-                                            <a href=""><i class="fab fa-instagram"></i></a>
-                                            <a href=""><i class="fab fa-pinterest-p"></i></a>
-                                        </p>
-                                    </div>
+                                <div class="attribute-detail row">
+                                    <p class="title col-4">SKU</p>
+                                    <p class="col-8">{{ $product->sku }}</p>
+                                </div>
+                                <div class="attribute-detail row">
+                                    <p class="title col-4">Danh mục</p>
+                                    <p class="col-8">{{ $product->category->name }}</p>
+                                </div>
+                                <div class="attribute-detail row">
+                                    <p class="title col-4">Nhãn</p>
+                                    <p class="col-8">Thời trang | Đàn ông | Lịch lãm</p>
+                                </div>
+                                <div class="attribute-detail row">
+                                    <p class="title col-4">Chia sẻ</p>
+                                    <p class="product_sharing col-8">
+                                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a href=""><i class="fab fa-twitter"></i></a>
+                                        <a href=""><i class="fab fa-instagram"></i></a>
+                                        <a href=""><i class="fab fa-pinterest-p"></i></a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -300,29 +302,29 @@
                         <div class="star_rating d-md-inline mt-2 ml-md-5 pl-md-2">
                             <input type="hidden" id="rating" name="rating" value="5">
 
-                            <div class="star d-inline mr-4" data-star="1">
+                            <div class="star d-block d-md-inline mr-4" data-star="1">
                                 <i class="fas fa-star"></i>
                             </div>
 
-                            <div class="star d-inline mr-4" data-star="2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-
-                            <div class="star d-inline mr-4" data-star="3">
-                                <i class="fas fa-star"></i>
+                            <div class="star d-block d-md-inline mr-4" data-star="2">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
 
-                            <div class="star d-inline mr-4" data-star="4">
-                                <i class="fas fa-star"></i>
+                            <div class="star d-block d-md-inline mr-4" data-star="3">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
 
-                            <div class="star d-inline mr-4 checked" data-star="5">
+                            <div class="star d-block d-md-inline mr-4" data-star="4">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+
+                            <div class="star d-block d-md-inline mr-4 checked" data-star="5">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -363,8 +365,11 @@
         </div>
 
         <div class="related_products mt-md-5 mt-0 pt-5">
-            <div class="text-center">
+            <div class="text-center d-none d-md-block">
                 <h1>Sản phẩm liên quan</h1>
+            </div>
+            <div class="text-center d-block d-md-none">
+                <h2>Sản phẩm liên quan</h2>
             </div>
 
             <div class="swiper_related_products swiper-container products mt-5">
@@ -415,8 +420,8 @@
                     @endforeach
                 </div>
                 <!-- Add Arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="swiper-arrow swiper-button-next"></div>
+                <div class="swiper-arrow swiper-button-prev"></div>
             </div>
         </div>
 

@@ -158,6 +158,10 @@
     .product_section .product_info .card-title {
         font-size: 16px;
     }
+    .product_section .product_item a {
+        padding: 10px;
+        margin: 0 5px;
+    }
 }
 /*===================================*
     BLOG SECTION
@@ -294,5 +298,10 @@
     }
 }
 /*===================================*
-    CART SECTION
+    PRODUCT DETAIL SECTION
 *===================================*/
+@media only screen and (min-width: 1199px) {
+    .gallery-top {
+        height: 500px;
+    }
+}

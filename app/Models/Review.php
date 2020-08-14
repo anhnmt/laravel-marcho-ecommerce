@@ -25,4 +25,14 @@ class Review extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * The belongs to Relationship
+     *
+     * @var array
+     */
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Product');
+    }
 }
