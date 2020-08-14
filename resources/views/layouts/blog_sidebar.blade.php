@@ -15,12 +15,12 @@
             @foreach ($latest_blog as $blog)
             <div class="post_list">
                 <div class="row no-gutters">
-                    <div class="col-4 pr-2 post_img">
+                    <div class="col-4 post_img">
                         <a href="{{ route('blog.show', $blog->slug) }}">
                             <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $blog->image)) }}" class="img-fluid" alt="{{ $blog->name }}">
                         </a>
                     </div>
-                    <div class="col-8 post_info">
+                    <div class="col-8 pl-2 post_info">
                         <p>
                             <i class="fad fa-calendar-alt"></i>
                             {{ $blog->created_at->diffForHumans() }}

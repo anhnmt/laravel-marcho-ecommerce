@@ -163,6 +163,10 @@ Route::group([
         'index', 'destroy'
     ]);
 
+    // Review
+    Route::get('product/{product}/review/list', 'ReviewController@list')->name('review.list');
+    Route::resource('product.review', 'ReviewController', ['except' => ['show']]);
+
     // User
     Route::get('user/list', 'UserController@list')->name('user.list');
     Route::resource('user', 'UserController', ['except' => ['show', 'create', 'store']]);

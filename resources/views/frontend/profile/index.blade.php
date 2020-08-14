@@ -40,7 +40,7 @@
     </section>
 </div>
 
-<section class="profile_section my-5 py-5">
+<section class="profile_section my-5 py-md-5 py-0">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4">
@@ -88,8 +88,8 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <label for="">Tên</label>
-                                            <input type="text" id=""
-                                                class="form-control @error('name') is-invalid @enderror"
+                                            <input type="text" id="name"
+                                                class="form-control coupon_code_input @error('name') is-invalid @enderror"
                                                 placeholder="Nhập tên của bạn ..." aria-describedby="helpId"
                                                 value="{{auth()->user()->name}}" name="name">
 
@@ -100,8 +100,8 @@
 
                                         <div class="form-group">
                                             <label for="">Email</label>
-                                            <input type="email" id=""
-                                                class="form-control @error('email') is-invalid @enderror"
+                                            <input type="email" id="email"
+                                                class="form-control coupon_code_input @error('email') is-invalid @enderror"
                                                 placeholder="Nhập email của bạn ..." aria-describedby="helpId"
                                                 value="{{auth()->user()->email}}" name="email">
 
@@ -112,7 +112,7 @@
 
                                         <div class="form-group">
                                             <label for="">Số điện thoại</label>
-                                            <input type="text" id="" class="form-control"
+                                            <input type="text" id="phone" class="form-control coupon_code_input"
                                                 placeholder="Nhập số điện thoại của bạn ..." aria-describedby="helpId"
                                                 name="phone" value="{{auth()->user()->phone}}">
                                         </div>

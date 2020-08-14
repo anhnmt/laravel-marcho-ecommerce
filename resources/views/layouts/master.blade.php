@@ -17,13 +17,16 @@
     <header>
         <div class="container">
             <nav class="menu_bar navbar navbar-expand-lg align-items-center justify-content-between">
-                <div class="d-flex justify-content-center my-md-0 my-3 col-sm-auto col-xs-12">
+                <div class="d-flex justify-content-center my-md-0 my-2 col-sm-auto col-xs-12">
                     <a class="header_logo navbar-brand" href="{{ route('home') }}">
                         <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
                     </a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="header-navbar">
+                    <a class="d-md-none d-block header_logo navbar-brand" href="{{ route('home') }}">
+                        <img loading="lazy" class="logo d-inline-block align-middle" src="{{ asset('assets/img/logo.svg') }}" alt="">
+                    </a>
                     <ul class="header_menu navbar-nav">
                         <li class="nav-item {{ (request()->routeIs('home')) ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home') }}">Trang chủ</a>
@@ -50,9 +53,6 @@
                     <a class="nav-item nav-link navbar-toggler" href="#" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fal fa-bars"></i>
                     </a>
-                    <!-- <a class="nav-item nav-link" href="#" title="Tìm kiếm">
-                        <i class="fal fa-search"></i>
-                    </a> -->
                     <a class="nav-item nav-link icon_love" href="{{ route('favorite.index') }}">
                         <i class="fal fa-heart"></i>
                         <span id="favorite_count" class="wishlist_count">{{ $favoriteCount }}</span>
@@ -135,7 +135,7 @@
                             <a href="{{ route('contact.index') }}">Liên hệ</a>
                         </li>
                         <li>
-                            <a href="{{ route('home') }}">Tìm kiếm</a>
+                            <a href="{{ route('user.order.index') }}">Đơn hàng của tôi</a>
                         </li>
                     </ul>
                 </div>
@@ -217,6 +217,8 @@
             </div>
         </div>
     </footer>
+
+    <div class="overlay"></div>
 
     <!-- Custom Script -->
     {!! \Assets::renderFooter() !!}

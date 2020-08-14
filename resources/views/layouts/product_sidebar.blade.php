@@ -1,5 +1,5 @@
 <div class="makp_sidebar product_sidebar">
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5">
         <h4 class="mb-4 head_sidebar">TÌM KIẾM</h4>
         <form action="{{ url()->route('product.index', request()->except('page')) }}" method="GET">
             <div class="form-group form_group">
@@ -11,7 +11,7 @@
             </div>
         </form>
     </div>
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5 d-lg-block d-none">
         <h4 class="mb-5 head_sidebar">MỨC GIÁ</h4>
         <div class="price-range-wrap">
             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="0" data-max="{{ $max_price }}">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5 d-lg-block d-none">
         <h4 class="mb-3 head_sidebar">MÀU SẮC</h4>
         <div class="color_filter">
             <ul class="list-group">
@@ -103,7 +103,7 @@
             </ul>
         </div>
     </div>
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5 d-lg-block d-none">
         <h4 class="mb-4 head_sidebar">KÍCH CỠ</h4>
         <div class="size_filter mt-3">
             <ul class="list-group">
@@ -155,7 +155,7 @@
             </ul>
         </div>
     </div>
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5 d-lg-block d-none">
         <h4 class="mb-4 head_sidebar">DANH MỤC</h4>
         <div class="product_category">
             <ul class="list-group">
@@ -172,7 +172,7 @@
             </ul>
         </div>
     </div>
-    <div class="widget_box search_widget mb-55">
+    <div class="widget_box search_widget mb-5 d-lg-block d-none">
         <h4 class="mb-4 head_sidebar">TỪ KHOÁ</h4>
         <div class="pop_tags">
             <span class="_tags mb-2 mr-2">Sweet shirt</span>

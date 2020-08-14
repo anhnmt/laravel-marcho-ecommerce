@@ -108,8 +108,7 @@
                                             <tr>
                                                 <td class="product-thumbnail">
                                                     <a href="#">
-                                                        <img src="{{ asset(str_replace('thumbs/', '', $orderDetail->product->image)) }}"
-                                                            alt="product1">
+                                                        <img src="{{ asset(str_replace('thumbs/', '', $orderDetail->product->image)) }}" alt="product1">
                                                     </a>
                                                 </td>
                                                 <td>
@@ -140,7 +139,7 @@
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="status" value="4">
-                                    <button type="submit" class="btn btn-fill-line">Huỷ đơn hàng</button>
+                                    <button type="submit" class="btn btn-fill-line btn-sm">Huỷ đơn hàng</button>
                                 </form>
                             </div>
                             @endif
@@ -169,19 +168,16 @@
                                         @if ($order->status == 0)
                                         <!-- Button trigger modal -->
                                         <div class="text-right mt-4">
-                                            <button type="button" class="btn btn-fill-out" data-toggle="modal"
-                                                data-target="#exampleModal">
+                                            <button type="button" class="btn btn-fill-out btn-sm" data-toggle="modal" data-target="#exampleModal">
                                                 Sửa
                                             </button>
                                         </div>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                 <div class="modal-content">
-                                                    <form action="{{ route('user.order.update', $order->id) }}"
-                                                        method="post">
+                                                    <form action="{{ route('user.order.update', $order->id) }}" method="post">
                                                         @csrf
                                                         @method('put')
                                                         <div class="modal-header">
@@ -189,131 +185,88 @@
                                                                 thông tin
                                                                 người
                                                                 đặt</h3>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
 
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <label for="">Tên</label>
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Nhập tên của bạn ..."
-                                                                    aria-describedby="helpId"
-                                                                    value="{{auth()->user()->name}}" name="name"
-                                                                    disabled>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">Email</label>
-                                                                <input type="email" class="form-control"
-                                                                    placeholder="Nhập email của bạn ..."
-                                                                    aria-describedby="helpId"
-                                                                    value="{{auth()->user()->email}}" name="email"
-                                                                    disabled>
-                                                            </div>
-
-                                                            <div class="form-group">
                                                                 <label for="">Số điện thoại</label>
-                                                                <input type="text"
-                                                                    class="form-control @error('phone') is-invalid @enderror"
-                                                                    placeholder="Nhập số điện thoại của bạn ..."
-                                                                    aria-describedby="helpId" name="phone"
-                                                                    value="{{ old('phone') ?? old('phone', $order->phone) }}">
+                                                                <input type="text" class="form-control coupon_code_input @error('phone') is-invalid @enderror" placeholder="Nhập số điện thoại của bạn ..." aria-describedby="helpId" name="phone" value="{{ old('phone') ?? old('phone', $order->phone) }}">
 
                                                                 @error('phone')
-                                                                <span class="invalid-feedback"
-                                                                    role="alert">{{ $message }}</span>
+                                                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
 
                                                             <div class="form-group @error('city_id') is-invalid @enderror">
                                                                 <label for="">Tỉnh/Thành phố</label>
-                                                                <select
-                                                                    class="form-control select2 @error('city_id') is-invalid @enderror"
-                                                                    name="city_id" id="cities">
+                                                                <select class="form-control coupon_code_input select2 @error('city_id') is-invalid @enderror" name="city_id" id="cities">
                                                                     <option value="0">--Tỉnh/Thành phố--</option>
 
                                                                     @foreach ($cities as $city)
-                                                                    <option value="{{$city->id}}"
-                                                                        {{(old('city_id') ?? old('city_id', $order->city_id)) == $city->id ? 'selected' : ''}}>
+                                                                    <option value="{{$city->id}}" {{(old('city_id') ?? old('city_id', $order->city_id)) == $city->id ? 'selected' : ''}}>
                                                                         {{$city->name}}</option>
                                                                     @endforeach
                                                                 </select>
 
                                                                 @error('city_id')
-                                                                <span class="invalid-feedback"
-                                                                    role="alert">{{ $message }}</span>
+                                                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
 
                                                             <div class="form-group @error('district_id') is-invalid @enderror">
                                                                 <label for="">Quận/Huyện</label>
-                                                                <select
-                                                                    class="form-control select2 @error('district_id') is-invalid @enderror"
-                                                                    name="district_id" id="districts">
+                                                                <select class="form-control coupon_code_input select2 @error('district_id') is-invalid @enderror" name="district_id" id="districts">
                                                                     <option value="0">--Quận/Huyện--</option>
 
                                                                     @foreach ($districts as $district)
-                                                                    <option value="{{$district->id}}"
-                                                                        {{(old('district_id') ?? old('district_id', $order->district_id)) == $district->id ? 'selected' : ''}}>
+                                                                    <option value="{{$district->id}}" {{(old('district_id') ?? old('district_id', $order->district_id)) == $district->id ? 'selected' : ''}}>
                                                                         {{$district->name}}</option>
                                                                     @endforeach
                                                                 </select>
 
                                                                 @error('district_id')
-                                                                <span class="invalid-feedback"
-                                                                    role="alert">{{ $message }}</span>
+                                                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
 
                                                             <div class="form-group @error('ward_id') is-invalid @enderror">
                                                                 <label for="">Xã/Phường</label>
-                                                                <select
-                                                                    class="form-control select2 @error('ward_id') is-invalid @enderror"
-                                                                    name="ward_id" id="wards">
+                                                                <select class="form-control coupon_code_input select2 @error('ward_id') is-invalid @enderror" name="ward_id" id="wards">
                                                                     <option value="0">--Xã/Phường--</option>
 
                                                                     @foreach ($wards as $ward)
-                                                                    <option value="{{$ward->id}}"
-                                                                        {{(old('ward_id') ?? old('ward_id', $order->ward_id)) == $ward->id ? 'selected' : ''}}>
+                                                                    <option value="{{$ward->id}}" {{(old('ward_id') ?? old('ward_id', $order->ward_id)) == $ward->id ? 'selected' : ''}}>
                                                                         {{$ward->name}}</option>
                                                                     @endforeach
                                                                 </select>
 
                                                                 @error('ward_id')
-                                                                <span class="invalid-feedback"
-                                                                    role="alert">{{ $message }}</span>
+                                                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="">Địa chỉ</label>
-                                                                <input type="text"
-                                                                    class="form-control @error('address') is-invalid @enderror"
-                                                                    placeholder="Nhập địa chỉ của bạn ..."
-                                                                    aria-describedby="helpId"
-                                                                    value="{{ old('address') ?? old('address', $order->address) }}"
-                                                                    name="address">
+                                                                <input type="text" class="form-control coupon_code_input @error('address') is-invalid @enderror" placeholder="Nhập địa chỉ của bạn ..." aria-describedby="helpId" value="{{ old('address') ?? old('address', $order->address) }}" name="address">
 
                                                                 @error('address')
-                                                                <span class="invalid-feedback"
-                                                                    role="alert">{{ $message }}</span>
+                                                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="" class="required">Lời nhắn</label>
-                                                                <textarea class="form-control" name="note" rows="5"
-                                                                    placeholder="Ghi chú của bạn...">{{$order->note}}</textarea>
+                                                                <textarea class="form-control coupon_code_input" name="note" rows="5" placeholder="Ghi chú của bạn...">{{$order->note}}</textarea>
                                                             </div>
                                                         </div>
 
                                                         <div class="modal-footer">
-                                                            <button class="btn btn-fill-line" data-dismiss="modal">Quay
+                                                            <button class="btn btn-fill-line btn-sm" data-dismiss="modal">Quay
                                                                 lại</button>
-                                                            <button type="submit" class="btn btn-fill-out">Lưu thay
+                                                            <button type="submit" class="btn btn-fill-out btn-sm">Lưu thay
                                                                 đổi</button>
                                                         </div>
                                                     </form>
@@ -381,44 +334,44 @@
 @section('script')
 <script>
     $("#cities").on('change', function(e) {
-		e.preventDefault();
-		var id = $(this).val();
-		$.ajax({
-			url: "{{ route('checkout.districts') }}",
-			method: 'POST',
-			data: {
-				id: id,
-			},
-			success: function(data) {
-				$('#districts').find('option:not(:first)').remove();
-				$('#wards').find('option:not(:first)').remove();
-				$.each(data, function(key, value) {
-					$("#districts").append(
-						"<option value=" + value.id + ">" + value.name + "</option>"
-					);
-				});
-			}
-		});
-	});
+        e.preventDefault();
+        var id = $(this).val();
+        $.ajax({
+            url: "{{ route('checkout.districts') }}",
+            method: 'POST',
+            data: {
+                id: id,
+            },
+            success: function(data) {
+                $('#districts').find('option:not(:first)').remove();
+                $('#wards').find('option:not(:first)').remove();
+                $.each(data, function(key, value) {
+                    $("#districts").append(
+                        "<option value=" + value.id + ">" + value.name + "</option>"
+                    );
+                });
+            }
+        });
+    });
 
-	$("#districts").on('change', function(e) {
-		e.preventDefault();
-		var id = $(this).val();
-		$.ajax({
-			url: "{{ route('checkout.wards') }}",
-			method: 'POST',
-			data: {
-				id: id,
-			},
-			success: function(data) {
-				$('#wards').find('option:not(:first)').remove();
-				$.each(data, function(key, value) {
-					$("#wards").append(
-						"<option value=" + value.id + ">" + value.name + "</option>"
-					);
-				});
-			}
-		});
-	});
+    $("#districts").on('change', function(e) {
+        e.preventDefault();
+        var id = $(this).val();
+        $.ajax({
+            url: "{{ route('checkout.wards') }}",
+            method: 'POST',
+            data: {
+                id: id,
+            },
+            success: function(data) {
+                $('#wards').find('option:not(:first)').remove();
+                $.each(data, function(key, value) {
+                    $("#wards").append(
+                        "<option value=" + value.id + ">" + value.name + "</option>"
+                    );
+                });
+            }
+        });
+    });
 </script>
 @endsection
