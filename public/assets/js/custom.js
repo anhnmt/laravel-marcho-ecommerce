@@ -54,6 +54,9 @@ Number.prototype.formatMoney = function (
         $("body").addClass("block");
         $("#header-navbar").addClass("show");
         $(".overlay").show();
+        $("#mySidenav").style.width = "250px";
+        $("#main").style.marginLeft = "250px";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     });
 
     $(".overlay").on("click", function () {
@@ -169,14 +172,4 @@ Number.prototype.formatMoney = function (
             }
         });
     });
-
-    // ANIMATION
-    // $(".blog_img, .post_img").on("mouseover", function () {
-    //     $(this).addClass(
-    //         "animate__animated animate__zoomIn"
-    //     );
-    //     // $(this).removeClass(
-    //     //     "animate__animated animate__slideInDown"
-    //     // );
-    // });
 })(window.jQuery);

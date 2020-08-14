@@ -59,9 +59,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-lg-6">
-                                                <h5>Đơn hàng #{{$order->id}}</h5>
-                                                <span class="order_detail_title">Ngày đặt: {{$order->created_at}}</span>
+                                            <div class="col-auto mr-auto">
+                                                <h4>Đơn hàng #{{$order->id}}</h4>
                                                 <span class="d-block order_detail_title">
                                                     Trạng thái:
                                                     @if ($order->status == 0)
@@ -77,9 +76,9 @@
                                                     @endif
                                                 </span>
                                             </div>
-                                            <div class="col-lg-6 d-flex align-items-center justify-content-end">
-                                                <h5><span class="order_detail_title">Tổng cộng: </span>
-                                                    {{ number_format($order->total, 0) }}đ</h5>
+                                            <div class="col-auto ml-auto">
+                                                <span class="d-block order_detail_title">Ngày đặt: {{$order->created_at}}</span>
+                                                <span class="d-block order_detail_title">Tổng cộng: {{ number_format($order->total, 0) }}đ</span>
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +89,7 @@
                     <div class="tab-content dashboard_content mb-5">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Chi tiết đơn hàng</h3>
+                                <h4>Chi tiết đơn hàng</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
