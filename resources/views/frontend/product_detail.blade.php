@@ -83,29 +83,19 @@
                                     <div class="swiper-container gallery-top" style="height: 500px;">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <img loading="lazy"
-                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
-                                                    alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy"
-                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
-                                                    alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy"
-                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
-                                                    alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy"
-                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
-                                                    alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img loading="lazy"
-                                                    src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
-                                                    alt="">
+                                                <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                             </div>
                                         </div>
                                         <!-- Add Arrows -->
@@ -197,8 +187,7 @@
                                 <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
                                 <input type="button" value="+" class="plus">
                             </div>
-                            <input type="hidden" id="product_quantity"
-                                value="{{ $productAttributes->isNotEmpty() ? $productAttributes->first()->quantity : $product->quantity }}">
+                            <input type="hidden" id="product_quantity" value="{{ $productAttributes->isNotEmpty() ? $productAttributes->first()->quantity : $product->quantity }}">
                             <input type="hidden" name="product" value="{{ $product->id }}">
                             <button type="submit" class="btn btn-fill-out filter_btn">Thêm vào giỏ</button>
                         </div>
@@ -228,9 +217,7 @@
                         <li class="comment_info">
                             <div class="d-flex justify-content-between">
                                 <div class="comment_user">
-                                    <img loading="lazy"
-                                        src="{{ asset($review->user->avatar ? $review->user->avatar : 'assets/img/user2-160x160.jpg') }}"
-                                        alt="user2" class="rounded-circle">
+                                    <img loading="lazy" src="{{ asset($review->user->avatar ? $review->user->avatar : 'assets/img/user2-160x160.jpg') }}" alt="user2" class="rounded-circle">
                                 </div>
                                 <div class="comment_content">
                                     <div class="d-flex">
@@ -352,8 +339,7 @@
                             <div class="col-lg-12">
                                 @if($user ?? '')
                                 <div class="form-group form_group">
-                                    <img loading="lazy" src="{{asset($user->avatar)}}" width="40px" alt="user4"
-                                        class="rounded-circle">
+                                    <img loading="lazy" src="{{asset($user->avatar)}}" width="40px" alt="user4" class="rounded-circle">
                                     <span>{{ $user->name }}</span>
                                 </div>
                                 @else
@@ -363,8 +349,7 @@
                                 @endif
 
                                 <div class="form_group">
-                                    <textarea class="form_control" placeholder="Đánh giá của bạn..."
-                                        name="body"></textarea>
+                                    <textarea class="form_control" placeholder="Đánh giá của bạn..." name="body"></textarea>
                                 </div>
 
                                 <div class="button_box">
@@ -377,7 +362,7 @@
             </form>
         </div>
 
-        <div class="related_products mt-5 pt-5">
+        <div class="related_products mt-md-5 mt-0 pt-5">
             <div class="text-center">
                 <h1>Sản phẩm liên quan</h1>
             </div>
@@ -386,19 +371,16 @@
                 <div class="swiper-wrapper">
                     @foreach($relatedProducts as $product)
                     <div class="swiper-slide product_section">
-                        <div class="card">
+                        <div class="card card-shadow">
                             <div class="row">
-                                <div class="product_image col-md-4 col-sm-12 col-12">
+                                <div class="product_image col-12">
                                     <a href="{{ route('product.show', $product->slug) }}">
-                                        <img loading="lazy"
-                                            src="{{ asset(str_replace('thumbs/', '', $product->image)) }}"
-                                            class="card-img card-img-list" alt="">
+                                        <img loading="lazy" src="{{ asset(str_replace('thumbs/', '', $product->image)) }}" alt="">
                                     </a>
 
                                     <div class="product_item">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <a class="add-wishlist @if($user && $user->favorited($product->id)) active @endif"
-                                                data-product="{{ $product->id }}">
+                                            <a class="add-wishlist @if($user && $user->favorited($product->id)) active @endif" data-product="{{ $product->id }}">
                                                 <i class="fal fa-heart"></i>
                                             </a>
                                             <a class="add-cart">

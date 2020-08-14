@@ -45,7 +45,7 @@
 	</section>
 </div>
 
-<section class="cart_section my-5 py-5">
+<section class="cart_section my-md-5 my-0 py-5">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">

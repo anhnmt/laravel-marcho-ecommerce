@@ -51,7 +51,7 @@
                 @include('layouts.product_sidebar')
             </div>
 
-            <div class="col-lg-8 col-sm-12 col-12">
+            <div class="col-lg-8 col-sm-12 col-12 mt-md-0 mt-5">
                 <div class="widget_box search_widget mb-55 option_product">
                     <div class="row">
                         <div class="col-6">

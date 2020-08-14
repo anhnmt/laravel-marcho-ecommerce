@@ -82,8 +82,7 @@
                                                 </td>
                                                 <td>{{ number_format($order->total, 0) }}đ</td>
                                                 <td class="text-center">
-                                                    <a href="{{route('user.order.edit', $order->id)}}"
-                                                        class="btn btn-outline-success btn-sm">Xem</a>
+                                                    <a href="{{route('user.order.edit', $order->id)}}" class="btn btn-fill-out btn-sm">Xem</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -97,8 +96,7 @@
                                                             Bạn hiện không có đơn hàng nào...
                                                         </p>
 
-                                                        <a href="{{ route('product.index') }}"
-                                                            class="btn btn-fill-out px-3 py-2">Mua ngay</a>
+                                                        <a href="{{ route('product.index') }}" class="btn btn-fill-out px-3 py-2">Mua ngay</a>
                                                     </div>
                                                 </td>
                                             </tr>
