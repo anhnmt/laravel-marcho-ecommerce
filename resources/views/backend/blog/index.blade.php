@@ -105,7 +105,8 @@
 					data: 'action',
 					className: 'align-middle text-center',
 					orderable: false,
-					searchable: false
+					searchable: false,
+					width: '15%',
 				},
 			]
 		}).on('submit', '.delete-form', function(event) {

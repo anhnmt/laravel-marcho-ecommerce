@@ -16,18 +16,21 @@ class UserController extends Controller
         $users = User::select('id', 'name', 'email');
 
         return datatables($users)
-        ->addColumn('action', function ($user) {
-            $action = '<form class="delete-form" action="' . route('admin.user.destroy', $user->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
-            
-            if(auth()->user()->can('admin.user.edit'))
-            $action .= '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
-            if(auth()->user()->name != $user->name && auth()->user()->can('admin.user.destroy'))
-            $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+            ->addColumn('action', function ($user) {
+                $user = auth()->user();
 
-            if((auth()->user()->cannot('admin.user.edit') && auth()->user()->cannot('admin.user.destroy'))) 
-                $action .= "<span>Không có hành động nào</span>";
-            $action .= '</=form>';
+                $action = '<form class="delete-form" action="' . route('admin.user.destroy', $user->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE">';
 
+                if ($user->can('admin.user.edit')) {
+                    $action .= '<a href="' . route('admin.user.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                }
+                if ($user->name != $user->name && $user->can('admin.user.destroy')) {
+                    $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                }
+
+                if (($user->cannot(['admin.user.edit', 'admin.user.destroy']))) {
+                    $action .= "<span>Không có hành động nào</span>";
+                }
                 $action .= '</=form>';
 
                 return $action;

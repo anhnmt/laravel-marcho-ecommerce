@@ -40,10 +40,8 @@
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Ảnh</th>
-										<th>Tên</th>
-										<th>Đường dẫn</th>
-										<th>Trạng thái</th>
+										<th>Tên người dùng</th>
+										<th>Nội dung</th>
 										<th>Hành động</th>
 									</tr>
 								</thead>
@@ -68,7 +66,7 @@
 			"autoWidth": false,
 			"responsive": true,
 			"serverSide": true,
-			"ajax": "{{ route('admin.comment.list') }}",
+			"ajax": "{{ route('admin.comment.list', $blog->id) }}",
 			"order": [
 				[0, 'desc']
 			],
@@ -77,22 +75,12 @@
 					className: 'align-middle text-center',
 				},
 				{
-					data: 'image',
-					className: 'align-middle text-center',
-					orderable: false,
-					searchable: false
-				},
-				{
-					data: 'name',
+					data: 'user',
 					className: 'align-middle',
 				},
 				{
-					data: 'slug',
+					data: 'body',
 					className: 'align-middle',
-				},
-				{
-					data: 'status',
-					className: 'align-middle text-center',
 				},
 				{
 					data: 'action',

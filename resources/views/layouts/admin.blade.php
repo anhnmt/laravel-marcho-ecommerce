@@ -135,40 +135,16 @@
                         </li>
                         @endcan
 
-                        @canany(['admin.blog.index','admin.comment.index'])
+                        @can('admin.blog.index')
                         <li class="nav-item has-treeview {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'active' : '' }}">
+                            <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs(['admin.blog.*', 'admin.comment.*'])) ? 'active' : '' }}">
                                 <i class="nav-icon fal fa-book-alt"></i>
                                 <p>
                                     Bài viết
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                @can('admin.blog.index')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.blog.index') }}" class="nav-link {{ (request()->routeIs('admin.blog.*')) ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Danh sách bài viết
-                                        </p>
-                                    </a>
-                                </li>
-                                @endcan
-
-                                @can('admin.comment.index')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.comment.index') }}" class="nav-link {{ (request()->routeIs('admin.comment.*')) ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Danh sách bình luận
-                                        </p>
-                                    </a>
-                                </li>
-                                @endcan
-                            </ul>
                         </li>
-                        @endcanany
+                        @endcan
 
                         @canany(['admin.user.index','admin.role.index','admin.permission.index'])
                         <li class="nav-item has-treeview {{ (request()->routeIs(['admin.user*', 'admin.role*','admin.permission*'])) ? 'menu-open' : '' }}">

@@ -46,9 +46,11 @@ class ProductAttributeController extends Controller
                 return $action;
             })
             ->addColumn('action', function ($productAttribute) {
+                $user = auth()->user();
+
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.product.attribute.destroy', [$this->product->id, $productAttribute->id]) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
-                if (auth()->user()->can('admin.product.attribute.destroy')) {
+                if ($user->can('admin.product.attribute.destroy')) {
                     $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
                 } else {
                     $action .= "<span>Không có hành động nào</span>";

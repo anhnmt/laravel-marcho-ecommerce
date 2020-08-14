@@ -21,22 +21,27 @@ class CategoryController extends Controller
         return datatables($categories)
             ->addColumn('image', function ($category) {
                 $thumb_url = $category->image ? $category->image : 'assets/img/placeholder.png';
-                return '<img loading="lazy" height="70px" width="70px" src="' . $thumb_url . '"/>';
+                return '<img loading="lazy" height="70px" width="70px" src="' . asset($thumb_url) . '"/>';
             })
             ->addColumn('status', function ($category) {
                 return $category->status === 1 ? '<span class="badge badge-success">Kích hoạt</span>' : '<span class="badge badge-warning">Bản nháp</span>';
             })
             ->addColumn('action', function ($category) {
+                $user = auth()->user();
+
                 $action = '<form class="delete-form d-flex justify-content-center" action="' . route('admin.category.destroy', $category->id) . '" method="POST"><input type="hidden" name="_token" value="' . csrf_token() . '"><input type="hidden" name="_method" value="DELETE"><div class="btn-group">';
 
-                if (auth()->user()->can('admin.category.edit'))
-                    $action .= '<a href="' . route('admin.category.edit', $category->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';
+                if ($user->can('admin.category.edit')){
 
-                if (auth()->user()->can('admin.category.destroy'))
+                    $action .= '<a href="' . route('admin.category.edit', $category->id) . '" class="btn btn-sm btn-warning">Sửa</a> ';                }
+
+                if ($user->can('admin.category.destroy')){
                     $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
+                }
 
-                if ((auth()->user()->cannot('admin.category.edit') && auth()->user()->cannot('admin.category.destroy')))
+                if ($user->cannot(['admin.category.edit', 'admin.category.destroy'])){
                     $action .= "<span>Không có hành động nào</span>";
+                }
 
                 $action .= '</div></form>';
 

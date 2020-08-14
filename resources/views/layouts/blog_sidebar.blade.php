@@ -26,7 +26,7 @@
                             {{ $blog->created_at->diffForHumans() }}
                         </p>
                         <h3 class="post_title">
-                            <a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
+                            <a class="line-clamp" href="{{ route('blog.show', $blog->slug) }}">{{ $blog->name }}</a>
                         </h3>
                     </div>
                 </div>
