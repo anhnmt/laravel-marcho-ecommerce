@@ -135,7 +135,7 @@
                             <a href="{{ route('contact.index') }}">Liên hệ</a>
                         </li>
                         <li>
-                            <a href="{{ route('home') }}">Tìm kiếm</a>
+                            <a href="{{ route('user.order.index') }}">Đơn hàng của tôi</a>
                         </li>
                     </ul>
                 </div>

@@ -218,7 +218,7 @@
 						<h2>Best Summer Collection</h2>
 					</div>
 					<h5 class="mb-4">Sale Get up to 50% Off</h5>
-					<a href="#/" class="btn btn-fill-out rounded-0">Shop Now</a>
+					<a href="{{ route('product.index') }}" class="btn btn-fill-out rounded-0">Shop Now</a>
 				</div>
 				<div class="medium_divider clearfix"></div>
 			</div>

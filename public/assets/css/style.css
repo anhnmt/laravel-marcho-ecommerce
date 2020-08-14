@@ -926,7 +926,7 @@ section .section_title p {
     opacity: 1;
 }
 .form-control:focus {
-    box-shadow: unset;
+    /* box-shadow: unset; */
 }
 
 /*===================================*
@@ -2735,7 +2735,7 @@ select.not_chosen.form-control:focus {
     .select2-container--default
     .select2-selection--single
     .select2-selection__rendered {
-    color: #878b97;
+    color: #000;
 }
 .checkout_section .form-check label {
     position: relative;

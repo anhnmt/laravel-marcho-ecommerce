@@ -42,12 +42,12 @@ class OrderCreateRequest extends FormRequest
             'email.required' => 'Vui lòng nhập email của bạn.',
             'phone.required' => 'Vui lòng nhập số điện thoại của bạn.',
             'phone.regex' => 'Số điện thoại bạn nhập không đúng định dạng, vui lòng nhập lại.',
-            'city_id.gt' => 'Vui lòng chọn thành phố của bạn',
-            'district_id.gt' => 'Vui lòng chọn quận huyện của bạn',
-            'ward_id.gt' => 'Vui lòng chọn xã phường của bạn',
-            'city_id.exists' => 'Thành phố bạn chọn không tồn tại',
-            'district_id.exists' => 'Quận huyện bạn chọn không tồn tại',
-            'ward_id.exists' => 'Xã phường bạn chọn không tồn tại',
+            'city_id.gt' => 'Thành phố không được để trống',
+            'district_id.gt' => 'Quận huyện không được để trống',
+            'ward_id.gt' => 'Xã phường không được để trống',
+            'city_id.exists' => 'Thành phố không tồn tại',
+            'district_id.exists' => 'Quận huyện không tồn tại',
+            'ward_id.exists' => 'Xã phường không tồn tại',
             'address.required' => 'Vui lòng nhập địa chỉ của bạn',
         ];
     }

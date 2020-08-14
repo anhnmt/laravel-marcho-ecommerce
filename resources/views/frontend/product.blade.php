@@ -117,7 +117,7 @@
                                                     <div class="product_description">
                                                         <p>{{ $product->description }}</p>
                                                     </div>
-                                                    <button class="btn filter_btn">Thêm vào giỏ</button>
+                                                    <button class="btn btn-fill-out">Thêm vào giỏ</button>
                                                 </div>
                                             </div>
                                         </div>
