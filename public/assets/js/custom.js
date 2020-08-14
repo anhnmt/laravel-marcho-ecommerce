@@ -47,6 +47,22 @@ Number.prototype.formatMoney = function (
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
+    
+    /*===================================*
+        Offcanvas Menu
+	*===================================*/
+    $('.navbar-toggler').on('click', function() {
+        $('body').addClass('block');
+        $('#header-navbar').addClass('show');
+        $('.overlay').show();
+    });
+
+    $('.overlay').on('click', function() {
+        $('body').removeClass('block');
+        $('#header-navbar').removeClass('show');
+        $('.overlay').hide();
+    });
+
     /*===================================*
         Offcanvas Menu
     *===================================*/
