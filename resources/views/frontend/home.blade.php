@@ -222,7 +222,7 @@
 						<h2>Bộ sưu tập mùa hè đẹp nhất</h2>
 					</div>
 					<h5 class="mb-4">Giảm giá lên đến 30%</h5>
-					<a href="#/" class="btn btn-fill-out rounded-0">Mua ngay</a>
+					<a href="{{ route('product.index') }}" class="btn btn-fill-out rounded-0">Mua ngay</a>
 				</div>
 				<div class="medium_divider clearfix"></div>
 			</div>
