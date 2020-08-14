@@ -35,7 +35,7 @@ class SliderController extends Controller
                 if (auth()->user()->can('admin.slider.destroy'))
                     $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-                if ((auth()->user()->can('admin.slider.edit') && auth()->user()->can('admin.slider.destroy')) == false)
+                if ((auth()->user()->cannot('admin.slider.edit') && auth()->user()->cannot('admin.slider.destroy')))
                     $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</div></form>';

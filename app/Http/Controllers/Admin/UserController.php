@@ -24,7 +24,7 @@ class UserController extends Controller
             if(auth()->user()->name != $user->name && auth()->user()->can('admin.user.destroy'))
             $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-            if((auth()->user()->can('admin.user.edit') && auth()->user()->can('admin.user.destroy')) == false) 
+            if((auth()->user()->cannot('admin.user.edit') && auth()->user()->cannot('admin.user.destroy'))) 
                 $action .= "<span>Không có hành động nào</span>";
             $action .= '</=form>';
 

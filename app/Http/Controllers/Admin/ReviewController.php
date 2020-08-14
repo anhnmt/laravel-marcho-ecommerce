@@ -35,7 +35,7 @@ class ReviewController extends Controller
                 if (auth()->user()->can('admin.product.review.destroy'))
                     $action .= '<button type="submit" class="btn btn-sm btn-danger">Xoá</button>';
 
-                if ((auth()->user()->can('admin.product.review.edit') && auth()->user()->can('admin.product.review.destroy')) == false)
+                if ((auth()->user()->cannot('admin.product.review.edit') && auth()->user()->cannot('admin.product.review.destroy')))
                     $action .= "<span>Không có hành động nào</span>";
 
                 $action .= '</div></form>';
