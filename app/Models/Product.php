@@ -88,7 +88,6 @@ class Product extends Model implements UseCartable
                 'name',
                 'slug',
                 'description',
-                'body',
             ];
 
             $search_terms = explode(' ', $request->keyword);
