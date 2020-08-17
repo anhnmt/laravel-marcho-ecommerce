@@ -200,9 +200,8 @@
 
         <div class="row body_product_detail pt-5">
             <div class="col-12">
-                <h3>HOME</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
+                <h3>Nội dung</h3>
+                <p>{!!$product->body!!}</p>
             </div>
         </div>
 

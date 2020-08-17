@@ -15,6 +15,7 @@ class ProductController extends Controller
     {
         $user = auth()->user();
         $categories = Category::all();
+        $min_price = 0;
         $max_price = Product::max('price');
 
         $products = Product::with('attributes')->where('status', 1)
@@ -28,6 +29,7 @@ class ProductController extends Controller
             'user',
             'products',
             'categories',
+            'min_price',
             'max_price',
         ));
     }
