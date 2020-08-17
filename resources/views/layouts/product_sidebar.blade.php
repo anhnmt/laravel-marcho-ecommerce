@@ -13,27 +13,32 @@
     </div>
     <div class="widget_box search_widget mb-5 d-lg-block d-none">
         <h4 class="mb-5 head_sidebar">MỨC GIÁ</h4>
-        <div class="price-range-wrap">
-            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="0" data-max="{{ $max_price }}">
-                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span>
-                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
-                <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div>
-            </div>
-            <div class="range-slider pd-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="price-input pt-1">
-                            <p>Giá: <span id="minamount"> </span> - <span id="maxamount"> </span> </p>
+        <form action="{{ url()->route('product.index', request()->except('page')) }}" method="GET">
+            <div class="price-range-wrap">
+                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="{{ $min_price }}" data-max="{{ $max_price }}">
+                    <input type="hidden" id="min_price" name="min_price" value="">
+                    <input type="hidden" id="max_price" name="max_price" value="">
+
+                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span>
+                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
+                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div>
+                </div>
+                <div class="range-slider pd-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="price-input pt-1">
+                                <p>Giá: <span id="minamount"> </span> - <span id="maxamount"> </span> </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-fill-out">LỌC</button>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <button class="btn btn-fill-out">LỌC</button>
-                    </div>
-                </div>
 
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="widget_box search_widget mb-5 d-lg-block d-none">
         <h4 class="mb-3 head_sidebar">MÀU SẮC</h4>

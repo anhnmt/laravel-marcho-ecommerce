@@ -181,7 +181,7 @@
 		<div class="row pb-4">
 			@if($latest_blog ?? '')
 			@foreach ($latest_blog as $blog)
-			<div class="col-lg-3 col-md-6 col-6">
+			<div class="col-lg-4 col-md-6 col-6">
 				<div class="grid_item">
 					<div class="grid_inner_item">
 						<div class="blog_img">

@@ -75,7 +75,7 @@
                                 <div class="row">
                                     @foreach ($products as $product)
                                     <div class="product_grid_item col-12 mb-55">
-                                        <div class="card">
+                                        <div class="card card-shadow">
                                             <div class="row">
                                                 <div class="product_image col-md-4 col-sm-12 col-12">
                                                     <a href="{{ route('product.show', $product->slug) }}">
