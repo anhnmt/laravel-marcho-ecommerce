@@ -16,7 +16,7 @@ $ composer install
 $ cp .env.example .env
 $ php artisan key:generate
     setup DB in .env
-$ php artisan migrate --seed
+$ php artisan migrate:fresh --seed
 $ npm install
 $ npm run dev
 ```
